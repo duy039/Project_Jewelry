@@ -1,0 +1,27 @@
+/*----------------------------------------*/
+/*  21 - Components - Brand
+/*----------------------------------------*/
+.brand-area{
+    padding: 50px 0 80px;
+    .brand-slider_nav{
+        .brand-slider{
+            border-top: 1px solid $border-color; 
+            border-left: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+            .slide-item{
+                border-right: 1px solid $border-color;
+                > a{
+                    > img{
+                        width: 100%;
+                    }
+                }
+            }
+            .slick-list{
+                margin: 0 -15px;
+                .slick-slide{
+                    margin: 0 15px;
+                }
+            }
+        }
+    }
+}
