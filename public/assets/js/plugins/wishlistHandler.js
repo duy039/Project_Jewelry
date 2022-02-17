@@ -1,6 +1,6 @@
 
 var url = $("#urlWeb").val();
-var user_id = $("#user_id").val();
+var user_id = ($("#user_id").val() != 'null')?$("#user_id").val():null;
 function wishlistResponse() {
     // local var
     var theResponse = null;
@@ -30,7 +30,6 @@ function renderWishlist(){
     products = wishlistResponse();
     let htmlWishkist = "";
     for(let i=0; i< products.length; i++){
-        console.log(products[i].Quantity, products[i].WishList_id, products[i].Product_id);
         let htmlstock="";
         if(products[i].Quantity >= 1){
             htmlstock = '<td class="hiraola-product-stock-status"><span class="in-stock">In Stock</span></td>'
@@ -46,7 +45,7 @@ function renderWishlist(){
                     +        '<td class="hiraola-product-name"><a href="'+url + "/product/" + products[i].Product_id+'">'+ products[i].Name+'</a></td>'
                     +        '<td class="hiraola-product-price"><span class="amount">$'+products[i].CurrentPrice+'</span></td>'
                     +        htmlstock
-                    +        '<td class="hiraola-cart_btn"><a href="javascript:void(0)">add to cart</a></td>'
+                    +        '<td class="hiraola-cart_btn"><a onclick="addToCartProduct(\'' +products[i].Product_id+ '\')" href="javascript:void(0)">add to cart</a></td>'
                     +    '</tr>';
     }
     $("#sessionWishlist").html(htmlWishkist);
@@ -71,6 +70,48 @@ function wishlistDelete(wishlist_id){
                 renderWishlist();
             }
         });
+    }
+}
+ // tối về làm tiếp thêm sản phẩm cho list product
+function addToCartProduct(productAdd){
+    
+    if(user_id == null){
+        return confirm("You must be logged in to add this product to your cart!");
+    }else{
+        var urlajax = url +'/shop/quickView/' + productAdd;
+        $.ajax({
+            url : urlajax,
+            type : "get",
+            dataType:"text",
+            data : {
+                
+            },
+            success : function (result){
+                var product = JSON.parse(result);  
+                let urlAddToCart = url +'/addToCart';
+                let size = "null";
+                if(product.Size.length > 0){
+                    size = product.Size[0];
+                }
+                $.ajax({
+                    url : urlAddToCart,
+                    type : "post",
+                    cache: false,
+                    dataType:"text",
+                    data : {
+                        _token: $("#csrf_token").val(),
+                        'product_id' : productAdd,
+                        'size' : size,
+                        'quantity' : 1
+                    },
+                    success : function (result){
+                        if(result == true){
+                            return alert("The product has been added to the cart");
+                        }
+                    }
+                });
+            }
+        })
     }
 }
 renderWishlist();

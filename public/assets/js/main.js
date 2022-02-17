@@ -877,9 +877,7 @@
 	/*----------------------------------------*/
 	/*  Cart Plus Minus Button
 /*----------------------------------------*/
-	$('.cart-plus-minus').append(
-		'<div class="dec qtybutton"><i class="fa fa-angle-down"></i></div><div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>'
-	);
+	
 	$('.qtybutton').on('click', function () {
 		var $button = $(this);
 		var oldValue = $button.parent().find('input').val();

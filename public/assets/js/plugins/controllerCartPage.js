@@ -1,6 +1,7 @@
 
 var url = $("#urlWeb").val();
-var user_id = $("#user_id").val();
+var user_id = ($("#user_id").val() != 'null')?$("#user_id").val():null;
+// trả về các sản phảm có trong giỏ hàng
 function productsResponse() {
     var theResponse = null;
     $.ajax({
@@ -24,43 +25,62 @@ function productsResponse() {
 }
 let products = productsResponse();
 
-// sữa lại render
-function renderListProduct(){
-    products = productsResponse();
-    let htmlCart = "";
+// thay đổi số lượng sản phẩm
+function changeQuantity(){
     for(let i=0; i< products.length; i++){
-        let htmlstock="";
-        let quantityProducts = $("#quantity"+products[i].Product_id).val();
-        let total = quantityProducts * products[i].CurrentPrice;
-        if(products[i].Quantity >= 1){
-            htmlstock = '<td class="hiraola-product-stock-status"><span class="in-stock">In Stock</span></td>'
-        }else{
-            htmlstock = '<td class="hiraola-product-stock-status"><span class="out-stock">Out Stock</span></td>'
-        }
-        htmlCart += '<tr>'
-                    +        '<td  class="hiraola-product_remove">' 
-                    +            '<a style="font-size: 30px" onclick="wishlistDelete(\'' +products[i].WishList_id+ '\')" href="javascript:void(0)"><i class="fas fa-trash-alt" title="Remove"></i></a>'
-                    +        '</td>'
-                    +        '<td class="hiraola-product-thumbnail"><a href="'+url + "/product/" + products[i].Product_id+'"><img src="'+url+'/assets/images/product/'+products[i].Avatar+'" alt="Cart Thumbnail" width="100px"></a>'
-                    +        '</td>'
-                    +        '<td class="hiraola-product-name"><a href="'+url + "/product/" + products[i].Product_id+'">'+ products[i].Name+'</a></td>'
-                    +        '<td class="hiraola-product-price"><span class="amount">$'+products[i].CurrentPrice+'</span></td>'
-                    +        '<td class="quantity">'
-                    +           '<label>Quantity</label>'
-                    +           '<div class="cart-plus-minus">'
-                    +               '<input id="quantity'+products[i].Product_id+'" class="cart-plus-minus-box" value="1" type="text">'
-                    +                '<div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>'
-                    +                '<div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>'
-                    +           '</div>'
-                    +       '</td>'
-                    +       '<td class="product-subtotal"><span class="amount">'+total+'</span></td>'
-                    +    '</tr>';
-       
-                                        
+        let total = $("#quantity"+i).val() * products[i].CurrentPrice;
+        $("#total"+i).html("$"+total.toFixed(2));
     }
-    if(products == null){
-        return $("#listProducts").html(htmlCart);
-    }
-    $("#listProducts").html(htmlCart);
 }
+
+
+function renderListProduct(){
+    if(user_id == null){
+        $("#sessionCart").html("Cart is currently empty!!!");
+        $("#sessionCart").css({
+            "text-align" : "center"
+            });
+        return 0;
+    }else{
+        products = productsResponse();
+        let htmlCart = "";
+        if(products == null){
+            $("#sessionCart").html("Cart is currently empty!!!");
+            $("#sessionCart").css({
+                "text-align" : "center"
+                });
+            return 0;
+        }
+        let sum = 0;
+        for(let i=0; i< products.length; i++){
+            let size="";
+            if(products[i].Size != "null"){
+                size = products[i].Size;
+            }
+            let total = products[i].Quantity * products[i].CurrentPrice;
+            sum +=total;
+            htmlCart += '<tr>'
+                        +        '<td  class="hiraola-product_remove">' 
+                        +            '<a style="font-size: 30px" onclick="cartDelete(\'' +i+ '\')" href="javascript:void(0)"><i class="fas fa-trash-alt" title="Remove"></i></a>'
+                        +        '</td>'
+                        +        '<td class="hiraola-product-thumbnail"><a href="'+url + "/product/" + products[i].Product_id+'"><img src="'+url+'/assets/images/product/'+products[i].Avatar+'" alt="Cart Thumbnail" width="100px"></a>'
+                        +        '</td>'
+                        +        '<td class="hiraola-product-name"><a href="'+url + "/product/" + products[i].Product_id+'">'+ products[i].Name+'</a></td>'
+                        +        '<td class="hiraola-product-price"><span class="amount">$'+products[i].CurrentPrice+'</span></td>'
+                        +        '<td class="hiraola-product-price"><span class="amount">'+size+'</span></td>'
+                        +        '<td class="quantity">'
+                        +           '<div class="cart-plus-minus">'
+                        +               '<input onchange="changeQuantity()" id="quantity'+i+'"  class="cart-plus-minus-box" value="'+products[i].Quantity+'" type="number">'
+                        +                '<div class="dec qtybutton" onclick="changeQuantity()"><i class="fa fa-angle-down"></i></div>'
+                        +                '<div class="inc qtybutton" onclick="changeQuantity()"><i class="fa fa-angle-up"></i></div>'
+                        +           '</div>'
+                        +       '</td>'
+                        +       '<td class="product-subtotal"><span id="total'+i+'" class="amount">'+total.toFixed(2)+'</span></td>'
+                        +    '</tr>';
+        }
+        $("#listProducts").html(htmlCart);
+        $("#subTotal").html("$"+sum);
+    }
+}
+
 renderListProduct();

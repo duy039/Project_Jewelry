@@ -49,7 +49,7 @@
         <div class="hiraola-cart-area">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12" id="sessionCart">
                         <form action="javascript:void(0)">
                             <div class="table-content table-responsive">
                                 <table class="table">
@@ -59,6 +59,7 @@
                                             <th class="hiraola-product-thumbnail">images</th>
                                             <th class="cart-product-name">Product</th>
                                             <th class="hiraola-product-price">Unit Price</th>
+                                            <th class="hiraola-product-price">Size</th>
                                             <th class="hiraola-product-quantity">Quantity</th>
                                             <th class="hiraola-product-subtotal">Total</th>
                                         </tr>
@@ -73,7 +74,7 @@
                                             <td class="quantity">
                                                 <label>Quantity</label>
                                                 <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" value="1" type="text">
+                                                    <input class="cart-plus-minus-box" onchange="changeQuantity()" value="1" type="text">
                                                     <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                     <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                 </div>
@@ -117,7 +118,8 @@
                                     <div class="cart-page-total">
                                         <h2>Cart totals</h2>
                                         <ul>
-                                            <li>Subtotal <span>$118.60</span></li>
+                                            <li>Subtotal <span id="subTotal">$118.60</span></li>
+                                            <li>Tax <span>1%</span></li>
                                             <li>Total <span>$118.60</span></li>
                                         </ul>
                                         <a href="javascript:void(0)">Proceed to checkout</a>

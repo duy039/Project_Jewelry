@@ -5,8 +5,9 @@
     if (session_id() === ''){
         session_start();
     }
-    $user = null;
-    // $_SESSION['user_id']=1;
+    $user = "";
+    $_SESSION['user_id']=1;
+    
     $lusers = DB::table('users')->get();
     if( isset( $_SESSION['user_id'] ) ){
         // đã login
@@ -59,10 +60,10 @@
 
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
 </head>
-<body class="template-color-3">
+<body class="template-color-1">
     {{-- các biền cần gửi qua cho js --}}
     <input id="csrf_token" type="hidden" value='{{ csrf_token() }}'>
-    <input id="user_id" type="hidden" value="{{ ($user == null)?$user:$user->id }}">
+    <input id="user_id" type="hidden" value='{{ ($user == "")?"null":$user->id }}'>
     <input id="urlWeb" type="hidden" value='{{ url("") }}'>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>

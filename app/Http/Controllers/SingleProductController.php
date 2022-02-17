@@ -241,22 +241,52 @@ public function addToCart(Request $request){
         session_start();
     }
     // kiểm tra có tồn tại 2 post này ko?
-    if(isset($request->product_id) && isset($request->size)){
-        foreach($this->products as $p){
-            if($p->getId() == $request->product_id){
-                // tạo 1 đối tượng để vào session
-                $productObj = (object) [
-                    'Product_id'   => $p->getId(),
-                    'Name'         => $p->getName(),
-                    'Size'         => $request->size,
-                    'Rating'       => $p->getRating(),
-                    'Quantity'     => $p->getQuantity(),
-                    'Avatar'       => $p->getAvatar(),
-                    'CurrentPrice' => $p->getCurrentPrice()
-                ];
-                $_SESSION['inCart'][]= $productObj ;
+    if(isset($request->product_id) && isset($request->quantity) && isset($request->size)){
+        // $request->size có thể  = "null"
+        if( !isset( $_SESSION['inCart'] ) ){
+            // đã login
+            $_SESSION['inCart'] = array();
+        }
+        if(count($_SESSION['inCart']) == 0 ){
+            foreach($this->products as $p){
+                if($p->getId() == $request->product_id){
+                    // tạo 1 đối tượng để vào session
+                    $productObj = (object) [
+                        'Product_id'   => $p->getId(),
+                        'Name'         => $p->getName(),
+                        'Size'         => $request->size,
+                        'Rating'       => $p->getRating(),
+                        'Quantity'     => $request->quantity,
+                        'Avatar'       => $p->getAvatar(),
+                        'CurrentPrice' => $p->getCurrentPrice()
+                    ];
+                    $_SESSION['inCart'][]= $productObj ;
+                }
+            }
+        }else{
+            foreach($_SESSION['inCart'] as $ic){
+                if($ic->Product_id == $request->product_id && $ic->Size == $request->size){
+                    $ic->Quantity += $request->quantity;
+                    return true;
+                }
+            }
+            foreach($this->products as $p){
+                if($p->getId() == $request->product_id){
+                    // tạo 1 đối tượng để vào session
+                    $productObj = (object) [
+                        'Product_id'   => $p->getId(),
+                        'Name'         => $p->getName(),
+                        'Size'         => $request->size,
+                        'Rating'       => $p->getRating(),
+                        'Quantity'     => $request->quantity,
+                        'Avatar'       => $p->getAvatar(),
+                        'CurrentPrice' => $p->getCurrentPrice()
+                    ];
+                    $_SESSION['inCart'][]= $productObj ;
+                }
             }
         }
+        
         return true;
     }else{
         return false;

@@ -105,9 +105,9 @@
                                 <div class="quantity">
                                     <label>Quantity</label>
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" value="1" type="text">
-                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                        <input id="quantityProduct" class="cart-plus-minus-box" value="1" type="text">
+                                        <div  class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                        <div  class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
                                 <div class="qty-btn_area">
@@ -362,7 +362,7 @@
                                         <div class="add-actions">
                                             <ul>
                                                 <li>
-                                                    <a class="hiraola-add_cart" href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                                    <a class="hiraola-add_cart" onclick="addToCartProduct('{{ $pro->getId() }}')" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="hiraola-add_compare" href="compare.html" data-toggle="tooltip" data-placement="top" title="Compare This Product">
@@ -463,10 +463,10 @@
                                         <div class="add-actions">
                                             <ul>
                                                 <li>
-                                                    <a class="hiraola-add_cart" href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                                    <a class="hiraola-add_cart" onclick="addToCartProduct('{{ $pro->getId() }}')" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a class="hiraola-add_compare" href="compare.html" data-toggle="tooltip" data-placement="top" title="Compare This Product">
+                                                    <a class="hiraola-add_compare" href="compare" data-toggle="tooltip" data-placement="top" title="Compare This Product">
                                                         <i class="ion-ios-shuffle-strong"></i>
                                                     </a>
                                                 </li>
@@ -596,14 +596,14 @@
                                     <div class="quantity">
                                         <label>Quantity</label>
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
+                                            <input class="cart-plus-minus-box" id="quantityQuickView" value="1" type="text">
                                             <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                             <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                         </div>
                                     </div>
                                     <div class="hiraola-group_btn">
                                         <ul>
-                                            <li><a href="{{ url('cart') }}" class="add-to_cart">Cart To Cart</a></li>
+                                            <li id="addtoCartQuickView"></li>
                                             <li><a href="{{ url('wishlist') }}"><i class="ion-android-favorite-outline"></i></a></li>
                                             <li><a href="{{ url('compare') }}"><i class="ion-ios-shuffle-strong"></i></a></li>
                                         </ul>

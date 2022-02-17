@@ -1,6 +1,6 @@
 var url = $("#urlWeb").val();
 // user_id có thể = null nếu chưa đăng nhập
-var user_id = $("#user_id").val();
+var user_id = ($("#user_id").val() != 'null')?$("#user_id").val():null;
 var pro_id = $("#pro_id").val();
 function wishlistsResponse() {
     // local var
@@ -498,8 +498,9 @@ function quickView(id_ProductQuickView){
                             tagQuickViews += '<a href="'+ url + '/shop/categories/'+ product.tag_id[u] + '"> '+ product.tag_name[u] +'</a>';
                         }
                     }
+                let addtoCartQuickView = '<a href="javascript:void(0)" onclick="addToCartQuickView(\''+product.Product_id+'\')" class="add-to_cart">Add To Cart</a>';
                 if(product.Size.length > 0){
-                    let sizeQuickView = '<span>Size</span> <select class="myniceselect nice-select">';
+                    let sizeQuickView = '<span>Size</span> <select id="getSizeQuickView" class="myniceselect nice-select">';
                     for(let o=0; o<product.Size.length; o++){
                         sizeQuickView += '<option value="'+product.Size[o]+'">'+product.Size[o]+'</option>'
                     }
@@ -519,6 +520,7 @@ function quickView(id_ProductQuickView){
                 $('#priceQuickView').html(priceQuickView);
                 $('#codeAndQuantity').html(codeAndQuantity);
                 $('#tagQuickView').html(tagQuickViews);
+                $('#addtoCartQuickView').html(addtoCartQuickView);
                 
                 
             }
@@ -527,13 +529,16 @@ function quickView(id_ProductQuickView){
     
     
 }
-
 // xử lý thêm 1 product vào giỏ hàng
 function addToCart(productAdd){
     if(user_id == null){
         return confirm("You must be logged in to add this product to your cart!");
     }else{
         let urlAddToCart = url +'/addToCart';
+        let size = "null";
+        if($("#getSize").val()!= undefined){
+            size = $("#getSize").val();
+        }
         $.ajax({
             url : urlAddToCart,
             type : "post",
@@ -542,7 +547,8 @@ function addToCart(productAdd){
             data : {
                 _token: $("#csrf_token").val(),
                 'product_id' : productAdd,
-                'size' : $("#getSize").val()
+                'size' : size,
+                'quantity' : $("#quantityProduct").val()
             },
             success : function (result){
                 if(result == true){
@@ -550,6 +556,76 @@ function addToCart(productAdd){
                 }
             }
         });
+    }
+}
+// xử lý thêm 1 product quickView vào giỏ hàng
+function addToCartQuickView(productAdd){
+    if(user_id == null){
+        return confirm("You must be logged in to add this product to your cart!");
+    }else{
+        let urlAddToCart = url +'/addToCart';
+        let size = "null";
+        if($("#getSizeQuickView").val()!= undefined){
+            size = $("#getSizeQuickView").val();
+        }
+        $.ajax({
+            url : urlAddToCart,
+            type : "post",
+            cache: false,
+            dataType:"text",
+            data : {
+                _token: $("#csrf_token").val(),
+                'product_id' : productAdd,
+                'size' : size,
+                'quantity' : $("#quantityQuickView").val()
+            },
+            success : function (result){
+                if(result == true){
+                    return alert("The product has been added to the cart");
+                }
+            }
+        });
+    }
+}
+// tối về làm tiếp thêm sản phẩm cho list product
+function addToCartProduct(productAdd){
+    if(user_id == null){
+        return confirm("You must be logged in to add this product to your cart!");
+    }else{
+        var urlajax = url +'/shop/quickView/' + productAdd;
+        $.ajax({
+            url : urlajax,
+            type : "get",
+            dataType:"text",
+            data : {
+                
+            },
+            success : function (result){
+                var product = JSON.parse(result);  
+                let urlAddToCart = url +'/addToCart';
+                let size = "null";
+                if(product.Size.length > 0){
+                    size = product.Size[0];
+                }
+                $.ajax({
+                    url : urlAddToCart,
+                    type : "post",
+                    cache: false,
+                    dataType:"text",
+                    data : {
+                        _token: $("#csrf_token").val(),
+                        'product_id' : productAdd,
+                        'size' : size,
+                        'quantity' : 1
+                    },
+                    success : function (result){
+                        if(result == true){
+                            return alert("The product has been added to the cart");
+                        }
+                    }
+                });
+            }
+        })
     }
 }
 

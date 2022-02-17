@@ -75,7 +75,7 @@ class WishlistController extends Controller
     }
     // Ajax
     public function wishlistDelete($user_id, $wishl_id){
-            $wishlists = DB::table('wishlist')->where('id', $user_id)->get();
+            $wishlists = DB::table('wishlist')->where('User_id', $user_id)->get();
             $test = false;
             foreach($wishlists as $wish){
                 if($wish->WishList_id == $wishl_id){

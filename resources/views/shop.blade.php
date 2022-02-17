@@ -365,14 +365,14 @@
                                     <div class="quantity">
                                         <label>Quantity</label>
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
+                                            <input id="quantityQuickView" class="cart-plus-minus-box" value="1" type="text">
                                             <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                             <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                         </div>
                                     </div>
                                     <div class="hiraola-group_btn">
                                         <ul>
-                                            <li><a href="{{ url('cart') }}" class="add-to_cart">Cart To Cart</a></li>
+                                            <li id="addtoCartQuickView"></li>
                                             <li><a href="{{ url('wishlist') }}"><i class="ion-android-favorite-outline"></i></a></li>
                                             <li><a href="{{ url('compare') }}"><i class="ion-ios-shuffle-strong"></i></a></li>
                                         </ul>
