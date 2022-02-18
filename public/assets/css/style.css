@@ -761,7 +761,7 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .popup_wrapper
 .template-color-3 .hiraola-product-tab_slider-3 .list-slide_item .single_product,
 .template-color-3 .hiraola-product_slider-3 .list-slide_item .single_product,
 .template-color-3 .latest-blog_slider .list-slide_item .single_product,
-.template-color-3 .shop-product-wrap .list-slide_item .single_product, 
+.template-color-3 .shop-product-wrap .list-slide_item .single_product,
 .hiraola-banner_btn,
 .hiraola-btn-bondi_blue,
 .hiraola-btn_fullwidth,
@@ -2499,7 +2499,7 @@ button.li-btn:hover {
 
 .bg-6,
 .bg-7 {
-  background-image: url("../images/slider/6.jpg");
+  background-image: url("../images/banner/R.jfif");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -2521,7 +2521,7 @@ button.li-btn:hover {
 }
 
 .bg-7 {
-  background-image: url("../images/slider/7.jpg");
+  background-image: url("../images/banner/2.jpg");
 }
 
 /* ---Hiraola's Slider Progress Bar--- */
@@ -3801,7 +3801,7 @@ button.li-btn:hover {
 }
 
 .static-banner_area .static-banner-image {
-  background-image: url("../images/banner/static-banner.png");
+  background-image: url("../images/banner/banner3.jpg");
   background-size: cover;
   min-height: 345px;
   background-repeat: no-repeat;
@@ -3809,7 +3809,7 @@ button.li-btn:hover {
 }
 
 .static-banner_area .static-banner-image.static-banner-image-2 {
-  background-image: url("../images/banner/static-banner-2.png");
+  background-image: url("../images/banner/banner3.jpg");
 }
 
 .static-banner_area .static-banner-content {
@@ -4999,7 +4999,7 @@ button.li-btn:hover {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex;  
+  display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: flex-start;
       -ms-flex-pack: center;
@@ -7020,7 +7020,7 @@ button.li-btn:hover {
   font-size: 16px;
 }
 .sp-product-tab_area .sp-product-tab_nav .tab-content .product-description > ul > li  .sizeQuantity{
-  font-weight: bold; 
+  font-weight: bold;
   font-size: 18px
 }
 
@@ -9871,12 +9871,12 @@ button[name=apply]{
   opacity: 0;
   z-index: 1;
   transition: all 0.5s ease-in-out;
-  top: 150%;  
+  top: 150%;
 }
 #displayJewelry > li {
-  list-style-type: none; /* xóa dấu chấm đầu hàng*/ 
+  list-style-type: none; /* xóa dấu chấm đầu hàng*/
   position: relative;
-  
+
 }
 
 #displayJewelry  > li > a {

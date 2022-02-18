@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -7,31 +8,41 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
-    <!-- Fontawesome -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/font-awesome.css')}}">
-    <!-- Fontawesome Star -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/fontawesome-stars.css')}}">
-    <!-- Ion Icon -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/ion-fonts.css')}}">
-    <!-- Slick CSS -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/slick.css')}}">
-    <!-- Animation -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/animate.css')}}">
-    <!-- jQuery Ui -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/jquery-ui.min.css')}}">
-    <!-- Lightgallery -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/lightgallery.min.css')}}">
-    <!-- Nice Select -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/nice-select.css')}}">
-    <!-- Timecircles -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/timecircles.css')}}">
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/font-awesome.css') }}">
+    <!-- Fontawesome Star -->
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/fontawesome-stars.css') }}">
+    <!-- Ion Icon -->
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/ion-fonts.css') }}">
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/slick.css') }}">
+    <!-- Animation -->
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.css') }}">
+    <!-- jQuery Ui -->
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery-ui.min.css') }}">
+    <!-- Lightgallery -->
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/lightgallery.min.css') }}">
+    <!-- Nice Select -->
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/nice-select.css') }}">
+    <!-- Timecircles -->
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/timecircles.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <style>
+        .User_Image {
+            width: 15%;
+            height: 15%;
+            border-radius: 50%;
+        }
+
+    </style>
 </head>
 @extends('layout.layout_nav_footer')
-    @section('main')
+@section('main')
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
@@ -70,8 +81,8 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" id="account-logout-tab" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();" href="{{ url('logout') }}" role="tab"
-                                    aria-selected="false">Logout</a>
+                                                            document.getElementById('logout-form').submit();"
+                                    href="{{ url('logout') }}" role="tab" aria-selected="false">Logout</a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     class="d-none">
@@ -86,10 +97,11 @@
                                 aria-labelledby="account-dashboard-tab">
                                 <div class="myaccount-dashboard">
                                     @if (Auth::check())
-                                        <p>Hello <b>{{ Auth::user()->Username }}</b> (not
-                                            <b>{{ Auth::user()->Username }}</b> ?
-                                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
+                                        <p>Hello <b>{{ Auth::user()->First_Name }}</b> (not
+                                            <b>{{ Auth::user()->First_Name }}</b> ?
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                                                document.getElementById('logout-form').submit();">
                                                 {{ __('Sign out') }}
                                             </a>)
                                         </p>
@@ -162,96 +174,131 @@
                             </div>
                             <div class="tab-pane fade" id="account-details" role="tabpanel"
                                 aria-labelledby="account-details-tab">
-                                <div class="myaccount-details">
-                                    <form action="{{ url('user/accountUpdate') }}" id="account" class="hiraola-form"
-                                        method="POST">
-                                        {{ csrf_field() }}
-                                        <div class="hiraola-form-inner">
-                                            <div class="single-input single-input-half">
-                                                <label for="account-details-firstname">First Name <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" data-html="true" value="{{ $user->First_Name }}"
-                                                    name="firstName" id="f_name">
-                                                <span class="text-danger error-text firstName_error"></span>
-                                            </div>
-                                            <div class="single-input single-input-half">
-                                                <label for="account-details-lastname">Last Name <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" data-html="true" value="{{ $user->Last_Name }} "
-                                                    name="lastName" id="l_name">
-                                                <span class="text-danger error-text lastName_error"></span>
-                                            </div>
-                                            <div class="single-input single-input-half">
-                                                <label for="account-details-lastname">Phone number <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="number" data-html="true" value="{{ $user->Phone_Number }}"
-                                                    name="phone_number" id="phone">
-                                                <span class="text-danger error-text phone_number_error"></span>
-                                            </div>
-                                            <div class="single-input single-input-half">
-                                                <label for="account-details-lastname">Gender <span
-                                                        class="text-danger">*</span></label>
-                                                <select name="gender" id="gender">
-                                                    <option value="other" {{ $user->Gender == 'other' ? 'selected' : '' }}>
-                                                        Other</option>
-                                                    <option value="male" {{ $user->Gender == 'male' ? 'selected' : '' }}>Male
-                                                    </option>
-                                                    <option value="female" {{ $user->Gender == 'female' ? 'selected' : '' }}>
-                                                        Female</option>
-                                                </select>
-                                            </div>
-                                            <div class="single-input">
-                                                <label for="account-details-email">Username <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" data-html="true" value="{{ $user->Username }}"
-                                                    name="username" id="username">
-                                                <span class="text-danger error-text username_error"></span>
-                                            </div>
-                                            <div class="single-input">
-                                                <label for="account-details-email">Email <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="email" data-html="true" value="{{ $user->email }}"
-                                                    name="email" id="email">
-                                                <span class="text-danger error-text email_error"></span>
-                                            </div>
-                                            @if ($user->Password != null)
-                                                <div class="single-input">
-                                                    <label for="account-details-oldpass">Current Password <span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="password" name="current_password" data-html="true"
-                                                        id="current_pass">
-                                                    <span class="text-danger error-text current_password_error"></span>
-                                                </div>
+                                <form action="{{ url('accountUpdate') }}" id="account" class="hiraola-form"
+                                    method="POST" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <div class="text-center" style="padding-bottom: 2%">
+                                        <img class="User_Image"
+                                        @if (Auth::user()->Avatar != null) src="{{ Auth::user()->Avatar }}"
+                                        @else
+                                            @if (Auth::user()->Gender == 'male')
+                                                src={{url("assets/images/user/avatarmale.jpg")}}
+                                            @elseif (Auth::user()->Gender == 'female')
+                                                src={{url("assets/images/user/avatarfemale.jpg")}}
+                                                @else
+                                                src = {{url("assets/images/user/avatarmale.jpg")}} @endif
                                             @endif
-                                            <div class="single-input">
-                                                <label for="account-details-newpass">New Password <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="password" data-html="true" name="password" id="password">
-                                                <span class="text-danger error-text password_error"></span>
-                                            </div>
-                                            <div class="single-input">
-                                                <label for="account-details-confpass">Confirm New Password <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="password" data-html="true" name="password_confirmation"
-                                                    id="confirm_pass">
-                                                <span class="text-danger error-text password_confirmation_error"></span>
+                                        alt="">
+                                    </div>
+                                    <div class="text-center" style="padding-bottom: 2%">
+                                        <input type="file" name="avatar" id="avatar" style="opacity: 0; display:none">
+                                        <a href="javascript:void(0)" class="btn btn-primary responsive"
+                                            id="change_avatar">Change Avatar</a>
+                                        <div><span class="text-danger error-text avatar_error"></span></div>
+                                    </div>
 
-                                            </div>
-                                            <div class="single-input">
-                                                <button class="hiraola-btn hiraola-btn_dark" id="submit"
-                                                    type="submit"><span>SAVE
-                                                        CHANGES</span></button>
-                                            </div>
+                                    <div class="hiraola-form-inner">
+                                        <div class="single-input single-input-half">
+                                            <label for="account-details-firstname">First Name <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" data-html="true" value="{{ $user->First_Name }}"
+                                                name="firstName" id="f_name">
+                                            <span class="text-danger error-text firstName_error"></span>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="single-input single-input-half">
+                                            <label for="account-details-lastname">Last Name <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" data-html="true" value="{{ $user->Last_Name }} "
+                                                name="lastName" id="l_name">
+                                            <span class="text-danger error-text lastName_error"></span>
+                                        </div>
+                                        <div class="single-input single-input-half">
+                                            <label for="account-details-lastname">Phone number <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" data-html="true" value="{{ $user->Phone_Number }}"
+                                                name="phone_number" id="phone">
+                                            <span class="text-danger error-text phone_number_error"></span>
+                                        </div>
+                                        <div class="single-input single-input-half">
+                                            <label for="account-details-lastname">Gender <span
+                                                    class="text-danger">*</span></label>
+                                            <select name="gender" id="gender">
+                                                <option value="other" {{ $user->Gender == 'other' ? 'selected' : '' }}>
+                                                    Other</option>
+                                                <option value="male" {{ $user->Gender == 'male' ? 'selected' : '' }}>
+                                                    Male
+                                                </option>
+                                                <option value="female" {{ $user->Gender == 'female' ? 'selected' : '' }}>
+                                                    Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="single-input">
+                                            <label for="account-details-email">Email <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="email" data-html="true" value="{{ $user->email }}" name="email"
+                                                id="email">
+                                            <span class="text-danger error-text email_error"></span>
+                                        </div>
+                                        @if ($user->Password != null)
+                                            <div class="single-input">
+                                                <label for="account-details-oldpass">Current Password <span
+                                                        id="cur_pass">*</span></label>
+                                                <input type="password" name="current_password" data-html="true"
+                                                    id="current_pass">
+                                                <span class="text-danger error-text current_password_error"></span>
+                                            </div>
+                                        @endif
+                                        <div class="single-input">
+                                            <label for="account-details-newpass">New Password <span
+                                                    id="pass">*</span></label>
+                                            <input type="password" data-html="true" name="password" id="password">
+                                            <span class="text-danger error-text password_error"></span>
+                                        </div>
+                                        <div class="single-input">
+                                            <label for="account-details-confpass">Confirm New Password <span
+                                                    id="con_pass">*</span></label>
+                                            <input type="password" data-html="true" name="password_confirmation"
+                                                id="confirm_pass">
+                                            <span class="text-danger error-text password_confirmation_error"></span>
+
+                                        </div>
+                                        <div class="single-input">
+                                            <button class="hiraola-btn hiraola-btn_dark" id="submit"
+                                                type="submit"><span>SAVE
+                                                    CHANGES</span></button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </main>
-    <script src="{{url('assets/js/account.js')}}"></script>
+    <script>
+        $('#change_avatar').on('click', function() {
+            $('#avatar').click();
+        });
+        $('#avatar').ijaboCropTool({
+            preview: '.image-previewer',
+            setRatio: 1,
+            allowedExtensions: ['jpg', 'jpeg', 'png'],
+            buttonsText: ['CROP', 'QUIT'],
+            buttonsColor: ['#30bf7d', '#ee5155', -15],
+            processUrl: '{{ url('crop') }}',
+            withCSRF: ['_token', '{{ csrf_token() }}'],
+            onSuccess: function(message, element, status) {
+                swal('Success',message,'success');
+                setInterval('location.reload()', 2500);
+            },
+            onError: function(message, element, status) {
+                swal('Error',message,'error');
+            }
+        });
+    </script>
+    <script src="{{ url('assets/js/account.js') }}"></script>
 @endsection
+
 </html>

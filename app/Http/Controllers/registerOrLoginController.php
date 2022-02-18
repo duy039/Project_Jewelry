@@ -6,6 +6,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -37,7 +38,7 @@ class registerOrLoginController extends Controller
                     if ($pass == decrypt($users->Password)) {
                         Auth::login($users);
                         $_SESSION['user_id'] = $users->id;
-                        return response()->json(['status' => 3, 'name' => $users->Username]);
+                        return response()->json(['status' => 3, 'name' => $users->First_Name . $users->Last_Name]);
                     } else {
                         return response()->json(['status' => 1, 'invalid' => 'Wrong password!']);
                     }
@@ -54,7 +55,6 @@ class registerOrLoginController extends Controller
     public function postRegister(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'username' => 'required|string|max:20',
             'l_name' => 'required|string|max:20',
             'f_name' => 'required|string|max:20',
             'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
@@ -67,13 +67,17 @@ class registerOrLoginController extends Controller
         ]);
         $l_name = $request->l_name;
         $f_name = $request->f_name;
+        $gender = $request->gender;
         $email = $request->email;
         $password = $request->password;
+        $date = Carbon::now();
         $value = [
             'First_Name' => $f_name,
             'Last_Name' => $l_name,
+            'Gender' =>$gender,
             'Password' => encrypt($password),
-            'Email' => $email,
+            'email' => $email,
+            'Create_Date' => $date,
         ];
         $isExists = DB::table('users')->where('email', $email)->exists();
         if (!$validate->fails()) {
@@ -122,7 +126,7 @@ class registerOrLoginController extends Controller
         $user = User::where('email', '=', $data->email)->first();
         if (!$user) {
             $user = new User();
-            $user->Username = $data->name;
+            $user->First_Name = $data->name;
             $user->Email = $data->email;
             $user->Avatar = $data->avatar;
             $user->provider_id = $data->id;

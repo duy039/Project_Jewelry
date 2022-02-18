@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,30 +9,30 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
     <!-- Fontawesome -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/font-awesome.css') }}">
     <!-- Fontawesome Star -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/fontawesome-stars.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/fontawesome-stars.css') }}">
     <!-- Ion Icon -->
-    <link rel="stylesheet" href="{{asset('assets/css/vendor/ion-fonts.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/ion-fonts.css') }}">
     <!-- Slick CSS -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/slick.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/slick.css') }}">
     <!-- Animation -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/animate.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.css') }}">
     <!-- jQuery Ui -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery-ui.min.css') }}">
     <!-- Lightgallery -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/lightgallery.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/lightgallery.min.css') }}">
     <!-- Nice Select -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/nice-select.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/nice-select.css') }}">
     <!-- Timecircles -->
-    <link rel="stylesheet" href="{{asset('assets/css/plugins/timecircles.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/timecircles.css') }}">
 
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 @extends('layout.layout_nav_footer')
-    @section('main')
+@section('main')
     <div class="hiraola-login-register_area">
         <div class="container">
             <div class="row" style="width: 500px; margin:0 auto">
@@ -65,10 +66,10 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6" style="margin-left: 55%;transform: translateX(-50%);">
                                     <button class="hiraola-login_btn">Login</button>
                                 </div>
-                                <div class="col-md-12 text-center">
+                                <div class="col-md-12 text-center" style="padding-top: 5%">
                                     <div class="forgotton-password_info">
                                         @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -79,14 +80,20 @@
                                 </div>
 
                                 <div class="col-md-12 text-center">
-                                    <div style="padding: 20px">
+                                    <div style="padding: 2%">
                                         <hr>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <div style="padding-bottom: 5%; text-decoration">
+                                        Don't have account yet ? @if (Route::has('register'))<a style="text-decoration:underline" href="{{ url('register') }}">{{ __('Register') }}</a>@endif
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div style="font-size:40px" class="text-center">
-                                        <a style="padding: 3%" href="{{ url('google') }}"target="_self" class="btn btn-danger"><i class="fab fa-google"></i> Login with Google</a>
+                                        <a style="padding: 3%" href="{{ url('google') }}" target="_self"
+                                            class="btn btn-danger"><i class="fab fa-google"></i> Login with Google</a>
                                     </div>
                                 </div>
                             </div>
@@ -96,6 +103,7 @@
             </div>
         </div>
     </div>
-    <script src="{{url('assets/js/login.js')}}"></script>
+    <script src="{{ url('assets/js/login.js') }}"></script>
 @endsection
+
 </html>

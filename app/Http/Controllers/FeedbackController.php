@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 class FeedbackController extends Controller
 {
-    
+
     public function index()
     {
         $user = auth()->user();
@@ -23,12 +23,12 @@ class FeedbackController extends Controller
         $subject = $request->subject;
         $message = $request->message;
         $validate = Validator::make($request->all(),[
-            'subject' => 'required|string|max:20',
+            // 'subject' => 'required|string|max:20',
             'message' => 'required|string|max:100',
         ]);
         $value = [
             'User_id'=>$user->id,
-            'subject'=>$subject,
+            // 'subject'=>$subject,
             'Content'=>$message,
             'Create_Date'=>$time
         ];

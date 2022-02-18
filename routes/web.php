@@ -56,6 +56,8 @@ Route::get('my-account', [App\Http\Controllers\my_accountController::class, 'ind
 Route::get('contact', [App\Http\Controllers\FeedbackController::class, 'index'])->name('contact');
 Route::post('accountUpdate', [App\Http\Controllers\my_accountController::class, 'updateDetail']);
 Route::post('feedback', [App\Http\Controllers\FeedbackController::class, 'postFeedback'])->name('feedback');
+Route::post('crop',[App\Http\Controllers\my_accountController::class, 'crop'])->name('crop');
+
 
 
 

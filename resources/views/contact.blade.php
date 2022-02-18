@@ -87,26 +87,27 @@
                     <div class="contact-form-content">
                         <h3 class="contact-page-title">Tell Us Your Message</h3>
                         <div class="contact-form">
-                            <form id="contact" action="{{ url('user/feedback') }}" method="POST">
+                            <form id="contact" action="{{ url('feedback') }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>Your Username <span class="required">*</span></label>
-                                    <input type="text" readonly
-                                        @if (Route::has('login')) value="{{ $user->Username }}"
-                                        @else value="" @endif
-                                        name="name" required>
+                                    <label>Your Name <span class="required">*</span></label>
+                                    <input type="text"
+                                        @if (!Auth::guest()) value="{{ $user->First_Name }} {{ $user->Last_Name }}" readonly
+                                    @else value="" autofocus @endif
+                                        name="name">
+                                    <span class="text-danger error-text name_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label>Your Email <span class="required">*</span></label>
-                                    <input type="email" readonly value="{{ $user->email }}" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Subject <span class="text-danger">*</span></label>
-                                    <input type="text" id="subject" autofocus data-html="true" name="subject">
+                                    <input type="email"
+                                        @if (!Auth::guest()) value="{{ $user->email }}" readonly @else value="" @endif
+                                        name="email">
+                                    <span class="text-danger error-text email_error"></span>
                                 </div>
                                 <div class="form-group form-group-2">
                                     <label>Your Message <span class="text-danger">*</span></label>
                                     <textarea name="message" id="message" data-html="true" style="resize: none"></textarea>
+                                    <span class="text-danger error-text message_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" value="submit" id="submit" class="hiraola-contact-form_btn"
