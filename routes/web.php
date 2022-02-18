@@ -36,6 +36,8 @@ Route::prefix('wishlist')->group(function(){
 Route::prefix('cart')->group(function(){
         Route::get('/', 'App\Http\Controllers\CartController@index');
         Route::get('/getProduct', 'App\Http\Controllers\CartController@getProduct');
+        Route::get('/cartDelete/{id}', 'App\Http\Controllers\CartController@cartDelete');
+        Route::get('/quantityChange/{id}/{method}', 'App\Http\Controllers\CartController@quantityChange');
 });
 
 Auth::routes(['verify' => true]);

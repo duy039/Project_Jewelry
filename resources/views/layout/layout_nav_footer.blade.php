@@ -288,9 +288,10 @@
                     <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
                     <div class="minicart-content">
                         <div class="minicart-heading">
-                            <h4>Shopping Cart</h4>
+                            <h4>Minicart</h4>
                         </div>
-                        <ul class="minicart-list">
+                        <ul class="minicart-list" id="sessionMiniCart">
+                            {{-- 1 sản phẩm --}}
                             <li class="minicart-product">
                                 <a class="product-item_remove" href="javascript:void(0)"><i class="ion-android-close"></i></a>
                                 <div class="product-item_img">
@@ -325,13 +326,13 @@
                     </div>
                     <div class="minicart-item_total">
                         <span>Subtotal</span>
-                        <span class="ammount">$360.00</span>
+                        <span class="ammount" id="subTotalMiniCart">$0</span>
                     </div>
                     <div class="minicart-btn_area">
-                        <a href="/cart" class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">Minicart</a>
+                        <a href="/cart" class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">Go To Cart</a>
                     </div>
                     <div class="minicart-btn_area">
-                        <a href="/checkout" class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">Checkout</a>
+                        <a href='{{ url("checkout") }}' class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">Checkout</a>
                     </div>
                 </div>
             </div>
@@ -687,6 +688,8 @@
 <!-- Main JS -->
 <script src="{{url('assets/js/main.js')}}"></script>
 <script language="javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="{{url('assets/js/plugins/layout.js')}}"></script>
 <script>
     function focusSearch(){
         var valueSearch = $("#inputSearch").val();

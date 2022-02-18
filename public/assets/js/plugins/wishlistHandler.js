@@ -72,7 +72,7 @@ function wishlistDelete(wishlist_id){
         });
     }
 }
- // tối về làm tiếp thêm sản phẩm cho list product
+ // thêm sản phẩm vào giỏ
 function addToCartProduct(productAdd){
     
     if(user_id == null){

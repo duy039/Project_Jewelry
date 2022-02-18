@@ -249,9 +249,16 @@ public function addToCart(Request $request){
         }
         if(count($_SESSION['inCart']) == 0 ){
             foreach($this->products as $p){
+                $cart_id="";
+                if($request->size == "null"){
+                    $cart_id  = $p->getId() . "1" . "x";
+                }else{
+                    $cart_id = $p->getId() . $request->size . "x";
+                }
                 if($p->getId() == $request->product_id){
                     // tạo 1 đối tượng để vào session
                     $productObj = (object) [
+                        'cart_id'      => $cart_id,
                         'Product_id'   => $p->getId(),
                         'Name'         => $p->getName(),
                         'Size'         => $request->size,
@@ -272,8 +279,15 @@ public function addToCart(Request $request){
             }
             foreach($this->products as $p){
                 if($p->getId() == $request->product_id){
+                    $cart_id="";
+                    if($request->size == "null"){
+                        $cart_id  = $p->getId() . "1" . "x";
+                    }else{
+                        $cart_id = $p->getId() . $request->size . "x";
+                    }
                     // tạo 1 đối tượng để vào session
                     $productObj = (object) [
+                        'cart_id'      => $cart_id,
                         'Product_id'   => $p->getId(),
                         'Name'         => $p->getName(),
                         'Size'         => $request->size,

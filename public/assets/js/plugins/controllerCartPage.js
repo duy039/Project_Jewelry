@@ -26,10 +26,22 @@ function productsResponse() {
 let products = productsResponse();
 
 // thay đổi số lượng sản phẩm
-function changeQuantity(){
-    for(let i=0; i< products.length; i++){
-        let total = $("#quantity"+i).val() * products[i].CurrentPrice;
-        $("#total"+i).html("$"+total.toFixed(2));
+function changeQuantity(id, method){
+    if(user_id == null){
+        return confirm("You must be logged in to do this!!!");
+    }else{
+        let urlcartDelete = url +'/cart/quantityChange/'+id +"/"+method;
+        $.ajax({
+            url : urlcartDelete,
+            type : "get",
+            cache: false,
+            dataType:"text",
+            data : {
+            },
+            success : function (result){
+                renderListProduct();
+            }
+        });
     }
 }
 
@@ -40,9 +52,11 @@ function renderListProduct(){
         $("#sessionCart").css({
             "text-align" : "center"
             });
+        console.log("no user");
         return 0;
     }else{
         products = productsResponse();
+        console.log(products);
         let htmlCart = "";
         if(products == null){
             $("#sessionCart").html("Cart is currently empty!!!");
@@ -61,7 +75,7 @@ function renderListProduct(){
             sum +=total;
             htmlCart += '<tr>'
                         +        '<td  class="hiraola-product_remove">' 
-                        +            '<a style="font-size: 30px" onclick="cartDelete(\'' +i+ '\')" href="javascript:void(0)"><i class="fas fa-trash-alt" title="Remove"></i></a>'
+                        +            '<a style="font-size: 30px" onclick="cartDelete(\'' +products[i].cart_id+ '\')" href="javascript:void(0)"><i class="fas fa-trash-alt" title="Remove"></i></a>'
                         +        '</td>'
                         +        '<td class="hiraola-product-thumbnail"><a href="'+url + "/product/" + products[i].Product_id+'"><img src="'+url+'/assets/images/product/'+products[i].Avatar+'" alt="Cart Thumbnail" width="100px"></a>'
                         +        '</td>'
@@ -71,16 +85,36 @@ function renderListProduct(){
                         +        '<td class="quantity">'
                         +           '<div class="cart-plus-minus">'
                         +               '<input onchange="changeQuantity()" id="quantity'+i+'"  class="cart-plus-minus-box" value="'+products[i].Quantity+'" type="number">'
-                        +                '<div class="dec qtybutton" onclick="changeQuantity()"><i class="fa fa-angle-down"></i></div>'
-                        +                '<div class="inc qtybutton" onclick="changeQuantity()"><i class="fa fa-angle-up"></i></div>'
+                        +                '<div class="dec qtybutton" onclick="changeQuantity(\'' +products[i].cart_id+ '\',\'down\')"><i class="fa fa-angle-down"></i></div>'
+                        +                '<div class="inc qtybutton" onclick="changeQuantity(\'' +products[i].cart_id+ '\',\'up\')"><i class="fa fa-angle-up"></i></div>'
                         +           '</div>'
                         +       '</td>'
-                        +       '<td class="product-subtotal"><span id="total'+i+'" class="amount">'+total.toFixed(2)+'</span></td>'
+                        +       '<td class="product-subtotal"><span id="total'+i+'" class="amount">$'+total.toFixed(2)+'</span></td>'
                         +    '</tr>';
         }
         $("#listProducts").html(htmlCart);
-        $("#subTotal").html("$"+sum);
+        $("#subTotalMiniCart").html("$"+sum.toFixed(2));
     }
 }
-
+function cartDelete(id){
+    if(user_id == null){
+        return confirm("You must be logged in to do this!!!");
+    }else{
+        let urlcartDelete = url +'/cart/cartDelete/'+id ;
+        $.ajax({
+            url : urlcartDelete,
+            type : "get",
+            cache: false,
+            dataType:"text",
+            data : {
+            },
+            success : function (result){
+                if(result){
+                    alert("The product has been removed from the cart!");
+                };
+                renderListProduct();
+            }
+        });
+    }
+}
 renderListProduct();
