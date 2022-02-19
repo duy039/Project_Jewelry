@@ -110,7 +110,7 @@
                                             <li>
                                                 <a href="{{ url('my-account') }}"><img style="border-radius: 50%"
                                                         width="25px" height="25px"
-                                                        @if (Auth::user()->Avatar != null) src= {{url('assets/images/user/')}}{{Auth::user()->Avatar}}
+                                                        @if (Auth::user()->Avatar != null) src= {{url('assets/images/user')}}{{Auth::user()->Avatar}}
                                                     @else
                                                     @if (Auth::user()->Gender == 'male')
                                                     src={{ url('assets/images/user/avatarmale.jpg') }}
