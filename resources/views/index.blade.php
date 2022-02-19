@@ -100,7 +100,8 @@
                                                         class="fa fa-chevron-down"></i></a>
                                                 <ul class="ht-dropdown ht-my_account">
                                                     @if (Route::has('login'))
-                                                        <li><a href="{{ url('login') }}"><i class="fas fa-user"></i>
+                                                        <li><a href="{{ url('login') }}"><i
+                                                                    class="fas fa-user text-primary"></i>
                                                                 {{ __('Login') }}</a></li>
                                                     @endif
                                                 </ul>
@@ -109,7 +110,7 @@
                                             <li>
                                                 <a href="{{ url('my-account') }}"><img style="border-radius: 50%"
                                                         width="25px" height="25px"
-                                                        @if (Auth::user()->Avatar != null) src="{{ Auth::user()->Avatar }}"
+                                                        @if (Auth::user()->Avatar != null) src= {{url('assets/images/user/')}}{{Auth::user()->Avatar}}
                                                     @else
                                                     @if (Auth::user()->Gender == 'male')
                                                     src={{ url('assets/images/user/avatarmale.jpg') }}
@@ -133,7 +134,7 @@
                                                     <hr style="margin: 0">
                                                     <li><a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault();
-                                                                                document.getElementById('logout-form').submit();"><i
+                                                                                    document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
                                                                 aria-hidden="true"></i>
                                                             {{ __('Sign out') }}
@@ -217,7 +218,8 @@
                             <div class="main-menu_area">
                                 <nav>
                                     <ul>
-                                        <li class="dropdown-holder"><a href='{{ url('/') }}'>{{__('home-header.home')}}</a></li>
+                                        <li class="dropdown-holder"><a
+                                                href='{{ url('/') }}'>{{ __('home-header.home') }}</a></li>
                                         <li class="megamenu-holder"><a href='{{ url('/shop') }}'>Shop</a>
                                             <ul class="hm-megamenu">
                                                 <li>

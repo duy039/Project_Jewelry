@@ -1,7 +1,20 @@
 $(function (data) {
-
     $('#account').on('submit', function (e) {
         e.preventDefault();
+
+        // var cur_pass = document.getElementById('current_pass').value;
+        var pass = document.getElementById('password').value;
+        var con_pass = document.getElementById('confirm_pass').value;
+
+        if(pass =='' && con_pass ==''){
+            $('#cur_pass').removeClass('text-danger')
+            $('#pass').removeClass('text-danger')
+            $('#con_pass').removeClass('text-danger')
+        }else{
+            $('#cur_pass').addClass('text-danger')
+            $('#pass').addClass('text-danger')
+            $('#con_pass').addClass('text-danger')
+        }
 
         $.ajax({
             url: $(this).attr('action'),

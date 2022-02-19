@@ -14,9 +14,9 @@ return [
     |
     */
     'google' => [
-        'client_id' => '291356830347-lhb7p5ebq72o9m14t4gi4ngnu57lguuq.apps.googleusercontent.com',
-        'client_secret' => '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',
-        'redirect' => 'http://localhost:8000/callback/google',
+        'client_id' => '291356830347-m1ehlgp75h9i70q4miaqr9i0qfqsgb47.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://127.0.0.1:8000/callback/google',
       ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

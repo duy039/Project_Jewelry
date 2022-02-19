@@ -6,7 +6,7 @@ if (session_id() === '') {
     session_start();
 }
 $user = '';
-$_SESSION['user_id'] = 1;
+// $_SESSION['user_id'] = 1;
 
 $lusers = DB::table('users')->get();
 if (isset($_SESSION['user_id'])) {
@@ -138,7 +138,7 @@ $tagss = $lloadTag->getTags();
                                                         class="fa fa-chevron-down"></i></a>
                                                 <ul class="ht-dropdown ht-my_account">
                                                     @if (Route::has('login'))
-                                                        <li><a href="{{ url('login') }}"><i class="fas fa-user"></i>
+                                                        <li><a href="{{ url('login') }}"><i class="fas fa-user text-primary"></i>
                                                                 {{ __('Login') }}</a></li>
                                                     @endif
                                                 </ul>
@@ -147,7 +147,8 @@ $tagss = $lloadTag->getTags();
                                             <li>
                                                 <a href="{{ url('my-account') }}"><img style="border-radius: 50%"
                                                         width="25px" height="25px"
-                                                        @if (Auth::user()->Avatar != null) src="{{ Auth::user()->Avatar }}"
+                                                        @if (Auth::user()->Avatar != null)
+                                                        src= {{url('assets/images/user/')}}{{Auth::user()->Avatar}}
                                                     @else
                                                     @if (Auth::user()->Gender == 'male')
                                                     src={{ url('assets/images/user/avatarmale.jpg') }}

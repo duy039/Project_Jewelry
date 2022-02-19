@@ -30,7 +30,7 @@ class my_accountController extends Controller
         $upload = $file->move(public_path($path), $new_image_name);
         if ($upload) {
             $value = [
-                'Avatar' => $path . $new_image_name,
+                'Avatar' => '/'.$new_image_name,
             ];
             $user = auth()->user();
             $oldimage = $user->Avatar;
@@ -58,16 +58,6 @@ class my_accountController extends Controller
         $confirm = $request->password_confirmation;
         $password = $request->password;
         $date = Carbon::now();
-
-        $value = [
-            'First_Name' => $f_name,
-            'Last_Name' => $l_name,
-            'email' => $email,
-            'Gender' => $gender,
-            'Phone_Number' => $phone,
-            'Password' => encrypt($password),
-            'Update_Date' => $date->format('Y-m-d H:i:s'),
-        ];
         if ($user->Password != null) {
             if ($oldPassword == '' && $password == '' && $confirm == '') {
                 $validate = Validator::make($request->all(), [
@@ -106,6 +96,15 @@ class my_accountController extends Controller
                 if (!$validate->fails()) {
                     if ($oldPassword == decrypt($user->Password)) {
                         if ($oldPassword != $password) {
+                            $value = [
+                                'First_Name' => $f_name,
+                                'Last_Name' => $l_name,
+                                'email' => $email,
+                                'Gender' => $gender,
+                                'Phone_Number' => $phone,
+                                'Password' => encrypt($password),
+                                'Update_Date' => $date->format('Y-m-d H:i:s'),
+                            ];
                             $query = DB::table('users')->where('id', $user->id)->update($value);
                             if ($query) {
                                 return response()->json(['status' => 1, 'msg' => 'Save infomation success!']);
@@ -121,15 +120,50 @@ class my_accountController extends Controller
                 }
             }
         } else {
-            $validate = Validator::make($request->all(), [
-                'firstName' => 'required|string|max:50',
-                'lastName' => 'required|string|max:50',
-                'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
-                'password' => 'required|string|max:15|confirmed',
-            ]);
-            $query = DB::table('users')->where('id', $user->id)->update($value);
-            if ($query) {
-                return response()->json(['status' => 1, 'msg' => 'Save infomation success!']);
+            if ($password == '') {
+                $value = [
+                    'First_Name' => $f_name,
+                    'Last_Name' => $l_name,
+                    'email' => $email,
+                    'Gender' => $gender,
+                    'Phone_Number' => $phone,
+                    'Update_Date' => $date->format('Y-m-d H:i:s'),
+                ];
+                $validate = Validator::make($request->all(), [
+                    'firstName' => 'required|string|max:50',
+                    'lastName' => 'required|string|max:50',
+                    'phone_number' => 'required|string|max:11|min:10',
+                    'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
+                ]);
+                if (!$validate->fails()) {
+                    DB::table('users')->where('id', $user->id)->update($value);
+                    return response()->json(['status' => 1, 'msg' => 'Save infomation success!']);
+                } else {
+                    return response()->json(['status' => 0, 'error' => $validate->errors()->toArray()]);
+                }
+            }else{
+                $value = [
+                    'First_Name' => $f_name,
+                    'Last_Name' => $l_name,
+                    'email' => $email,
+                    'Gender' => $gender,
+                    'Phone_Number' => $phone,
+                    'Password' => encrypt($password),
+                    'Update_Date' => $date->format('Y-m-d H:i:s'),
+                ];
+                $validate = Validator::make($request->all(), [
+                    'firstName' => 'required|string|max:50',
+                    'lastName' => 'required|string|max:50',
+                    'phone_number' => 'required|string|max:11|min:10',
+                    'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
+                    'password' => 'required|string|max:15|confirmed',
+                ]);
+                if (!$validate->fails()) {
+                    DB::table('users')->where('id', $user->id)->update($value);
+                    return response()->json(['status' => 1, 'msg' => 'Save infomation success!']);
+                } else {
+                    return response()->json(['status' => 0, 'error' => $validate->errors()->toArray()]);
+                }
             }
         }
     }

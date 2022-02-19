@@ -46,11 +46,11 @@
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
-                <h2>Other</h2>
+                {{-- <h2>Other</h2>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="active">My Account</li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
@@ -74,10 +74,10 @@
                                 <a class="nav-link" id="account-details-tab" data-toggle="tab" href="#account-details"
                                     role="tab" aria-controls="account-details" aria-selected="false">Account Details</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-address"
                                     role="tab" aria-controls="account-address" aria-selected="false">Addresses</a>
-                            </li>
+                            </li> --}}
 
                             <li class="nav-item">
                                 <a class="nav-link" id="account-logout-tab" onclick="event.preventDefault();
@@ -110,9 +110,7 @@
                                             @csrf
                                         </form>
                                     @endif
-                                    <p>From your account dashboard you can view your recent orders, manage your shipping and
-                                        billing addresses and <a href="javascript:void(0)">edit your password and account
-                                            details</a>.</p>
+                                    <p>From your account dashboard you can view your recent orders and edit your password and account details.</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="account-orders" role="tabpanel"
@@ -179,7 +177,7 @@
                                     {{ csrf_field() }}
                                     <div class="text-center" style="padding-bottom: 2%">
                                         <img class="User_Image"
-                                        @if (Auth::user()->Avatar != null) src="{{ Auth::user()->Avatar }}"
+                                        @if (Auth::user()->Avatar != null) src= {{url('assets/images/user/')}}{{Auth::user()->Avatar}}
                                         @else
                                             @if (Auth::user()->Gender == 'male')
                                                 src={{url("assets/images/user/avatarmale.jpg")}}

@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 class FeedbackController extends Controller
 {
 
@@ -20,23 +21,20 @@ class FeedbackController extends Controller
         $user = auth()->user();
         $date = new DateTime();
         $time = $date->format('Y-m-d H:i:s');
-        $subject = $request->subject;
         $message = $request->message;
-        $validate = Validator::make($request->all(),[
-            // 'subject' => 'required|string|max:20',
+        $validate = Validator::make($request->all(), [
             'message' => 'required|string|max:100',
         ]);
         $value = [
-            'User_id'=>$user->id,
-            // 'subject'=>$subject,
-            'Content'=>$message,
-            'Create_Date'=>$time
+            'User_id' => $user->id,
+            'Content' => $message,
+            'Create_Date' => $time
         ];
         if (!$validate->fails()) {
             DB::table('feedback')->insert($value);
-            return response()->json(['status'=>0, 'success'=> 'Your feedback have sent']);
-        }else{
-            return response()->json(['status'=>1,'error'=>$validate->errors()->toArray()]);
+            return response()->json(['status' => 0, 'success' => 'Your feedback have sent']);
+        } else {
+            return response()->json(['status' => 1, 'error' => $validate->errors()->toArray()]);
         }
     }
 }

@@ -20,7 +20,7 @@ class registerOrLoginController extends Controller
 
     public function postLogin(Request $request)
     {
-        if(session_id()===""){
+        if (session_id() === "") {
             session_start();
         }
 
@@ -42,7 +42,7 @@ class registerOrLoginController extends Controller
                     } else {
                         return response()->json(['status' => 1, 'invalid' => 'Wrong password!']);
                     }
-                }else {
+                } else {
                     return response()->json(['status' => 1, 'invalid' => 'Wrong password!']);
                 }
             } else {
@@ -74,10 +74,10 @@ class registerOrLoginController extends Controller
         $value = [
             'First_Name' => $f_name,
             'Last_Name' => $l_name,
-            'Gender' =>$gender,
+            'Gender' => $gender,
             'Password' => encrypt($password),
             'email' => $email,
-            'Create_Date' => $date,
+            'Create_Date' => $date->format('Y-m-d H:i:s'),
         ];
         $isExists = DB::table('users')->where('email', $email)->exists();
         if (!$validate->fails()) {
@@ -94,19 +94,19 @@ class registerOrLoginController extends Controller
         }
     }
 
-    public function redirectToFacebook()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
+    // public function redirectToFacebook()
+    // {
+    //     return Socialite::driver('facebook')->redirect();
+    // }
 
 
-    public function handleFacebookCallback()
-    {
+    // public function handleFacebookCallback()
+    // {
 
-        $user = Socialite::driver('facebook')->user();
-        $this->_registerOrLogin($user);
-        return redirect('/');
-    }
+    //     $user = Socialite::driver('facebook')->user();
+    //     $this->_registerOrLogin($user);
+    //     return redirect('/');
+    // }
 
     public function redirectToGoogle()
     {
@@ -123,15 +123,24 @@ class registerOrLoginController extends Controller
     }
     protected function _registerOrLogin($data)
     {
-        $user = User::where('email', '=', $data->email)->first();
-        if (!$user) {
-            $user = new User();
-            $user->First_Name = $data->name;
-            $user->Email = $data->email;
-            $user->Avatar = $data->avatar;
-            $user->provider_id = $data->id;
-            $user->save();
+        if (session_id() === "") {
+            session_start();
         }
-        Auth::login($user);
+        $date = Carbon::now();
+        $user = DB::table('users')->where('email', $data->email)->first();
+        if (!$user) {
+            $value = [
+                'First_Name' => $data->name,
+                'Email' => $data->email,
+                'Avatar' => $data->avatar,
+                'provider_id' => $data->id,
+                'Create_Date' => $date->format('Y-m-d H:i:s'),
+                'Update_Date' => $date->format('Y-m-d H:i:s'),
+            ];
+            DB::table('users')->insert($value);
+        }
+        $users = User::where('email', '=',$data->email)->first();
+        Auth::login($users);
+        $_SESSION['user_id'] = $users->id;
     }
 }
