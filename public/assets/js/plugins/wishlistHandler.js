@@ -74,44 +74,40 @@ function wishlistDelete(wishlist_id){
 }
  // thêm sản phẩm vào giỏ
 function addToCartProduct(productAdd){
-    
-    if(user_id == null){
-        return confirm("You must be logged in to add this product to your cart!");
-    }else{
-        var urlajax = url +'/shop/quickView/' + productAdd;
-        $.ajax({
-            url : urlajax,
-            type : "get",
-            dataType:"text",
-            data : {
-                
-            },
-            success : function (result){
-                var product = JSON.parse(result);  
-                let urlAddToCart = url +'/addToCart';
-                let size = "null";
-                if(product.Size.length > 0){
-                    size = product.Size[0];
-                }
-                $.ajax({
-                    url : urlAddToCart,
-                    type : "post",
-                    cache: false,
-                    dataType:"text",
-                    data : {
-                        _token: $("#csrf_token").val(),
-                        'product_id' : productAdd,
-                        'size' : size,
-                        'quantity' : 1
-                    },
-                    success : function (result){
-                        if(result == true){
-                            return alert("The product has been added to the cart");
-                        }
-                    }
-                });
+    var urlajax = url +'/shop/quickView/' + productAdd;
+    $.ajax({
+        url : urlajax,
+        type : "get",
+        dataType:"text",
+        data : {
+            
+        },
+        success : function (result){
+            var product = JSON.parse(result);  
+            let urlAddToCart = url +'/addToCart';
+            let size = "null";
+            if(product.Size.length > 0){
+                size = product.Size[0];
             }
-        })
-    }
+            $.ajax({
+                url : urlAddToCart,
+                type : "post",
+                cache: false,
+                dataType:"text",
+                data : {
+                    _token: $("#csrf_token").val(),
+                    'product_id' : productAdd,
+                    'size' : size,
+                    'quantity' : 1
+                },
+                success : function (result){
+                    if(result == true){
+                        return alert("The product has been added to the cart");
+                    }
+                }
+            });
+        }
+    })
 }
+
 renderWishlist();
