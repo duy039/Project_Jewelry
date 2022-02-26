@@ -9,7 +9,5 @@ class BlogController extends Controller
     public function index(){
         return view('blog');
     }
-
-
     // các sự kiện xẩy ra trong trang này...
 }

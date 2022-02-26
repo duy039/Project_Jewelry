@@ -365,6 +365,14 @@
                                     <div class="order-button-payment">
                                         <input value="Place order" type="submit">
                                     </div>
+                                    <div>
+                                        <form method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="{{url('payMomo')}}">
+                                            {{ csrf_field() }}
+                                            <div class="order-button-payment">
+                                                <input value="Pay with MOMO" type="submit">
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -373,6 +381,6 @@
             </div>
         </div>
         <!-- Hiraola's Checkout Area End Here -->
-        
+
 @endsection
 </html>

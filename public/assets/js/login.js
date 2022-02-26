@@ -21,9 +21,13 @@ $(document).ready(function () {
                 else if(data.status==2){
                     $('span.email_error').text(data.invalid);
 
-                } else{
+                } else if (data.status==3){
                     swal('Success','Welcome '+data.name,'success');
                     setInterval('location.reload()', 2500);
+                }else{
+                    swal('Success','Welcome '+data.name,'success');
+                    setTimeout(2500);
+                    window.location = '/admin';
                 }
             }
         });

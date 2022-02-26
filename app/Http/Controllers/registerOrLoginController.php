@@ -38,7 +38,11 @@ class registerOrLoginController extends Controller
                     if ($pass == decrypt($users->Password)) {
                         Auth::login($users);
                         $_SESSION['user_id'] = $users->id;
-                        return response()->json(['status' => 3, 'name' => $users->First_Name . $users->Last_Name]);
+                        if ($users->Admins != 0) {
+                            return response()->json(['status' => 3, 'name' => $users->First_Name . $users->Last_Name]);
+                        }else{
+                            return response()->json(['status' => 4, 'name' => $users->First_Name . $users->Last_Name]);
+                        }
                     } else {
                         return response()->json(['status' => 1, 'invalid' => 'Wrong password!']);
                     }
@@ -78,6 +82,7 @@ class registerOrLoginController extends Controller
             'Password' => encrypt($password),
             'email' => $email,
             'Create_Date' => $date->format('Y-m-d H:i:s'),
+            'Update_Date' => $date->format('Y-m-d H:i:s'),
         ];
         $isExists = DB::table('users')->where('email', $email)->exists();
         if (!$validate->fails()) {
@@ -93,20 +98,6 @@ class registerOrLoginController extends Controller
             return response()->json(['status' => 0, 'error' => $validate->errors()->toArray()]);
         }
     }
-
-    // public function redirectToFacebook()
-    // {
-    //     return Socialite::driver('facebook')->redirect();
-    // }
-
-
-    // public function handleFacebookCallback()
-    // {
-
-    //     $user = Socialite::driver('facebook')->user();
-    //     $this->_registerOrLogin($user);
-    //     return redirect('/');
-    // }
 
     public function redirectToGoogle()
     {
@@ -132,14 +123,14 @@ class registerOrLoginController extends Controller
             $value = [
                 'First_Name' => $data->name,
                 'Email' => $data->email,
-                'Avatar' => $data->avatar,
+                // 'Avatar' => $data->avatar,
                 'provider_id' => $data->id,
                 'Create_Date' => $date->format('Y-m-d H:i:s'),
                 'Update_Date' => $date->format('Y-m-d H:i:s'),
             ];
             DB::table('users')->insert($value);
         }
-        $users = User::where('email', '=',$data->email)->first();
+        $users = User::where('email', '=', $data->email)->first();
         Auth::login($users);
         $_SESSION['user_id'] = $users->id;
     }

@@ -72,7 +72,7 @@ $tagss = $lloadTag->getTags();
     <script src="{{ url('assets/js/vendor/jquery.validate.js') }}"></script>
     <!-- Sweet Alert -->
     <script src="{{ url('assets/js/vendor/sweetalert.min.js') }}"></script>
-    <script src="{{url('assets/js/vendor/ijaboCropTool.min.js')}}"></script>
+    <script src="{{ url('assets/js/vendor/ijaboCropTool.min.js') }}"></script>
 
 
     <div class="main-wrapper">
@@ -108,7 +108,8 @@ $tagss = $lloadTag->getTags();
                                 <div class="ht-menu">
                                     <ul>
                                         <li>
-                                            <a href="javascript:void(0)">Language <i class="fa fa-chevron-down"></i></a>
+                                            <a href="javascript:void(0)">{{ __('home-header.language') }}<i
+                                                    class="fa fa-chevron-down"></i></a>
                                             <ul class="ht-dropdown">
                                                 <li>
                                                     <a href="#" id="navbarDropdownMenuLink" aria-expanded="false">
@@ -134,11 +135,12 @@ $tagss = $lloadTag->getTags();
                                         </li>
                                         @guest
                                             <li>
-                                                <a href="{{ url('my-account') }}">My Account<i
+                                                <a href="{{ url('my-account') }}">{{ __('home-header.account') }}<i
                                                         class="fa fa-chevron-down"></i></a>
                                                 <ul class="ht-dropdown ht-my_account">
                                                     @if (Route::has('login'))
-                                                        <li><a href="{{ url('login') }}"><i class="fas fa-user text-primary"></i>
+                                                        <li><a href="{{ url('login') }}"><i
+                                                                    class="fas fa-user text-primary"></i>
                                                                 {{ __('Login') }}</a></li>
                                                     @endif
                                                 </ul>
@@ -147,8 +149,7 @@ $tagss = $lloadTag->getTags();
                                             <li>
                                                 <a href="{{ url('my-account') }}"><img style="border-radius: 50%"
                                                         width="25px" height="25px"
-                                                        @if (Auth::user()->Avatar != null)
-                                                        src= {{url('assets/images/user')}}{{Auth::user()->Avatar}}
+                                                        @if (Auth::user()->Avatar != null) src= {{ url('assets/images/user') }}{{ Auth::user()->Avatar }}
                                                     @else
                                                     @if (Auth::user()->Gender == 'male')
                                                     src={{ url('assets/images/user/avatarmale.jpg') }}
@@ -167,15 +168,16 @@ $tagss = $lloadTag->getTags();
                                                                 href="{{ route('home') }}">{{ __('Admin Dashboard') }}</a>
                                                         </li>
                                                     @endif
-                                                    <li><span style="font-size: 12px ;margin-left:3%"> {{ __('Point') }}:
+                                                    <li><span style="font-size: 12px ;margin-left:3%">
+                                                            {{ __('home-header.point') }}:
                                                             {{ Auth::user()->point }}</span></li>
                                                     <hr style="margin: 0">
                                                     <li><a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault();
-                                                                                document.getElementById('logout-form').submit();"><i
+                                                                                    document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
                                                                 aria-hidden="true"></i>
-                                                            {{ __('Sign out') }}
+                                                            {{ __('home-header.signout') }}
                                                         </a></li>
                                                 </ul>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -223,7 +225,7 @@ $tagss = $lloadTag->getTags();
                         <div class="col-md-4 col-sm-4 d-lg-none d-block">
                             <div class="header-logo">
                                 <a href='{{ url('/') }}'>
-                                    <img src="{{ url('assets/images/logo/logo.png') }}" alt="Header Logo">
+                                    <img src="{{ url('assets/images/logo/logo2.png') }}" alt="Header Logo">
                                 </a>
                             </div>
                         </div>
@@ -231,13 +233,16 @@ $tagss = $lloadTag->getTags();
                             <div class="main-menu_area">
                                 <nav>
                                     <ul>
-                                        <li class="dropdown-holder"><a href="{{ url('/') }}">Home</a></li>
-                                        <li class="megamenu-holder"><a href="{{ url('shop') }}">Shop</a>
+                                        <li class="dropdown-holder"><a
+                                                href="{{ url('/') }}">{{ __('home-header.home') }}</a></li>
+                                        <li class="megamenu-holder"><a
+                                                href="{{ url('shop') }}">{{ __('home-header.shop') }}</a>
                                             <ul class="hm-megamenu">
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/1') }}'>Rings</a></li>
+                                                                href='{{ url('shop/categories/1') }}'>{{ __('home-header.ring') }}</a>
+                                                        </li>
                                                         <li><a href='{{ url('shop/categories/1') }}'><img
                                                                     src="{{ url('assets/images/product/R01P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
@@ -246,7 +251,7 @@ $tagss = $lloadTag->getTags();
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/2') }}'>Earrings</a>
+                                                                href='{{ url('shop/categories/2') }}'>{{ __('home-header.ear') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/2') }}'><img
                                                                     src="{{ url('assets/images/product/R04P01.jpg') }}"
@@ -256,7 +261,7 @@ $tagss = $lloadTag->getTags();
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/3') }}'>Necklaces</a>
+                                                                href='{{ url('shop/categories/3') }}'>{{ __('home-header.neck') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/3') }}'><img
                                                                     src="{{ url('assets/images/product/R08P01.jpg') }}"
@@ -266,29 +271,21 @@ $tagss = $lloadTag->getTags();
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/4') }}'>Bracelets</a>
+                                                                href='{{ url('shop/categories/4') }}'>{{ __('home-header.brace') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/4') }}'><img
                                                                     src="{{ url('assets/images/product/R09P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
                                                     </ul>
                                                 </li>
-                                                <li> <img src="{{ url('assets/images/menu/Halloween.png') }}" alt="">
+                                                <li> <img width="210px" height="200px"
+                                                        src="{{ url('assets/images/menu/Halloween.png') }}" alt="">
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href='{{ url('blog') }}'>Blog</a>
-                                            <ul class="hm-dropdown">
-                                                <li>
-                                                    <a href='{{ url('blog') }}'>Grid View</a>
-                                                </li>
-                                                <li>
-                                                    <a href='{{ url('blog') }}'>List View</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href='{{ url('/about-us') }}'>About Us</a></li>
-                                        <li><a href='{{ url('/contact') }}'>Contact</a></li>
+                                        <li><a href='{{ url('blog') }}'>{{ __('home-header.blog') }}</a></li>
+                                        <li><a href='{{ url('/about-us') }}'>{{ __('home-header.about') }}</a></li>
+                                        <li><a href='{{ url('/contact') }}'>{{ __('home-header.contact') }}</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -399,7 +396,7 @@ $tagss = $lloadTag->getTags();
                         <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
                         <div class="offcanvas-inner_search">
                             <form action='{{ url('/search') }}' class="hm-searchbox">
-                                <input type="text" placeholder="Search for item...">
+                                <input name="search" type="text" placeholder="Search for item...">
                                 <button class="search_btn" type="submit"><i
                                         class="ion-ios-search-strong"></i></button>
                             </form>
@@ -407,115 +404,102 @@ $tagss = $lloadTag->getTags();
                         <nav class="offcanvas-navigation">
                             <ul class="mobile-menu">
                                 <li class="menu-item-has-children active"><a href='{{ url('/') }}'><span
-                                            class="mm-text">Home</span></a></li>
+                                            class="mm-text">{{ __('home-header.home') }}</span></a></li>
                                 <li class="menu-item-has-children">
                                     <a href='{{ url('/shop') }}'>
-                                        <span class="mm-text">Shop</span>
+                                        <span class="mm-text">{{ __('home-header.shop') }}</span>
                                     </a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item-has-children">
-                                            <a href='{{ url('shop/categories/1') }}'>
-                                                <span class="mm-text">Rings</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href='{{ url('shop/categories/2') }}'>
-                                                <span class="mm-text">Earrings</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href='{{ url('shop/categories/3') }}'>
-                                                <span class="mm-text">Necklaces</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href='{{ url('shop/categories/4') }}'>
-                                                <span class="mm-text">Bracelets</span>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="#">
-                                        <span class="mm-text">Blog</span>
+                                    <a href='{{ url('/blog') }}'>
+                                        <span class="mm-text">{{ __('home-header.blog') }}</span>
                                     </a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item-has-children has-children">
-                                            <a href="#">
-                                                <span class="mm-text">Grid View</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item-has-children has-children">
-                                            <a href="#">
-                                                <span class="mm-text">List View</span>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-
+                                <li class="menu-item-has-children">
+                                    <a href='{{ url('/contact') }}'>
+                                        <span class="mm-text">{{ __('home-header.contact') }}</span>
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
                         <nav class="offcanvas-navigation user-setting_area">
                             <ul class="mobile-menu">
-                                <li class="menu-item-has-children active">
-                                    <a href="#">
-                                        <span class="mm-text">User
-                                            Setting
-                                        </span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="/account">
-                                                <span class="mm-text">My Account</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/account">
-                                                <span class="mm-text">Login | Register</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
                                 <li class="menu-item-has-children"><a href="#"><span
-                                            class="mm-text">Currency</span></a>
+                                            class="mm-text">{{ __('home-header.language') }}</span></a>
                                     <ul class="sub-menu">
                                         <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="mm-text">EUR €</span>
+                                            <a href="#" id="navbarDropdownMenuLink" aria-expanded="false">
+                                                <img width="40px" height="22px"
+                                                    src="assets/images/flags/{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}.png"
+                                                    alt="">
+                                                {{ Config::get('languages')[App::getLocale()]['display'] }}
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="mm-text">USD $</span>
-                                            </a>
+                                            @foreach (Config::get('languages') as $lang => $language)
+                                                @if ($lang != App::getLocale())
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('lang.switch', $lang) }}"><img width="40xp"
+                                                            height="22px"
+                                                            src="assets/images/flags/{{ $language['flag-icon'] }}.png"
+                                                            alt="">
+                                                        {{ $language['display'] }}</a>
+                                                @endif
+                                            @endforeach
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children"><a href="#"><span
-                                            class="mm-text">Language</span></a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="mm-text">English</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="mm-text">Français</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="mm-text">Romanian</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="mm-text">Japanese</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                @guest
+                                    <li class="menu-item-has-children active">
+                                        <a href="{{ url('my-account') }}"><span
+                                                class="mm-text">{{ __('home-header.account') }}</span></a>
+                                        <ul class="sub-menu">
+                                            @if (Route::has('login'))
+                                                <li><a href="{{ url('login') }}"><i
+                                                            class="fas fa-user text-primary"></i>
+                                                        {{ __('Login') }}</a></li>
+                                            @endif
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li class="menu-item-has-children active">
+                                        <a href="{{ url('my-account') }}"><img style="border-radius: 50%" width="25px"
+                                                height="25px"
+                                                @if (Auth::user()->Avatar != null) src= {{ url('assets/images/user') }}{{ Auth::user()->Avatar }}
+                                        @else
+                                        @if (Auth::user()->Gender == 'male')
+                                        src={{ url('assets/images/user/avatarmale.jpg') }}
+                                    @elseif (Auth::user()->Gender == 'female')
+                                        src={{ url('assets/images/user/avatarfemale.jpg') }}
+                                        @else
+                                        src = {{ url('assets/images/user/avatarmale.jpg') }} @endif
+                                                @endif
+                                            alt="">
+                                            <span class="mm-text"> {{ Auth::user()->First_Name }}
+                                                {{ Auth::user()->Last_Name }}</span> </a>
+
+                                        <ul class="sub-menu">
+                                            @if (Auth::user()->Admins == 1)
+                                                <li><a href="{{ route('home') }}">{{ __('Admin Dashboard') }}</a>
+                                                </li>
+                                            @endif
+                                            <li><span style="font-size: 12px ;margin-left:3%">
+                                                    {{ __('home-header.point') }}:
+                                                    {{ Auth::user()->point }}</span></li>
+                                            <hr style="margin: 0">
+                                            <li><a href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                        document.getElementById('logout-form').submit();"><i
+                                                        class="fa fa-sign-out-alt text-danger" aria-hidden="true"></i>
+                                                    {{ __('home-header.signout') }}
+                                                </a></li>
+                                        </ul>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                @endguest
                             </ul>
                         </nav>
                     </div>
@@ -531,7 +515,6 @@ $tagss = $lloadTag->getTags();
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="footer-widgets_info">
-
                                 <div class="footer-widgets_logo">
                                     <a href='{{ url('/') }}'>
                                         <img src="{{ url('assets/images/logo/logo.png') }}"
@@ -548,26 +531,21 @@ $tagss = $lloadTag->getTags();
                                 <div class="hiraola-social_link">
                                     <ul>
                                         <li class="facebook">
-                                            <a href="https://www.facebook.com" data-toggle="tooltip" target="_blank"
-                                                title="Facebook">
+                                            <a href="https://www.facebook.com/JeuliaJewelry/" data-toggle="tooltip"
+                                                target="_blank" title="Facebook">
                                                 <i class="fab fa-facebook"></i>
                                             </a>
                                         </li>
-                                        <li class="twitter">
-                                            <a href="https://twitter.com" data-toggle="tooltip" target="_blank"
-                                                title="Twitter">
-                                                <i class="fab fa-twitter-square"></i>
+                                        <li class="youtube">
+                                            <a href="https://www.youtube.com/c/JeuliaRings" data-toggle="tooltip"
+                                                target="_blank" title="Youtube">
+                                                <i class="fab fa-youtube"></i>
                                             </a>
                                         </li>
-                                        <li class="google-plus">
-                                            <a href="https://www.plus.google.com/discover" data-toggle="tooltip"
-                                                target="_blank" title="Google Plus">
-                                                <i class="fab fa-google-plus"></i>
-                                            </a>
-                                        </li>
+
                                         <li class="instagram">
-                                            <a href="https://rss.com" data-toggle="tooltip" target="_blank"
-                                                title="Instagram">
+                                            <a href="https://www.instagram.com/jeuliajewelry/" data-toggle="tooltip"
+                                                target="_blank" title="Instagram">
                                                 <i class="fab fa-instagram"></i>
                                             </a>
                                         </li>
@@ -580,7 +558,7 @@ $tagss = $lloadTag->getTags();
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="footer-widgets_title">
-                                            <h6>Product</h6>
+                                            <h6>{{ __('home-header.product') }}</h6>
                                         </div>
                                         <div class="footer-widgets">
                                             <ul>
@@ -594,7 +572,7 @@ $tagss = $lloadTag->getTags();
                                     <div class="col-lg-5">
                                         <div class="footer-widgets_info">
                                             <div class="footer-widgets_title">
-                                                <h6>About Us</h6>
+                                                <h6>{{ __('home-header.about') }}</h6>
                                             </div>
                                             <div class="widgets-essential_stuff">
                                                 <ul>
@@ -752,10 +730,10 @@ $tagss = $lloadTag->getTags();
     <script src="{{ url('assets/js/plugins/layout.js') }}"></script>
     <script>
         function focusSearch() {
-            var valueSearch = $("#inputSearch").val();
-            var url = '{{ url('shop/searchAjax') }}/' + valueSearch;
+            let valueSearch = $("#inputSearch").val();
+            let urlSearch = '{{ url('shop/searchAjax') }}/' + valueSearch;
             $.ajax({
-                url: url,
+                url: urlSearch,
                 type: "get",
                 dataType: "text",
                 data: {},
@@ -764,18 +742,20 @@ $tagss = $lloadTag->getTags();
                         $("#displayJewelry").html(result);
                         return console.log(0);;
                     }
-                    var product = JSON.parse(result);
-                    var listSearch = " ";
-                    var test = true;
-                    for (var i = 0; i < product.length; i++) {
+                    let productSearchs = JSON.parse(result);
+                    let listSearch = " ";
+                    let test = true;
+                    for (let i = 0; i < productSearchs.length; i++) {
                         if (i == 4) {
                             break;
                         }
-                        if (product[i].Name.toLowerCase().search(valueSearch.toLowerCase()) != -1) {
+                        if (productSearchs[i].Name.toLowerCase().search(valueSearch.toLowerCase()) != -1) {
                             test = false;
-                            listSearch += '<li><a href="{{ url('product') }}/' + product[i].Product_id +
-                                '"><img src="{{ url('assets/images/product') }}/' + product[i].Avatar +
-                                '" alt="Image Product" width="80px"> <span> ' + product[i].Name +
+                            listSearch += '<li><a href="{{ url('product') }}/' + productSearchs[i]
+                                .Product_id +
+                                '"><img src="{{ url('assets/images/product') }}/' + productSearchs[i]
+                                .Avatar +
+                                '" alt="Image Product" width="80px"> <span> ' + productSearchs[i].Name +
                                 '</span></a></li>';
                         }
                         if (test == true && i == 4) {
@@ -803,14 +783,13 @@ $tagss = $lloadTag->getTags();
         }
 
         function changeSearch() {
-            var valueSearch = $("#inputSearch").val();
+            let valueSearch = $("#inputSearch").val();
             if (valueSearch.trim() == "") {
                 return console.log(0);
             }
-            var url = '{{ url('shop/searchAjax') }}/' + valueSearch;
-            console.log(valueSearch);
+            let urlSearch = '{{ url('shop/searchAjax') }}/' + valueSearch;
             $.ajax({
-                url: url,
+                url: urlSearch,
                 type: "get",
                 dataType: "text",
                 data: {},
@@ -819,25 +798,24 @@ $tagss = $lloadTag->getTags();
                         $("#displayJewelry").html(result);
                         return 0;
                     }
-                    var product = JSON.parse(result);
-                    console.log(product)
-                    var listSearch = " ";
-                    var test = true;
-                    console.log(valueSearch);
-                    for (var i = 0; i < product.length; i++) {
+                    let productSearchs = JSON.parse(result);
+                    let listSearch = " ";
+                    let test = true;
+                    for (let i = 0; i < productSearchs.length; i++) {
                         if (i == 4) {
                             break;
                         }
-                        if (product[i].Name.toLowerCase().search(valueSearch.toLowerCase()) != -1) {
+                        if (productSearchs[i].Name.toLowerCase().search(valueSearch.toLowerCase()) != -1) {
                             test = false;
-                            listSearch += '<li><a href="{{ url('product') }}/' + product[i].Product_id +
-                                '"><img src="{{ url('assets/images/product') }}/' + product[i].Avatar +
-                                '" alt="Image Product" width="80px"> <span> ' + product[i].Name +
+                            listSearch += '<li><a href="{{ url('product') }}/' + productSearchs[i]
+                                .Product_id +
+                                '"><img src="{{ url('assets/images/product') }}/' + productSearchs[i]
+                                .Avatar +
+                                '" alt="Image Product" width="80px"> <span> ' + productSearchs[i].Name +
                                 '</span></a></li>';
                         }
                         if (test == true && i == 4) {
-                            listSearch += '<li> No Products Found!!! </li>'
-                            console.log("yes2");
+                            listSearch += '<li> No Products Found!!! </li>';
                             break;
                         }
 
@@ -852,6 +830,7 @@ $tagss = $lloadTag->getTags();
             });
         }
     </script>
+
 
 </body>
 
