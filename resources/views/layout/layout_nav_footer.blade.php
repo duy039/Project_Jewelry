@@ -72,7 +72,7 @@ $tagss = $lloadTag->getTags();
     <script src="{{ url('assets/js/vendor/jquery.validate.js') }}"></script>
     <!-- Sweet Alert -->
     <script src="{{ url('assets/js/vendor/sweetalert.min.js') }}"></script>
-    <script src="{{ url('assets/js/vendor/ijaboCropTool.min.js') }}"></script>
+    <script src="{{ url('assets/js/vendor/ijaboCropTool.min.js') }}"></script>\
 
 
     <div class="main-wrapper">
@@ -719,6 +719,7 @@ $tagss = $lloadTag->getTags();
     <script src="{{ url('assets/js/plugins/mailchimp-ajax.js') }}"></script>
     <!-- Ajax Mail JS -->
     <script src="{{ url('assets/js/ajax-mail.js') }}"></script>
+    <script src="{{ url('assets/js/plugins/tooltips.js') }}"></script>
 
     <!-- Vendor & Plugins JS (Please remove the comment from below vendor.min.js & plugins.min.js for better website load performance and remove js files from avobe) -->
 
