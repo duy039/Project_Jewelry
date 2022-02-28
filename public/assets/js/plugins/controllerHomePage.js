@@ -79,7 +79,7 @@ function wishlistHandler(prod_id) {
         },
         success: function (result) {
             if (result) {
-                alert("The product has been added to favorites");
+                swal('Success',"The product has been added to favorites",'success');
             };
             renderIconWishlist(prod_id);
         }
@@ -98,7 +98,7 @@ function wishlistDelete(prod_id, wishlist_id) {
         },
         success: function (result) {
             if (result) {
-                alert("The product has been removed from favorites");
+                swal('Success',"The product has been removed from favorites",'success');
             };
             renderIconWishlist(prod_id);
         }
@@ -127,7 +127,6 @@ function productsResponse() {
     });
     return theResponse;
 }
-
 
 function renderMiniCart() {
     if (user_id == null) {
@@ -170,6 +169,7 @@ function renderMiniCart() {
         $("#subTotalMiniCart").html("$" + sum.toFixed(2));
     }
 }
+
 function cartDeleteMini(id) {
     if (user_id == null) {
         return confirm("You must be logged in to do this!!!");
@@ -184,7 +184,7 @@ function cartDeleteMini(id) {
             },
             success: function (result) {
                 if (result) {
-                    alert("The product has been removed from the cart!");
+                    swal('Success',"The product has been removed from the cart!",'success');
                 };
                 renderMiniCart();
             }

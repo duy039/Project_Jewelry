@@ -32,7 +32,7 @@
 </head>
 @extends('layout.layout_nav_footer')
 @section('main')
-<?php 
+<?php
     if (session_id() === '') {
         session_start();
     }
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {{-- phần thông tin --}}
                 <div class="row">
                     <div class="col-lg-6 col-12">
@@ -161,7 +161,7 @@
                                     <div class="order-notes">
                                         <div class="checkout-form-list checkout-form-list-2">
                                             <label>Order Notes</label>
-                                            <textarea id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                            <textarea id="checkout-mess" cols="30" rows="5" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +169,7 @@
                                 <div class="different-address">
                                     <div class="order-notes">
                                         <div class="checkout-form-list checkout-form-list-2">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -237,13 +237,6 @@
                                             </div>
                                         </div>
                                         <div class="card">
-                                            <div class="card-header" id="#payment-2">
-                                                <h5 class="panel-title">
-                                                    <a href="javascript:void(0)" class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                        Cheque Payment
-                                                    </a>
-                                                </h5>
-                                            </div>
                                             <div id="collapseTwo" class="collapse" data-parent="#accordion">
                                                 <div class="card-body">
                                                     <p>Make your payment directly into our bank account. Please use your Order
@@ -254,13 +247,6 @@
                                             </div>
                                         </div>
                                         <div class="card">
-                                            <div class="card-header" id="#payment-3">
-                                                <h5 class="panel-title">
-                                                    <a href="javascript:void(0)" class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        PayPal
-                                                    </a>
-                                                </h5>
-                                            </div>
                                             <div id="collapseThree" class="collapse" data-parent="#accordion">
                                                 <div class="card-body">
                                                     <p>Make your payment directly into our bank account. Please use your Order
@@ -289,14 +275,8 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBILQ16GymM4XtzUY6Qu_VzzgTQ8Vk87U&libraries=places&callback=initialize" async defer></script>
         <script src="{{url('assets/js/plugins/controllerCheckout.js')}}"></script>
-=======
-        <!-- Hiraola's Checkout Area End Here -->
-
->>>>>>> 1457270095b787e931ea7e64bad2671ecdd1039a
 @endsection
 </html>

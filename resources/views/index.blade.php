@@ -37,10 +37,8 @@
 
 <body class="template-color-1">
     <input id="csrf_token" type="hidden" value='{{ csrf_token() }}'>
-    <input type="hidden" id="user_id" value="{{Auth::user()->id}}">
-    <input type="hidden" id="pro_id" value="@foreach ($product as $pro)
-            {{$pro->getId()}}
-    @endforeach">
+    <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+    <input type="hidden" id="pro_id" value="@foreach ($product as $pro) {{ $pro->getId() }} @endforeach">
     <div class="main-wrapper">
         <!-- Begin Loading Area -->
         <div class="loading">
@@ -140,7 +138,7 @@
                                                     <hr style="margin: 0">
                                                     <li><a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault();
-                                                                                                                                            document.getElementById('logout-form').submit();"><i
+                                                                                                                                                                document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
                                                                 aria-hidden="true"></i>
                                                             {{ __('home-header.signout') }}
@@ -515,17 +513,17 @@
                                             class="mm-text">{{ __('home-header.home') }}</span></a></li>
                                 <li class="menu-item-has-children">
                                     <a href='{{ url('/shop') }}'>
-                                        <span class="mm-text">Shop</span>
+                                        <span class="mm-text">{{ __('home-header.shop') }}</span>
                                     </a>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href='{{ url('/blog') }}'>
-                                        <span class="mm-text">Blog</span>
+                                        <span class="mm-text">{{ __('home-header.blog') }}</span>
                                     </a>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href='{{ url('/contact') }}'>
-                                        <span class="mm-text">Contact</span>
+                                        <span class="mm-text">{{ __('home-header.contact') }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -597,7 +595,7 @@
                                             <hr style="margin: 0">
                                             <li><a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
-                                                                                                    document.getElementById('logout-form').submit();"><i
+                                                                                                                        document.getElementById('logout-form').submit();"><i
                                                         class="fa fa-sign-out-alt text-danger" aria-hidden="true"></i>
                                                     {{ __('Sign out') }}
                                                 </a></li>
@@ -658,22 +656,22 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
                         <div class="banner-item img-hover_effect">
-                            <a href="{{url('shop/categories/1')}}">
-                                <img height="100%" src="{{asset('assets/images/banner/ringsbanner.jpg')}}" alt="">
+                            <a href="{{ url('shop/categories/1') }}">
+                                <img height="100%" src="{{ asset('assets/images/banner/ringsbanner.jpg') }}" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="banner-item img-hover_effect">
-                            <a href="{{url('shop/categories/1')}}">
-                                <img src="{{asset('assets/images/banner/wedding.jpg')}}" alt="">
+                            <a href="{{ url('shop/categories/1') }}">
+                                <img src="{{ asset('assets/images/banner/wedding.jpg') }}" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="banner-item img-hover_effect">
-                            <a href="{{url('shop/categories/1')}}">
-                                <img src="{{asset('assets/images/banner/shopnow.jpg')}}" alt="">
+                            <a href="{{ url('shop/categories/1') }}">
+                                <img src="{{ asset('assets/images/banner/shopnow.jpg') }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -706,6 +704,9 @@
                                                     alt='Product Image'>
                                             </a>
                                             <span class="sticker">New</span>
+                                            @if ($pro->getSale_type() != null && strtolower($pro->getSale_type()) != 'normal')
+                                                <span class='sticker-2'>Sale</span>
+                                            @endif
                                         </div>
                                         <div class="hiraola-product_content">
                                             <div class="product-desc_info">
@@ -713,8 +714,17 @@
                                                         href="{{ url('product/' . $pro->getId()) }}">{{ $pro->getName() }}</a>
                                                 </h6>
                                                 <div class="price-box">
-                                                    <span
-                                                        class="new-price">${{ $pro->getCurrentPrice() }}</span>
+                                                    @if ($pro->getSale_type() != null && strtolower($pro->getSale_type()) != 'normal')
+                                                        <span style="font-weight: bolder"
+                                                            class="new-price text-danger">${{ $pro->getCurrentPrice() }}</span>
+                                                    @else
+                                                        <span style="font-weight: bolder"
+                                                            class="new-price fw-bolder">${{ $pro->getCurrentPrice() }}</span>
+                                                    @endif
+                                                    @if ($pro->getCurrentPrice() != $pro->getPrice_Root())
+                                                        <span
+                                                            class="old-price">${{ $pro->getPrice_Root() }}</span>
+                                                    @endif
                                                 </div>
                                                 <div class="additional-add_action">
                                                     <ul>
@@ -722,25 +732,36 @@
                                                             <?php $test = true; ?>
                                                             @foreach ($wishlists as $w)
                                                                 @if ($w->Product_id == $pro->getId())
-                                                                    <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistDelete('{{ $pro->getId() }}','{{ $w->WishList_id }}')" data-toggle="tooltip" data-placement="top" title="Remove from favorites" style="color: rgb(255, 51, 0)"><i class="fas fa-heart"></i></a>
+                                                                    <a class="hiraola-add_compare"
+                                                                        href="javascript:void(0)"
+                                                                        onclick="wishlistDelete('{{ $pro->getId() }}','{{ $w->WishList_id }}')"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        title="Remove from favorites"
+                                                                        style="color: rgb(255, 51, 0)"><i
+                                                                            class="fas fa-heart"></i></a>
                                                                     <?php $test = false; ?>
                                                                 @endif
                                                             @endforeach
                                                             @if ($test)
-                                                            <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler('{{ $pro->getId() }}')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i
-                                                                class="ion-android-favorite-outline"></i></a>
+                                                                <a class="hiraola-add_compare"
+                                                                    href="javascript:void(0)"
+                                                                    onclick="wishlistHandler('{{ $pro->getId() }}')"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Add To Wishlist"><i
+                                                                        class="ion-android-favorite-outline"></i></a>
                                                             @endif
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div class="rating-box">
                                                     <ul>
-                                                        <li><i class="fa fa-star-of-david"></i></li>
-                                                        <li><i class="fa fa-star-of-david"></i></li>
-                                                        <li><i class="fa fa-star-of-david"></i></li>
-                                                        <li><i class="fa fa-star-of-david"></i></li>
-                                                        <li class="silver-color"><i class="fa fa-star-of-david"></i>
-                                                        </li>
+                                                        @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                            <li><i class="fa fa-star-of-david"></i></li>
+                                                        @endfor
+                                                        @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                            <li class="silver-color"><i
+                                                                    class="fa fa-star-of-david"></i></li>
+                                                        @endfor
                                                     </ul>
                                                 </div>
                                             </div>
@@ -814,6 +835,9 @@
                                                             alt='Product Image'>
                                                     </a>
                                                     <span class="sticker">New</span>
+                                                    @if ($ri->getSale_type() != null && strtolower($ri->getSale_type()) != 'normal')
+                                                        <span class='sticker-2'>Sale</span>
+                                                    @endif
                                                 </div>
                                                 <div class="hiraola-product_content">
                                                     <div class="product-desc_info">
@@ -821,8 +845,17 @@
                                                                 href="single-product.html">{{ $ri->getName() }}</a>
                                                         </h6>
                                                         <div class="price-box">
-                                                            <span
-                                                                class="new-price">${{ $ri->getCurrentPrice() }}</span>
+                                                            @if ($ri->getSale_type() != null && strtolower($ri->getSale_type()) != 'normal')
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price text-danger">${{ $ri->getCurrentPrice() }}</span>
+                                                            @else
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price fw-bolder">${{ $ri->getCurrentPrice() }}</span>
+                                                            @endif
+                                                            @if ($ri->getCurrentPrice() != $ri->getPrice_Root())
+                                                                <span
+                                                                    class="old-price">${{ $ri->getPrice_Root() }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="additional-add_action">
                                                             <ul>
@@ -830,25 +863,37 @@
                                                                     <?php $test = true; ?>
                                                                     @foreach ($wishlists as $w)
                                                                         @if ($w->Product_id == $ri->getId())
-                                                                            <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistDelete('{{ $ri->getId() }}','{{ $w->WishList_id }}')" data-toggle="tooltip" data-placement="top" title="Remove from favorites" style="color: rgb(255, 51, 0)"><i class="fas fa-heart"></i></a>
+                                                                            <a class="hiraola-add_compare"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="wishlistDelete('{{ $ri->getId() }}','{{ $w->WishList_id }}')"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Remove from favorites"
+                                                                                style="color: rgb(255, 51, 0)"><i
+                                                                                    class="fas fa-heart"></i></a>
                                                                             <?php $test = false; ?>
                                                                         @endif
                                                                     @endforeach
                                                                     @if ($test)
-                                                                    <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler('{{ $ri->getId() }}')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
+                                                                        <a class="hiraola-add_compare"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="wishlistHandler('{{ $ri->getId() }}')"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add To Wishlist"><i
+                                                                                class="ion-android-favorite-outline"></i></a>
                                                                     @endif
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                         <div class="rating-box">
                                                             <ul>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li class="silver-color"><i
-                                                                        class="fa fa-star-of-david"></i></li>
+                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                                    <li class="silver-color"><i
+                                                                            class="fa fa-star-of-david"></i></li>
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -875,6 +920,9 @@
                                                             alt='Product Image'>
                                                     </a>
                                                     <span class="sticker">New</span>
+                                                    @if ($nec->getSale_type() != null && strtolower($nec->getSale_type()) != 'normal')
+                                                        <span class='sticker-2'>Sale</span>
+                                                    @endif
                                                 </div>
                                                 <div class="hiraola-product_content">
                                                     <div class="product-desc_info">
@@ -882,8 +930,17 @@
                                                                 href="single-product.html">{{ $nec->getName() }}</a>
                                                         </h6>
                                                         <div class="price-box">
-                                                            <span
-                                                                class="new-price">${{ $nec->getCurrentPrice() }}</span>
+                                                            @if ($nec->getSale_type() != null && strtolower($nec->getSale_type()) != 'normal')
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price text-danger">${{ $nec->getCurrentPrice() }}</span>
+                                                            @else
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price fw-bolder">${{ $nec->getCurrentPrice() }}</span>
+                                                            @endif
+                                                            @if ($nec->getCurrentPrice() != $nec->getPrice_Root())
+                                                                <span
+                                                                    class="old-price">${{ $nec->getPrice_Root() }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="additional-add_action">
                                                             <ul>
@@ -891,25 +948,37 @@
                                                                     <?php $test = true; ?>
                                                                     @foreach ($wishlists as $w)
                                                                         @if ($w->Product_id == $nec->getId())
-                                                                            <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistDelete('{{ $nec->getId() }}','{{ $w->WishList_id }}')" data-toggle="tooltip" data-placement="top" title="Remove from favorites" style="color: rgb(255, 51, 0)"><i class="fas fa-heart"></i></a>
+                                                                            <a class="hiraola-add_compare"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="wishlistDelete('{{ $nec->getId() }}','{{ $w->WishList_id }}')"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Remove from favorites"
+                                                                                style="color: rgb(255, 51, 0)"><i
+                                                                                    class="fas fa-heart"></i></a>
                                                                             <?php $test = false; ?>
                                                                         @endif
                                                                     @endforeach
                                                                     @if ($test)
-                                                                    <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler('{{ $nec->getId() }}')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
+                                                                        <a class="hiraola-add_compare"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="wishlistHandler('{{ $nec->getId() }}')"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add To Wishlist"><i
+                                                                                class="ion-android-favorite-outline"></i></a>
                                                                     @endif
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                         <div class="rating-box">
                                                             <ul>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li class="silver-color"><i
-                                                                        class="fa fa-star-of-david"></i></li>
+                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                                    <li class="silver-color"><i
+                                                                            class="fa fa-star-of-david"></i></li>
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -935,6 +1004,9 @@
                                                             alt='Product Image'>
                                                     </a>
                                                     <span class="sticker">New</span>
+                                                    @if ($brac->getSale_type() != null && strtolower($brac->getSale_type()) != 'normal')
+                                                        <span class='sticker-2'>Sale</span>
+                                                    @endif
                                                 </div>
                                                 <div class="hiraola-product_content">
                                                     <div class="product-desc_info">
@@ -942,8 +1014,17 @@
                                                                 href="{{ url('product/' . $brac->getId()) }}">{{ $brac->getName() }}</a>
                                                         </h6>
                                                         <div class="price-box">
-                                                            <span
-                                                                class="new-price">${{ $brac->getCurrentPrice() }}</span>
+                                                            @if ($brac->getSale_type() != null && strtolower($brac->getSale_type()) != 'normal')
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price text-danger">${{ $brac->getCurrentPrice() }}</span>
+                                                            @else
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price fw-bolder">${{ $brac->getCurrentPrice() }}</span>
+                                                            @endif
+                                                            @if ($brac->getCurrentPrice() != $brac->getPrice_Root())
+                                                                <span
+                                                                    class="old-price">${{ $brac->getPrice_Root() }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="additional-add_action">
                                                             <ul>
@@ -951,26 +1032,37 @@
                                                                     <?php $test = true; ?>
                                                                     @foreach ($wishlists as $w)
                                                                         @if ($w->Product_id == $brac->getId())
-                                                                            <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistDelete('{{ $brac->getId() }}','{{ $w->WishList_id }}')" data-toggle="tooltip" data-placement="top" title="Remove from favorites" style="color: rgb(255, 51, 0)"><i class="fas fa-heart"></i></a>
+                                                                            <a class="hiraola-add_compare"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="wishlistDelete('{{ $brac->getId() }}','{{ $w->WishList_id }}')"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Remove from favorites"
+                                                                                style="color: rgb(255, 51, 0)"><i
+                                                                                    class="fas fa-heart"></i></a>
                                                                             <?php $test = false; ?>
                                                                         @endif
                                                                     @endforeach
                                                                     @if ($test)
-                                                                    <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler('{{ $brac->getId() }}')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
+                                                                        <a class="hiraola-add_compare"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="wishlistHandler('{{ $brac->getId() }}')"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add To Wishlist"><i
+                                                                                class="ion-android-favorite-outline"></i></a>
                                                                     @endif
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                         <div class="rating-box">
                                                             <ul>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li class="silver-color"><i
-                                                                        class="fa fa-star-of-david"></i></li>
-                                                                <li class="silver-color"><i
-                                                                        class="fa fa-star-of-david"></i></li>
+                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                                    <li class="silver-color"><i
+                                                                            class="fa fa-star-of-david"></i></li>
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1561,6 +1653,9 @@
                                                             alt='Product Image'>
                                                     </a>
                                                     <span class="sticker">New</span>
+                                                    @if ($ri->getSale_type() != null && strtolower($ri->getSale_type()) != 'normal')
+                                                        <span class='sticker-2'>Sale</span>
+                                                    @endif
                                                 </div>
                                                 <div class="hiraola-product_content">
                                                     <div class="product-desc_info">
@@ -1568,8 +1663,17 @@
                                                                 href="single-product.html">{{ $ri->getName() }}</a>
                                                         </h6>
                                                         <div class="price-box">
-                                                            <span
-                                                                class="new-price">${{ $ri->getCurrentPrice() }}</span>
+                                                            @if ($ri->getSale_type() != null && strtolower($ri->getSale_type()) != 'normal')
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price text-danger">${{ $ri->getCurrentPrice() }}</span>
+                                                            @else
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price fw-bolder">${{ $ri->getCurrentPrice() }}</span>
+                                                            @endif
+                                                            @if ($ri->getCurrentPrice() != $ri->getPrice_Root())
+                                                                <span
+                                                                    class="old-price">${{ $ri->getPrice_Root() }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="additional-add_action">
                                                             <ul>
@@ -1577,25 +1681,37 @@
                                                                     <?php $test = true; ?>
                                                                     @foreach ($wishlists as $w)
                                                                         @if ($w->Product_id == $ri->getId())
-                                                                            <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistDelete('{{ $ri->getId() }}','{{ $w->WishList_id }}')" data-toggle="tooltip" data-placement="top" title="Remove from favorites" style="color: rgb(255, 51, 0)"><i class="fas fa-heart"></i></a>
+                                                                            <a class="hiraola-add_compare"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="wishlistDelete('{{ $ri->getId() }}','{{ $w->WishList_id }}')"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Remove from favorites"
+                                                                                style="color: rgb(255, 51, 0)"><i
+                                                                                    class="fas fa-heart"></i></a>
                                                                             <?php $test = false; ?>
                                                                         @endif
                                                                     @endforeach
                                                                     @if ($test)
-                                                                    <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler('{{ $ri->getId() }}')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
+                                                                        <a class="hiraola-add_compare"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="wishlistHandler('{{ $ri->getId() }}')"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add To Wishlist"><i
+                                                                                class="ion-android-favorite-outline"></i></a>
                                                                     @endif
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                         <div class="rating-box">
                                                             <ul>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li class="silver-color"><i
-                                                                        class="fa fa-star-of-david"></i></li>
+                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                                    <li class="silver-color"><i
+                                                                            class="fa fa-star-of-david"></i></li>
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1622,6 +1738,9 @@
                                                             alt='Product Image'>
                                                     </a>
                                                     <span class="sticker">New</span>
+                                                    @if ($nec->getSale_type() != null && strtolower($nec->getSale_type()) != 'normal')
+                                                        <span class='sticker-2'>Sale</span>
+                                                    @endif
                                                 </div>
                                                 <div class="hiraola-product_content">
                                                     <div class="product-desc_info">
@@ -1629,8 +1748,17 @@
                                                                 href="single-product.html">{{ $nec->getName() }}</a>
                                                         </h6>
                                                         <div class="price-box">
-                                                            <span
-                                                                class="new-price">${{ $nec->getCurrentPrice() }}</span>
+                                                            @if ($nec->getSale_type() != null && strtolower($nec->getSale_type()) != 'normal')
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price text-danger">${{ $nec->getCurrentPrice() }}</span>
+                                                            @else
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price fw-bolder">${{ $nec->getCurrentPrice() }}</span>
+                                                            @endif
+                                                            @if ($nec->getCurrentPrice() != $nec->getPrice_Root())
+                                                                <span
+                                                                    class="old-price">${{ $nec->getPrice_Root() }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="additional-add_action">
                                                             <ul>
@@ -1638,25 +1766,37 @@
                                                                     <?php $test = true; ?>
                                                                     @foreach ($wishlists as $w)
                                                                         @if ($w->Product_id == $nec->getId())
-                                                                            <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistDelete('{{ $nec->getId() }}','{{ $w->WishList_id }}')" data-toggle="tooltip" data-placement="top" title="Remove from favorites" style="color: rgb(255, 51, 0)"><i class="fas fa-heart"></i></a>
+                                                                            <a class="hiraola-add_compare"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="wishlistDelete('{{ $nec->getId() }}','{{ $w->WishList_id }}')"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Remove from favorites"
+                                                                                style="color: rgb(255, 51, 0)"><i
+                                                                                    class="fas fa-heart"></i></a>
                                                                             <?php $test = false; ?>
                                                                         @endif
                                                                     @endforeach
                                                                     @if ($test)
-                                                                    <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler('{{ $nec->getId() }}')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
+                                                                        <a class="hiraola-add_compare"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="wishlistHandler('{{ $nec->getId() }}')"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add To Wishlist"><i
+                                                                                class="ion-android-favorite-outline"></i></a>
                                                                     @endif
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                         <div class="rating-box">
                                                             <ul>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li class="silver-color"><i
-                                                                        class="fa fa-star-of-david"></i></li>
+                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                                    <li class="silver-color"><i
+                                                                            class="fa fa-star-of-david"></i></li>
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1682,6 +1822,9 @@
                                                             alt='Product Image'>
                                                     </a>
                                                     <span class="sticker">New</span>
+                                                    @if ($brac->getSale_type() != null && strtolower($brac->getSale_type()) != 'normal')
+                                                        <span class='sticker-2'>Sale</span>
+                                                    @endif
                                                 </div>
                                                 <div class="hiraola-product_content">
                                                     <div class="product-desc_info">
@@ -1689,35 +1832,55 @@
                                                                 href="{{ url('product/' . $brac->getId()) }}">{{ $brac->getName() }}</a>
                                                         </h6>
                                                         <div class="price-box">
-                                                            <span
-                                                                class="new-price">${{ $brac->getCurrentPrice() }}</span>
+                                                            @if ($brac->getSale_type() != null && strtolower($brac->getSale_type()) != 'normal')
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price text-danger">${{ $brac->getCurrentPrice() }}</span>
+                                                            @else
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price fw-bolder">${{ $brac->getCurrentPrice() }}</span>
+                                                            @endif
+                                                            @if ($brac->getCurrentPrice() != $brac->getPrice_Root())
+                                                                <span
+                                                                    class="old-price">${{ $brac->getPrice_Root() }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="additional-add_action">
                                                             <ul>
-                                                                <li id="ba{{ $brac->getId() }}">
+                                                                <li id="b{{ $brac->getId() }}">
                                                                     <?php $test = true; ?>
                                                                     @foreach ($wishlists as $w)
                                                                         @if ($w->Product_id == $brac->getId())
-                                                                            <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistDelete('{{ $brac->getId() }}','{{ $w->WishList_id }}')" data-toggle="tooltip" data-placement="top" title="Remove from favorites" style="color: rgb(255, 51, 0)"><i class="fas fa-heart"></i></a>
+                                                                            <a class="hiraola-add_compare"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="wishlistDelete('{{ $brac->getId() }}','{{ $w->WishList_id }}')"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Remove from favorites"
+                                                                                style="color: rgb(255, 51, 0)"><i
+                                                                                    class="fas fa-heart"></i></a>
                                                                             <?php $test = false; ?>
                                                                         @endif
                                                                     @endforeach
                                                                     @if ($test)
-                                                                    <a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler('{{ $brac->getId() }}')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
+                                                                        <a class="hiraola-add_compare"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="wishlistHandler('{{ $brac->getId() }}')"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add To Wishlist"><i
+                                                                                class="ion-android-favorite-outline"></i></a>
                                                                     @endif
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                         <div class="rating-box">
                                                             <ul>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li><i class="fa fa-star-of-david"></i></li>
-                                                                <li class="silver-color"><i
-                                                                        class="fa fa-star-of-david"></i></li>
-                                                                <li class="silver-color"><i
-                                                                        class="fa fa-star-of-david"></i></li>
+                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                                    <li class="silver-color"><i
+                                                                            class="fa fa-star-of-david"></i></li>
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -2709,6 +2872,7 @@
         </div>
         <!-- Hiraola's Modal Area End Here -->
         <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+        <script src="{{ url('assets/js/vendor/sweetalert.min.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/popper.min.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>

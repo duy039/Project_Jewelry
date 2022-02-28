@@ -214,10 +214,8 @@ for ($i = 0; $i < count($products); $i++) {
                                                         <div class="price-box">
                                                             <span class="new-price">${!! $pro->getCurrentPrice() !!}</span>
                                                             @if ($pro->getCurrentPrice() != $pro->getPrice_Root())
-                                                                <span
-                                                                    class="old-price">${{ $pro->getPrice_Root() }}</span>
+                                                                <span class="old-price">${{ $pro->getPrice_Root() }}</span>
                                                             @endif
-
                                                         </div>
                                                         <div class="additional-add_action">
                                                             <ul>
