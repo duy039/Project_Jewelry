@@ -75,7 +75,7 @@ let end = onePage;
     }
 //  render lại danh sách sản phẩm
     function renderProducts(){
-        console.log(totalPage());
+        console.log(user_id);
         htmlProduct = " ";
         var product = products;
         if(product != null){
@@ -354,6 +354,7 @@ let end = onePage;
     }
 // xử lý khi user chọn mức giá
     function priceFromTo(){
+        idProduct  = $("#idAllProductInShop").val();
         var urlprice = url +"/shop/pricefromto/" + $("#priceFrom").val() + "/" + $("#priceTo").val() + "/" + idProduct ;
         $.ajax({
                 url : urlprice,
@@ -363,6 +364,8 @@ let end = onePage;
                      
                 },
                 success : function (result){
+                    // vị trí cần sửa
+                    console.log(idProduct);
                     products = JSON.parse(result);
                     idProduct = "";
                     for(y=0; y < products.length; y++){
@@ -524,6 +527,7 @@ function addToCartQuickView(productAdd){
         },
         success : function (result){
             if(result == true){
+                renderMiniCart()
                 return alert("The product has been added to the cart");
             }
         }
@@ -559,6 +563,7 @@ function addToCartProduct(productAdd){
                 },
                 success : function (result){
                     if(result == true){
+                        renderMiniCart();
                         return alert("The product has been added to the cart");
                     }
                 }

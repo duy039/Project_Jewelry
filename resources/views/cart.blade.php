@@ -65,38 +65,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="listProducts">
-                                        <tr>
-                                            <td class="hiraola-product_remove"><a href="javascript:void(0)"><i class="fa fa-trash"
-                                                title="Remove"></i></a></td>
-                                            <td class="hiraola-product-thumbnail"><a href="javascript:void(0)"><img src="assets/images/product/small-size/2-1.jpg" alt="Hiraola's Cart Thumbnail"></a></td>
-                                            <td class="hiraola-product-name"><a href="javascript:void(0)">Juma rema pola</a></td>
-                                            <td class="hiraola-product-price"><span class="amount">$46.80</span></td>
-                                            <td class="quantity">
-                                                <label>Quantity</label>
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" onchange="changeQuantity()" value="1" type="text">
-                                                    <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                    <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal"><span class="amount">$46.80</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="hiraola-product-remove"><a href="javascript:void(0)"><i class="fa fa-trash"
-                                                title="Remove"></i></a></td>
-                                            <td class="hiraola-product-thumbnail"><a href="javascript:void(0)"><img src="assets/images/product/small-size/2-2.jpg" alt="Hiraola's Cart Thumbnail"></a></td>
-                                            <td class="hiraola-product-name"><a href="javascript:void(0)">Bag Goodscol model</a></td>
-                                            <td class="hiraola-product-price"><span class="amount">$71.80</span></td>
-                                            <td class="quantity">
-                                                <label>Quantity</label>
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" value="1" type="text">
-                                                    <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                    <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal"><span class="amount">$71.80</span></td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

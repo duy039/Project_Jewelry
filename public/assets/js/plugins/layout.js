@@ -1,7 +1,7 @@
 var url = $("#urlWeb").val();
 var user_id = ($("#user_id").val() != 'null')?$("#user_id").val():null;
 // trả về các sản phẩm có trong giỏ hàng
-function productsResponse() {
+function productsCart() {
     var theResponse = null;
     $.ajax({
         url: url +'/cart/getProduct',
@@ -31,10 +31,9 @@ function renderMiniCart(){
             });
         return 0;
     }else{
-        products = productsResponse();
-        console.log(products);
+        let productsCartLatout = productsCart();
         let htmlMiniCart = "";
-        if(products == null){
+        if(productsCartLatout == null){
             $("#sessionMiniCart").html("Cart is currently empty!!!");
             $("#sessionMiniCart").css({
                 "text-align" : "center"
@@ -42,26 +41,27 @@ function renderMiniCart(){
             return 0;
         }
         let sum = 0;
-        for(let i=0; i< products.length; i++){
+        for(let i=0; i< productsCartLatout.length; i++){
             let size="";
-            if(products[i].Size != "null"){
-                size = products[i].Size;
+            if(productsCartLatout[i].Size != "null"){
+                size = productsCartLatout[i].Size;
             }
-            let total = products[i].Quantity * products[i].CurrentPrice;
+            let total = productsCartLatout[i].Quantity * productsCartLatout[i].CurrentPrice;
             sum +=total;
+            console.log(sum);
             htmlMiniCart += '<li class="minicart-product">'
-                        +    '<a class="product-item_remove" onclick="cartDeleteMini(\'' +products[i].cart_id+ '\')" href="javascript:void(0)"><i class="ion-android-close"></i></a>'
+                        +    '<a class="product-item_remove" onclick="cartDeleteMini(\'' +productsCartLatout[i].cart_id+ '\')" href="javascript:void(0)"><i class="ion-android-close"></i></a>'
                         +    '<div class="product-item_img">'
-                        +        '<img src="'+url+'/assets/images/product/'+products[i].Avatar+'" alt="Product Image">'
+                        +        '<img src="'+url+'/assets/images/product/'+productsCartLatout[i].Avatar+'" alt="Product Image">'
                         +    '</div>'
                         +    '<div class="product-item_content">'
-                        +        '<a class="product-item_title" href="'+url + "/product/" + products[i].Product_id+'">'+ products[i].Name+'</a>'
-                        +        '<span class="product-item_quantity">'+products[i].Quantity+' x $'+products[i].CurrentPrice.toFixed(2)+'</span>'
+                        +        '<a class="product-item_title" href="'+url + "/product/" + productsCartLatout[i].Product_id+'">'+ productsCartLatout[i].Name+'</a>'
+                        +        '<span class="product-item_quantity">'+productsCartLatout[i].Quantity+' x $'+productsCartLatout[i].CurrentPrice.toFixed(2)+'</span>'
                         +    '</div>'
                         +'</li>';
         }
         $("#sessionMiniCart").html(htmlMiniCart);
-        $("#subTotal").html("$"+sum.toFixed(2));
+        $("#subTotalMiniCart").html("$"+sum.toFixed(2));
     }
 }
 function cartDeleteMini(id){
