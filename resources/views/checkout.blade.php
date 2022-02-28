@@ -274,6 +274,14 @@
                                     <div class="order-button-payment">
                                         <input value="Place order" type="submit">
                                     </div>
+                                    <div>
+                                        <form method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="{{url('payMomo')}}">
+                                            {{ csrf_field() }}
+                                            <div class="order-button-payment">
+                                                <input value="Pay with MOMO" type="submit">
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -281,9 +289,14 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBILQ16GymM4XtzUY6Qu_VzzgTQ8Vk87U&libraries=places&callback=initialize" async defer></script>
         <script src="{{url('assets/js/plugins/controllerCheckout.js')}}"></script>
+=======
+        <!-- Hiraola's Checkout Area End Here -->
+
+>>>>>>> 1457270095b787e931ea7e64bad2671ecdd1039a
 @endsection
 </html>

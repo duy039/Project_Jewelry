@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
 </head>
 @extends('layout.layout_nav_footer')
-    
+
     @section('main')
         <!-- Area -->
         <div class="breadcrumb-area">
@@ -71,12 +71,12 @@
                                         @endfor
                                         @for ($y=0; $y < (5 - round($product->getRating())); $y++)
                                             <li class="silver-color"><i class="fa fa-star-of-david"></i></li>
-                                        @endfor    
+                                        @endfor
                                     </ul>
                                 </div>
                                 <div class="sp-essential_stuff">
                                     <ul>
-                                        
+
                                             @if ($product->getCurrentPrice() != $product->getPrice_Root() )
                                                 <li><span class="CurrentPrice">${{ $product->getCurrentPrice() }} </span>
                                                 <span class="oldPrice"> ${{ $product->getPrice_Root() }}</span>
@@ -131,27 +131,19 @@
                                 <div class="hiraola-social_link">
                                     <ul>
                                         <li class="facebook">
-                                            <a href="https://www.facebook.com" data-toggle="tooltip" target="_blank" title="Facebook">
+                                            <a href="https://www.facebook.com/JeuliaJewelry/" data-toggle="tooltip" target="_blank"
+                                                title="Facebook">
                                                 <i class="fab fa-facebook"></i>
                                             </a>
                                         </li>
-                                        <li class="twitter">
-                                            <a href="https://twitter.com" data-toggle="tooltip" target="_blank" title="Twitter">
-                                                <i class="fab fa-twitter-square"></i>
-                                            </a>
-                                        </li>
                                         <li class="youtube">
-                                            <a href="https://www.youtube.com" data-toggle="tooltip" target="_blank" title="Youtube">
+                                            <a href="https://www.youtube.com/c/JeuliaRings" data-toggle="tooltip" target="_blank" title="Youtube">
                                                 <i class="fab fa-youtube"></i>
                                             </a>
                                         </li>
-                                        <li class="google-plus">
-                                            <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank" title="Google Plus">
-                                                <i class="fab fa-google-plus"></i>
-                                            </a>
-                                        </li>
                                         <li class="instagram">
-                                            <a href="https://rss.com" data-toggle="tooltip" target="_blank" title="Instagram">
+                                            <a href="https://www.instagram.com/jeuliajewelry/" data-toggle="tooltip" target="_blank"
+                                                title="Instagram">
                                                 <i class="fab fa-instagram"></i>
                                             </a>
                                         </li>
@@ -199,7 +191,7 @@
                                 </div>
                                 <div id="calculateSize" class="tab-pane" role="tabpanel">
                                     <div class="tab-pane active">
-                                        <ul class="imgCalculateSize"> 
+                                        <ul class="imgCalculateSize">
                                             <?php $test = substr($product->getId(), 0, 1); ?>
                                             @switch($test)
                                                 @case("R")
@@ -214,7 +206,7 @@
                                                 @default
                                                     <li></li>
                                             @endswitch
-                                            
+
                                         </ul>
                                     </div>
                                 </div>
@@ -343,7 +335,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="hiraola-product_slider-3">
-                        @foreach($bigSale as $pro) 
+                        @foreach($bigSale as $pro)
                             <!-- Begin  Slide Item Area -->
                             <div class="slide-item">
                                 <div class="single_product">
@@ -358,7 +350,7 @@
                                         @if ($pro->getSale_type() != null && strtolower($pro->getSale_type()) != "normal")
                                             <span class='sticker-2'>Sale</span>
                                         @endif
-                                        
+
                                         <div class="add-actions">
                                             <ul>
                                                 <li>
@@ -444,7 +436,7 @@
                         <div class="hiraola-product_slider-3">
 
                         <!-- Begin  Slide Item Area -->
-                        @foreach($relatedProducts as $pro) 
+                        @foreach($relatedProducts as $pro)
                             <!-- Begin  Slide Item Area -->
                             <div class="slide-item">
                                 <div class="single_product">
@@ -459,7 +451,7 @@
                                         @if ($pro->getSale_type() != null && strtolower($pro->getSale_type()) != "normal")
                                             <span class='sticker-2'>Sale</span>
                                         @endif
-                                        
+
                                         <div class="add-actions">
                                             <ul>
                                                 <li>
@@ -524,7 +516,7 @@
                             </div>
                             <!--  Slide Item Area End Here -->
                         @endforeach
-                            
+
                         </div>
                     </div>
                 </div>
@@ -591,7 +583,7 @@
                                         </ul>
                                     </div>
                                     <div id="sizeQuickView" class="product-size_box">
-                                        
+
                                     </div>
                                     <div class="quantity">
                                         <label>Quantity</label>
@@ -647,7 +639,7 @@
                 </div>
             </div>
          </div>
-               
+
         <input id="pro_id" type="hidden" value='{{ $product->getId() }}'>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>

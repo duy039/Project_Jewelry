@@ -26,7 +26,7 @@ class registerOrLoginController extends Controller
 
         $validate = Validator::make($request->all(), [
             'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
-            'password' => 'required|string|max:12',
+            'password' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/',
         ]);
         $email = $request->email;
         $pass = $request->password;
@@ -38,7 +38,11 @@ class registerOrLoginController extends Controller
                     if ($pass == decrypt($users->Password)) {
                         Auth::login($users);
                         $_SESSION['user_id'] = $users->id;
-                        return response()->json(['status' => 3, 'name' => $users->First_Name . $users->Last_Name]);
+                        if ($users->Admins != 0) {
+                            return response()->json(['status' => 3, 'name' => $users->First_Name . $users->Last_Name]);
+                        }else{
+                            return response()->json(['status' => 4, 'name' => $users->First_Name . $users->Last_Name]);
+                        }
                     } else {
                         return response()->json(['status' => 1, 'invalid' => 'Wrong password!']);
                     }
@@ -58,12 +62,13 @@ class registerOrLoginController extends Controller
             'l_name' => 'required|string|max:20',
             'f_name' => 'required|string|max:20',
             'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
-            'password' => 'required|string|max:12|confirmed',
+            'password' => 'required|string|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/',
         ], [
             'l_name.required' => 'The last name field is required',
             'f_name.required' => 'The first name field is required',
             'l_name.max' => 'The last name must not be greater than 20 characters.',
             'f_name.max' => 'The first name must not be greater than 20 characters.',
+            'password.regex' => 'Password must have at least 1 lowercase alphabetical, 1 uppercase alphabetical,1 numeric character, 1 special character, must be 8 characters or longer',
         ]);
         $l_name = $request->l_name;
         $f_name = $request->f_name;
@@ -78,6 +83,7 @@ class registerOrLoginController extends Controller
             'Password' => encrypt($password),
             'email' => $email,
             'Create_Date' => $date->format('Y-m-d H:i:s'),
+            'Update_Date' => $date->format('Y-m-d H:i:s'),
         ];
         $isExists = DB::table('users')->where('email', $email)->exists();
         if (!$validate->fails()) {
@@ -93,20 +99,6 @@ class registerOrLoginController extends Controller
             return response()->json(['status' => 0, 'error' => $validate->errors()->toArray()]);
         }
     }
-
-    // public function redirectToFacebook()
-    // {
-    //     return Socialite::driver('facebook')->redirect();
-    // }
-
-
-    // public function handleFacebookCallback()
-    // {
-
-    //     $user = Socialite::driver('facebook')->user();
-    //     $this->_registerOrLogin($user);
-    //     return redirect('/');
-    // }
 
     public function redirectToGoogle()
     {
@@ -132,14 +124,13 @@ class registerOrLoginController extends Controller
             $value = [
                 'First_Name' => $data->name,
                 'Email' => $data->email,
-                'Avatar' => $data->avatar,
                 'provider_id' => $data->id,
                 'Create_Date' => $date->format('Y-m-d H:i:s'),
                 'Update_Date' => $date->format('Y-m-d H:i:s'),
             ];
             DB::table('users')->insert($value);
         }
-        $users = User::where('email', '=',$data->email)->first();
+        $users = User::where('email', '=', $data->email)->first();
         Auth::login($users);
         $_SESSION['user_id'] = $users->id;
     }

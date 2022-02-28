@@ -3101,9 +3101,6 @@ button.li-btn:hover {
 }
 
 /* ---Header User Setting Area--- */
-.user-setting_area {
-  padding-top: 25px;
-}
 
 .user-setting_area > ul > li > a > span {
   text-transform: capitalize;
@@ -5801,7 +5798,7 @@ button.li-btn:hover {
 }
 
 .header-main_area-3 .header-bottom_area {
-  background-color: #5ca3f5;
+  background-color: #cda557;
   display: block;
 }
 
@@ -5827,7 +5824,7 @@ button.li-btn:hover {
 
 @media (max-width: 991px) {
   .header-main_area-3 .header-bottom_area.header-sticky {
-    background-color: #5ca3f5 !important;
+    background-color: #cda557 !important;
     display: block;
   }
   .header-main_area-3 .header-bottom_area.header-sticky .header-right_area > ul > li > a:hover {
@@ -5836,7 +5833,7 @@ button.li-btn:hover {
 }
 
 .header-main_area-3 .header-bottom_area.sticky {
-  background-color: #5ca3f5 !important;
+    background-color: #cda557 !important;
   display: block;
 }
 
@@ -9914,9 +9911,6 @@ button[name=apply]{
 
 .chartRatings ul  li .start12345{
   font-size: 20px;
-}
-.imgCalculateSize img{
-  margin-left: 10%;
 }
 
 

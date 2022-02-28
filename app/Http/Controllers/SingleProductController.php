@@ -90,7 +90,7 @@ class SingleProductController extends Controller
                 }
             }
         }
-        
+
         // xử lý danh sách sản phẩm big sale
         usort($result, function($b, $a){
             if ($a->getprice_Sale() == $b->getprice_Sale()) {
@@ -104,7 +104,7 @@ class SingleProductController extends Controller
             }
             $count++;
         };
-        
+
 
         $this->bigSale = $bigS;
         $this->relatedProducts = $rel;
@@ -112,10 +112,10 @@ class SingleProductController extends Controller
         ->with(
             [
                 'wishlists'=> $wishlists,
-                'product'=> $this->product, 
-                'bigSale'=>$this->bigSale, 
-                'relatedProducts'=>$this->relatedProducts, 
-                'tags'=> $resultTag 
+                'product'=> $this->product,
+                'bigSale'=>$this->bigSale,
+                'relatedProducts'=>$this->relatedProducts,
+                'tags'=> $resultTag
             ]);
     }
 
@@ -144,7 +144,7 @@ class SingleProductController extends Controller
                 'user_Avatar'   => ($users->Avatar == null)?"null":$users->Avatar,
                 'user_Gender'   => $users->Gender,
                 'user_Name'     => $users->First_Name ." " .  $users->Last_Name
-                
+
             ];
             $result[] = $commentObj;
         }
@@ -176,7 +176,7 @@ class SingleProductController extends Controller
                 'user_Avatar'   => ($users->Avatar == null)?"null":$users->Avatar,
                 'user_Gender'   => $users->Gender,
                 'user_Name'     => $users->First_Name ." " .  $users->Last_Name
-                
+
             ];
             $result[] = $raitingObj;
         }
@@ -190,7 +190,7 @@ class SingleProductController extends Controller
             $product_id = $request->product_id;
             $user_id    = $request->user_id;
             $content    = $request->content;
-            
+
             DB::table('comment')->insert([
                 'Product_id'    => $product_id,
                 'User_id'       => $user_id,
@@ -300,7 +300,7 @@ public function addToCart(Request $request){
                 }
             }
         }
-        
+
         return true;
     }else{
         return false;

@@ -75,7 +75,10 @@ let end = onePage;
     }
 //  render lại danh sách sản phẩm
     function renderProducts(){
+<<<<<<< HEAD
         console.log(user_id);
+=======
+>>>>>>> 1457270095b787e931ea7e64bad2671ecdd1039a
         htmlProduct = " ";
         var product = products;
         if(product != null){
@@ -93,7 +96,7 @@ let end = onePage;
                     var str2 = "";
                             if(product[y].Sale_Type != null && product[y].Sale_Type != "normal"){
                                 str2 = '<span class="sticker-2">Sale</span>';
-                            }         
+                            }
                     var str31 = " ";
                     var str3 =              '<div class="add-actions">'
                             +                   '<ul>'
@@ -129,7 +132,7 @@ let end = onePage;
                             +                   '<div class="additional-add_action">'
                             +                       '<ul>'
                             +                           '<li>'
-                    var str32="" 
+                    var str32=""
                     if(wishlists == null){
                         str32='<a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler(\'' +product[y].Product_id+ '\')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="far fa-heart"></i></a>';
                     }else {
@@ -149,13 +152,13 @@ let end = onePage;
                             +                       '<ul>';
                             var str4x=" ";
                             var str4 = " ";
-                            
+
                                 for(i=0; i < product[y].Rating.toFixed(); i++){
                                     str4x+= '<span> </span><li> <i class="fa fa-star-of-david"></i></li>';
                                 }
                                 for(i=0; i < (5 - product[y].Rating.toFixed()); i++){
                                     str4x+= '<span> </span><li class="silver-color"><i class="fa fa-star-of-david"></i></li>';
-                                }     
+                                }
                             str4 = str4x;
                             var str5=                  '</ul>'
                             +                    '</div>'
@@ -205,7 +208,7 @@ let end = onePage;
                 }
             }
         }
-        $('#showProducts').html(htmlProduct); 
+        $('#showProducts').html(htmlProduct);
     }
 // set up hàng phân trang
     function listNumberPage(){
@@ -257,7 +260,7 @@ let end = onePage;
                 }
                 break;
             }
-        
+
         }
         numberPage +=    '<li>'
                 +            '<a class="Next" href="javascript:void(0)" onclick="nextPage()">'
@@ -299,7 +302,7 @@ let end = onePage;
                         });
                     });
             }
-            
+
         }
     }
 //  sự kiện khi ta click vào nút số trang cần đến
@@ -332,7 +335,7 @@ let end = onePage;
         renderProducts();
         listNumberPage();
     }
-    
+
 // xử lý khi user chọn phương  thức sắp xếp
     function shorting(){
         var urlshort = url +'/shop/short/' + $("#short").val() + "/" + idProduct ;
@@ -341,7 +344,7 @@ let end = onePage;
                 type : "get",
                 dataType:"text",
                 data : {
-                     
+
                 },
                 success : function (result){
                     products = JSON.parse(result);
@@ -350,7 +353,7 @@ let end = onePage;
                     listNumberPage();
                 }
         });
-        
+
     }
 // xử lý khi user chọn mức giá
     function priceFromTo(){
@@ -361,7 +364,7 @@ let end = onePage;
                 type : "get",
                 dataType:"text",
                 data : {
-                     
+
                 },
                 success : function (result){
                     // vị trí cần sửa
@@ -380,7 +383,7 @@ let end = onePage;
                     listNumberPage();
                 }
         });
-        
+
     }
 // xử lý quickView
     function quickView(id_ProductQuickView){
@@ -390,10 +393,10 @@ let end = onePage;
                 type : "get",
                 dataType:"text",
                 data : {
-                     
+
                 },
                 success : function (result){
-                   var product = JSON.parse(result);  
+                   var product = JSON.parse(result);
                     var imgQuickView1 =      '<img src="'+url + '/assets/images/product/' +product.Image[0]+ '" alt="Product Image">'
                     var imgQuickView2 =      '<img src="'+url + '/assets/images/product/' +product.Image[1]+ '" alt="Product Image">'
                     var imgQuickView3 =      '<img src="'+url + '/assets/images/product/' +product.Image[2]+ '" alt="Product Image">'
@@ -407,7 +410,7 @@ let end = onePage;
                         }
                         for(i=0; i < (5 - product.Rating.toFixed()); i++){
                             str+= '<span> </span><li class="silver-color"><i class="fa fa-star-of-david"></i></li>';
-                        }     
+                        }
                         ratingQuickView = str;
                     var priceQuickView = '<span class="new-price">$'+product.CurrentPrice+'</span>';
                         if(product.Sale_Type == 'percent' && product.Sale_Type == 'direct'){
@@ -416,7 +419,7 @@ let end = onePage;
                     var codeAndQuantity =' <li>Product Code: '+product.Product_id+'</li> <li>Current item quantity: '+product.Quantity+'</li> <li>Number Of Products Sold: '+product.Sold_Product_Quantity+'</li>'
                     var tagQuickViews = " ";
                         for(u=0; u < product.tag_name.length; u++){
-                            if( u < (product.tag_name.length - 1) ){ 
+                            if( u < (product.tag_name.length - 1) ){
                                 tagQuickViews += '<a href="'+ url + '/shop/categories/'+ product.tag_id[u] + '"> '+ product.tag_name[u] +'</a><span>, </span>';
                             }else{
                                 tagQuickViews += '<a href="'+ url + '/shop/categories/'+ product.tag_id[u] + '"> '+ product.tag_name[u] +'</a>';
@@ -445,13 +448,13 @@ let end = onePage;
                     $('#codeAndQuantity').html(codeAndQuantity);
                     $('#tagQuickView').html(tagQuickViews);
                     $('#addtoCartQuickView').html(addtoCartQuickView);
-                    
-                    
+
+
                 }
         })
-        
-        
-        
+
+
+
     }
 // xử lý khi user chọn Thêm sản phẩm vào danh sách yêu thích
     function wishlistHandler(prod_id){
@@ -541,10 +544,10 @@ function addToCartProduct(productAdd){
         type : "get",
         dataType:"text",
         data : {
-            
+
         },
         success : function (result){
-            var product = JSON.parse(result);  
+            var product = JSON.parse(result);
             let urlAddToCart = url +'/addToCart';
             let size = "null";
             if(product.Size.length > 0){
@@ -571,7 +574,6 @@ function addToCartProduct(productAdd){
         }
     })
 }
-
     renderProducts();
     listNumberPage();
-    
+
