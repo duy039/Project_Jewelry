@@ -7,6 +7,7 @@ use App\Models\LoadProduct;
 use App\Models\LoadTag;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Route;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,14 @@ class HomeController extends Controller
 
     public function index()
     {
-        $wishlists = DB::table('wishlist')->where('User_id', Auth::user()->id)->get();
+        $wishlists =array();
+        if (session_id() === ''){
+            session_start();
+        }
+        if( isset( $_SESSION['user_id'] ) ){
+            // đã login
+            $wishlists = DB::table('wishlist')->where('User_id', $_SESSION['user_id'])->get();
+        }
         $contact = DB::table('contact')->get();
         $resultProductRing = array();
         // $resultProductEarring = array();

@@ -7,7 +7,7 @@ function wishlistsResponse() {
     var theResponse = null;
     // jQuery ajax
     $.ajax({
-        url: 'wishlists/' + user_id,
+        url:'wishlists/' + user_id,
         type: 'get',
         data: {
 
@@ -63,9 +63,9 @@ function renderIconWishlist(productIDWishlist) {
     }
 }
 function wishlistHandler(prod_id) {
-    // if(user_id == null){
-    //     return confirm("You must be logged in to add products to your wish list");
-    // }else{
+    if(user_id == null){
+        return swal('Warning',"You must be logged in to add products to your wish list",'warning');
+    }else{
     var urlAddWishlist = '/wishlistHandler';
     $.ajax({
         url: urlAddWishlist,
@@ -84,7 +84,7 @@ function wishlistHandler(prod_id) {
             renderIconWishlist(prod_id);
         }
     });
-
+    }
 }
 
 function wishlistDelete(prod_id, wishlist_id) {

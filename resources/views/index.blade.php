@@ -37,7 +37,11 @@
 
 <body class="template-color-1">
     <input id="csrf_token" type="hidden" value='{{ csrf_token() }}'>
-    <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+    <input type="hidden" id="user_id" @if (!Auth::guest())
+        value="{{Auth::user()->id}}"
+        @else
+        value="null"
+    @endif >
     <input type="hidden" id="pro_id" value="@foreach ($product as $pro) {{ $pro->getId() }} @endforeach">
     <div class="main-wrapper">
         <!-- Begin Loading Area -->
