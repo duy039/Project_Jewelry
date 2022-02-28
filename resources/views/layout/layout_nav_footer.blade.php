@@ -58,7 +58,7 @@ $tagss = $lloadTag->getTags();
     <link rel="stylesheet" href="{{ url('assets/css/plugins/timecircles.css') }}">
 
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
-    <link rel="stylesheet" href="assets/css/vendor/ijaboCropTool.min.css">
+    <link rel="stylesheet" href="{{url('assets/css/vendor/ijaboCropTool.min.css')}}">
 
 </head>
 
@@ -324,7 +324,6 @@ $tagss = $lloadTag->getTags();
                             <h4>Minicart</h4>
                         </div>
                         <ul class="minicart-list" id="sessionMiniCart">
-                            {{-- 1 sản phẩm --}}
                             <li class="minicart-product">
                                 <a class="product-item_remove" href="javascript:void(0)"><i
                                         class="ion-android-close"></i></a>
@@ -333,28 +332,6 @@ $tagss = $lloadTag->getTags();
                                 </div>
                                 <div class="product-item_content">
                                     <a class="product-item_title" href='{{ url('/shop') }}'>Magni dolorum vel</a>
-                                    <span class="product-item_quantity">1 x $120.80</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="javascript:void(0)"><i
-                                        class="ion-android-close"></i></a>
-                                <div class="product-item_img">
-                                    <img src="assets/images/product/small-size/2-2.jpg" alt="Hiraola's Product Image">
-                                </div>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="/shop">Eius accusantium omnis</a>
-                                    <span class="product-item_quantity">1 x $120.80</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="javascript:void(0)"><i
-                                        class="ion-android-close"></i></a>
-                                <div class="product-item_img">
-                                    <img src="assets/images/product/small-size/2-3.jpg" alt="Hiraola's Product Image">
-                                </div>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="/shop">Aperiam adipisci dolorem</a>
                                     <span class="product-item_quantity">1 x $120.80</span>
                                 </div>
                             </li>

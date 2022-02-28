@@ -300,12 +300,9 @@ public function addToCart(Request $request){
                 }
             }
         }
-
         return true;
     }else{
         return false;
     }
 }
-
-
 }

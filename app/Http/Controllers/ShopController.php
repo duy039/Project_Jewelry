@@ -25,10 +25,10 @@ class ShopController extends Controller
         $resultTag = $this->tags;
         shuffle($resultProduct);
         $messenger = null;
-        return view('shop', 
+        return view('shop',
         [
-            'products'=> $resultProduct, 
-            'tags'=> $resultTag, 
+            'products'=> $resultProduct,
+            'tags'=> $resultTag,
             'messenger'=>$messenger]);
     }
     public function search(Request $request){
@@ -47,10 +47,10 @@ class ShopController extends Controller
             $messenger = "No Products Found!!!";
         };
         return view('shop', [
-            'products'=> $result, 
-            'tags'=> $resultTag, 
+            'products'=> $result,
+            'tags'=> $resultTag,
             'messenger'=>$messenger
-        ]); 
+        ]);
     }
     public function categories($tagID){
         $resultProduct = array();
@@ -69,8 +69,8 @@ class ShopController extends Controller
         shuffle($resultProduct);
         $messenger = null;
         return view('shop', [
-            'products'=> $resultProduct, 
-            'tags'=> $resultTag, 
+            'products'=> $resultProduct,
+            'tags'=> $resultTag,
             'messenger'=>$messenger
         ]);
     }
@@ -91,7 +91,7 @@ class ShopController extends Controller
                             $resultProduct[] = $listProd;
                         }
                     }else{
-            // trường hợp $resultProduct ko rỗng thì ta tạo biến cờ để xét 
+            // trường hợp $resultProduct ko rỗng thì ta tạo biến cờ để xét
             // size trong kho với size tham số  VÀ
             // product đó vẫn chưa có trong $resultProduct
                         $test = true;
@@ -111,13 +111,13 @@ class ShopController extends Controller
         $messenger = null;
         shuffle($resultProduct);
         return view('shop', [
-            'products'=> $resultProduct, 
-            'tags'=> $resultTag, 
+            'products'=> $resultProduct,
+            'tags'=> $resultTag,
             'messenger'=>$messenger
         ]);
     }
 
-// Ajax 
+// Ajax
     public function priceFromTo($priceFrom, $priceTo, $shopProducts){
         $id_shopProducts = explode(",", $shopProducts);
         $result = null;
@@ -193,7 +193,7 @@ class ShopController extends Controller
         if($test || trim($nameSearch) == ""){
             return "No Products Found!!!";
         };
-        
+
         // tạo json
         // lọc ra từng Object có trong list $resultProducts
         for($i=0; $i < count($result); $i++){
@@ -237,7 +237,7 @@ class ShopController extends Controller
                 ];
             $result[$i] = $product;
         }
-        
+
         return json_encode($result);
     }
 // Ajax
@@ -404,7 +404,7 @@ class ShopController extends Controller
                 ];
             $result[$i] = $product;
         }
-        
+
         return json_encode($result);
     }
 // Ajax
@@ -456,7 +456,7 @@ class ShopController extends Controller
             'tag_name'          => $tag_name
             ];
         $result = $product;
-       
+
         return json_encode($result);
     }
 // Ajax
@@ -477,8 +477,6 @@ class ShopController extends Controller
         };
         return false;
     }
-
-    
 }
 
 ?>

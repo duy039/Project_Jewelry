@@ -64,7 +64,16 @@ Route::prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
     Route::get('manage-product', [App\Http\Controllers\AdminController::class, 'manage_product'])->name('manageProduct');
 });
-Route::get('/', 'App\Http\Controllers\HomeController@index');
+Route::prefix('/')->group(function () {
+    Route::get('/', 'App\Http\Controllers\HomeController@index');
+    Route::get('wishlists/{user_id}', 'App\Http\Controllers\HomeController@wishlists');
+    Route::post('homeWishlistHandler', 'App\Http\Controllers\HomeController@wishlistHandler');
+    Route::get('homeWishlistDelete/{user_id}/{wishl_id}', 'App\Http\Controllers\HomeController@wishlistDelete');
+    Route::get('getProduct', 'App\Http\Controllers\HomeController@getProduct');
+    Route::get('cartDelete/{id}', 'App\Http\Controllers\HomeController@cartDelete');
+    Route::get('quantityChange/{id}/{method}', 'App\Http\Controllers\HomeController@quantityChange');
+});
+
 
 
 

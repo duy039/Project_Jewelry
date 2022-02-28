@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\LoadProduct;
 use App\Models\LoadTag;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        $wishlists = DB::table('wishlist')->where('User_id', Auth::user()->id)->get();
         $contact = DB::table('contact')->get();
         $resultProductRing = array();
         // $resultProductEarring = array();
@@ -97,19 +99,109 @@ class HomeController extends Controller
             if (count($resultProductBracelet) > $i) {
                 $bestSellingProductsBracelet[] = $resultProductBracelet[$i];
             }
-            // dd($resultProductBracelet);
         }
-        // dd($resultProduct);
         return view('index', [
             'bestSellingProductsRing' => $bestSellingProductsRing,
-            'ring' => $resultProductRing,
-            // 'bestSellingProductsEarring' => $bestSellingProductsEarring,
             'bestSellingProductsNecklace' => $bestSellingProductsNecklace,
-            'necklace' => $resultProductNecklace,
             'bestSellingProductsBracelet' => $bestSellingProductsBracelet,
-            'bracelet' => $resultProductBracelet,
             'product' => $this->products,
             'contact' => $contact,
+            'wishlists' => $wishlists,
         ]);
+    }
+    public function wishlistHandler(Request $request)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        // kiểm tra có tồn tại 2 post này ko?
+        if (isset($request->user_id) && isset($request->product_id)) {
+            $product_id = $request->product_id;
+            $user_id    = $request->user_id;
+            $test = true;
+            if ($test) {
+                DB::table('wishlist')->insert([
+                    'Product_id'    => $product_id,
+                    'User_id'       => $user_id,
+                    'Create_Date'   => date('Y-m-d  H:i:s'),
+                    'Update_Date'   => date('Y-m-d  H:i:s')
+                ]);
+            }
+            return $test;
+        } else {
+            return false;
+        }
+        return false;
+    }
+    public function wishlists($user_id)
+    {
+        $wish = array();
+        if ($wishlists = DB::table('wishlist')->where('User_id', $user_id)->get()) {
+            foreach ($wishlists as $wi) {
+                $wishlistsObj = (object) [
+                    'WishList_id'    => $wi->WishList_id,
+                    'Product_id'    => $wi->Product_id,
+                    'User_id'       => $wi->User_id,
+                    'Create_Date'    => $wi->Create_Date,
+                    'Update_Date'    => $wi->Update_Date
+                ];
+                $wish[] = $wishlistsObj;
+            }
+            return json_encode($wish);
+        };
+        return false;
+    }
+    public function wishlistDelete($user_id, $wishl_id)
+    {
+        $wishlists = DB::table('wishlist')->where('User_id', $user_id)->get();
+        foreach ($wishlists as $wish) {
+            if ($wish->WishList_id == $wishl_id) {
+                // xóa nếu sản phẩm đó đã có trong wishlist
+                DB::table('wishlist')->where('WishList_id', $wishl_id)->delete();
+                return true;
+            }
+        }
+        return false;
+    }
+    public function getProduct()
+    {
+        if (session_id() === '') {
+            session_start();
+        }
+        if (isset($_SESSION['inCart'])) {
+            $resultProducts = $_SESSION['inCart'];
+            return json_encode($resultProducts);
+        }
+        return false;
+    }
+    public function cartDelete($id)
+    {
+        if (session_id() === '') {
+            session_start();
+        }
+        $test = array();
+        for ($i = 0; $i < count($_SESSION['inCart']); $i++) {
+            if ($_SESSION['inCart'][$i]->cart_id  != $id) {
+                $test[]  = $_SESSION['inCart'][$i];
+            }
+        }
+        $_SESSION['inCart'] = $test;
+        return true;
+    }
+
+    // Ajax Thay đổi Quantity 1 product trong cart
+    public function quantityChange($id, $method)
+    {
+        if (session_id() === '') {
+            session_start();
+        }
+        for ($i = 0; $i < count($_SESSION['inCart']); $i++) {
+            if ($_SESSION['inCart'][$i]->cart_id  == $id) {
+                if ($method == "up") {
+                    $_SESSION['inCart'][$i]->Quantity += 1;
+                } else {
+                    $_SESSION['inCart'][$i]->Quantity -= 1;
+                };
+            }
+        }
+        return true;
     }
 }

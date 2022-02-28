@@ -64,6 +64,7 @@ class CheckoutController extends Controller
             'requestType' => $requestType,
             'signature' => $signature
         );
+        // dd($data);
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);  // decode json
         // dd($jsonResult);

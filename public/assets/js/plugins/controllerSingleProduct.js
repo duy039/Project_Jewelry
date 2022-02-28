@@ -64,7 +64,7 @@ function raitingResponse() {
             }else{
                 theResponse = null;
             }
-            
+
         }
     });
     return theResponse;
@@ -122,7 +122,7 @@ function rendercomment(){
 function renderRaiting(){
     raitings = raitingResponse();
     let htmlRaitings = "";
-    
+
     for(let i=0; i<raitings.length; i++){
         let htmlAvatarRaiting = "";
         let htmlCountRaiting = "";
@@ -284,9 +284,9 @@ function wishlistHandler(prod_id){
                 renderIconWishlist();
             }
         });
-        
+
     }
-    
+
 }
 // xử lý khi user chọn Xóa sản phẩm ra khỏi danh sách yêu thích
 function wishlistDelete(wishlist_id){
@@ -308,9 +308,9 @@ function wishlistDelete(wishlist_id){
                 renderIconWishlist();
             }
         });
-       
+
     }
-    
+
 }
 function chartRating(){
     // dùng array đi nha tôi
@@ -430,9 +430,9 @@ function wishlistHandlerList(prod_id){
                 renderIconWishlistList(prod_id);
             }
         });
-        
+
     }
-    
+
 }
 // xử lý khi user chọn Xóa sản phẩm ra khỏi danh sách yêu thích của 2 list bên dưới
 function wishlistDeleteList(prod_id, wishlist_id){
@@ -454,9 +454,9 @@ function wishlistDeleteList(prod_id, wishlist_id){
                 renderIconWishlistList(prod_id);
             }
         });
-       
+
     }
-    
+
 }
 // xử lý quickView
 function quickView(id_ProductQuickView){
@@ -466,10 +466,10 @@ function quickView(id_ProductQuickView){
             type : "get",
             dataType:"text",
             data : {
-                 
+
             },
             success : function (result){
-               var product = JSON.parse(result);  
+               var product = JSON.parse(result);
                 var imgQuickView1 =      '<img src="'+url + '/assets/images/product/' +product.Image[0]+ '" alt="Product Image">'
                 var imgQuickView2 =      '<img src="'+url + '/assets/images/product/' +product.Image[1]+ '" alt="Product Image">'
                 var imgQuickView3 =      '<img src="'+url + '/assets/images/product/' +product.Image[2]+ '" alt="Product Image">'
@@ -483,7 +483,7 @@ function quickView(id_ProductQuickView){
                     }
                     for(i=0; i < (5 - product.Rating.toFixed()); i++){
                         str+= '<span> </span><li class="silver-color"><i class="fa fa-star-of-david"></i></li>';
-                    }     
+                    }
                     ratingQuickView = str;
                 var priceQuickView = '<span class="new-price">$'+product.CurrentPrice+'</span>';
                     if(product.Sale_Type == 'percent' && product.Sale_Type == 'direct'){
@@ -492,7 +492,7 @@ function quickView(id_ProductQuickView){
                 var codeAndQuantity =' <li>Product Code: '+product.Product_id+'</li> <li>Current item quantity: '+product.Quantity+'</li> <li>Number Of Products Sold: '+product.Sold_Product_Quantity+'</li>'
                 var tagQuickViews = " ";
                     for(u=0; u < product.tag_name.length; u++){
-                        if( u < (product.tag_name.length - 1) ){ 
+                        if( u < (product.tag_name.length - 1) ){
                             tagQuickViews += '<a href="'+ url + '/shop/categories/'+ product.tag_id[u] + '"> '+ product.tag_name[u] +'</a><span>, </span>';
                         }else{
                             tagQuickViews += '<a href="'+ url + '/shop/categories/'+ product.tag_id[u] + '"> '+ product.tag_name[u] +'</a>';
@@ -521,13 +521,13 @@ function quickView(id_ProductQuickView){
                 $('#codeAndQuantity').html(codeAndQuantity);
                 $('#tagQuickView').html(tagQuickViews);
                 $('#addtoCartQuickView').html(addtoCartQuickView);
-                
-                
+
+
             }
     })
-    
-    
-    
+
+
+
 }
 // xử lý thêm 1 product vào giỏ hàng
 function addToCart(productAdd){
@@ -551,12 +551,14 @@ function addToCart(productAdd){
             if(result == true){
                 return alert("The product has been added to the cart");
             }
+            renderMiniCart();
         }
     });
 }
 
 // xử lý thêm 1 product quickView vào giỏ hàng
 function addToCartQuickView(productAdd){
+    // controler xử lý chức năng
     let urlAddToCart = url +'/addToCart';
     let size = "null";
     if($("#getSizeQuickView").val()!= undefined){
@@ -589,10 +591,10 @@ function addToCartProduct(productAdd){
         type : "get",
         dataType:"text",
         data : {
-            
+
         },
         success : function (result){
-            var product = JSON.parse(result);  
+            var product = JSON.parse(result);
             let urlAddToCart = url +'/addToCart';
             let size = "null";
             if(product.Size.length > 0){
@@ -618,8 +620,6 @@ function addToCartProduct(productAdd){
         }
     })
 }
-
-
 rendercomment();
 renderIconWishlist();
 renderRaiting();

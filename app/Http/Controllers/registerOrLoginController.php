@@ -38,7 +38,7 @@ class registerOrLoginController extends Controller
                     if ($pass == decrypt($users->Password)) {
                         Auth::login($users);
                         $_SESSION['user_id'] = $users->id;
-                        if ($users->Admins != 0) {
+                        if ($users->Admins != 1) {
                             return response()->json(['status' => 3, 'name' => $users->First_Name . $users->Last_Name]);
                         }else{
                             return response()->json(['status' => 4, 'name' => $users->First_Name . $users->Last_Name]);
