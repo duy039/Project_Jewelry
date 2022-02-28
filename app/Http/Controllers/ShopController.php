@@ -120,8 +120,8 @@ class ShopController extends Controller
 // Ajax
     public function priceFromTo($priceFrom, $priceTo, $shopProducts){
         $id_shopProducts = explode(",", $shopProducts);
-        $result = null;
-        $resultProduct = null;
+        $result = array();
+        $resultProduct = array();
         $resultTag = $this->tags;
         foreach($this->products as $pt){
             foreach($id_shopProducts as $id){
@@ -130,6 +130,7 @@ class ShopController extends Controller
                 }
             }
         }
+        
         foreach($resultProduct as $listProd){
             if($listProd->getCurrentPrice() >=  $priceFrom &&  $listProd->getCurrentPrice() <=  $priceTo){
                 $result[] = $listProd;
@@ -473,6 +474,7 @@ class ShopController extends Controller
                 ];
                 $wish[] = $wishlistsObj;
             }
+            // $wish là 1 array chứa nhìu Object
             return json_encode($wish);
         };
         return false;

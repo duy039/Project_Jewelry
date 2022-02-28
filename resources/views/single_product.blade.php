@@ -195,13 +195,13 @@
                                             <?php $test = substr($product->getId(), 0, 1); ?>
                                             @switch($test)
                                                 @case("R")
-                                                    <li><img src='{{ url("assets/images/product/size/ring.jpg") }}' alt="size"></li>
+                                                    <li><img src='{{ url("assets/images/product/size/ring.jpg") }}' alt="size" width="100%"></li>
                                                     @break
                                                 @case("N")
-                                                    <li><img src='{{ url("assets/images/product/size/necklace.png") }}' alt="size"></li>
+                                                    <li><img src='{{ url("assets/images/product/size/necklace.png") }}' alt="size" width="100%"></li>
                                                     @break
                                                 @case("B")
-                                                    <li><img src='{{ url("assets/images/product/size/bracelet.jpg") }}' alt="size"></li>
+                                                    <li><img src='{{ url("assets/images/product/size/bracelet.jpg") }}' alt="size" width="100%"></li>
                                                     @break
                                                 @default
                                                     <li></li>
