@@ -33,7 +33,7 @@ class my_accountController extends Controller
                 'Avatar' => '/'.$new_image_name,
             ];
             $user = auth()->user();
-            $oldimage = $user->Avatar;
+            $oldimage = $path . $user->Avatar;
             if (File::exists($oldimage)) {
                 File::delete($oldimage);
             }
@@ -91,7 +91,7 @@ class my_accountController extends Controller
                     'current_password' => 'required|string|min:8',
                     'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
                     'password' => 'required|string|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/',
-
+                    'password_confirmation'=>'required',
                 ]);
                 if (!$validate->fails()) {
                     if ($oldPassword == decrypt($user->Password)) {
@@ -157,6 +157,7 @@ class my_accountController extends Controller
                     'phone_number' => 'required|string|max:11|min:10',
                     'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
                     'password' => 'required|string|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/',
+                    'password_confirmation'=>'required',
                 ]);
                 if (!$validate->fails()) {
                     DB::table('users')->where('id', $user->id)->update($value);
