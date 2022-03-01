@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-       
+
         <!-- Begin Hiraola's Cart Area -->
         <div class="hiraola-cart-area">
             <div class="container">
@@ -86,7 +86,7 @@
                                     <div class="cart-page-total">
                                         <h2>Cart totals</h2>
                                         <ul>
-                                            <li>Subtotal <span id="subTotal">$118.60</span></li>
+                                            <li>Subtotal <span id="CartMiniCart">$119.60</span></li>
                                             <li>Tax <span>1%</span></li>
                                             <li>Total <span>$118.60</span></li>
                                         </ul>

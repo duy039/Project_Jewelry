@@ -37,11 +37,10 @@
 
 <body class="template-color-1">
     <input id="csrf_token" type="hidden" value='{{ csrf_token() }}'>
-    <input type="hidden" id="user_id" @if (!Auth::guest())
-        value="{{Auth::user()->id}}"
+    <input type="hidden" id="user_id"
+        @if (!Auth::guest()) value="{{ Auth::user()->id }}"
         @else
-        value="null"
-    @endif >
+        value="null" @endif>
     <input type="hidden" id="pro_id" value="@foreach ($product as $pro) {{ $pro->getId() }} @endforeach">
     <div class="main-wrapper">
         <!-- Begin Loading Area -->
@@ -142,7 +141,7 @@
                                                     <hr style="margin: 0">
                                                     <li><a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault();
-                                                                                                                                                                document.getElementById('logout-form').submit();"><i
+                                                                                                                                                                    document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
                                                                 aria-hidden="true"></i>
                                                             {{ __('home-header.signout') }}
@@ -232,7 +231,7 @@
                     </div>
                     <div class="minicart-item_total">
                         <span>Subtotal</span>
-                        <span class="ammount" id="subTotalMiniCart">$0</span>
+                        <span class="ammount" id="homeMiniCart">$0</span>
                     </div>
                     <div class="minicart-btn_area">
                         <a href="{{ url('cart') }}" class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">Go To
@@ -277,19 +276,9 @@
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/2') }}'>{{ __('home-header.ear') }}</a>
+                                                                href='{{ url('shop/categories/2') }}'>{{ __('home-header.neck') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/2') }}'><img
-                                                                    src="{{ url('assets/images/product/R04P01.jpg') }}"
-                                                                    alt="" width="150px"></a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <ul>
-                                                        <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/3') }}'>{{ __('home-header.neck') }}</a>
-                                                        </li>
-                                                        <li><a href='{{ url('shop/categories/3') }}'><img
                                                                     src="{{ url('assets/images/product/R08P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
                                                     </ul>
@@ -297,13 +286,25 @@
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/4') }}'>{{ __('home-header.brace') }}</a>
+                                                                href='{{ url('shop/categories/3') }}'>{{ __('home-header.brace') }}</a>
                                                         </li>
-                                                        <li><a href='{{ url('shop/categories/4') }}'><img
+                                                        <li><a href='{{ url('shop/categories/3') }}'><img
                                                                     src="{{ url('assets/images/product/R09P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
                                                     </ul>
                                                 </li>
+                                                <li>
+                                                    <ul>
+                                                        <li style="text-align: center; font-size: 120px;"><a
+                                                                href='{{ url('shop/categories/4') }}'>{{ __('home-header.ear') }}</a>
+                                                        </li>
+                                                        <li><a href='{{ url('shop/categories/4') }}'><img
+                                                                    src="{{ url('assets/images/product/R04P01.jpg') }}"
+                                                                    alt="" width="150px"></a></li>
+                                                    </ul>
+                                                </li>
+
+
                                                 <li> <img width="210px" height="200px"
                                                         src="{{ url('assets/images/menu/Halloween.png') }}" alt="">
                                                 </li>
@@ -598,7 +599,7 @@
                                             <hr style="margin: 0">
                                             <li><a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
-                                                                                                                        document.getElementById('logout-form').submit();"><i
+                                                                                                                            document.getElementById('logout-form').submit();"><i
                                                         class="fa fa-sign-out-alt text-danger" aria-hidden="true"></i>
                                                     {{ __('Sign out') }}
                                                 </a></li>

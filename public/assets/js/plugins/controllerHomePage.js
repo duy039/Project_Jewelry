@@ -166,7 +166,7 @@ function renderMiniCart() {
                 + '</li>';
         }
         $("#sessionMiniCart").html(htmlMiniCart);
-        $("#subTotalMiniCart").html("$" + sum.toFixed(2));
+        $("#homeMiniCart").html("$" + sum.toFixed(2));
     // }
 }
 

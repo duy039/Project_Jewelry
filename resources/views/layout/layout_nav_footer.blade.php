@@ -251,19 +251,9 @@ $tagss = $lloadTag->getTags();
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/2') }}'>{{ __('home-header.ear') }}</a>
+                                                                href='{{ url('shop/categories/2') }}'>{{ __('home-header.neck') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/2') }}'><img
-                                                                    src="{{ url('assets/images/product/R04P01.jpg') }}"
-                                                                    alt="" width="150px"></a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <ul>
-                                                        <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/3') }}'>{{ __('home-header.neck') }}</a>
-                                                        </li>
-                                                        <li><a href='{{ url('shop/categories/3') }}'><img
                                                                     src="{{ url('assets/images/product/R08P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
                                                     </ul>
@@ -271,13 +261,25 @@ $tagss = $lloadTag->getTags();
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/4') }}'>{{ __('home-header.brace') }}</a>
+                                                                href='{{ url('shop/categories/3') }}'>{{ __('home-header.brace') }}</a>
                                                         </li>
-                                                        <li><a href='{{ url('shop/categories/4') }}'><img
+                                                        <li><a href='{{ url('shop/categories/3') }}'><img
                                                                     src="{{ url('assets/images/product/R09P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
                                                     </ul>
                                                 </li>
+                                                <li>
+                                                    <ul>
+                                                        <li style="text-align: center; font-size: 120px;"><a
+                                                                href='{{ url('shop/categories/4') }}'>{{ __('home-header.ear') }}</a>
+                                                        </li>
+                                                        <li><a href='{{ url('shop/categories/4') }}'><img
+                                                                    src="{{ url('assets/images/product/R04P01.jpg') }}"
+                                                                    alt="" width="150px"></a></li>
+                                                    </ul>
+                                                </li>
+
+
                                                 <li> <img width="210px" height="200px"
                                                         src="{{ url('assets/images/menu/Halloween.png') }}" alt="">
                                                 </li>
