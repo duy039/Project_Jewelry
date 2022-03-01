@@ -206,7 +206,6 @@
                     </div>
                 </div>
             </div>
-
             {{-- mini cart --}}
 
             <div class="offcanvas-minicart_wrapper" id="miniCart">

@@ -18,7 +18,7 @@ function productsResponse() {
             }else{
                 theResponse = null;
             }
-            
+
         }
     });
     return theResponse;
@@ -39,7 +39,7 @@ function changeQuantity(id, method){
             renderListProduct();
         }
     });
-    
+
 }
 
 
@@ -63,7 +63,7 @@ function renderListProduct(){
         let total = products[i].Quantity * products[i].CurrentPrice;
         sum +=total;
         htmlCart += '<tr>'
-                    +        '<td  class="hiraola-product_remove">' 
+                    +        '<td  class="hiraola-product_remove">'
                     +            '<a style="font-size: 30px" onclick="cartDelete(\'' +products[i].cart_id+ '\')" href="javascript:void(0)"><i class="fas fa-trash-alt" title="Remove"></i></a>'
                     +        '</td>'
                     +        '<td class="hiraola-product-thumbnail"><a href="'+url + "/product/" + products[i].Product_id+'"><img src="'+url+'/assets/images/product/'+products[i].Avatar+'" alt="Cart Thumbnail" width="100px"></a>'
@@ -95,7 +95,7 @@ function cartDelete(id){
         },
         success : function (result){
             if(result){
-                alert("The product has been removed from the cart!");
+                swal('Success',"The product has been removed from the cart!",'success');
             };
             renderListProduct();
         }

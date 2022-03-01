@@ -242,7 +242,7 @@
                                                         <tr>
                                                             <td><span class="start12345">5 <i class="ion-android-star"></i></span></td>
                                                             <td><div id="ca5"></div></td>
-                                                            <td><span> </span><span id="numberRating5"></span></td>
+                                                            <td><span></span><span id="numberRating5"></span></td>
                                                         </tr>
                                                     </table>
                                                 </li>

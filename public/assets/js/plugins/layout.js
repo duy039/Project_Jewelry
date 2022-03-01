@@ -1,84 +1,84 @@
 var url = $("#urlWeb").val();
-var user_id = ($("#user_id").val() != 'null')?$("#user_id").val():null;
+var user_id = ($("#user_id").val() != 'null') ? $("#user_id").val() : null;
 // trả về các sản phẩm có trong giỏ hàng
 function productsCart() {
     var theResponse = null;
     $.ajax({
-        url: url +'/cart/getProduct',
+        url: url + '/cart/getProduct',
         type: 'get',
         data: {
 
         },
         dataType: "text",
         async: false,
-        success: function(respText) {
-            if(respText!=false){
+        success: function (respText) {
+            if (respText != false) {
                 theResponse = JSON.parse(respText);
-            }else{
+            } else {
                 theResponse = null;
             }
-            
+
         }
     });
     return theResponse;
 }
 
-function renderMiniCart(){
-    if(user_id == null){
+function renderMiniCart() {
+    if (user_id == null) {
         $("#sessionMiniCart").html("Cart is currently empty!!!");
         $("#sessionMiniCart").css({
-            "text-align" : "center"
-            });
+            "text-align": "center"
+        });
         return 0;
-    }else{
+    } else {
         let productsCartLatout = productsCart();
         let htmlMiniCart = "";
-        if(productsCartLatout == null){
+        if (productsCartLatout == null) {
             $("#sessionMiniCart").html("Cart is currently empty!!!");
             $("#sessionMiniCart").css({
-                "text-align" : "center"
-                });
+                "text-align": "center"
+            });
             return 0;
         }
         let sum = 0;
-        for(let i=0; i< productsCartLatout.length; i++){
-            let size="";
-            if(productsCartLatout[i].Size != "null"){
+        for (let i = 0; i < productsCartLatout.length; i++) {
+            let size = "";
+            if (productsCartLatout[i].Size != "null") {
                 size = productsCartLatout[i].Size;
             }
             let total = productsCartLatout[i].Quantity * productsCartLatout[i].CurrentPrice;
-            sum +=total;
+            sum += total;
             console.log(sum);
             htmlMiniCart += '<li class="minicart-product">'
-                        +    '<a class="product-item_remove" onclick="cartDeleteMini(\'' +productsCartLatout[i].cart_id+ '\')" href="javascript:void(0)"><i class="ion-android-close"></i></a>'
-                        +    '<div class="product-item_img">'
-                        +        '<img src="'+url+'/assets/images/product/'+productsCartLatout[i].Avatar+'" alt="Product Image">'
-                        +    '</div>'
-                        +    '<div class="product-item_content">'
-                        +        '<a class="product-item_title" href="'+url + "/product/" + productsCartLatout[i].Product_id+'">'+ productsCartLatout[i].Name+'</a>'
-                        +        '<span class="product-item_quantity">'+productsCartLatout[i].Quantity+' x $'+productsCartLatout[i].CurrentPrice.toFixed(2)+'</span>'
-                        +    '</div>'
-                        +'</li>';
+                + '<a class="product-item_remove" onclick="cartDeleteMini(\'' + productsCartLatout[i].cart_id + '\')" href="javascript:void(0)"><i class="ion-android-close"></i></a>'
+                + '<div class="product-item_img">'
+                + '<img src="' + url + '/assets/images/product/' + productsCartLatout[i].Avatar + '" alt="Product Image">'
+                + '</div>'
+                + '<div class="product-item_content">'
+                + '<a class="product-item_title" href="' + url + "/product/" + productsCartLatout[i].Product_id + '">' + productsCartLatout[i].Name + '</a>'
+                + '<span class="product-item_quantity">' + productsCartLatout[i].Quantity + ' x $' + productsCartLatout[i].CurrentPrice.toFixed(2) + '</span>'
+                + '</div>'
+                + '</li>';
         }
         $("#sessionMiniCart").html(htmlMiniCart);
-        $("#subTotalMiniCart").html("$"+sum.toFixed(2));
+        $("#subTotalMiniCart").html("$" + sum.toFixed(2));
     }
 }
-function cartDeleteMini(id){
-    if(user_id == null){
+function cartDeleteMini(id) {
+    if (user_id == null) {
         return confirm("You must be logged in to do this!!!");
-    }else{
-        let urlcartDelete = url +'/cart/cartDelete/'+id ;
+    } else {
+        let urlcartDelete = url + '/cart/cartDelete/' + id;
         $.ajax({
-            url : urlcartDelete,
-            type : "get",
+            url: urlcartDelete,
+            type: "get",
             cache: false,
-            dataType:"text",
-            data : {
+            dataType: "text",
+            data: {
             },
-            success : function (result){
-                if(result){
-                    alert("The product has been removed from the cart!");
+            success: function (result) {
+                if (result) {
+                    swal('Success','The product has been removed from the cart!','success');
                 };
                 renderMiniCart();
             }

@@ -114,7 +114,7 @@ $tagss = $lloadTag->getTags();
                                                 <li>
                                                     <a href="#" id="navbarDropdownMenuLink" aria-expanded="false">
                                                         <img width="40px" height="22px"
-                                                            src="assets/images/flags/{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}.png"
+                                                            src="../assets/images/flags/{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}.png"
                                                             alt="">
                                                         {{ Config::get('languages')[App::getLocale()]['display'] }}
                                                     </a>
@@ -125,7 +125,7 @@ $tagss = $lloadTag->getTags();
                                                             <a class="dropdown-item"
                                                                 href="{{ route('lang.switch', $lang) }}"><img
                                                                     width="40xp" height="22px"
-                                                                    src="assets/images/flags/{{ $language['flag-icon'] }}.png"
+                                                                    src="../assets/images/flags/{{ $language['flag-icon'] }}.png"
                                                                     alt="">
                                                                 {{ $language['display'] }}</a>
                                                         @endif

@@ -75,10 +75,6 @@ let end = onePage;
     }
 //  render lại danh sách sản phẩm
     function renderProducts(){
-<<<<<<< HEAD
-        console.log(user_id);
-=======
->>>>>>> 1457270095b787e931ea7e64bad2671ecdd1039a
         htmlProduct = " ";
         var product = products;
         if(product != null){
@@ -567,7 +563,7 @@ function addToCartProduct(productAdd){
                 success : function (result){
                     if(result == true){
                         renderMiniCart();
-                        return alert("The product has been added to the cart");
+                        return swal('Success',"The product has been added to the cart",'success');
                     }
                 }
             });

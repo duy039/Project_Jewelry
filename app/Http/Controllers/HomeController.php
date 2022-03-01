@@ -26,14 +26,15 @@ class HomeController extends Controller
 
     public function index()
     {
-        $wishlists =array();
-        if (session_id() === ''){
+        $wishlists = array();
+        if (session_id() === '') {
             session_start();
         }
-        if( isset( $_SESSION['user_id'] ) ){
+        if (isset($_SESSION['user_id'])) {
             // đã login
             $wishlists = DB::table('wishlist')->where('User_id', $_SESSION['user_id'])->get();
         }
+
         $contact = DB::table('contact')->get();
         $resultProductRing = array();
         // $resultProductEarring = array();
@@ -121,7 +122,7 @@ class HomeController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         // kiểm tra có tồn tại 2 post này ko?
-        if (isset($request->user_id) && isset($request->product_id)) {
+        if (isset($request->user_id) && isset($request->product_id) && isset($request->size)) {
             $product_id = $request->product_id;
             $user_id    = $request->user_id;
             $test = true;

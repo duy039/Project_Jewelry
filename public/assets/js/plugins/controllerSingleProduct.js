@@ -201,10 +201,22 @@ function renderIconWishlist(){
 function addComment(){
     let  content = $("#con_message").val();
     if(content.trim() == ""){
-        return alert("You have not entered the comment content!!");
+        return swal('Success',"You have not entered the comment content!!",'success');
     }
     if(user_id == null){
-        return confirm("You must be logged in to comment on this product!");
+        // return confirm("You must be logged in to comment on this product!");
+        return swal({
+            title: "Are you sure?",
+            text: "You must be logged in to comment on this product!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              window.location('login');
+            }
+          });
     }else{
         let urlAddComment = url +'/addComment' ;
         $.ajax({
@@ -250,7 +262,7 @@ function addRaiting(){
             },
             success : function (result){
                 if(result == false){
-                    return alert("You have already rated this product!");
+                    return swal('Warning',"You have already rated this product!",'warning');
                 }
                 raitings = raitingResponse();
                 renderRaiting();
@@ -277,9 +289,9 @@ function wishlistHandler(prod_id){
             },
             success : function (result){
                 if(result){
-                    alert("The product has been added to favorites");
+                    swal('Success',"The product has been added to favorites",'success');
                 }else{
-                    alert("The product has been removed from favorites");
+                    swal('Success',"The product has been removed from favorites",'success');
                 };
                 renderIconWishlist();
             }
@@ -303,7 +315,7 @@ function wishlistDelete(wishlist_id){
             },
             success : function (result){
                 if(result){
-                    alert("The product has been removed from favorites");
+                    swal('Success',"The product has been removed from favorites",'success');
                 };
                 renderIconWishlist();
             }
@@ -423,9 +435,9 @@ function wishlistHandlerList(prod_id){
             },
             success : function (result){
                 if(result){
-                    alert("The product has been added to favorites");
+                    swal('Success',"The product has been added to favorites",'success');
                 }else{
-                    alert("The product has been removed from favorites");
+                    swal('Success',"The product has been removed from favorites",'success');
                 };
                 renderIconWishlistList(prod_id);
             }
@@ -449,7 +461,7 @@ function wishlistDeleteList(prod_id, wishlist_id){
             },
             success : function (result){
                 if(result){
-                    alert("The product has been removed from favorites");
+                    swal('Success',"The product has been removed from favorites",'success');
                 };
                 renderIconWishlistList(prod_id);
             }
@@ -549,9 +561,9 @@ function addToCart(productAdd){
         },
         success : function (result){
             if(result == true){
-                return alert("The product has been added to the cart");
+                renderMiniCart();
+                return swal('Success',"The product has been added to the cart",'success');
             }
-            renderMiniCart();
         }
     });
 }

@@ -214,6 +214,8 @@ public function addRaiting(Request $request){
         $raiting    = $request->raiting;
         if($request->content == "-@.@.@-"){
             $content = "";
+        }else{
+            $content = $request->content;
         }
         $Ratings = DB::table('Ratings')->where('User_id', $user_id)->get();
         foreach($Ratings as $rr){
