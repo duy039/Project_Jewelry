@@ -36,11 +36,11 @@
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
-                <h2>Other</h2>
+                {{-- <h2>Other</h2>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="active">Contact</li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
@@ -59,25 +59,25 @@
             <div class="row">
                 <div class="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
                     <div class="contact-page-side-content">
-                        <h3 class="contact-page-title">Contact Us</h3>
+                        <h3 class="contact-page-title">{{__('contact.contactus')}}</h3>
                         <p class="contact-page-message">Claritas est etiam processus dynamicus, qui sequitur
                             mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum
                             claram anteposuerit litterarum formas human.</p>
                         <div class="single-contact-block">
-                            <h4><i class="fa fa-fax"></i> Address</h4>
+                            <h4><i class="fas fa-map-marker-alt"></i> {{__('contact.address')}}</h4>
                             @foreach ($contact as $con)
                                 <p>{{ $con->Address }}</p>
                             @endforeach
                         </div>
                         <div class="single-contact-block">
-                            <h4><i class="fa fa-phone"></i> Phone</h4>
+                            <h4><i class="fas fa-phone"></i> {{__('contact.phone')}}</h4>
                             @foreach ($contact as $con)
                                 <p>{{ $con->Number_Phone }}</p>
                             @endforeach
 
                         </div>
                         <div class="single-contact-block last-child">
-                            <h4><i class="fa fa-envelope-o"></i> Email</h4>
+                            <h4><i class="fas fa-envelope"></i> Email</h4>
                             @foreach ($contact as $con)
                                 <p>{{ $con->Email }}</p>
                             @endforeach
@@ -86,12 +86,12 @@
                 </div>
                 <div class="col-lg-6 col-md-12 order-2 order-lg-1">
                     <div class="contact-form-content">
-                        <h3 class="contact-page-title">Tell Us Your Message</h3>
+                        <h3 class="contact-page-title">{{__('contact.tell')}}</h3>
                         <div class="contact-form">
                             <form id="contact" action="{{ url('feedback') }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>Your Name <span class="required">*</span></label>
+                                    <label>{{__('contact.name')}} <span class="required">*</span></label>
                                     <input type="text"
                                         @if (!Auth::guest()) value="{{ $user->First_Name }} {{ $user->Last_Name }}" readonly
                                     @else value="" autofocus @endif
@@ -99,14 +99,14 @@
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label>Your Email <span class="required">*</span></label>
+                                    <label>Email <span class="required">*</span></label>
                                     <input type="email"
                                         @if (!Auth::guest()) value="{{ $user->email }}" readonly @else value="" @endif
                                         name="email">
                                     <span class="text-danger error-text email_error"></span>
                                 </div>
                                 <div class="form-group form-group-2">
-                                    <label>Your Message <span class="text-danger">*</span></label>
+                                    <label>{{__('contact.message')}} <span class="text-danger">*</span></label>
                                     <textarea name="message" id="message" data-html="true" style="resize: none"></textarea>
                                     <span class="text-danger error-text message_error"></span>
                                 </div>
@@ -114,10 +114,10 @@
                                     @if (!Auth::guest())
                                         <div class="form-group">
                                             <button type="submit" value="submit" id="submit"
-                                                class="hiraola-contact-form_btn" name="submit">send</button>
+                                                class="hiraola-contact-form_btn" name="submit">{{__("contact.send")}}</button>
                                         </div>
                                     @else
-                                        <div><span class="text-warning">Please Login before sent feedback!</span></div>
+                                        <div><span class="text-warning">{{__('contact.war')}}</span></div>
                                     @endif
                                 </div>
 

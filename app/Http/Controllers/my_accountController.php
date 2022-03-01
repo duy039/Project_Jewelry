@@ -58,10 +58,11 @@ class my_accountController extends Controller
         $confirm = $request->password_confirmation;
         $password = $request->password;
         $date = Carbon::now();
+        $checkbox = $request->checkbox;
         if ($user->Password != null) {
-            if ($oldPassword == '' && $password == '' && $confirm == '') {
+            if ($checkbox ==null) {
                 $validate = Validator::make($request->all(), [
-                    'phone_number' => 'required|string|max:11|min:10',
+                    'phone_number' => 'required|string|max:10|min:10',
                     'firstName' => 'required|string|max:20',
                     'lastName' => 'required|string|max:20',
                     'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
@@ -89,7 +90,7 @@ class my_accountController extends Controller
                     'lastName' => 'required|string|max:20',
                     'current_password' => 'required|string|max:12',
                     'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
-                    'password' => 'required|string|max:12|confirmed',
+                    'password' => 'required|string|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/',
                     'password_confirmation' => 'required|string|max:12',
 
                 ]);
@@ -120,7 +121,7 @@ class my_accountController extends Controller
                 }
             }
         } else {
-            if ($password == '') {
+            if ($checkbox == null) {
                 $value = [
                     'First_Name' => $f_name,
                     'Last_Name' => $l_name,
@@ -156,7 +157,7 @@ class my_accountController extends Controller
                     'lastName' => 'required|string|max:50',
                     'phone_number' => 'required|string|max:11|min:10',
                     'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
-                    'password' => 'required|string|max:15|confirmed',
+                    'password' => 'required|string|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/',
                 ]);
                 if (!$validate->fails()) {
                     DB::table('users')->where('id', $user->id)->update($value);

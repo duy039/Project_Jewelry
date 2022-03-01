@@ -8,7 +8,7 @@ var newpass = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</
 var confpass = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- Must same new password</li></ul></div>";
 var subject = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- At least 20 character</li></ul></div>";
 var message = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- At least 100 character</li></ul></div>";
-var phone = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- Must a number</li><li>- At least 10 number.</li><li>- Not greater than 11 number.</li></ul></div>";
+var phone = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- Must a number</li><li>- At least 10 number.</li><li>- Not greater than 10 number.</li></ul></div>";
 $('#f_name').tooltip({ 'trigger': 'hover', 'title': firstname, 'placement': 'bottom' });
 $('#l_name').tooltip({ 'trigger': 'hover', 'title': lastname, 'placement': 'bottom' });
 $('#username').tooltip({ 'trigger': 'hover', 'title': username, 'placement': 'bottom' });

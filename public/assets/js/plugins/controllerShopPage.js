@@ -470,9 +470,7 @@ let end = onePage;
                 },
                 success : function (result){
                     if(result){
-                        alert("The product has been added to favorites");
-                    }else{
-                        alert("The product has been removed from favorites");
+                        swal('Success',"The product has been added to favorites",'success');
                     };
                     wishlists = wishlistsResponse();
                     renderProducts();
@@ -496,7 +494,7 @@ let end = onePage;
                 },
                 success : function (result){
                     if(result){
-                        alert("The product has been removed from favorites");
+                        swal('Success',"The product has been removed from favorites",'success');
                         wishlists = wishlistsResponse();
                         renderProducts();
                         listNumberPage();
