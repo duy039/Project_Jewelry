@@ -88,10 +88,9 @@ class my_accountController extends Controller
                     'phone_number' => 'required|string|max:11|min:10',
                     'firstName' => 'required|string|max:20',
                     'lastName' => 'required|string|max:20',
-                    'current_password' => 'required|string|max:12',
+                    'current_password' => 'required|string|min:8',
                     'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
                     'password' => 'required|string|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/',
-                    'password_confirmation' => 'required|string|max:12',
 
                 ]);
                 if (!$validate->fails()) {
@@ -111,7 +110,7 @@ class my_accountController extends Controller
                                 return response()->json(['status' => 1, 'msg' => 'Save infomation success!']);
                             }
                         } else {
-                            return response()->json(['status' => 2, 'invalid' => 'Your current password same new password!']);
+                            return response()->json(['status' => 2, 'invalid' => 'Your new password same current password!']);
                         }
                     } else {
                         return response()->json(['status' => 2, 'invalid' => 'Current password invalid']);

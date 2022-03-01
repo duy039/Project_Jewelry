@@ -12,10 +12,14 @@ return[
     'fname' => 'Tên',
     'lname' => 'Họ',
     'phone' => 'Số điện thoại',
+    'phones' => 'Nhập số điện thoại',
     'gender' => 'Giới tính',
-    'curPass' => 'Mật khẩu cũ',
+    'curPass' => 'Mật khẩu',
+    'curPasss' => 'Nhập mật khẩu',
     'newPass' => 'Mật khẩu mới',
+    'newPasss' => 'Nhập mật khẩu mới',
     'conPass' => 'Xác nhận mật khẩu',
     'save' => 'Cập nhật',
+    'change' => 'Thay đổi mật khẩu',
 ]
 ?>

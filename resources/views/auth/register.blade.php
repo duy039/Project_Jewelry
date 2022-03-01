@@ -37,22 +37,22 @@
         <form style="padding: 3%" action="{{ url('postRegister') }}" method="POST" id="registerForm">
             {{ csrf_field() }}
             <div class="login-form" style="width: 500px; margin:0 auto">
-                <h4 class="login-title text-center">{{ __('Register') }}</h4>
+                <h4 class="login-title text-center">{{ __('registers.register') }}</h4>
                 <div class="row">
                     <div class="col-md-12 col-12 mb--20">
-                        <label>First Name <span class="text-danger">*</span></label>
+                        <label> {{__('myaccount.fname')}} <span class="text-danger">*</span></label>
                         <input type="text" name="f_name" data-html="true" value="{{ old('f_name') }}" id="f_name"
-                            autocomplete="f_name">
+                            autocomplete="f_name" placeholder="{{__('registers.fname')}}">
                         <span class="text-danger error-text f_name_error"></span>
                     </div>
                     <div class="col-md-12 col-12 mb--20">
-                        <label>Last Name <span class="text-danger">*</span></label>
+                        <label>{{__('myaccount.lname')}}<span class="text-danger">*</span></label>
                         <input type="text" name="l_name" data-html="true" value="{{ old('l_name') }}" id="l_name"
-                            autocomplete="l_name">
+                            autocomplete="l_name" placeholder="{{__('registers.lname')}}">
                         <span class="text-danger error-text l_name_error"></span>
                     </div>
                     <div class="col-md-12 col-12 mb--20">
-                        <label for="account-details-lastname">Gender <span class="text-danger">*</span></label>
+                        <label for="account-details-lastname">{{__('myaccount.gender')}}<span class="text-danger">*</span></label>
                         <select name="gender" id="gender" class="form-control">
                             <option selected value="other"> Other</option>
                             <option value="male"> Male</option>
@@ -60,23 +60,23 @@
                         </select>
                     </div>
                     <div class="col-md-12">
-                        <label>Email Address <span class="text-danger">*</span></label>
+                        <label>Email<span class="text-danger">*</span></label>
                         <input type="email" name="email" data-html="true" value="{{ old('email') }}" id="email"
-                            autocomplete="email">
+                            autocomplete="email" placeholder="{{__('registers.email')}}">
                         <span class="text-danger error-text email_error"></span>
                     </div>
                     <div class="col-md-6">
-                        <label>Password <span class="text-danger">*</span></label>
-                        <input type="password" id="password" data-html="true" name="password" autocomplete="new-password">
+                        <label>{{__('logins.pass')}} <span class="text-danger">*</span></label>
+                        <input type="password" id="password" data-html="true" name="password" autocomplete="new-password" placeholder="{{__('registers.pass')}}">
                         <span class="text-danger error-text password_error"></span>
                     </div>
                     <div class="col-md-6">
-                        <label>Confirm Password <span class="text-danger">*</span></label>
+                        <label>{{__('myaccount.conPass')}} <span class="text-danger">*</span></label>
                         <input type="password" data-html="true" id="confirm_pass" class="form-control"
-                            name="password_confirmation" autocomplete="new-password">
+                            name="password_confirmation" autocomplete="new-password" placeholder="{{__('registers.conpass')}}">
                     </div>
                     <div class="col-12">
-                        <input type="submit" class="hiraola-register_btn" value="{{ __('Register') }}">
+                        <input type="submit" class="hiraola-register_btn" value="{{ __('registers.register') }}">
                     </div>
                 </div>
             </div>

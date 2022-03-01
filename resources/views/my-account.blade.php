@@ -179,21 +179,21 @@
                                             <label for="account-details-firstname">{{ __('myaccount.fname') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" data-html="true" value="{{ $user->First_Name }}"
-                                                name="firstName" id="f_name">
+                                                name="firstName" id="f_name" placeholder="{{__('registers.fname')}}">
                                             <span class="text-danger error-text firstName_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
                                             <label for="account-details-lastname">{{ __('myaccount.lname') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" data-html="true" value="{{ $user->Last_Name }} "
-                                                name="lastName" id="l_name">
+                                                name="lastName" id="l_name" placeholder="{{__('registers.lname')}}">
                                             <span class="text-danger error-text lastName_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
                                             <label for="account-details-lastname">{{ __('myaccount.phone') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="number" data-html="true" value="0{{ $user->Phone_Number }}"
-                                                name="phone_number" id="phone">
+                                                name="phone_number" id="phone" placeholder="{{__('myaccount.phones')}}">
                                             <span class="text-danger error-text phone_number_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
@@ -213,7 +213,7 @@
                                             <label for="account-details-email">Email <span
                                                     class="text-danger">*</span></label>
                                             <input type="email" data-html="true" value="{{ $user->email }}" name="email"
-                                                id="email">
+                                                id="email" placeholder="{{__('registers.email')}}">
                                             <span class="text-danger error-text email_error"></span>
                                         </div>
                                         <div class="single-input" id="ship-box-info">
@@ -222,26 +222,26 @@
                                                     <label for="account-details-oldpass">{{ __('myaccount.curPass') }}
                                                         <span class="text-danger">*</span></label>
                                                     <input type="password" name="current_password" data-html="true"
-                                                        id="current_pass">
+                                                        id="current_pass" placeholder="{{__('myaccount.curPasss')}}">
                                                     <span class="text-danger error-text current_password_error"></span>
                                                 </div>
                                             @endif
                                             <div class="single-input">
                                                 <label for="account-details-newpass">{{ __('myaccount.newPass') }} <span
                                                         class="text-danger">*</span></label>
-                                                <input type="password" data-html="true" name="password" id="password">
+                                                <input type="password" data-html="true" name="password" id="password" placeholder="{{__('myaccount.newPasss')}}">
                                                 <span class="text-danger error-text password_error"></span>
                                             </div>
                                             <div class="single-input">
                                                 <label for="account-details-confpass">{{ __('myaccount.conPass') }} <span
                                                         class="text-danger">*</span></label>
                                                 <input type="password" data-html="true" name="password_confirmation"
-                                                    id="confirm_pass">
+                                                    id="confirm_pass" placeholder="{{__('registers.conpass')}}">
                                                 <span class="text-danger error-text password_confirmation_error"></span>
                                             </div>
                                         </div>
                                         <div style="margin-top: 2%">
-                                            <label>Change password ?</label>
+                                            <label>{{__('myaccount.change')}} ?</label>
                                             <input type="checkbox" name="checkbox" id="ship-box">
                                         </div>
                                         <div style="margin-left: 78%" class="single-input">
