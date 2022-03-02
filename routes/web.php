@@ -72,6 +72,7 @@ Route::prefix('/')->group(function () {
     Route::get('getProduct', 'App\Http\Controllers\HomeController@getProduct');
     Route::get('cartDelete/{id}', 'App\Http\Controllers\HomeController@cartDelete');
     Route::get('quantityChange/{id}/{method}', 'App\Http\Controllers\HomeController@quantityChange');
+    Route::get('/listproduct/{listProductsID}', 'App\Http\Controllers\HomeController@productsInShop');
 });
 
 

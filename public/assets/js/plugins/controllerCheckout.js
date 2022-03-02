@@ -57,7 +57,7 @@ function setCustomer(){
 }
 var display= null;
 function changeInput(){
-    setCustomer();    
+    setCustomer();
     var dservie = new google.maps.DirectionsService();
     if(display){
         display.setMap(null);
@@ -81,10 +81,6 @@ function changeInput(){
 
 }
 
-
-
-
-
 function initialize(){
     // khởi tạo map
     routeMap = new google.maps.Map(document.getElementById("map"), {
@@ -95,5 +91,5 @@ function initialize(){
         position: {lat:shop.geometry.location.lat, lng:shop.geometry.location.lng},
         map: routeMap
     });
-    
+
 }

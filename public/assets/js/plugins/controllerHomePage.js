@@ -62,6 +62,7 @@ function renderIconWishlist(productIDWishlist) {
         $("#na" + productIDWishlist).html(htmlWishkist);
     }
 }
+
 function wishlistHandler(prod_id) {
     if(user_id == null){
         return swal('Warning',"You must be logged in to add products to your wish list",'warning');
@@ -129,17 +130,17 @@ function productsResponse() {
 }
 
 function renderMiniCart() {
-    // if (user_id == null) {
-    //     $("#sessionMiniCart").html("Cart is currently empty!!!");
-    //     $("#sessionMiniCart").css({
-    //         "text-align": "center"
-    //     });
-    //     return 0;
-    // } else {
+    if (pro_id ==null) {
+        $("#sessionMiniCart").html("Cart is currently empty!!!");
+        $("#sessionMiniCart").css({
+            "text-align": "center"
+        });
+        return 0;
+    } else {
         products = productsResponse();
         console.log(products);
         let htmlMiniCart = "";
-        if (products == null) {
+        if (products.length == 0) {
             $("#sessionMiniCart").html("Cart is currently empty!!!");
             $("#sessionMiniCart").css({
                 "text-align": "center"
@@ -167,7 +168,7 @@ function renderMiniCart() {
         }
         $("#sessionMiniCart").html(htmlMiniCart);
         $("#homeMiniCart").html("$" + sum.toFixed(2));
-    // }
+    }
 }
 
 function cartDeleteMini(id) {

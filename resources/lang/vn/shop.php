@@ -11,7 +11,7 @@ return [
     'ztoa' => 'Từ Z đến A',
     'ltoh' => 'Giá thấp đến cao',
     'htol' => 'Giá cao đến thấp',
-    'rh' => 'Lượt đánh cao nhất',
+    'rh' => 'Lượt đánh giá cao nhất',
     'rl' => 'Lượt đánh giá thấp nhất',
     'category' => 'Các mặt hàng',
 ]

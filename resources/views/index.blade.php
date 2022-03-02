@@ -141,7 +141,7 @@
                                                     <hr style="margin: 0">
                                                     <li><a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault();
-                                                                                                                                                                    document.getElementById('logout-form').submit();"><i
+                                                                                                                                                                        document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
                                                                 aria-hidden="true"></i>
                                                             {{ __('home-header.signout') }}
@@ -599,7 +599,7 @@
                                             <hr style="margin: 0">
                                             <li><a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
-                                                                                                                            document.getElementById('logout-form').submit();"><i
+                                                                                                                                document.getElementById('logout-form').submit();"><i
                                                         class="fa fa-sign-out-alt text-danger" aria-hidden="true"></i>
                                                     {{ __('Sign out') }}
                                                 </a></li>
@@ -695,7 +695,7 @@
                     <div class="col-lg-12">
                         <div class="hiraola-product_slider">
                             <!-- Begin Hiraola's Slide Item Area -->
-                            @foreach ($product as $pro)
+                                @foreach ($product as $pro)
                                 <div class="slide-item">
                                     <div class="single_product">
                                         <div class="product-img">

@@ -27,7 +27,4 @@ class ChechoutController extends Controller
 
         ]);
     }
-
-
-    
 }

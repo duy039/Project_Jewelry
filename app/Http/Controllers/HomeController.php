@@ -118,6 +118,7 @@ class HomeController extends Controller
             'wishlists' => $wishlists,
         ]);
     }
+
     public function wishlistHandler(Request $request)
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
@@ -213,4 +214,6 @@ class HomeController extends Controller
         }
         return true;
     }
+
+
 }

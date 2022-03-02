@@ -33,7 +33,7 @@ function renderMiniCart() {
     } else {
         let productsCartLatout = productsCart();
         let htmlMiniCart = "";
-        if (productsCartLatout == null) {
+        if (productsCartLatout.length == 0) {
             $("#sessionMiniCart").html("Cart is currently empty!!!");
             $("#sessionMiniCart").css({
                 "text-align": "center"
@@ -48,7 +48,6 @@ function renderMiniCart() {
             }
             let total = productsCartLatout[i].Quantity * productsCartLatout[i].CurrentPrice;
             sum += total;
-            console.log(sum);
             htmlMiniCart += '<li class="minicart-product">'
                 + '<a class="product-item_remove" onclick="cartDeleteMini(\'' + productsCartLatout[i].cart_id + '\')" href="javascript:void(0)"><i class="ion-android-close"></i></a>'
                 + '<div class="product-item_img">'

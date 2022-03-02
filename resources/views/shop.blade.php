@@ -150,8 +150,8 @@ for ($i = 0; $i < count($products); $i++) {
                                         <option value="3">{{__('shop.ztoa')}}</option>
                                         <option value="4">{{__('shop.ltoh')}}</option>
                                         <option value="5">{{__('shop.htol')}}</option>
-                                        <option value="6">{{__('shop.rh')}}</option>
-                                        <option value="7">{{__('shop.rl')}}</option>
+                                        <option value="6">{{__('shop.rl')}}</option>
+                                        <option value="7">{{__('shop.rh')}}</option>
                                     </select>
                                 </div>
                             </div>

@@ -1,15 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\LoadProduct;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
-    public function index()
-    {
-        return view('checkout');
+    public $products;
+
+    public function __construct(){
+        $loadProduct = new LoadProduct();
+        $this->products = $loadProduct->getProducts();
     }
+    public function index(){
+        if (session_id() === ''){
+            session_start();
+        }
+        if( !isset( $_SESSION['user_id'] ) ){
+            // đã login
+            $_SESSION['user_id'] = array();
+        }
+        return view('checkout',[
+
+        ]);
+    }
+
     function execPostRequest($url, $data)
     {
         $ch = curl_init($url);
@@ -32,7 +47,8 @@ class CheckoutController extends Controller
         curl_close($ch);
         return $result;
     }
-    public function payMomo(Request $request)
+
+    public function payMomo()
     {
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $partnerCode = 'MOMOW1KL20220211';
@@ -41,8 +57,8 @@ class CheckoutController extends Controller
         $orderInfo = "Thanh toán qua MoMo";
         $amount = "5000";
         $orderId = time() . "";
-        $redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
-        $ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+        $redirectUrl = "http://127.0.0.1:8000/checkout";
+        $ipnUrl = "http://127.0.0.1:8000/checkout";
         $extraData = "";
 
         $requestId = time() . "";

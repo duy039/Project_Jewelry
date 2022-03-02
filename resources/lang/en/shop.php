@@ -12,7 +12,7 @@ return [
     'ltoh' => 'Price low to high',
     'htol' => 'Price high to low',
     'rh' => 'Rating highest',
-    'rl' => 'Rating Lowest',
+    'rl' => 'Rating lowest',
     'category' => 'Categories',
 ]
 ?>
