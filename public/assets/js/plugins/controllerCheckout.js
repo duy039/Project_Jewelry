@@ -237,6 +237,7 @@ function  renderBill(){
                     +            '<th>Order Total</th>'
                     +           '<td class="priceBill" ><strong><span class="amount">$'+orderTotal+'</span></strong></td>'
                     +        '</tr>'
+                    +    '<input type="hidden" value="'+orderTotal+'" id="totalOrderBill"></input>';
 
     $('#displayProductBill').html(htmlProductBill);
     $('#displayTotalBill').html(htmlTotalBill);
