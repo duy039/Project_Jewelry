@@ -146,7 +146,7 @@
                                             @if ($user == '')
                                             <input id="inputPhoneCheckout" type="text">
                                             @else
-                                            <input id="inputPhoneCheckout" type="text" value="{{ $user->Phone_Number }}">
+                                            <input id="inputPhoneCheckout" type="text" value="0{{ $user->Phone_Number }}">
                                             @endif
                                         </div>
                                     </div>

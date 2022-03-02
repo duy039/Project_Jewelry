@@ -35,13 +35,13 @@
 
         <div class="breadcrumb-area">
             <div class="container">
-                <div class="breadcrumb-content">
+                {{-- <div class="breadcrumb-content">
                     <h2>Other</h2>
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li class="active">Cart</li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -55,13 +55,13 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="hiraola-product-remove">remove</th>
-                                            <th class="hiraola-product-thumbnail">images</th>
-                                            <th class="cart-product-name">Product</th>
-                                            <th class="hiraola-product-price">Unit Price</th>
-                                            <th class="hiraola-product-price">Size</th>
-                                            <th class="hiraola-product-quantity">Quantity</th>
-                                            <th class="hiraola-product-subtotal">Total</th>
+                                            <th class="hiraola-product-remove">{{__('cart.remove')}}</th>
+                                            <th class="hiraola-product-thumbnail">{{__('cart.image')}}</th>
+                                            <th class="cart-product-name">{{__('cart.product')}}</th>
+                                            <th class="hiraola-product-price">{{__('cart.price')}}</th>
+                                            <th class="hiraola-product-price">{{__('cart.size')}}</th>
+                                            <th class="hiraola-product-quantity">{{__('cart.quantity')}}</th>
+                                            <th class="hiraola-product-subtotal">{{__('cart.total')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="listProducts">
@@ -84,13 +84,13 @@
                             <div class="row">
                                 <div class="col-md-5 ml-auto">
                                     <div class="cart-page-total">
-                                        <h2>Cart totals</h2>
+                                        <h2>{{__('cart.sign')}}</h2>
                                         <ul>
-                                            <li>Subtotal <span id="CartMiniCart">$119.60</span></li>
-                                            <li>Tax <span>1%</span></li>
-                                            <li>Total <span>$118.60</span></li>
+                                            <li>{{__('cart.sub')}} <span id="CartMiniCart">$119.60</span></li>
+                                            <li>{{__('cart.tax')}} <span>1%</span></li>
+                                            <li>{{__('cart.totals')}} <span>$118.60</span></li>
                                         </ul>
-                                        <a href="javascript:void(0)">Proceed to checkout</a>
+                                        <a href="{{url('checkout')}}">{{__('cart.checkout')}}</a>
                                     </div>
                                 </div>
                             </div>

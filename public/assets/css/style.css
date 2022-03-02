@@ -8430,9 +8430,10 @@ button.li-btn:hover {
   border: 1px solid #e5e5e5;
   color: #ffffff;
   display: inline-block;
-  margin-top: 30px;
   padding: 10px 20px;
   text-transform: capitalize;
+  margin: 5% 0% 0% 50%;
+  transform: translateX(-50%);
 }
 
 .cart-page-total a:hover {

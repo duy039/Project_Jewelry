@@ -45,16 +45,16 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="hiraola-product_remove">remove</th>
-                                            <th class="hiraola-product-thumbnail">images</th>
-                                            <th class="cart-product-name">Product</th>
-                                            <th class="hiraola-product-price">Unit Price</th>
+                                            <th class="hiraola-product-remove">{{__('cart.remove')}}</th>
+                                            <th class="hiraola-product-thumbnail">{{__('cart.image')}}</th>
+                                            <th class="cart-product-name">{{__('cart.product')}}</th>
+                                            <th class="hiraola-product-price">{{__('cart.price')}}</th>
                                             <th class="hiraola-product-stock-status">Stock Status</th>
-                                            <th class="hiraola-cart_btn">add to cart</th>
+                                            <th class="hiraola-cart_btn">{{__('wishlist.add')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="sessionWishlist">
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -66,6 +66,6 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="{{url('assets/js/plugins/wishlistHandler.js')}}"></script>
-        
+
     @endsection
 </html>
