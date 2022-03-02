@@ -60,7 +60,7 @@ let currentPage = 1;
 let start = 0;
 let end = onePage;
 
-
+console.log(user_id)
 //   tính tổng số trang con
     function totalPage(){
         if(products != null){
@@ -131,7 +131,9 @@ let end = onePage;
                     var str32=""
                     if(wishlists == null){
                         str32='<a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler(\'' +product[y].Product_id+ '\')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="far fa-heart"></i></a>';
-                    }else {
+                    }else if(wishlists.length == 0){
+                        str32='<a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler(\'' +product[y].Product_id+ '\')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="far fa-heart"></i></a>';
+                    }else{
                         for(var i=0; i<wishlists.length; i++){
                             if(product[y].Product_id == wishlists[i].Product_id){
                                 str32='<a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistDelete(\'' +wishlists[i].WishList_id+ '\')" data-toggle="tooltip" data-placement="top" title="Remove from favorites" style="color: rgb(255, 51, 0)"><i class="fas fa-heart"></i></a>';
@@ -471,6 +473,8 @@ let end = onePage;
                 success : function (result){
                     if(result){
                         swal('Success',"The product has been added to favorites",'success');
+                    }else{
+                        swal('Success',"The product has been removed from favorites",'success');
                     };
                     wishlists = wishlistsResponse();
                     renderProducts();

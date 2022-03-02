@@ -8354,7 +8354,7 @@ button.li-btn:hover {
   font-size: 13px;
   border-radius: 0;
   height: 42px;
-  width: 120px;
+  width: 220px;
   padding: 0 10px;
 }
 
@@ -8371,7 +8371,7 @@ button.li-btn:hover {
   height: 42px;
   letter-spacing: 1px;
   line-height: 42px;
-  padding: 0 25px;
+  padding: 0 10px;
   text-transform: uppercase;
   width: inherit;
 }
@@ -8430,10 +8430,9 @@ button.li-btn:hover {
   border: 1px solid #e5e5e5;
   color: #ffffff;
   display: inline-block;
+  margin-top: 30px;
   padding: 10px 20px;
   text-transform: capitalize;
-  margin: 5% 0% 0% 50%;
-  transform: translateX(-50%);
 }
 
 .cart-page-total a:hover {
@@ -9914,7 +9913,28 @@ button[name=apply]{
   font-size: 20px;
 }
 
-
+#ship-box-info #map{
+  margin: auto;
+  margin-bottom: 40px;
+}
+.priceBill .amount{
+  padding-left: 35px;
+}
+.cart-product-total .amount{
+  padding-left: 35px;
+}
+.cart-subtotal .priceBill{
+  font-size: 20px;
+}
+.cart-subtotal .discountBill{
+  color: red;
+}
+.order-total .priceBill{
+  font-size: 20px;
+}
+.cart_item .sizeProductBill{
+  color: red;
+}
 
 
 

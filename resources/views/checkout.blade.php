@@ -32,7 +32,7 @@
 </head>
 @extends('layout.layout_nav_footer')
 @section('main')
-<?php
+<?php 
     if (session_id() === '') {
         session_start();
     }
@@ -51,6 +51,8 @@
         // Chưa login
     }
 ?>
+    <input id="taxName" type="hidden" value="{{ $tax[0]->Tax_Name }}">
+    <input id="taxPercentage" type="hidden" value="{{ $tax[0]->Tax_Percentage }}">
         <!-- Begin Breadcrumb Area -->
         <div class="breadcrumb-area">
             <div class="container">
@@ -69,21 +71,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="coupon-accordion">
-                            <div class="different-address">
-                                <div class="ship-different-title">
-                                    <h3>
-                                        <label>Do you use express shipping?</label>
-                                        <input id="ship-box" type="checkbox">
-                                    </h3>
-                                </div>
-                                <div id="ship-box-info" class="row">
-                                    <div style="height: 500px" id="map"></div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
-
+                
                 {{-- phần thông tin --}}
                 <div class="row">
                     <div class="col-lg-6 col-12">
@@ -92,16 +84,9 @@
                                 <h3>Billing Details</h3>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="country-select clearfix">
-                                            <label>Country <span class="required">*</span></label>
-                                            <select class="myniceselect nice-select wide">
-                                                <option data-display="Bangladesh">Bangladesh</option>
-                                                <option value="uk">London</option>
-                                                <option value="rou">Romania</option>
-                                                <option value="fr">French</option>
-                                                <option value="de">Germany</option>
-                                                <option value="aus">Australia</option>
-                                            </select>
+                                        <div class="checkout-form-list">
+                                            <label>Address <span class="required">*</span></label>
+                                            <input id="deliveryAddress" placeholder="Street address" type="text" onchange="changeInput()">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -124,12 +109,6 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="checkout-form-list">
-                                            <label>Address <span class="required">*</span></label>
-                                            <input id="deliveryAddress" placeholder="Street address" type="text" onchange="changeInput()">
-                                        </div>
-                                    </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Email <span class="required">*</span></label>
@@ -146,30 +125,23 @@
                                             @if ($user == '')
                                             <input id="inputPhoneCheckout" type="text">
                                             @else
-                                            <input id="inputPhoneCheckout" type="text" value="0{{ $user->Phone_Number }}">
+                                            <input id="inputPhoneCheckout" type="text" value="{{ $user->Phone_Number }}">
                                             @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="coupon-all">
                                     <div class="coupon">
-                                        <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
-                                        <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
+                                        <input id="coupon_code" class="" name="coupon_code" value="" placeholder="Coupon code" type="text" width="800">
+                                        <input class="button" name="" value="Apply coupon" type="submit" onclick="checkVoucher()">
+                                        <p id="NotificationCoupon_code"></p>
                                     </div>
-                                </div><br><br><br>
+                                </div><br><br><br><br><br>
                                 <div class="different-address">
                                     <div class="order-notes">
                                         <div class="checkout-form-list checkout-form-list-2">
                                             <label>Order Notes</label>
-                                            <textarea id="checkout-mess" cols="30" rows="5" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- phần hiển thị bản đồ --}}
-                                <div class="different-address">
-                                    <div class="order-notes">
-                                        <div class="checkout-form-list checkout-form-list-2">
-
+                                            <textarea id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -178,6 +150,23 @@
                     </div>
                     {{-- phần bill --}}
                     <div class="col-lg-6 col-12">
+                        {{-- phần hiển thị bản đồ --}}
+                        <div class="different-address">
+                            <div class="ship-different-title">
+                                <h3>
+                                    <label>Ship to a different address ?</label>
+                                    <input name="mapShip" id="ship-box" type="checkbox" onclick="renderBill()">
+                                </h3>
+                            </div>
+                            <div id="ship-box-info" class="row">
+                                
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <div style="height: 500px" id="map"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
                         <div class="your-order">
                             <h3>Your order</h3>
                             <div class="your-order-table table-responsive">
@@ -188,11 +177,11 @@
                                             <th class="cart-product-total">Total</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="displayProductBill">
                                         <tr class="cart_item">
                                             <td class="cart-product-name"> Vestibulum suscipit<strong class="product-quantity">
                                             × 1</strong></td>
-                                            <td class="cart-product-total"><span class="amount">£165.00</span></td>
+                                            <td class="cart-product-total"><span class="amount">$165.00</span></td>
                                         </tr>
                                         <tr class="cart_item">
                                             <td class="cart-product-name"> Vestibulum suscipit<strong class="product-quantity">
@@ -200,18 +189,26 @@
                                             <td class="cart-product-total"><span class="amount">£165.00</span></td>
                                         </tr>
                                     </tbody>
-                                    <tfoot>
+                                    <tfoot id="displayTotalBill">
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">£215.00</span></td>
+                                            <td><span class="amount">$0</span></td>
+                                        </tr>
+                                        <tr class="cart-subtotal">
+                                            <th>Price After Tax</th>
+                                            <td><span class="amount">$0</span></td>
+                                        </tr>
+                                        <tr class="cart-subtotal">
+                                            <th>Shipping Fee</th>
+                                            <td><span class="amount">$0</span></td>
                                         </tr>
                                         <tr class="cart-subtotal">
                                             <th>Discount</th>
-                                            <td><span class="discount">- £215.00</span></td>
+                                            <td><span class="discount">- $0</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">£215.00</span></strong></td>
+                                            <td><strong><span class="amount">$0</span></strong></td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -237,6 +234,13 @@
                                             </div>
                                         </div>
                                         <div class="card">
+                                            <div class="card-header" id="#payment-2">
+                                                <h5 class="panel-title">
+                                                    <a href="javascript:void(0)" class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                        Cheque Payment
+                                                    </a>
+                                                </h5>
+                                            </div>
                                             <div id="collapseTwo" class="collapse" data-parent="#accordion">
                                                 <div class="card-body">
                                                     <p>Make your payment directly into our bank account. Please use your Order
@@ -247,6 +251,13 @@
                                             </div>
                                         </div>
                                         <div class="card">
+                                            <div class="card-header" id="#payment-3">
+                                                <h5 class="panel-title">
+                                                    <a href="javascript:void(0)" class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                        PayPal
+                                                    </a>
+                                                </h5>
+                                            </div>
                                             <div id="collapseThree" class="collapse" data-parent="#accordion">
                                                 <div class="card-body">
                                                     <p>Make your payment directly into our bank account. Please use your Order
@@ -260,14 +271,6 @@
                                     <div class="order-button-payment">
                                         <input value="Place order" type="submit">
                                     </div>
-                                    <div>
-                                        <form method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="{{url('payMomo')}}">
-                                            {{ csrf_field() }}
-                                            <div class="order-button-payment">
-                                                <input value="Pay with MOMO" type="submit">
-                                            </div>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -275,6 +278,7 @@
                 </div>
             </div>
         </div>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBILQ16GymM4XtzUY6Qu_VzzgTQ8Vk87U&libraries=places&callback=initialize" async defer></script>
         <script src="{{url('assets/js/plugins/controllerCheckout.js')}}"></script>

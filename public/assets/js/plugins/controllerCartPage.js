@@ -1,24 +1,24 @@
 
 var url = $("#urlWeb").val();
-var user_id = ($("#user_id").val() != 'null') ? $("#user_id").val() : null;
+var user_id = ($("#user_id").val() != 'null')?$("#user_id").val():null;
 // trả về các sản phảm có trong giỏ hàng
 function productsResponse() {
     var theResponse = null;
     $.ajax({
-        url: url + '/cart/getProduct',
+        url: url +'/cart/getProduct',
         type: 'get',
         data: {
 
         },
         dataType: "text",
         async: false,
-        success: function (respText) {
-            if (respText != false) {
+        success: function(respText) {
+            if(respText!=false){
                 theResponse = JSON.parse(respText);
-            } else {
+            }else{
                 theResponse = null;
             }
-
+            
         }
     });
     return theResponse;
@@ -26,41 +26,42 @@ function productsResponse() {
 let products = productsResponse();
 
 // thay đổi số lượng sản phẩm
-function changeQuantity(id, method) {
-    let urlcartDelete = url + '/cart/quantityChange/' + id + "/" + method;
+function changeQuantity(id, method){
+    let urlcartDelete = url +'/cart/quantityChange/'+id +"/"+method;
     $.ajax({
-        url: urlcartDelete,
-        type: "get",
+        url : urlcartDelete,
+        type : "get",
         cache: false,
-        dataType: "text",
-        data: {
+        dataType:"text",
+        data : {
         },
-        success: function (result) {
+        success : function (result){
             renderListProduct();
         }
     });
-
+    
 }
 
 
-function renderListProduct() {
+function renderListProduct(){
     products = productsResponse();
+    console.log(products);
     let htmlCart = "";
-    if (products == null) {
+    if(products == null){
         $("#sessionCart").html("Cart is currently empty!!!");
         $("#sessionCart").css({
-            "text-align": "center"
-        });
+            "text-align" : "center"
+            });
         return 0;
     }
     let sum = 0;
-    for (let i = 0; i < products.length; i++) {
-        let size = "";
-        if (products[i].Size != "null") {
+    for(let i=0; i< products.length; i++){
+        let size="";
+        if(products[i].Size != "null"){
             size = products[i].Size;
         }
         let total = products[i].Quantity * products[i].CurrentPrice;
-        sum += total;
+        sum +=total;
         htmlCart += '<tr>'
             + '<td  class="hiraola-product_remove">'
             + '<a style="font-size: 30px" onclick="cartDelete(\'' + products[i].cart_id + '\')" href="javascript:void(0)"><i class="fas fa-trash-alt" title="Remove"></i></a>'
@@ -92,19 +93,23 @@ function renderListProduct() {
             + '</tr>';
     }
     $("#listProducts").html(htmlCart);
-    $("#CartMiniCart").html("$" + sum.toFixed(2));
+    $("#subTotal").html("$"+sum.toFixed(2));
+    let taxBill = $("#taxBill").val();
+    let cartTotalOrder = sum + ((sum * taxBill)/100);
+    $("#cartTotalOrder").html("$"+cartTotalOrder.toFixed(2));
+    renderMiniCart();
 }
-function cartDelete(id) {
-    let urlcartDelete = url + '/cart/cartDelete/' + id;
+function cartDelete(id){
+    let urlcartDelete = url +'/cart/cartDelete/'+id ;
     $.ajax({
-        url: urlcartDelete,
-        type: "get",
+        url : urlcartDelete,
+        type : "get",
         cache: false,
-        dataType: "text",
-        data: {
+        dataType:"text",
+        data : {
         },
-        success: function (result) {
-            if (result) {
+        success : function (result){
+            if(result){
                 swal('Success', "The product has been removed from the cart!", 'success');
             };
             renderListProduct();

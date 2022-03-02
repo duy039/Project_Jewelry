@@ -40,7 +40,10 @@ Route::prefix('cart')->group(function () {
     Route::get('/cartDelete/{id}', 'App\Http\Controllers\CartController@cartDelete');
     Route::get('/quantityChange/{id}/{method}', 'App\Http\Controllers\CartController@quantityChange');
 });
-
+Route::prefix('checkout')->group(function () {
+    Route::get('/', 'App\Http\Controllers\ChechoutController@index');
+    Route::get('/checkVoucher/{codeVoucher}', 'App\Http\Controllers\ChechoutController@checkVoucher');
+});
 Auth::routes(['verify' => true]);
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
@@ -84,6 +87,3 @@ Route::get('/blog', 'App\Http\Controllers\BlogController@index');
 Route::get('/error', 'App\Http\Controllers\ErrorController@index');
 Route::get('/compare', 'App\Http\Controllers\CompareController@index');
 
-Route::get('/checkout', function () {
-    return view('checkout');
-});

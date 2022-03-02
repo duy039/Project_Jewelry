@@ -19,7 +19,10 @@ class CartController extends Controller
         $this->tags = $loadTag->getTags();
     }
     public function index(){
-        return view('cart');
+        $tax = DB::table('tax')->where('Tax_id', '1')->get();
+        return view('cart',[
+            'tax' => $tax
+        ]);
     }
 
 // Ajax Gọi ra tất cả product trong Cart

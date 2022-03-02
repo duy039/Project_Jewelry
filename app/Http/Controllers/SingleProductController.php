@@ -204,107 +204,107 @@ class SingleProductController extends Controller
         }
     }
 //  thêm 1 Raiting
-public function addRaiting(Request $request){
-    date_default_timezone_set("Asia/Ho_Chi_Minh");
-    // kiểm tra có tồn tại 2 post này ko?
-    if(isset($request->user_id) && isset($request->content) && isset($request->product_id)  && isset($request->raiting)){
-        $content = "";
-        $product_id = $request->product_id;
-        $user_id    = $request->user_id;
-        $raiting    = $request->raiting;
-        if($request->content == "-@.@.@-"){
+    public function addRaiting(Request $request){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        // kiểm tra có tồn tại 2 post này ko?
+        if(isset($request->user_id) && isset($request->content) && isset($request->product_id)  && isset($request->raiting)){
             $content = "";
-        }else{
-            $content = $request->content;
-        }
-        $Ratings = DB::table('Ratings')->where('User_id', $user_id)->get();
-        foreach($Ratings as $rr){
-            if($rr->Product_id == $product_id){
-                // xóa nếu sản phẩm đó đã có trong wishlist
-                return false;
+            $product_id = $request->product_id;
+            $user_id    = $request->user_id;
+            $raiting    = $request->raiting;
+            if($request->content == "-@.@.@-"){
+                $content = "";
             }
+            $Ratings = DB::table('Ratings')->where('User_id', $user_id)->get();
+            foreach($Ratings as $rr){
+                if($rr->Product_id == $product_id){
+                    // xóa nếu sản phẩm đó đã có trong wishlist
+                    return false;
+                }
+            }
+            DB::table('Ratings')->insert([
+                'Product_id'    => $product_id,
+                'User_id'       => $user_id,
+                'Rating'        => $raiting,
+                'Content'       => $content,
+                'Create_Date'   => date('Y-m-d  H:i:s'),
+                'Update_Date'   => date('Y-m-d  H:i:s')
+            ]);
+            return true;
+        }else{
+            return false;
         }
-        DB::table('Ratings')->insert([
-            'Product_id'    => $product_id,
-            'User_id'       => $user_id,
-            'Rating'        => $raiting,
-            'Content'       => $content,
-            'Create_Date'   => date('Y-m-d  H:i:s'),
-            'Update_Date'   => date('Y-m-d  H:i:s')
-        ]);
-        return true;
-    }else{
-        return false;
     }
-}
 
-public function addToCart(Request $request){
-    if (session_id() === ''){
-        session_start();
-    }
-    // kiểm tra có tồn tại 2 post này ko?
-    if(isset($request->product_id) && isset($request->quantity) && isset($request->size)){
-        // $request->size có thể  = "null"
-        if( !isset( $_SESSION['inCart'] ) ){
-            // đã login
-            $_SESSION['inCart'] = array();
+    public function addToCart(Request $request){
+        if (session_id() === ''){
+            session_start();
         }
-        if(count($_SESSION['inCart']) == 0 ){
-            foreach($this->products as $p){
-                $cart_id="";
-                if($request->size == "null"){
-                    $cart_id  = $p->getId() . "1" . "x";
-                }else{
-                    $cart_id = $p->getId() . $request->size . "x";
-                }
-                if($p->getId() == $request->product_id){
-                    // tạo 1 đối tượng để vào session
-                    $productObj = (object) [
-                        'cart_id'      => $cart_id,
-                        'Product_id'   => $p->getId(),
-                        'Name'         => $p->getName(),
-                        'Size'         => $request->size,
-                        'Rating'       => $p->getRating(),
-                        'Quantity'     => $request->quantity,
-                        'Avatar'       => $p->getAvatar(),
-                        'CurrentPrice' => $p->getCurrentPrice()
-                    ];
-                    $_SESSION['inCart'][]= $productObj ;
-                }
+        // kiểm tra có tồn tại 2 post này ko?
+        if(isset($request->product_id) && isset($request->quantity) && isset($request->size)){
+            // $request->size có thể  = "null"
+            if( !isset( $_SESSION['inCart'] ) ){
+                // đã login
+                $_SESSION['inCart'] = array();
             }
-        }else{
-            foreach($_SESSION['inCart'] as $ic){
-                if($ic->Product_id == $request->product_id && $ic->Size == $request->size){
-                    $ic->Quantity += $request->quantity;
-                    return true;
-                }
-            }
-            foreach($this->products as $p){
-                if($p->getId() == $request->product_id){
+            if(count($_SESSION['inCart']) == 0 ){
+                foreach($this->products as $p){
                     $cart_id="";
                     if($request->size == "null"){
                         $cart_id  = $p->getId() . "1" . "x";
                     }else{
                         $cart_id = $p->getId() . $request->size . "x";
                     }
-                    // tạo 1 đối tượng để vào session
-                    $productObj = (object) [
-                        'cart_id'      => $cart_id,
-                        'Product_id'   => $p->getId(),
-                        'Name'         => $p->getName(),
-                        'Size'         => $request->size,
-                        'Rating'       => $p->getRating(),
-                        'Quantity'     => $request->quantity,
-                        'Avatar'       => $p->getAvatar(),
-                        'CurrentPrice' => $p->getCurrentPrice()
-                    ];
-                    $_SESSION['inCart'][]= $productObj ;
+                    if($p->getId() == $request->product_id){
+                        // tạo 1 đối tượng để vào session
+                        $productObj = (object) [
+                            'cart_id'      => $cart_id,
+                            'Product_id'   => $p->getId(),
+                            'Name'         => $p->getName(),
+                            'Size'         => $request->size,
+                            'Rating'       => $p->getRating(),
+                            'Quantity'     => $request->quantity,
+                            'Avatar'       => $p->getAvatar(),
+                            'CurrentPrice' => $p->getCurrentPrice()
+                        ];
+                        $_SESSION['inCart'][]= $productObj ;
+                    }
+                }
+            }else{
+                foreach($_SESSION['inCart'] as $ic){
+                    if($ic->Product_id == $request->product_id && $ic->Size == $request->size){
+                        $ic->Quantity += $request->quantity;
+                        return true;
+                    }
+                }
+                foreach($this->products as $p){
+                    if($p->getId() == $request->product_id){
+                        $cart_id="";
+                        if($request->size == "null"){
+                            $cart_id  = $p->getId() . "1" . "x";
+                        }else{
+                            $cart_id = $p->getId() . $request->size . "x";
+                        }
+                        // tạo 1 đối tượng để vào session
+                        $productObj = (object) [
+                            'cart_id'      => $cart_id,
+                            'Product_id'   => $p->getId(),
+                            'Name'         => $p->getName(),
+                            'Size'         => $request->size,
+                            'Rating'       => $p->getRating(),
+                            'Quantity'     => $request->quantity,
+                            'Avatar'       => $p->getAvatar(),
+                            'CurrentPrice' => $p->getCurrentPrice()
+                        ];
+                        $_SESSION['inCart'][]= $productObj ;
+                    }
                 }
             }
+            return true;
+        }else{
+            return false;
         }
-        return true;
-    }else{
-        return false;
     }
-}
+
+
 }
