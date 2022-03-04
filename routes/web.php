@@ -44,6 +44,15 @@ Route::prefix('checkout')->group(function () {
     Route::get('/', 'App\Http\Controllers\ChechoutController@index');
     Route::get('/checkVoucher/{codeVoucher}', 'App\Http\Controllers\ChechoutController@checkVoucher');
 });
+Route::prefix('event')->group(function () {
+    Route::get('/GetPointsEveryDay', 'App\Http\Controllers\EventController@eventEveryDay');
+    Route::post('/checkedEventEveryDay', 'App\Http\Controllers\EventController@checkedEventEveryDay');
+
+});
+
+
+
+
 Auth::routes(['verify' => true]);
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

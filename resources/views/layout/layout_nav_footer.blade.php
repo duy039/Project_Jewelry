@@ -72,7 +72,7 @@ $tagss = $lloadTag->getTags();
     <script src="{{ url('assets/js/vendor/jquery.validate.js') }}"></script>
     <!-- Sweet Alert -->
     <script src="{{ url('assets/js/vendor/sweetalert.min.js') }}"></script>
-    <script src="{{ url('assets/js/vendor/ijaboCropTool.min.js') }}"></script>\
+    <script src="{{ url('assets/js/vendor/ijaboCropTool.min.js') }}"></script>
 
 
     <div class="main-wrapper">
@@ -148,16 +148,22 @@ $tagss = $lloadTag->getTags();
                                         @else
                                             <li>
                                                 <a href="{{ url('my-account') }}"><img style="border-radius: 50%"
-                                                        width="25px" height="25px"
-                                                        @if (Auth::user()->Avatar != null) src= {{ url('assets/images/user') }}{{ Auth::user()->Avatar }}
-                                                    @else
-                                                    @if (Auth::user()->Gender == 'male')
-                                                    src={{ url('assets/images/user/avatarmale.jpg') }}
-                                                @elseif (Auth::user()->Gender == 'female')
-                                                    src={{ url('assets/images/user/avatarfemale.jpg') }}
-                                                    @else
-                                                    src = {{ url('assets/images/user/avatarmale.jpg') }} @endif
-                                                        @endif
+                                                    width="25px" height="25px"
+                                                    @switch(Auth::user()->Avatar)
+                                                        @case(null)
+                                                            @if (Auth::user()->Gender == 'male')
+                                                                src= "{{ url('assets/images/user/avatarmale.jpg') }}"
+                                                            @else
+                                                                src={{ url('assets/images/user/avatarfemale.jpg') }}
+                                                            @endif
+                                                            @break
+                                                        @default
+                                                          @if (substr(Auth::user()->Avatar, 0, 8) == "https://")
+                                                            src= "{{ Auth::user()->Avatar }}"
+                                                          @else
+                                                            src= "{{ url('assets/images/user') }}/{{ Auth::user()->Avatar }}"
+                                                          @endif  
+                                                    @endswitch
                                                     alt="">
                                                     {{ Auth::user()->First_Name }} {{ Auth::user()->Last_Name }}<i
                                                         class="fa fa-chevron-down"></i></a>
@@ -168,17 +174,30 @@ $tagss = $lloadTag->getTags();
                                                                 href="{{ route('home') }}">{{ __('Admin Dashboard') }}</a>
                                                         </li>
                                                     @endif
-                                                    <li><span style="font-size: 12px ;margin-left:3%">
-                                                            {{ __('home-header.point') }}:
-                                                            {{ Auth::user()->point }}</span></li>
+                                                    <li><a
+                                                        href="{{ url('my-account') }}">My Account</a>
+                                                    </li>
                                                     <hr style="margin: 0">
-                                                    <li><a href="{{ route('logout') }}"
+                                                    <li><a
+                                                        href="{{ url('wishlist') }}">My Wishlist</a>
+                                                    </li>
+                                                    <hr style="margin: 0">
+                                                    <li>
+                                                        <span style="font-size: 12px ;margin-left:3%">
+                                                            {{ __('home-header.point') }}:
+                                                            {{ Auth::user()->point }}
+                                                        </span>
+                                                    </li>
+                                                    <hr style="margin: 0">
+                                                    <li>
+                                                        <a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault();
-                                                                                    document.getElementById('logout-form').submit();"><i
+                                                                document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
                                                                 aria-hidden="true"></i>
                                                             {{ __('home-header.signout') }}
-                                                        </a></li>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                     class="d-none">

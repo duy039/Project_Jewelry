@@ -6400,11 +6400,11 @@ button.li-btn:hover {
 
 .shop-product-wrap.grid.gridview-5 > [class*="col-"] {
   -webkit-box-flex: 0;
-  -webkit-flex: 0 0 20%;
-  -moz-flex: 0 0 20%;
-  -ms-flex: 0 0 20%;
-  flex: 0 0 20%;
-  max-width: 20%;
+  -webkit-flex: 0 0 14.2857142857%;
+  -moz-flex: 0 0 14.2857142857%;
+  -ms-flex: 0 0 14.2857142857%;
+  flex: 0 0 14.2857142857%;
+  max-width: 14.2857142857%;
 }
 
 .shop-product-wrap.listview > [class*="col-"] {
@@ -9934,6 +9934,33 @@ button[name=apply]{
 }
 .cart_item .sizeProductBill{
   color: red;
+}
+.hiraola-content_wrapper #countCalendar{
+  margin: auto;
+}
+
+.titleEveryEveryDay{
+  height: 150px;
+  background-image: url("../images/banner/pn_03.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding-left: 10%;
+  font-family: fantasy;
+}
+.single_product .checkedIcon, .single_product .checkIcon{
+  text-align: center;
+  margin: 10px;
+  font-size: 50px;
+}
+.single_product .checkIcon :hover{
+  color: green;
+}
+.hiraola-product_content .eventGifts{
+  text-align: center;
+}
+p .bi-check-circle{
+  color: green;
 }
 
 
