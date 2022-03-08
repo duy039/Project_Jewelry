@@ -43,15 +43,20 @@ Route::prefix('cart')->group(function () {
 Route::prefix('checkout')->group(function () {
     Route::get('/', 'App\Http\Controllers\ChechoutController@index');
     Route::get('/checkVoucher/{codeVoucher}', 'App\Http\Controllers\ChechoutController@checkVoucher');
+    Route::post('payMomo', [\App\Http\Controllers\ChechoutController::class, 'payMomo']);
+    Route::get('result', [\App\Http\Controllers\ChechoutController::class, 'result']);
 });
 Route::prefix('event')->group(function () {
     Route::get('/GetPointsEveryDay', 'App\Http\Controllers\EventController@eventEveryDay');
     Route::post('/checkedEventEveryDay', 'App\Http\Controllers\EventController@checkedEventEveryDay');
-
 });
 
 
 
+Route::prefix('my-account')->group(function () {
+    Route::get('/', 'App\Http\Controllers\my_accountController@index');
+    Route::get('/view/{id_view}', 'App\Http\Controllers\my_accountController@accountView');
+});
 
 Auth::routes(['verify' => true]);
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
@@ -65,7 +70,7 @@ Route::post('postLogin', [App\Http\Controllers\registerOrLoginController::class,
 Route::post('postRegister', [App\Http\Controllers\registerOrLoginController::class, 'postRegister'])->name('postRegister');
 
 
-Route::get('my-account', [App\Http\Controllers\my_accountController::class, 'index'])->name('my-account');
+
 Route::get('contact', [App\Http\Controllers\FeedbackController::class, 'index'])->name('contact');
 Route::post('accountUpdate', [App\Http\Controllers\my_accountController::class, 'updateDetail']);
 Route::post('feedback', [App\Http\Controllers\FeedbackController::class, 'postFeedback'])->name('feedback');
@@ -95,4 +100,3 @@ Route::get('/about-us', 'App\Http\Controllers\AboutUsController@index');
 Route::get('/blog', 'App\Http\Controllers\BlogController@index');
 Route::get('/error', 'App\Http\Controllers\ErrorController@index');
 Route::get('/compare', 'App\Http\Controllers\CompareController@index');
-
