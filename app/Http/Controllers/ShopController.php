@@ -130,7 +130,7 @@ class ShopController extends Controller
                 }
             }
         }
-        
+
         foreach($resultProduct as $listProd){
             if($listProd->getCurrentPrice() >=  $priceFrom &&  $listProd->getCurrentPrice() <=  $priceTo){
                 $result[] = $listProd;

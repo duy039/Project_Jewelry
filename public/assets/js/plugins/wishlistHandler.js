@@ -88,7 +88,7 @@ function wishlistDelete(wishlist_id){
             },
             success : function (result){
                 if(result){
-                    alert("The product has been removed from favorites");
+                    swal('Success',"The product has been removed from favorites",'success');
                 };
                 renderWishlist();
             }

@@ -452,9 +452,6 @@ console.log(user_id)
 
                 }
         })
-
-
-
     }
 // xử lý khi user chọn Thêm sản phẩm vào danh sách yêu thích
     function wishlistHandler(prod_id){

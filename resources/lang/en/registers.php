@@ -6,5 +6,6 @@ return[
     'email' => 'Enter email',
     'pass' => 'Enter password',
     'conpass' => 'Enter confirm password',
+    'already' => 'Already have an account',
 ]
 ?>

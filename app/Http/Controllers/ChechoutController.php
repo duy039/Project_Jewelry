@@ -6,37 +6,41 @@ use Illuminate\Http\Request;
 use App\Models\LoadProduct;
 use App\Models\LoadTag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ChechoutController extends Controller
 {
     public $products;
 
-    public function __construct(){
+    public function __construct()
+    {
         $loadProduct = new LoadProduct();
         $this->products = $loadProduct->getProducts();
     }
-    public function index(){
-        if (session_id() === ''){
+    public function index()
+    {
+        if (session_id() === '') {
             session_start();
         }
-        if( !isset( $_SESSION['user_id'] ) ){
+        if (!isset($_SESSION['user_id'])) {
             // đã login
             $_SESSION['user_id'] = array();
         }
         $tax = DB::table('tax')->where('Tax_id', '1')->get();
-        return view('checkout',[
+        return view('checkout', [
             'tax' => $tax
         ]);
     }
 
-    public function checkVoucher($codeVoucher){
+    public function checkVoucher($codeVoucher)
+    {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $dateNow = date('Y-m-d  H:i:s');
         $vouchers = DB::table('voucher')->get();
-        foreach($vouchers as $v){
-            if($v->Voucher_id == $codeVoucher){
-                if(strtotime($v->Expired_Date) > strtotime($dateNow)){
-                    if($v->Status == "stocking"){
+        foreach ($vouchers as $v) {
+            if ($v->Voucher_id == $codeVoucher) {
+                if (strtotime($v->Expired_Date) > strtotime($dateNow)) {
+                    if ($v->Status == "stocking") {
                         $voucherObj = (object) [
                             'Voucher_id'    => $v->Voucher_id,
                             'Name'          => $v->Name,
@@ -52,7 +56,74 @@ class ChechoutController extends Controller
             }
         }
         return false;
-    }   
+    }
 
-    
+    public function result()
+    {
+        return view('result');
+    }
+
+    function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data)
+            )
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
+        return $result;
+    }
+
+    public function payMomo(Request $request)
+    {
+        $total = $request->total;
+        $all = $request->all();
+        dd($all);
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+        $partnerCode = 'MOMOW1KL20220211';
+        $accessKey = 'X4TFZLVDDr0ZRCfY';
+        $secretKey = 'McBbYmABhC7fiF4AiJWVp87pY2fuuxq9';
+        $orderInfo = "Thanh toán qua MoMo";
+        $amount = $total * 100;
+        $orderId = time() . "";
+        $redirectUrl = "http://127.0.0.1:8000/checkout/result";
+        $ipnUrl = "http://127.0.0.1:8000/checkout";
+        $extraData = base64_encode(json_encode($all));
+        $requestId = time() . "";
+        $requestType = "captureWallet";
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'en',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature
+        );
+        // dd($data);
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);  // decode json
+        // dd($jsonResult);
+        return redirect()->to($jsonResult['payUrl']);
+    }
 }
