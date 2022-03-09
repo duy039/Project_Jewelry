@@ -347,6 +347,8 @@ console.log(user_id)
                 success : function (result){
                     products = JSON.parse(result);
                     currentPage = 1
+                    start = (currentPage - 1) * onePage;
+                    end   = currentPage * onePage
                     renderProducts();
                     listNumberPage();
                 }
