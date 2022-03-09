@@ -39,7 +39,44 @@
             border-radius: 50%;
         }
 
+        .model-content {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            width: 100%;
+            pointer-events: auto;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: .3rem;
+            outline: 0;
+        }
+
+        .model-body {
+            position: relative;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            padding: 1rem;
+        }
+
+        .order {
+            font-weight: bolder;
+            font-size: 30px;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            color: black;
+        }
+
+        hr {
+            padding-bottom: 2%;
+        }
+
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 @extends('layout.layout_nav_footer')
 @section('main')
@@ -77,8 +114,9 @@
                                     aria-selected="false">{{ __('myaccount.account') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="account-logout-tab" onclick="event.preventDefault();
-                                                                        document.getElementById('logout-form').submit();"
+                                <a class="nav-link" id="account-logout-tab"
+                                    onclick="event.preventDefault();
+                                                                                                                                            document.getElementById('logout-form').submit();"
                                     href="{{ url('logout') }}" role="tab"
                                     aria-selected="false">{{ __('myaccount.logout') }}</a>
 
@@ -99,7 +137,7 @@
                                             <b>{{ Auth::user()->First_Name }}</b> ?
                                             <a href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
-                                                                                            document.getElementById('logout-form').submit();">
+                                                                                                                                                                document.getElementById('logout-form').submit();">
                                                 {{ __('Sign out') }}
                                             </a>)
                                         </p>
@@ -123,27 +161,31 @@
                                                     <th>{{ __('myaccount.order') }}</th>
                                                     <th>{{ __('myaccount.date') }}</th>
                                                     <th>{{ __('myaccount.status') }}</th>
-                                                    <th>{{ __('myaccount.total') }}</th>
                                                     <th></th>
                                                 </tr>
-                                                <tr>
-                                                    <td><a class="account-order-id" href="javascript:void(0)">#5364</a></td>
-                                                    <td>Mar 27, 2019</td>
-                                                    <td>On Hold</td>
-                                                    <td>£162.00 for 2 items</td>
-                                                    <td><a href="javascript:void(0)"
-                                                            class="hiraola-btn hiraola-btn_dark hiraola-btn_sm"><span>View</span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a class="account-order-id" href="javascript:void(0)">#5356</a></td>
-                                                    <td>Mar 27, 2019</td>
-                                                    <td>On Hold</td>
-                                                    <td>£162.00 for 2 items</td>
-                                                    <td><a href="javascript:void(0)"
-                                                            class="hiraola-btn hiraola-btn_dark hiraola-btn_sm"><span>View</span></a>
-                                                    </td>
-                                                </tr>
+                                                @if ($orders)
+                                                    @foreach ($orders as $order)
+                                                        <tr>
+                                                            <td>{{ $order->Order_id }}</td>
+                                                            <td>{{ $order->Create_Date }}</td>
+                                                            <td style="text-transform: uppercase">{{ $order->Status }}
+                                                            </td>
+                                                            <td>
+                                                                <a onclick="quickView('{!! $order->Order_id !!}')"
+                                                                    class="hiraola-btn hiraola-btn_dark hiraola-btn_sm"
+                                                                    data-toggle="modal" data-target="#exampleModalCenter"
+                                                                    href="javascript:void(0)" data-toggle="tooltip"
+                                                                    data-placement="top" title="Quick View">
+                                                                    View
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td colspan="4">Don't have order before.</td>
+                                                    </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -179,21 +221,22 @@
                                             <label for="account-details-firstname">{{ __('myaccount.fname') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" data-html="true" value="{{ $user->First_Name }}"
-                                                name="firstName" id="f_name" placeholder="{{__('registers.fname')}}">
+                                                name="firstName" id="f_name" placeholder="{{ __('registers.fname') }}">
                                             <span class="text-danger error-text firstName_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
                                             <label for="account-details-lastname">{{ __('myaccount.lname') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" data-html="true" value="{{ $user->Last_Name }} "
-                                                name="lastName" id="l_name" placeholder="{{__('registers.lname')}}">
+                                                name="lastName" id="l_name" placeholder="{{ __('registers.lname') }}">
                                             <span class="text-danger error-text lastName_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
                                             <label for="account-details-lastname">{{ __('myaccount.phone') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="number" data-html="true" value="0{{ $user->Phone_Number }}"
-                                                name="phone_number" id="phone" placeholder="{{__('myaccount.phones')}}">
+                                                name="phone_number" id="phone"
+                                                placeholder="{{ __('myaccount.phones') }}">
                                             <span class="text-danger error-text phone_number_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
@@ -213,7 +256,7 @@
                                             <label for="account-details-email">Email <span
                                                     class="text-danger">*</span></label>
                                             <input type="email" data-html="true" value="{{ $user->email }}" name="email"
-                                                id="email" placeholder="{{__('registers.email')}}">
+                                                id="email" placeholder="{{ __('registers.email') }}">
                                             <span class="text-danger error-text email_error"></span>
                                         </div>
                                         <div class="single-input" id="ship-box-info">
@@ -222,26 +265,27 @@
                                                     <label for="account-details-oldpass">{{ __('myaccount.curPass') }}
                                                         <span class="text-danger">*</span></label>
                                                     <input type="password" name="current_password" data-html="true"
-                                                        id="current_pass" placeholder="{{__('myaccount.curPasss')}}">
+                                                        id="current_pass" placeholder="{{ __('myaccount.curPasss') }}">
                                                     <span class="text-danger error-text current_password_error"></span>
                                                 </div>
                                             @endif
                                             <div class="single-input">
                                                 <label for="account-details-newpass">{{ __('myaccount.newPass') }} <span
                                                         class="text-danger">*</span></label>
-                                                <input type="password" data-html="true" name="password" id="password" placeholder="{{__('myaccount.newPasss')}}">
+                                                <input type="password" data-html="true" name="password" id="password"
+                                                    placeholder="{{ __('myaccount.newPasss') }}">
                                                 <span class="text-danger error-text password_error"></span>
                                             </div>
                                             <div class="single-input">
                                                 <label for="account-details-confpass">{{ __('myaccount.conPass') }} <span
                                                         class="text-danger">*</span></label>
                                                 <input type="password" data-html="true" name="password_confirmation"
-                                                    id="confirm_pass" placeholder="{{__('registers.conpass')}}">
+                                                    id="confirm_pass" placeholder="{{ __('registers.conpass') }}">
                                                 <span class="text-danger error-text password_confirmation_error"></span>
                                             </div>
                                         </div>
                                         <div style="margin-top: 2%">
-                                            <label>{{__('myaccount.change')}} ?</label>
+                                            <label>{{ __('myaccount.change') }} ?</label>
                                             <input type="checkbox" name="checkbox" id="ship-box">
                                         </div>
                                         <div style="margin-left: 78%" class="single-input">
@@ -258,6 +302,26 @@
         </div>
         </div>
     </main>
+    <!-- Dialog QuickView -->
+    <div class="modal fade modal-wrapper" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="model-content">
+                <div class="model-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area">
+                        <img class="float-left" style="position: absolute"
+                            src="{{ asset('assets/images/logo/logo2.png') }}" alt="">
+                        <div class="text-center order">Order History</div>
+                        <div class="text-right"><button id="download" class="btn btn-primary">Print PDF</button></div>
+                        <hr>
+                    </div>
+                    <div id="history"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $('#change_avatar').on('click', function() {
             $('#avatar').click();

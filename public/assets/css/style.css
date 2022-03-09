@@ -8635,7 +8635,8 @@ button.li-btn:hover {
 
 .checkbox-form .checkout-form-list input[type="text"],
 .checkbox-form .checkout-form-list input[type="password"],
-.checkbox-form .checkout-form-list input[type="email"] {
+.checkbox-form .checkout-form-list input[type="email"],
+.checkbox-form .checkout-form-list input[type="number"] {
   background: #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 0;

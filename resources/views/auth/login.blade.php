@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div class="col-12 mb--20">
-                                    <label>{{__('logins.pass')}}<span class="text-danger">*</span></label>
+                                    <label>{{__('logins.pass')}} <span class="text-danger">*</span></label>
                                     <input id="password" type="password" class="form-control" name="password"
                                         autocomplete="current-password" data-html="true" placeholder="{{__('logins.password')}}">
                                     <span class="text-danger error-text password_error"></span>

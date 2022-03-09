@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
-use Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\File;
 
 class my_accountController extends Controller
@@ -19,7 +17,11 @@ class my_accountController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('my-account')->with('user', $user);
+        $order = DB::table('orders')->get();
+        if(!$order){
+            dd($order);
+        }
+        return view('my-account')->with(['user'=> $user,'orders'=>$order]);
     }
 
     function crop(Request $request)
@@ -167,5 +169,44 @@ class my_accountController extends Controller
                 }
             }
         }
+    }
+
+    public function accountView($orderId)
+    {
+        $order = DB::table('orders')->where('Order_id', $orderId)->get();
+        $order_item = DB::table('order_item')->where('Order_id', $orderId)->get();
+        $bill = DB::table('bill')->where('Order_id', $orderId)->get();
+        $result = null;
+
+        foreach ($order_item as $o) {
+            $ors[] = $o;
+        }
+        // dd($ors);
+        foreach ($order as $or) {
+            $orders = $or;
+        }
+        foreach ($bill as $bills) {
+            $bil = $bills;
+        }
+        $infor = [
+            'Order_id' => $orders->Order_id,
+            'Email' => $orders->Email,
+            'Address' => $orders->Address,
+            'Name' => $orders->Name,
+            'Phone_Number' => $orders->Phone_Number,
+            'Status' => $orders->Status,
+            'Tax' => $bil->Tax,
+            'Method' => $bil->Payment_Method,
+            'Shipping_Fee' => $bil->Shipping_Fee,
+            'Point_Used' => $bil->Point_Used,
+            'Discount' => $bil->Disccount,
+            'Total' => $bil->Total,
+            'Note' => $bil->Note,
+            'Create_Date' => $bil->Create_Date,
+            'Or' => $ors,
+        ];
+        $result = $infor;
+        // dd($result);
+        return json_encode($result);
     }
 }
