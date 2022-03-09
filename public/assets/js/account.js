@@ -2,7 +2,6 @@ window.onload = function(){
     document.getElementById("download").addEventListener("click",function(){
         const invoice = document.getElementById("invoice");
         console.log(invoice);
-        // html2pdf().from(invoice).save();
         window.print(invoice);
     });
 }

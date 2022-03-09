@@ -129,7 +129,6 @@ function checkVoucher() {
         dataType: "text",
         success: function (respText) {
             if (respText == false) {
-                alert("Invalid Code!!!");
                 $("#NotificationCoupon_code").html("Voucher is not valid!");
                 $("#NotificationCoupon_code").css({
                     "color": "red",

@@ -28,7 +28,38 @@ class WishlistController extends Controller
         $resultProduct = array();
         $productSamples = $this->products;
         $users = DB::table('users')->where('id', $user_id)->first();
+        // $product = DB::table('product')->get();
         $wishlist = DB::table('wishlist')->get();
+
+        // $productCount =array();
+        // foreach($product as $p){
+        //     $count = 0;
+        //     foreach($wishlist as $w){
+        //         if($product->product_id == $wishlist->product_id){
+        //             ++$count;
+        //         }
+        //     }
+        //     $countProductObj = (object) [
+        //         'Product_id'    => $p->product_id,
+        //         'count'        => $count                    
+        //     ];
+        //     $productCount[] = $countProductObj;
+        // }
+
+        // usort($productCount, function($b, $a){
+        //     if ($a->count == $b->count) {
+        //         return 1;
+        //     }
+        //     return ($a->count > $b->count) ? 1 : -1;
+        // } );
+        // $top10 = array();
+        // for($i=0; $i < 10; $i++){
+        //     foreach($product as $p){
+        //         if($p->product_id == $productCount[$i]->Product_id){
+        //             $top10[] = $p;
+        //         }
+        //     }
+        // }
        
         foreach($wishlist as $w){
             if($w->User_id == $users->id){

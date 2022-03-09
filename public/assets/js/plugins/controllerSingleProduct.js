@@ -357,17 +357,17 @@ function chartRating(){
             }
         }
     }
-
-    total = ratingx[0] + ratingx[1] + ratingx[2] + ratingx[3] + ratingx[4];
-    for(let u=0; u<5; u++){
-        percentx[u]= (ratingx[u]/total) * 100;
-        if(percentx[u] == 0){
-            percentx[u] = 0;
-        }else{
-            percentx[u] = percentx[u].toFixed(1)
+    if(raitings.length > 0){
+        total = ratingx[0] + ratingx[1] + ratingx[2] + ratingx[3] + ratingx[4];
+        for(let u=0; u<5; u++){
+            percentx[u]= (ratingx[u]/total) * 100;
+            if(percentx[u] == 0){
+                percentx[u] = 0;
+            }else{
+                percentx[u] = percentx[u].toFixed(1)
+            }
         }
     }
-
     for(let u=0; u<5; u++){
         if(percentx[u] == 0){
             widthx[u] = 30;
