@@ -28,8 +28,8 @@
                 <div class="breadcrumb-content">
                     <h2>Other</h2>
                     <ul>
-                        <li><a href='{{ url("/") }}'>Home</a></li>
-                        <li class="active">Wishlist</li>
+                        <li><a href='{{ url("/") }}'>{{__('Home')}}</a></li>
+                        <li class="active">{{__('Wishlist')}}</li>
                     </ul>
                 </div>
             </div>
@@ -45,12 +45,12 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="hiraola-product-remove">{{__('cart.remove')}}</th>
-                                            <th class="hiraola-product-thumbnail">{{__('cart.image')}}</th>
-                                            <th class="cart-product-name">{{__('cart.product')}}</th>
-                                            <th class="hiraola-product-price">{{__('cart.price')}}</th>
-                                            <th class="hiraola-product-stock-status">Stock Status</th>
-                                            <th class="hiraola-cart_btn">{{__('wishlist.add')}}</th>
+                                            <th class="hiraola-product-remove">{{__('Remove')}}</th>
+                                            <th class="hiraola-product-thumbnail">{{__('Image')}}</th>
+                                            <th class="cart-product-name">{{__('Product')}}</th>
+                                            <th class="hiraola-product-price">{{__('Price')}}</th>
+                                            <th class="hiraola-product-stock-status">{{__('Status')}}</th>
+                                            <th class="hiraola-cart_btn">{{__('Add to cart')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="sessionWishlist">

@@ -38,13 +38,13 @@
                 <div class="breadcrumb-content">
                     <h2>Other</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active">Cart</li>
+                        <li><a href="{{url('/')}}">{{__('Home')}}</a></li>
+                        <li class="active">{{__('Cart')}}</li>
                     </ul>
                 </div>
             </div>
         </div>
-       
+
         <!-- Begin Hiraola's Cart Area -->
         <div class="hiraola-cart-area">
             <div class="container">
@@ -55,13 +55,13 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="hiraola-product-remove">remove</th>
-                                            <th class="hiraola-product-thumbnail">images</th>
-                                            <th class="cart-product-name">Product</th>
-                                            <th class="hiraola-product-price">Unit Price</th>
-                                            <th class="hiraola-product-price">Size</th>
-                                            <th class="hiraola-product-quantity">Quantity</th>
-                                            <th class="hiraola-product-subtotal">Total</th>
+                                            <th class="hiraola-product-remove">{{__('Remove')}}</th>
+                                            <th class="hiraola-product-thumbnail">{{__('Image')}}</th>
+                                            <th class="cart-product-name">{{__('Product')}}</th>
+                                            <th class="hiraola-product-price">{{__('Price')}}</th>
+                                            <th class="hiraola-product-price">{{__('Size')}}</th>
+                                            <th class="hiraola-product-quantity">{{__('Quantity')}}</th>
+                                            <th class="hiraola-product-subtotal">{{__('Total')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="listProducts">
@@ -73,11 +73,11 @@
                                     <div class="cart-page-total">
                                         <h2>Cart totals</h2>
                                         <ul>
-                                            <li>Subtotal <span id="subTotal">$118.60</span></li>
-                                            <li>Tax <span>{{ $tax[0]->Tax_Percentage }}%</span></li>
-                                            <li>Price After Tax <span id="cartTotalOrder">$118.60</span></li>
+                                            <li>{{__('Subtotal')}} <span id="subTotal">$118.60</span></li>
+                                            <li>{{__('Tax')}} <span>{{ $tax[0]->Tax_Percentage }}%</span></li>
+                                            <li>{{__('Price After Tax')}} <span id="cartTotalOrder">$118.60</span></li>
                                         </ul>
-                                        <a href="{{ url("/checkout") }}">Proceed to checkout</a>
+                                        <a href="{{ url("/checkout") }}">{{__("Check out")}}</a>
                                         <input id="taxBill" type="hidden" value="{{ $tax[0]->Tax_Percentage }}">
                                     </div>
                                 </div>

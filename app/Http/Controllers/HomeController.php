@@ -26,6 +26,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         $wishlists = array();
         if (session_id() === '') {
             session_start();
@@ -34,7 +35,6 @@ class HomeController extends Controller
             // đã login
             $wishlists = DB::table('wishlist')->where('User_id', $_SESSION['user_id'])->get();
         }
-
         $contact = DB::table('contact')->get();
         $resultProductRing = array();
         // $resultProductEarring = array();
@@ -214,6 +214,4 @@ class HomeController extends Controller
         }
         return true;
     }
-
-
 }

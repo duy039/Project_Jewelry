@@ -156,7 +156,7 @@
                                 <div class="order-notes">
                                     <div class="checkout-form-list checkout-form-list-2">
                                         <label>Order Notes</label>
-                                        <textarea style="resize: none" data-html="true" maxlength="100" required name="note" id="checkout-mess" cols="30"
+                                        <textarea style="resize: none" data-html="true" maxlength="100" name="note" id="checkout-mess" cols="30"
                                             rows="10"
                                             placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>

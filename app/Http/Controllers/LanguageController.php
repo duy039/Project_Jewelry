@@ -1,20 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Redirect;
+
+use Session;
 
 class LanguageController extends Controller
 {
+    public function language(Request $request,$language){
+    	//kiem tra luu session
+    	if($language){
+    		Session::put('language',$language);
 
-    public function switchLang($lang)
-    {
-        if (array_key_exists($lang, Config::get('languages'))) {
-            Session::put('applocale', $lang);
-        }
-        return Redirect::back();
+    	}
+    	return redirect()->back();
     }
 }

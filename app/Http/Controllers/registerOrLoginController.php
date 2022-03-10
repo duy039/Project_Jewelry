@@ -40,7 +40,7 @@ class registerOrLoginController extends Controller
                         $_SESSION['user_id'] = $users->id;
                         if ($users->Admins != 1) {
                             return response()->json(['status' => 3, 'name' => $users->First_Name . $users->Last_Name]);
-                        }else{
+                        } else {
                             return response()->json(['status' => 4, 'name' => $users->First_Name . $users->Last_Name]);
                         }
                     } else {
@@ -105,14 +105,22 @@ class registerOrLoginController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-
     public function handleGoogleCallback()
     {
 
         $user = Socialite::driver('google')->user();
         $this->_registerOrLogin($user);
-        return redirect('/');
+        $users = User::where('email', '=', $user->email)->first();
+        $userss = json_decode($users);
+        if ($userss->Admins != 1) {
+            // dd($userss->Admins);
+            return redirect('/');
+        } else {
+            return redirect('admin/dashboard');
+        }
+        // dd($userss);
     }
+
     protected function _registerOrLogin($data)
     {
         if (session_id() === "") {

@@ -60,7 +60,8 @@ Route::prefix('my-account')->group(function () {
 
 Auth::routes(['verify' => true]);
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
-Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+//language
+Route::get('/language/{language}', 'App\Http\Controllers\LanguageController@language');
 
 // -----------------Login Google-----------------------
 Route::get('google', [App\Http\Controllers\registerOrLoginController::class, 'redirectToGoogle'])->name('google');
@@ -78,8 +79,10 @@ Route::post('crop', [App\Http\Controllers\my_accountController::class, 'crop'])-
 Route::post('payMomo', [App\Http\Controllers\CheckoutController::class, 'payMomo'])->name('payMomo');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
-    Route::get('manage-product', [App\Http\Controllers\AdminController::class, 'manage_product'])->name('manageProduct');
+    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
+    Route::get('manageProduct', [App\Http\Controllers\ManageProduct::class, 'index']);
+
+
 });
 Route::prefix('/')->group(function () {
     Route::get('/', 'App\Http\Controllers\HomeController@index');

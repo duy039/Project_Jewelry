@@ -37,55 +37,55 @@
         <form style="padding: 3%" action="{{ url('postRegister') }}" method="POST" id="registerForm">
             {{ csrf_field() }}
             <div class="login-form" style="width: 500px; margin:0 auto">
-                <h4 class="login-title text-center">{{ __('registers.register') }}</h4>
+                <h4 class="login-title text-center">{{ __('Register') }}</h4>
                 <div class="row">
                     <div class="col-md-12 col-12 mb--20">
-                        <label> {{ __('myaccount.fname') }} <span class="text-danger">*</span></label>
+                        <label> {{ __('First Name') }} <span class="text-danger">*</span></label>
                         <input type="text" name="f_name" data-html="true" value="{{ old('f_name') }}" id="f_name"
-                            autocomplete="f_name" placeholder="{{ __('registers.fname') }}">
+                            autocomplete="f_name" placeholder="{{ __('Enter First Name') }}">
                         <span class="text-danger error-text f_name_error"></span>
                     </div>
                     <div class="col-md-12 col-12 mb--20">
-                        <label>{{ __('myaccount.lname') }} <span class="text-danger">*</span></label>
+                        <label>{{ __('Last Name') }} <span class="text-danger">*</span></label>
                         <input type="text" name="l_name" data-html="true" value="{{ old('l_name') }}" id="l_name"
-                            autocomplete="l_name" placeholder="{{ __('registers.lname') }}">
+                            autocomplete="l_name" placeholder="{{ __('Enter Last Name') }}">
                         <span class="text-danger error-text l_name_error"></span>
                     </div>
                     <div class="col-md-12 col-12 mb--20">
-                        <label for="account-details-lastname">{{ __('myaccount.gender') }} <span
+                        <label for="account-details-lastname">{{ __('Gender') }} <span
                                 class="text-danger">*</span></label>
                         <select name="gender" id="gender" class="form-control">
-                            <option selected value="other"> Other</option>
-                            <option value="male"> Male</option>
-                            <option value="female"> Female</option>
+                            <option selected value="other"> {{__("Other")}}</option>
+                            <option value="male"> {{__("Male")}}</option>
+                            <option value="female"> {{__("Female")}}</option>
                         </select>
                     </div>
                     <div class="col-md-12">
                         <label>Email <span class="text-danger">*</span></label>
                         <input type="email" name="email" data-html="true" value="{{ old('email') }}" id="email"
-                            autocomplete="email" placeholder="{{ __('registers.email') }}">
+                            autocomplete="email" placeholder="{{ __('Enter Email') }}">
                         <span class="text-danger error-text email_error"></span>
                     </div>
                     <div class="col-md-6">
-                        <label>{{ __('logins.pass') }} <span class="text-danger">*</span></label>
+                        <label>{{ __('Password') }} <span class="text-danger">*</span></label>
                         <input type="password" id="password" data-html="true" name="password" autocomplete="new-password"
-                            placeholder="{{ __('registers.pass') }}">
+                            placeholder="{{ __('Enter Password') }}">
                         <span class="text-danger error-text password_error"></span>
                     </div>
                     <div class="col-md-6">
-                        <label>{{ __('myaccount.conPass') }} <span class="text-danger">*</span></label>
+                        <label>{{ __('Confirm Password') }} <span class="text-danger">*</span></label>
                         <input type="password" data-html="true" id="confirm_pass" class="form-control"
                             name="password_confirmation" autocomplete="new-password"
-                            placeholder="{{ __('registers.conpass') }}">
+                            placeholder="{{ __('Enter Confirm Password') }}">
                     </div>
                     <div class="col-md-12 text-center">
                         <hr>
                         <div style="text-decoration">
-                            {{__('registers.already')}} ? @if (Route::has('login'))<a style="text-decoration:underline" href="{{ url('login') }}">{{ __('logins.logins') }}</a>@endif
+                            {{__('Have account')}} ? @if (Route::has('login'))<a style="text-decoration:underline" href="{{ url('login') }}">{{ __('Login') }}</a>@endif
                         </div>
                     </div>
                     <div class="col-12">
-                        <input type="submit" style="color: black; cursor: pointer;" class="hiraola-register_btn" value="{{ __('registers.register') }}">
+                        <input type="submit" style="color: black; cursor: pointer;" class="hiraola-register_btn" value="{{ __('Register') }}">
                     </div>
                 </div>
             </div>

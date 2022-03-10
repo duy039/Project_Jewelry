@@ -17,10 +17,7 @@ class my_accountController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $order = DB::table('orders')->get();
-        if(!$order){
-            dd($order);
-        }
+        $order = DB::table('orders')->where('Email', $user->email)->get();
         return view('my-account')->with(['user'=> $user,'orders'=>$order]);
     }
 

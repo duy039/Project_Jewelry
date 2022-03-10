@@ -38,7 +38,7 @@ if (!empty($_GET)) {
             'Create_Date' => $date->format('Y-m-d H:i:s'),
             'Status' => 'Success',
         ];
-        $orderTable = DB::table('orders')->update($value);
+        $orderTable = DB::table('orders')->where('Email',$data->email)->update($value);
         if ($orderTable) {
             $orderId = DB::table('orders')
                 ->where('Create_Date', $date->format('Y-m-d H:i:s'))
@@ -88,7 +88,7 @@ if (!empty($_GET)) {
             'Create_Date' => $date->format('Y-m-d H:i:s'),
             'Status' => 'Failed',
         ];
-        $orderTable = DB::table('orders')->update($value);
+        $orderTable = DB::table('orders')->where('Email',$data->email)->update($value);
     }
 }
 

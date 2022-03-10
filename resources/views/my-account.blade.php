@@ -101,24 +101,24 @@
                             <li class="nav-item">
                                 <a class="nav-link active" id="account-dashboard-tab" data-toggle="tab"
                                     href="#account-dashboard" role="tab" aria-controls="account-dashboard"
-                                    aria-selected="true">{{ __('myaccount.dash') }}</a>
+                                    aria-selected="true">{{ __('Dashboard') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="account-orders-tab" data-toggle="tab" href="#account-orders"
                                     role="tab" aria-controls="account-orders"
-                                    aria-selected="false">{{ __('myaccount.history') }}</a>
+                                    aria-selected="false">{{ __('Order History') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="account-details-tab" data-toggle="tab" href="#account-details"
                                     role="tab" aria-controls="account-details"
-                                    aria-selected="false">{{ __('myaccount.account') }}</a>
+                                    aria-selected="false">{{ __('Edit Account') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="account-logout-tab"
                                     onclick="event.preventDefault();
                                                                                                                                             document.getElementById('logout-form').submit();"
                                     href="{{ url('logout') }}" role="tab"
-                                    aria-selected="false">{{ __('myaccount.logout') }}</a>
+                                    aria-selected="false">{{ __('Sign out') }}</a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     class="d-none">
@@ -133,34 +133,22 @@
                                 aria-labelledby="account-dashboard-tab">
                                 <div class="myaccount-dashboard">
                                     @if (Auth::check())
-                                        <p>Hello <b>{{ Auth::user()->First_Name }}</b> (not
-                                            <b>{{ Auth::user()->First_Name }}</b> ?
-                                            <a href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                                                                                                                                document.getElementById('logout-form').submit();">
-                                                {{ __('Sign out') }}
-                                            </a>)
-                                        </p>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
+                                        <p>{{__("Hello")}} <b>{{ Auth::user()->First_Name }}</b></p>
                                     @endif
-                                    <p>From your account dashboard you can view your recent orders and edit your password
-                                        and account details.</p>
+                                    <p>{{__("From your account you can view your orders history and edit your password and account details.")}}</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="account-orders" role="tabpanel"
                                 aria-labelledby="account-orders-tab">
                                 <div class="myaccount-orders">
-                                    <h4 class="small-title">{{ __('myaccount.history') }}</h4>
+                                    <h4 class="small-title">{{ __('Order History') }}</h4>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover">
                                             <tbody>
                                                 <tr>
-                                                    <th>{{ __('myaccount.order') }}</th>
-                                                    <th>{{ __('myaccount.date') }}</th>
-                                                    <th>{{ __('myaccount.status') }}</th>
+                                                    <th>{{ __('#') }}</th>
+                                                    <th>{{ __('Date') }}</th>
+                                                    <th>{{ __('Status') }}</th>
                                                     <th></th>
                                                 </tr>
                                                 @if ($orders)
@@ -168,7 +156,7 @@
                                                         <tr>
                                                             <td>{{ $order->Order_id }}</td>
                                                             <td>{{ $order->Create_Date }}</td>
-                                                            <td style="text-transform: uppercase">{{ $order->Status }}
+                                                            <td style="text-transform: uppercase">{{ __($order->Status) }}
                                                             </td>
                                                             <td>
                                                                 <a onclick="quickView('{!! $order->Order_id !!}')"
@@ -212,85 +200,85 @@
                                     <div class="text-center" style="padding-bottom: 2%">
                                         <input type="file" name="avatar" id="avatar" style="opacity: 0; display:none">
                                         <a href="javascript:void(0)" class="btn btn-primary responsive"
-                                            id="change_avatar">{{ __('myaccount.ava') }}</a>
+                                            id="change_avatar">{{ __('Change Avatar') }}</a>
                                         <div><span class="text-danger error-text avatar_error"></span></div>
                                     </div>
 
                                     <div class="hiraola-form-inner">
                                         <div class="single-input single-input-half">
-                                            <label for="account-details-firstname">{{ __('myaccount.fname') }} <span
+                                            <label for="account-details-firstname">{{ __('First Name') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" data-html="true" value="{{ $user->First_Name }}"
-                                                name="firstName" id="f_name" placeholder="{{ __('registers.fname') }}">
+                                                name="firstName" id="f_name" placeholder="{{ __('Enter First Name') }}">
                                             <span class="text-danger error-text firstName_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
-                                            <label for="account-details-lastname">{{ __('myaccount.lname') }} <span
+                                            <label for="account-details-lastname">{{ __('Last Name') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" data-html="true" value="{{ $user->Last_Name }} "
-                                                name="lastName" id="l_name" placeholder="{{ __('registers.lname') }}">
+                                                name="lastName" id="l_name" placeholder="{{ __('Enter Last Name') }}">
                                             <span class="text-danger error-text lastName_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
-                                            <label for="account-details-lastname">{{ __('myaccount.phone') }} <span
+                                            <label for="account-details-lastname">{{ __('Phone Number') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="number" data-html="true" value="0{{ $user->Phone_Number }}"
                                                 name="phone_number" id="phone"
-                                                placeholder="{{ __('myaccount.phones') }}">
+                                                placeholder="{{ __('enterPhone') }}">
                                             <span class="text-danger error-text phone_number_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">
-                                            <label for="account-details-lastname">{{ __('myaccount.gender') }} <span
+                                            <label for="account-details-lastname">{{ __('Gender') }} <span
                                                     class="text-danger">*</span></label>
                                             <select name="gender" id="gender">
                                                 <option value="other" {{ $user->Gender == 'other' ? 'selected' : '' }}>
-                                                    Other</option>
+                                                    {{__("Other")}}</option>
                                                 <option value="male" {{ $user->Gender == 'male' ? 'selected' : '' }}>
-                                                    Male
+                                                    {{__("Male")}}
                                                 </option>
                                                 <option value="female" {{ $user->Gender == 'female' ? 'selected' : '' }}>
-                                                    Female</option>
+                                                    {{__("Female")}}</option>
                                             </select>
                                         </div>
                                         <div class="single-input">
                                             <label for="account-details-email">Email <span
                                                     class="text-danger">*</span></label>
                                             <input type="email" data-html="true" value="{{ $user->email }}" name="email"
-                                                id="email" placeholder="{{ __('registers.email') }}">
+                                                id="email" placeholder="{{ __('Enter Email') }}">
                                             <span class="text-danger error-text email_error"></span>
                                         </div>
                                         <div class="single-input" id="ship-box-info">
                                             @if ($user->Password != null)
                                                 <div class="single-input">
-                                                    <label for="account-details-oldpass">{{ __('myaccount.curPass') }}
+                                                    <label for="account-details-oldpass">{{ __('Current Password') }}
                                                         <span class="text-danger">*</span></label>
                                                     <input type="password" name="current_password" data-html="true"
-                                                        id="current_pass" placeholder="{{ __('myaccount.curPasss') }}">
+                                                        id="current_pass" placeholder="{{ __('Enter Current Password') }}">
                                                     <span class="text-danger error-text current_password_error"></span>
                                                 </div>
                                             @endif
                                             <div class="single-input">
-                                                <label for="account-details-newpass">{{ __('myaccount.newPass') }} <span
+                                                <label for="account-details-newpass">{{ __('Password') }} <span
                                                         class="text-danger">*</span></label>
                                                 <input type="password" data-html="true" name="password" id="password"
-                                                    placeholder="{{ __('myaccount.newPasss') }}">
+                                                    placeholder="{{ __('Enter Password') }}">
                                                 <span class="text-danger error-text password_error"></span>
                                             </div>
                                             <div class="single-input">
-                                                <label for="account-details-confpass">{{ __('myaccount.conPass') }} <span
+                                                <label for="account-details-confpass">{{ __('Confirm Password') }} <span
                                                         class="text-danger">*</span></label>
                                                 <input type="password" data-html="true" name="password_confirmation"
-                                                    id="confirm_pass" placeholder="{{ __('registers.conpass') }}">
+                                                    id="confirm_pass" placeholder="{{ __('Enter Confirm Password') }}">
                                                 <span class="text-danger error-text password_confirmation_error"></span>
                                             </div>
                                         </div>
                                         <div style="margin-top: 2%">
-                                            <label>{{ __('myaccount.change') }} ?</label>
+                                            <label>{{ __('Change Password') }} ?</label>
                                             <input type="checkbox" name="checkbox" id="ship-box">
                                         </div>
                                         <div style="margin-left: 78%" class="single-input">
                                             <button class="hiraola-btn_dark" id="submit"
-                                                type="submit"><span>{{ __('myaccount.save') }}</span></button>
+                                                type="submit"><span>{{ __('Save') }}</span></button>
                                         </div>
                                     </div>
                                 </form>
@@ -313,7 +301,7 @@
                     <div class="modal-inner-area">
                         <img class="float-left" style="position: absolute"
                             src="{{ asset('assets/images/logo/logo2.png') }}" alt="">
-                        <div class="text-center order">Order History</div>
+                        <div class="text-center order">{{__('Order History')}}</div>
                         <div class="text-right"><button id="download" class="btn btn-primary">Print PDF</button></div>
                         <hr>
                     </div>

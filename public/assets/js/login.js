@@ -27,7 +27,7 @@ $(document).ready(function () {
                 }else{
                     swal('Success','Welcome '+data.name,'success');
                     setTimeout(2500);
-                    window.location = '/admin';
+                    window.location = '/admin/dashboard';
                 }
             }
         });

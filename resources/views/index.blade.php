@@ -75,34 +75,16 @@
                                 <div class="ht-menu">
                                     <ul>
                                         <li>
-                                            <a href="javascript:void(0)">{{ __('home-header.language') }}<i
+                                            <a href="javascript:void(0)">{{ __('Language') }}<i
                                                     class="fa fa-chevron-down"></i></a>
                                             <ul class="ht-dropdown">
-                                                <li>
-                                                    <a href="#" id="navbarDropdownMenuLink" aria-expanded="false">
-                                                        <img width="40px" height="22px"
-                                                            src="assets/images/flags/{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}.png"
-                                                            alt="">
-                                                        {{ Config::get('languages')[App::getLocale()]['display'] }}
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    @foreach (Config::get('languages') as $lang => $language)
-                                                        @if ($lang != App::getLocale())
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('lang.switch', $lang) }}"><img
-                                                                    width="40xp" height="22px"
-                                                                    src="assets/images/flags/{{ $language['flag-icon'] }}.png"
-                                                                    alt="">
-                                                                {{ $language['display'] }}</a>
-                                                        @endif
-                                                    @endforeach
-                                                </li>
+                                                <li><a href="{{ URL::to('language', ['en']) }}">English</a></li>
+                                                <li><a href="{{ URL::to('language', ['vi']) }}">Vietnamese</a></li>
                                             </ul>
                                         </li>
                                         @guest
                                             <li>
-                                                <a href="{{ url('my-account') }}">My Account<i
+                                                <a href="{{ url('my-account') }}">{{__('Account')}}<i
                                                         class="fa fa-chevron-down"></i></a>
                                                 <ul class="ht-dropdown ht-my_account">
                                                     @if (Route::has('login'))
@@ -130,27 +112,22 @@
                                                         class="fa fa-chevron-down"></i></a>
 
                                                 <ul class="ht-dropdown ht-my_account">
-                                                    @if (Auth::user()->Admins == 1)
-                                                        <li><a
-                                                                href="{{ route('home') }}">{{ __('Admin Dashboard') }}</a>
-                                                        </li>
-                                                    @endif
                                                     <li><span style="font-size: 12px ;margin-left:3%">
-                                                            {{ __('home-header.point') }}:
+                                                            {{ __('Point') }}:
                                                             {{ Auth::user()->point }}</span></li>
                                                     <hr style="margin: 0">
                                                     <li><a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault();
-                                                                                                                                                                        document.getElementById('logout-form').submit();"><i
+                                                                document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
                                                                 aria-hidden="true"></i>
-                                                            {{ __('home-header.signout') }}
+                                                            {{ __('Sign out') }}
                                                         </a></li>
                                                 </ul>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                     class="d-none">
                                                     @csrf
-                                                </form>
+                                                </form> --}}
                                             </li>
                                         @endguest
                                     </ul>
@@ -165,7 +142,6 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="header-middle_wrap">
-
                                 <div class="header-logo">
                                     <a href='{{ url('/') }}'>
                                         <img src="{{ url('assets/images/logo/logo.png') }}"
@@ -174,7 +150,7 @@
                                 </div>
                                 <div class="header-contact_area">
                                     <div class="contact-box">
-                                        <span>Location</span>
+                                        <span>{{ __('Location') }}</span>
                                         @foreach ($contact as $con)
                                             <p>{{ $con->Address }}</p>
                                         @endforeach
@@ -259,14 +235,14 @@
                                 <nav>
                                     <ul>
                                         <li class="dropdown-holder"><a
-                                                href='{{ url('/') }}'>{{ __('home-header.home') }}</a></li>
+                                                href='{{ url('/') }}'>{{ __('Home') }}</a></li>
                                         <li class="megamenu-holder"><a
-                                                href='{{ url('/shop') }}'>{{ __('home-header.shop') }}</a>
+                                                href='{{ url('/shop') }}'>{{ __('Shop') }}</a>
                                             <ul class="hm-megamenu">
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/1') }}'>{{ __('home-header.ring') }}</a>
+                                                                href='{{ url('shop/categories/1') }}'>{{ __('Rings') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/1') }}'><img
                                                                     src="{{ url('assets/images/product/R01P01.jpg') }}"
@@ -276,7 +252,7 @@
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/2') }}'>{{ __('home-header.neck') }}</a>
+                                                                href='{{ url('shop/categories/2') }}'>{{ __('Neckles') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/2') }}'><img
                                                                     src="{{ url('assets/images/product/R08P01.jpg') }}"
@@ -286,7 +262,7 @@
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/3') }}'>{{ __('home-header.brace') }}</a>
+                                                                href='{{ url('shop/categories/3') }}'>{{ __('Braceles') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/3') }}'><img
                                                                     src="{{ url('assets/images/product/R09P01.jpg') }}"
@@ -296,7 +272,7 @@
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/4') }}'>{{ __('home-header.ear') }}</a>
+                                                                href='{{ url('shop/categories/4') }}'>{{ __('Earring') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/4') }}'><img
                                                                     src="{{ url('assets/images/product/R04P01.jpg') }}"
@@ -310,10 +286,10 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href='{{ url('/blog') }}'>{{ __('home-header.blog') }}</a></li>
-                                        <li><a href='{{ url('/about-us') }}'>{{ __('home-header.about') }}</a>
+                                        <li><a href='{{ url('/blog') }}'>{{ __('Blog') }}</a></li>
+                                        <li><a href='{{ url('/about-us') }}'>{{ __('About-us') }}</a>
                                         </li>
-                                        <li><a href='{{ url('/contact') }}'>{{ __('home-header.contact') }}</a>
+                                        <li><a href='{{ url('/contact') }}'>{{ __('Contact') }}</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -338,15 +314,15 @@
                                 <nav>
                                     <ul>
                                         <li class="dropdown-holder">
-                                            <a href='{{ url('/') }}'>{{ __('home-header.home') }}</a>
+                                            <a href='{{ url('/') }}'>{{ __('Home') }}</a>
                                         </li>
                                         <li class="megamenu-holder"><a
-                                                href='{{ url('/shop') }}'>{{ __('home-header.shop') }}</a>
+                                                href='{{ url('/shop') }}'>{{ __('Shop') }}</a>
                                             <ul class="hm-megamenu">
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/1') }}'>{{ __('home-header.ring') }}</a>
+                                                                href='{{ url('shop/categories/1') }}'>{{ __('Rings') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/1') }}'><img
                                                                     src="{{ url('assets/images/product/R01P01.jpg') }}"
@@ -356,7 +332,7 @@
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/2') }}'>{{ __('home-header.ear') }}</a>
+                                                                href='{{ url('shop/categories/2') }}'>{{ __('Earring') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/2') }}'><img
                                                                     src="{{ url('assets/images/product/R04P01.jpg') }}"
@@ -366,7 +342,7 @@
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/3') }}'>{{ __('home-header.neck') }}</a>
+                                                                href='{{ url('shop/categories/3') }}'>{{ __('Neckles') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/3') }}'><img
                                                                     src="{{ url('assets/images/product/R08P01.jpg') }}"
@@ -376,7 +352,7 @@
                                                 <li>
                                                     <ul>
                                                         <li style="text-align: center; font-size: 120px;"><a
-                                                                href='{{ url('shop/categories/4') }}'>{{ __('home-header.brace') }}</a>
+                                                                href='{{ url('shop/categories/4') }}'>{{ __('Braceles') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/4') }}'><img
                                                                     src="{{ url('assets/images/product/R09P01.jpg') }}"
@@ -388,10 +364,10 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href='{{ url('/blog') }}'>{{ __('home-header.blog') }}</a></li>
-                                        <li><a href='{{ url('/about-us') }}'>{{ __('home-header.about') }}</a>
+                                        <li><a href='{{ url('/blog') }}'>{{ __('Blog') }}</a></li>
+                                        <li><a href='{{ url('/about-us') }}'>{{ __('About') }}</a>
                                         </li>
-                                        <li><a href='{{ url('/contact') }}'>{{ __('home-header.contact') }}</a>
+                                        <li><a href='{{ url('/contact') }}'>{{ __('Contact') }}</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -473,14 +449,16 @@
                         </ul>
                     </div>
                     <div class="minicart-item_total">
-                        <span>Subtotal</span>
+                        <span>{{ __('Subtotal') }}</span>
                         <span class="ammount">$360.00</span>
                     </div>
                     <div class="minicart-btn_area">
-                        <a href="cart.html" class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">Minicart</a>
+                        <a href="cart.html"
+                            class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">{{ __('Minicart') }}</a>
                     </div>
                     <div class="minicart-btn_area">
-                        <a href="checkout.html" class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">Checkout</a>
+                        <a href="checkout.html"
+                            class="hiraola-btn hiraola-btn_dark hiraola-btn_fullwidth">{{ __('Check out') }}</a>
                     </div>
                 </div>
             </div>
@@ -514,20 +492,20 @@
                         <nav class="offcanvas-navigation">
                             <ul class="mobile-menu">
                                 <li class="menu-item-has-children active"><a href='{{ url('/') }}'><span
-                                            class="mm-text">{{ __('home-header.home') }}</span></a></li>
+                                            class="mm-text">{{ __('Home') }}</span></a></li>
                                 <li class="menu-item-has-children">
                                     <a href='{{ url('/shop') }}'>
-                                        <span class="mm-text">{{ __('home-header.shop') }}</span>
+                                        <span class="mm-text">{{ __('Shop') }}</span>
                                     </a>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href='{{ url('/blog') }}'>
-                                        <span class="mm-text">{{ __('home-header.blog') }}</span>
+                                        <span class="mm-text">{{ __('Blog') }}</span>
                                     </a>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href='{{ url('/contact') }}'>
-                                        <span class="mm-text">{{ __('home-header.contact') }}</span>
+                                        <span class="mm-text">{{ __('Contact') }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -535,35 +513,19 @@
                         <nav class="offcanvas-navigation user-setting_area">
                             <ul class="mobile-menu">
                                 <li class="menu-item-has-children">
-                                    <a href="#"><span
-                                            class="mm-text">{{ __('home-header.language') }}</span></a>
+                                    <a href="#"><span class="mm-text">{{ __('Language') }}</span></a>
                                     <ul class="sub-menu">
                                         <li>
-                                            <a href="#" id="navbarDropdownMenuLink" aria-expanded="false">
-                                                <img width="40px" height="22px"
-                                                    src="assets/images/flags/{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}.png"
-                                                    alt="">
-                                                {{ Config::get('languages')[App::getLocale()]['display'] }}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            @foreach (Config::get('languages') as $lang => $language)
-                                                @if ($lang != App::getLocale())
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('lang.switch', $lang) }}"><img width="40xp"
-                                                            height="22px"
-                                                            src="assets/images/flags/{{ $language['flag-icon'] }}.png"
-                                                            alt="">
-                                                        {{ $language['display'] }}</a>
-                                                @endif
-                                            @endforeach
+                                            <ul class="ht-dropdown">
+                                                <li><a href="{{ URL::to('language', ['en']) }}">English</a></li>
+                                                <li><a href="{{ URL::to('language', ['vi']) }}">Vietnamese</a></li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 @guest
                                     <li class="menu-item-has-children active">
-                                        <a href="{{ url('my-account') }}"><span class="mm-text">My
-                                                Account</span></a>
+                                        <a href="{{ url('my-account') }}"><span class="mm-text">{{__('Account')}}</span></a>
                                         <ul class="sub-menu">
                                             @if (Route::has('login'))
                                                 <li><a href="{{ url('login') }}"><i
@@ -599,7 +561,7 @@
                                             <hr style="margin: 0">
                                             <li><a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
-                                                                                                                                document.getElementById('logout-form').submit();"><i
+                                                                                                                                            document.getElementById('logout-form').submit();"><i
                                                         class="fa fa-sign-out-alt text-danger" aria-hidden="true"></i>
                                                     {{ __('Sign out') }}
                                                 </a></li>
@@ -629,7 +591,7 @@
                             <h3>Surface Studio 2019</h3>
                             <h4>Starting at <span>£1599.00</span></h4>
                             <div class="hiraola-btn-ps_center slide-btn">
-                                <a class="hiraola-btn" href="{{ url('shop') }}">Shopping Now</a>
+                                <a class="hiraola-btn" href="{{ url('shop') }}">{{ __('Shopping Now') }}</a>
                             </div>
                         </div>
                         <div class="slider-progress"></div>
@@ -645,7 +607,7 @@
                             <h3>Pro+ Obsidian</h3>
                             <h4>Starting at <span>£809.00</span></h4>
                             <div class="hiraola-btn-ps_center slide-btn">
-                                <a class="hiraola-btn" href="{{ url('shop') }}">Shopping Now</a>
+                                <a class="hiraola-btn" href="{{ url('shop') }}">{{ __('Shopping Now') }}</a>
                             </div>
                         </div>
                         <div class="slider-progress"></div>
@@ -689,13 +651,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="hiraola-section_title">
-                            <h4>{{ __('home-header.new') }}</h4>
+                            <h4>{{ __('New') }}</h4>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="hiraola-product_slider">
                             <!-- Begin Hiraola's Slide Item Area -->
-                                @foreach ($product as $pro)
+                            @foreach ($product as $pro)
                                 <div class="slide-item">
                                     <div class="single_product">
                                         <div class="product-img">
@@ -794,7 +756,7 @@
                                 <span> £1209.00</span>
                             </p>
                             <div class="hiraola-btn-ps_left">
-                                <a href="{{ url('shop') }}" class="hiraola-btn">Shopping Now</a>
+                                <a href="{{ url('shop') }}" class="hiraola-btn">{{ __('Shopping Now') }}</a>
                             </div>
                         </div>
                     </div>
@@ -809,17 +771,15 @@
                     <div class="col-lg-12">
                         <div class="product-tab">
                             <div class="hiraola-tab_title">
-                                <h4>{{ __('home-header.new') }}</h4>
+                                <h4>{{ __('New') }}</h4>
                             </div>
                             <ul class="nav product-menu">
                                 <li><a class="active" data-toggle="tab"
-                                        href="#rings"><span>{{ __('home-header.ring') }}</span></a>
+                                        href="#rings"><span>{{ __('Rings') }}</span></a>
                                 </li>
-                                <li><a data-toggle="tab"
-                                        href="#neckales"><span>{{ __('home-header.neck') }}</span></a></li>
-                                <li><a data-toggle="tab"
-                                        href="#bracelet"><span>{{ __('home-header.brace') }}</span></a></li>
-                                <li><a data-toggle="tab" href="#anklet"><span>Anklet</span></a></li>
+                                <li><a data-toggle="tab" href="#neckales"><span>{{ __('Neckales') }}</span></a></li>
+                                <li><a data-toggle="tab" href="#bracelet"><span>{{ __('Braceles') }}</span></a></li>
+                                <li><a data-toggle="tab" href="#Earrings"><span>{{ __('Earrings') }}</span></a></li>
                             </ul>
                         </div>
                         <div class="tab-content hiraola-tab_content">
@@ -1077,7 +1037,7 @@
                                     <!-- Hiraola's Slide Item Area End Here -->
                                 </div>
                             </div>
-                            <div id="anklet" class="tab-pane" role="tabpanel">
+                            <div id="Earrings" class="tab-pane" role="tabpanel">
                                 <div class="hiraola-product-tab_slider-2">
                                     <!-- Begin Hiraola's Slide Item Area -->
                                     <div class="slide-item">
@@ -1627,17 +1587,17 @@
                     <div class="col-lg-12">
                         <div class="product-tab">
                             <div class="hiraola-tab_title">
-                                <h4>{{ __('home-header.trend') }}</h4>
+                                <h4>{{ __('Trendding') }}</h4>
                             </div>
                             <ul class="nav product-menu">
                                 <li><a class="active" data-toggle="tab"
-                                        href="#rings-2"><span>{{ __('home-header.ring') }}</span></a>
+                                        href="#rings-2"><span>{{ __('Rings') }}</span></a>
                                 </li>
-                                <li><a data-toggle="tab"
-                                        href="#neckales-2"><span>{{ __('home-header.neck') }}</span></a></li>
-                                <li><a data-toggle="tab"
-                                        href="#bracelets-2"><span>{{ __('home-header.brace') }}</span></a></li>
-                                <li><a data-toggle="tab" href="#anklet-2"><span>Anklet</span></a></li>
+                                <li><a data-toggle="tab" href="#neckales-2"><span>{{ __('Neckales') }}</span></a>
+                                </li>
+                                <li><a data-toggle="tab" href="#bracelets-2"><span>{{ __('Braceles') }}</span></a>
+                                </li>
+                                <li><a data-toggle="tab" href="#Earrings-2"><span>{{ __('Earrings') }}</span></a></li>
                             </ul>
                         </div>
                         <div class="tab-content hiraola-tab_content">
@@ -1895,7 +1855,7 @@
                                     <!-- Hiraola's Slide Item Area End Here -->
                                 </div>
                             </div>
-                            <div id="anklet-2" class="tab-pane" role="tabpanel">
+                            <div id="Earrings-2" class="tab-pane" role="tabpanel">
                                 <div class="hiraola-product-tab_slider-2">
                                     <!-- Begin Hiraola's Slide Item Area -->
                                     <div class="slide-item">
@@ -2665,7 +2625,7 @@
                                     </div>
                                     <div class="hiraola-tag-line">
                                         <h6>Tags:</h6>
-                                        <a href="javascript:void(0)">Ring</a>,
+                                        <a href="javascript:void(0)">Rings</a>,
                                         <a href="javascript:void(0)">Necklaces</a>,
                                         <a href="javascript:void(0)">Braid</a>
                                     </div>
@@ -2770,14 +2730,14 @@
                                             <div class="widgets-essential_stuff">
                                                 <ul>
                                                     <li class="hiraola-address"><i
-                                                            class="ion-ios-location"></i><span>Address:</span>
+                                                            class="ion-ios-location"></i><span>{{ __('Location') }}:</span>
                                                         @foreach ($contact as $con)
                                                             {{ $con->Address }}
                                                         @endforeach
                                                     </li>
                                                     <li class="hiraola-phone"><i
-                                                            class="ion-ios-telephone"></i><span>Call
-                                                            Us:</span> <a
+                                                            class="ion-ios-telephone"></i><span>{{ __('Phone Number') }}:</span>
+                                                        <a
                                                             href="tel://+@foreach ($contact as $con) {{ $con->Number_Phone }} @endforeach">
                                                             @foreach ($contact as $con)
                                                                 {{ $con->Number_Phone }}

@@ -41,29 +41,29 @@
                     <form action="{{ url('postLogin') }}" id="loginForm" method="POST">
                         {{ csrf_field() }}
                         <div class="login-form">
-                            <h4 class="login-title text-center">{{__('logins.logins')}}</h4>
+                            <h4 class="login-title text-center">{{__('Login')}}</h4>
                             <div class="row">
                                 <div class="col-md-12 col-12">
                                     <label>Email <span class="text-danger">*</span></label>
                                     <input id="email" type="email" class="form-control" name="email"
-                                        value="{{ old('email') }}" data-html="true" autocomplete="email" autofocus placeholder="{{__('logins.email')}}">
+                                        value="{{ old('email') }}" data-html="true" autocomplete="email" autofocus placeholder="{{__('Enter Email')}}">
                                     <span class="text-danger error-text email_error"></span>
                                 </div>
 
                                 <div class="col-12 mb--20">
-                                    <label>{{__('logins.pass')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Password')}} <span class="text-danger">*</span></label>
                                     <input id="password" type="password" class="form-control" name="password"
-                                        autocomplete="current-password" data-html="true" placeholder="{{__('logins.password')}}">
+                                        autocomplete="current-password" data-html="true" placeholder="{{__('Enter Password')}}">
                                     <span class="text-danger error-text password_error"></span>
                                 </div>
                                 <div class="col-md-6" style="margin-left: 55%;transform: translateX(-50%);">
-                                    <button class="hiraola-login_btn">{{__('logins.logins')}}</button>
+                                    <button class="hiraola-login_btn">{{__('Login')}}</button>
                                 </div>
                                 <div class="col-md-12 text-center" style="padding-top: 5%">
                                     <div class="forgotton-password_info">
                                         @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('logins.forgot') }} ?
+                                                {{ __('Forgot password') }} ?
                                             </a>
                                         @endif
                                     </div>
@@ -76,14 +76,14 @@
                                 </div>
                                 <div class="col-md-12 text-center">
                                     <div style="padding-bottom: 5%; text-decoration">
-                                        {{__('logins.new')}} ? @if (Route::has('register'))<a style="text-decoration:underline" href="{{ url('register') }}">{{ __('logins.register') }}</a>@endif
+                                        {{__('Don\'t have account yet')}} ? @if (Route::has('register'))<a style="text-decoration:underline" href="{{ url('register') }}">{{ __('Register') }}</a>@endif
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div style="font-size:40px" class="text-center">
                                         <a style="padding: 3%" href="{{ url('google') }}" target="_self"
-                                            class="btn btn-danger"><i class="fab fa-google"></i> {{__('logins.google')}}</a>
+                                            class="btn btn-danger"><i class="fab fa-google"></i> {{__('Login with Google')}}</a>
                                     </div>
                                 </div>
                             </div>

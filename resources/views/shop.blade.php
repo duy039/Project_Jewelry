@@ -53,40 +53,40 @@ for ($i = 0; $i < count($products); $i++) {
                         <div class="hiraola-sidebar-catagories_area">
                             <div class="hiraola-sidebar_categories">
                                 <div class="hiraola-categories_title">
-                                    <h5>{{__('shop.price')}}</h5>
+                                    <h5>{{__('Price')}}</h5>
                                 </div>
                                 <div class="price-filter">
                                     <div id="slider-range"></div>
                                     <div class="price-slider-amount">
                                         <div class="label-input">
-                                            <label>{{__('shop.price')}}: </label>
+                                            <label>{{__('Price')}}: </label>
                                             <input type="text" id="amount" name="price" placeholder="Add Your Price"
                                                 disabled />
                                             <br>
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <h6 style="padding-top: 7px">{{__("shop.from")}} : </h6>
+                                                        <h6 style="padding-top: 7px">{{__("From")}} : </h6>
                                                     </td>
                                                     <td><input style="font-size: 15px; margin-left: 40px" type="number"
                                                             id="priceFrom" name="priceFrom"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <h6 style="padding-top: 7px">{{__('shop.to')}} : </h6>
+                                                        <h6 style="padding-top: 7px">{{__('To')}} : </h6>
                                                     </td>
                                                     <td><input style="font-size: 15px; margin-left: 40px" type="number"
                                                             id="priceTo" name="priceTo"><br></td>
                                                 </tr>
                                             </table>
-                                            <button class="ApplyPrice" onclick="priceFromTo()">{{__('shop.apply')}}</button>
+                                            <button class="ApplyPrice" onclick="priceFromTo()">{{__('Apply')}}</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="hiraola-sidebar_categories">
                                 <div class="hiraola-categories_title">
-                                    <h5>{{__('shop.size')}}</h5>
+                                    <h5>{{__('Size')}}</h5>
                                 </div>
                                 <ul class="sidebar-checkbox_list">
                                     <li>
@@ -108,7 +108,7 @@ for ($i = 0; $i < count($products); $i++) {
                             </div>
                             <div class="category-module hiraola-sidebar_categories">
                                 <div class="category-module_heading">
-                                    <h5>{{__('shop.category')}}</h5>
+                                    <h5>{{__('Category')}}</h5>
                                 </div>
                                 <div class="module-body">
                                     <ul class="module-list_item">
@@ -143,15 +143,15 @@ for ($i = 0; $i < count($products); $i++) {
                             {{-- Short By --}}
                             <div class="product-item-selection_area">
                                 <div class="product-short">
-                                    <label class="select-label">{{__('shop.sort')}}:</label>
+                                    <label class="select-label">{{__('Sort')}}:</label>
                                     <select id="short" name="short" class="nice-select" onchange="shorting()">
-                                        <option selected="selected" value="1">{{__('shop.random')}}</option>
-                                        <option value="2">{{__('shop.atoz')}}</option>
-                                        <option value="3">{{__('shop.ztoa')}}</option>
-                                        <option value="4">{{__('shop.ltoh')}}</option>
-                                        <option value="5">{{__('shop.htol')}}</option>
-                                        <option value="6">{{__('shop.rl')}}</option>
-                                        <option value="7">{{__('shop.rh')}}</option>
+                                        <option selected="selected" value="1">{{__('Random')}}</option>
+                                        <option value="2">{{__('Name A to Z')}}</option>
+                                        <option value="3">{{__('Name Z to A')}}</option>
+                                        <option value="4">{{__('Price lower to highest')}}</option>
+                                        <option value="5">{{__('Price highest to lower')}}</option>
+                                        <option value="6">{{__('Rating lower')}}</option>
+                                        <option value="7">{{__('Rating highest')}}</option>
                                     </select>
                                 </div>
                             </div>
