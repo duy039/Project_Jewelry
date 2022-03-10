@@ -60,6 +60,7 @@ body {
   color: #595959;
   font-size: 16px;
   line-height: 24px;
+  box-sizing: border-box;
 }
 
 h1,
@@ -9963,8 +9964,19 @@ button[name=apply]{
 p .bi-check-circle{
   color: green;
 }
-
-
+.text18{
+  line-height: 30px;
+  font-size: 18px;
+  color: #222;
+  padding-top: 30px;
+}
+.fw50{
+  float: left;
+  width: 50%;
+}
+.clearfix{
+  zoom: 1;
+}
 
 
 
