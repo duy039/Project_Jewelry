@@ -34,6 +34,8 @@
 @extends('layout.layout_nav_footer')
 @section('main')
     <?php
+    use Illuminate\Support\Carbon;
+    $date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
     if (session_id() === '') {
         session_start();
     }
@@ -80,8 +82,8 @@
             {{-- phần thông tin --}}
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <form method="POST" target="_blank" enctype="application/x-www-form-urlencoded"
-                        action="{{ url('checkout/payMomo') }}">
+                    <form method="POST" enctype="application/x-www-form-urlencoded"
+                        action="{{ url('checkout/payment') }}">
                         {{ csrf_field() }}
                         <input type="hidden" id="toTal">
                         <input type="hidden" id="pro_id">
@@ -89,14 +91,16 @@
                         <input type="hidden" id="tax">
                         <input type="hidden" id="ship">
                         <input type="hidden" id="discount">
+                        <input type="hidden" name="date" value="{{$date}}">
                         <div class="checkbox-form">
                             <h3>Billing Details</h3>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Address <span class="required">*</span></label>
-                                        <input id="deliveryAddress" maxlength="50" required data-html="true" placeholder="Street address"
-                                            type="text" onchange="changeInput()" name="address">
+                                        <input id="deliveryAddress" maxlength="50" required data-html="true"
+                                            placeholder="Street address" type="text" onchange="changeInput()"
+                                            name="address">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -156,8 +160,8 @@
                                 <div class="order-notes">
                                     <div class="checkout-form-list checkout-form-list-2">
                                         <label>Order Notes</label>
-                                        <textarea style="resize: none" data-html="true" maxlength="100" name="note" id="checkout-mess" cols="30"
-                                            rows="10"
+                                        <textarea style="resize: none" data-html="true" maxlength="100" name="note"
+                                            id="checkout-mess" cols="30" rows="10"
                                             placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>
                                 </div>
@@ -167,8 +171,7 @@
                             <div class="coupon">
                                 <input id="coupon_code" class="" name="coupon_code" value=""
                                     placeholder="Coupon code" type="text" width="800">
-                                <input class="button" name="" value="Apply coupon"
-                                    onclick="checkVoucher()">
+                                <input class="button" name="" value="Apply coupon" onclick="checkVoucher()">
                                 <p id="NotificationCoupon_code"></p>
                             </div>
                         </div>
@@ -241,49 +244,10 @@
                         </div>
                         <div class="payment-method">
                             <div class="payment-accordion">
-                                <div id="accordion">
-                                    <div class="card">
-                                        <div class="card-header" id="#payment-1">
-                                            <h5 class="panel-title">
-                                                <a href="javascript:void(0)" class="" data-toggle="collapse"
-                                                    data-target="#collapseOne" aria-expanded="true"
-                                                    aria-controls="collapseOne">
-                                                    Direct Bank Transfer.
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                            <div class="card-body">
-                                                <p>Make your payment directly into our bank account. Please use your Order
-                                                    ID as the payment
-                                                    reference. Your order won’t be shipped until the funds have cleared in
-                                                    our account.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
-                                                <p>Make your payment directly into our bank account. Please use your Order
-                                                    ID as the payment
-                                                    reference. Your order won’t be shipped until the funds have cleared in
-                                                    our account.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
-                                                <p>Make your payment directly into our bank account. Please use your Order
-                                                    ID as the payment
-                                                    reference. Your order won’t be shipped until the funds have cleared in
-                                                    our account.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="order-button-payment">
-                                    <input value="Pay with MOMO" type="submit">
+                                    <input value="Pay Direct" name="payment" type="submit">
+                                    <input value="Pay with MOMO" name="payment" type="submit">
+                                    <input value="Pay with VNPAY" name="payment" type="submit">
                                 </div>
                                 </form>
                             </div>

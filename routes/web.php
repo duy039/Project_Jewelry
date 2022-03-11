@@ -7,6 +7,7 @@ Route::post('/wishlistHandler', 'App\Http\Controllers\WishlistController@wishlis
 Route::post('/addComment', 'App\Http\Controllers\SingleProductController@addComment');
 Route::post('/addRaiting', 'App\Http\Controllers\SingleProductController@addRaiting');
 Route::post('/addToCart', 'App\Http\Controllers\SingleProductController@addToCart');
+Route::post('/addComapre', 'App\Http\Controllers\SingleProductController@addCompare');
 Route::get('/wishlistDelete/{user_id}/{wishl_id}', 'App\Http\Controllers\WishlistController@wishlistDelete');
 Route::get('/search', 'App\Http\Controllers\ShopController@search');
 
@@ -29,6 +30,9 @@ Route::prefix('product')->group(function () {
     Route::get('/{id}', 'App\Http\Controllers\SingleProductController@index');
     Route::get('/commentsAjax/{product_id}', 'App\Http\Controllers\SingleProductController@commentsAjax');
     Route::get('/raitingAjax/{product_id}', 'App\Http\Controllers\SingleProductController@raitingAjax');
+    Route::get('/compare/getProduct', 'App\Http\Controllers\SingleProductController@getCompare');
+    Route::get('/compare/deleteAll', 'App\Http\Controllers\SingleProductController@compareDeleteAll');
+    Route::get('/compareDelete/{id}', 'App\Http\Controllers\SingleProductController@compareDelete');
 });
 Route::prefix('wishlist')->group(function () {
     Route::get('/', 'App\Http\Controllers\WishlistController@index');
@@ -43,8 +47,9 @@ Route::prefix('cart')->group(function () {
 Route::prefix('checkout')->group(function () {
     Route::get('/', 'App\Http\Controllers\ChechoutController@index');
     Route::get('/checkVoucher/{codeVoucher}', 'App\Http\Controllers\ChechoutController@checkVoucher');
-    Route::post('payMomo', [\App\Http\Controllers\ChechoutController::class, 'payMomo']);
-    Route::get('result', [\App\Http\Controllers\ChechoutController::class, 'result']);
+    Route::post('payment', [\App\Http\Controllers\ChechoutController::class, 'payment']);
+    Route::get('resultMomo', [\App\Http\Controllers\ChechoutController::class, 'resultMomo']);
+    Route::get('resultVnpay', [\App\Http\Controllers\ChechoutController::class, 'resultVnpay']);
 });
 Route::prefix('event')->group(function () {
     Route::get('/GetPointsEveryDay', 'App\Http\Controllers\EventController@eventEveryDay');
@@ -70,7 +75,7 @@ Route::get('callback/google', [App\Http\Controllers\registerOrLoginController::c
 Route::post('postLogin', [App\Http\Controllers\registerOrLoginController::class, 'postLogin'])->name('postLogin');
 Route::post('postRegister', [App\Http\Controllers\registerOrLoginController::class, 'postRegister'])->name('postRegister');
 
-
+Route::post('logouts', [App\Http\Controllers\HomeController::class, 'logout']);
 
 Route::get('contact', [App\Http\Controllers\FeedbackController::class, 'index'])->name('contact');
 Route::post('accountUpdate', [App\Http\Controllers\my_accountController::class, 'updateDetail']);

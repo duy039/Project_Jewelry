@@ -632,6 +632,185 @@ function addToCartProduct(productAdd){
         }
     })
 }
+
+
+// các  function dùng cho compare
+//  show ra bảng các product đang có trong session compare
+function showCompare(){
+    $("#divShowCompare").css({
+        "display" : "block"
+    });
+    $("#ss-now").css({
+        "display" : "none"
+    });
+}
+//  ngược lại với showCompare()
+function shortenCompare(){
+    $("#divShowCompare").css({
+        "display" : "none"
+    });
+    $("#ss-now").css({
+        "display" : "block"
+    });
+}
+function renderListCompare(){
+    var htmlProduct = " ";
+    var urlGetCompare = url +'/product/compare/getProduct' ;
+    $.ajax({
+            url : urlGetCompare,
+            type : "get",
+            dataType:"text",
+            data : {
+
+            },
+            success : function (result){
+                productsCo = JSON.parse(result);
+                var htmlLi ="";
+                for(let productC of productsCo){
+                    htmlLi += '<li class="inProductCompare">'
+                    +            '<a href="javascript:void(0)" onclick="deleteProductCompare(\'' +productC.Product_id+ '\')" class="iconDeleteCompareProduct"><i class="ion-android-close"></i></a>'
+                    +            '<a href="'+url+'/product/'+ productC.Product_id + '" class="cp-plus cp-plus_new">'
+                    +                '<img src="'+url+'/assets/images/product/' + productC.Avatar   + '" alt="product" width="120px">'
+                    +                '<p>'+ productC.Name + '</p>'
+                    +            '</a>'
+                    +        '</li>';
+                }
+                for(let i =0; i < (2-productsCo.length); i++){
+                    htmlLi += '<li class="formsg">'
+                            +            '<a href="#searchProductCompare" class="cp-plus cp-plus_new" onclick="OpenDialSearch()">'
+                            +                '<i class="bi bi-plus-square-dotted"></i>'
+                            +                '<p>Add Product</p>'
+                            +            '</a>'
+                            +        '</li>'
+                }
+
+                htmlProduct =   '<ul class="listcompare" >'
+                            +        htmlLi
+                            +        '<li class="actionCompare">'
+                            +            '<a class="clearall" href="javascript:;" onclick="shortenCompare();" >'
+                            +                '<i class="bi-chevron-down"></i> Shorten'
+                            +            '</a>'
+                            +            '<div class="buttonActionCompare">'
+                            +                '<p><button type="button" class="btn btn-primary"><a href="'+url+'/compare">Compare Now</a></button></p>'
+                            +                '<button type="button" onclick="deleteAllProductCompare()" class="btn btn-danger">Delete All Products</button>'
+                            +            '</div>'
+                            +       '</li>'
+                            +    '</ul>';
+                $("#divShowCompare").html(htmlProduct);
+            }
+    });
+
+}
+function addProductCompare(productAdd){
+    var urlajax = url +'/addComapre';
+    $.ajax({
+        url : urlajax,
+        type : "post",
+        cache: false,
+        dataType:"text",
+        data : {
+            _token: $("#csrf_token").val(),
+            'product_id' : productAdd
+        },
+        success : function (result){
+            if(result == true){
+                $("#searchProductCompare").removeClass('open');
+                $("#inputSearchCompare").val("");
+                renderListCompare();
+                showCompare();
+                return swal('Success',"The product has been added to the comparison list",'success');
+            }else{
+                return swal('Warning',result,'warning');
+            }
+        }
+    });
+}
+
+function deleteProductCompare(id){
+    let urlCompareDelete = url +'/product/compareDelete/'+id ;
+    $.ajax({
+        url : urlCompareDelete,
+        type : "get",
+        cache: false,
+        dataType:"text",
+        data : {
+        },
+        success : function (result){
+            renderListCompare();
+        }
+    });
+}
+
+function deleteAllProductCompare(){
+    let urlCompareDelete = url +'/product/compare/deleteAll' ;
+    $.ajax({
+        url : urlCompareDelete,
+        type : "get",
+        cache: false,
+        dataType:"text",
+        data : {
+        },
+        success : function (result){
+            renderListCompare();
+        }
+    });
+}
+
+function OpenDialSearch(){
+    $("#searchProductCompare").toggleClass('open');
+}
+
+function changeSearchCompare() {
+    let valueSearch = $("#inputSearchCompare").val();
+    if (valueSearch.trim() == "") {
+        return console.log(0);
+    }
+    let urlSearch = url + '/shop/searchAjax/'+valueSearch;
+    console.log(urlSearch)
+    $.ajax({
+        url: urlSearch,
+        type: "get",
+        dataType: "text",
+        data: {},
+        success: function(result) {
+            console.log(result);
+            if (result == "No Products Found!!!") {
+                $("#displayJewelryCompare").html(result);
+                return 0;
+            }
+            let productSearchs = JSON.parse(result);
+            let listSearch = " ";
+            let test = true;
+            for (let i = 0; i < productSearchs.length; i++) {
+                if (i == 4) {
+                    break;
+                }
+                if (productSearchs[i].Name.toLowerCase().search(valueSearch.toLowerCase()) != -1) {
+                    test = false;
+                    listSearch +=   '<li>'
+                        +               '<a href="javascript:void(0)"  onclick="addProductCompare(\'' +productSearchs[i].Product_id+ '\')">'
+                        +                   '<img src="'+url+'/assets/images/product/' + productSearchs[i].Avatar + '" alt="Image Product" width="80px">'
+                        +                   '<span> ' + productSearchs[i].Name +'</span>'
+                        +               '</a>'
+                        +           '</li>';
+                }
+                if (test == true && i == 4) {
+                    listSearch += '<li> No Products Found!!! </li>';
+                    break;
+                }
+
+            }
+            $("#displayJewelryCompare").css({
+                "opacity": "1",
+                "visibility": "visible",
+                "z-index": "1"
+            });
+            $("#displayJewelryCompare").html(listSearch);
+        }
+    });
+}
+
+renderListCompare();    
 rendercomment();
 renderIconWishlist();
 renderRaiting();

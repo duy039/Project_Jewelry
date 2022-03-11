@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\LoadProduct;
 use App\Models\LoadTag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\JsonResponse;
 use Auth;
 use Route;
 
@@ -23,10 +24,40 @@ class HomeController extends Controller
         $this->tags = $loadTag->getTags();
     }
 
+    public function logout(Request $r)
+    {
+        if (session_id() === '') {
+            session_start();
+        }
+        if (isset($_SESSION['user_id'])) {
+            unset($_SESSION['user_id']);
+        }
+        $this->guard()->logout();
+
+        $r->session()->invalidate();
+
+        $r->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($r)) {
+            return $response;
+        }
+
+        return $r->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/');
+    }
+    protected function loggedOut(Request $request)
+    {
+        //
+    }
+
+    protected function guard()
+    {
+        return Auth::guard();
+    }
 
     public function index()
     {
-
         $wishlists = array();
         if (session_id() === '') {
             session_start();
@@ -37,7 +68,7 @@ class HomeController extends Controller
         }
         $contact = DB::table('contact')->get();
         $resultProductRing = array();
-        // $resultProductEarring = array();
+        $resultProductEarring = array();
         $resultProductNecklace = array();
         $resultProductBracelet = array();
         foreach ($this->products as $p) {
@@ -49,15 +80,15 @@ class HomeController extends Controller
                                     $resultProductRing[] =  $p;
                                     break;
                                 }
-                                // case "2":{
-                                //     $resultProductEarring[] =  $p;
-                                //     break;
-                                // }
                             case "2": {
-                                    $resultProductNecklace[] =  $p;
+                                    $resultProductEarring[] =  $p;
                                     break;
                                 }
                             case "3": {
+                                    $resultProductNecklace[] =  $p;
+                                    break;
+                                }
+                            case "4": {
                                     $resultProductBracelet[] =  $p;
                                     break;
                                 }
@@ -66,8 +97,9 @@ class HomeController extends Controller
                 }
             }
         }
+        // dd($resultProductBracelet);
         $bestSellingProductsRing = array();
-        // $bestSellingProductsEarring = array();
+        $bestSellingProductsEarring = array();
         $bestSellingProductsNecklace = array();
         $bestSellingProductsBracelet = array();
         // tìm 10 sản phẩm có nhiều lượt mua nhất
@@ -77,12 +109,12 @@ class HomeController extends Controller
             }
             return ($a->getSold_Product_Quantity() > $b->getSold_Product_Quantity()) ? 1 : -1;
         });
-        // usort($resultProductEarring, function($b, $a){
-        //     if ($a->getSold_Product_Quantity() == $b->getSold_Product_Quantity()) {
-        //         return 1;
-        //     }
-        //     return ($a->getSold_Product_Quantity() > $b->getSold_Product_Quantity()) ? 1 : -1;
-        // } );
+        usort($resultProductEarring, function ($b, $a) {
+            if ($a->getSold_Product_Quantity() == $b->getSold_Product_Quantity()) {
+                return 1;
+            }
+            return ($a->getSold_Product_Quantity() > $b->getSold_Product_Quantity()) ? 1 : -1;
+        });
         usort($resultProductNecklace, function ($b, $a) {
             if ($a->getSold_Product_Quantity() == $b->getSold_Product_Quantity()) {
                 return 1;
@@ -99,9 +131,9 @@ class HomeController extends Controller
             if (count($resultProductRing) > $i) {
                 $bestSellingProductsRing[] = $resultProductRing[$i];
             }
-            // if(count($resultProductEarring)>$i){
-            //     $bestSellingProductsEarring[] = $resultProductEarring[$i];
-            // }
+            if (count($resultProductEarring) > $i) {
+                $bestSellingProductsEarring[] = $resultProductEarring[$i];
+            }
             if (count($resultProductNecklace) > $i) {
                 $bestSellingProductsNecklace[] = $resultProductNecklace[$i];
             }
@@ -109,10 +141,12 @@ class HomeController extends Controller
                 $bestSellingProductsBracelet[] = $resultProductBracelet[$i];
             }
         }
+        // dd($resultProductEarring);
         return view('index', [
             'bestSellingProductsRing' => $bestSellingProductsRing,
             'bestSellingProductsNecklace' => $bestSellingProductsNecklace,
             'bestSellingProductsBracelet' => $bestSellingProductsBracelet,
+            'bestSellingProductsEarring' => $bestSellingProductsEarring,
             'product' => $this->products,
             'contact' => $contact,
             'wishlists' => $wishlists,
