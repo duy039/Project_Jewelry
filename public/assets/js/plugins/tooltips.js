@@ -14,7 +14,6 @@ var inputLastName = "<div class='text-left'><b>Required: </b><ul><li>- Can not b
 var inputEmailCheckout = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- Less than 50 characters</li></ul></div>";
 var inputPhoneCheckout = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- Less than 12 number</li><li>- Must a number</li></ul></div>";
 var deliveryAddress = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- Less than 50 characters</li></ul></div>";
-var checkout_mess = "<div class='text-left'><b>Required: </b><ul><li>- Can not blank</li><li>- Less than 100 characters</li></ul></div>";
 
 $('#f_name').tooltip({ 'trigger': 'hover', 'title': firstname, 'placement': 'bottom' });
 $('#inputFirstName').tooltip({ 'trigger': 'hover', 'title': inputFirstName, 'placement': 'bottom' });
@@ -31,4 +30,3 @@ $('#message').tooltip({ 'trigger': 'hover', 'title': message, 'placement': 'bott
 $('#phone').tooltip({ 'trigger': 'hover', 'title': phone, 'placement': 'bottom' });
 $('#inputPhoneCheckout').tooltip({ 'trigger': 'hover', 'title': inputPhoneCheckout, 'placement': 'bottom' });
 $('#deliveryAddress').tooltip({ 'trigger': 'hover', 'title': deliveryAddress, 'placement': 'bottom' });
-$('#checkout-mess').tooltip({ 'trigger': 'hover', 'title': checkout_mess, 'placement': 'bottom' });

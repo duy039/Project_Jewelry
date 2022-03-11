@@ -116,7 +116,7 @@
                                                             {{ __('Point') }}:
                                                             {{ Auth::user()->point }}</span></li>
                                                     <hr style="margin: 0">
-                                                    <li><a href="{{ route('logout') }}"
+                                                    <li><a href="{{ url('logouts') }}"
                                                             onclick="event.preventDefault();
                                                                 document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
@@ -124,10 +124,10 @@
                                                             {{ __('Sign out') }}
                                                         </a></li>
                                                 </ul>
-                                                {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                <form id="logout-form" action="{{ url('logouts') }}" method="POST"
                                                     class="d-none">
                                                     @csrf
-                                                </form> --}}
+                                                </form>
                                             </li>
                                         @endguest
                                     </ul>
@@ -559,14 +559,14 @@
                                             <li><span style="font-size: 12px ;margin-left:3%"> {{ __('Point') }}:
                                                     {{ Auth::user()->point }}</span></li>
                                             <hr style="margin: 0">
-                                            <li><a href="{{ route('logout') }}"
+                                            <li><a href="{{ url('logouts') }}"
                                                     onclick="event.preventDefault();
                                                                                                                                             document.getElementById('logout-form').submit();"><i
                                                         class="fa fa-sign-out-alt text-danger" aria-hidden="true"></i>
                                                     {{ __('Sign out') }}
                                                 </a></li>
                                         </ul>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        <form id="logout-form" action="{{ url('logouts') }}" method="POST"
                                             class="d-none">
                                             @csrf
                                         </form>
@@ -1040,515 +1040,85 @@
                             <div id="Earrings" class="tab-pane" role="tabpanel">
                                 <div class="hiraola-product-tab_slider-2">
                                     <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-5.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-9.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
+                                    @foreach ($bestSellingProductsEarring as $ear)
+                                        <div class="slide-item">
+                                            <div class="single_product">
+                                                <div class="product-img">
+                                                    <a href="{{ url('product/' . $ear->getId()) }}">
+                                                        <img class='primary-img'
+                                                            src='{{ url('assets/images/product/' . $ear->getAvatar()) }}'
+                                                            alt='Product Image'>
+                                                        <img class='secondary-img'
+                                                            src='{{ url('assets/images/product/' . $ear->getImage()[1]) }}'
+                                                            alt='Product Image'>
+                                                    </a>
+                                                    <span class="sticker">New</span>
+                                                    @if ($ear->getSale_type() != null && strtolower($ear->getSale_type()) != 'normal')
+                                                        <span class='sticker-2'>Sale</span>
+                                                    @endif
                                                 </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Puoly and
-                                                            Bark Eames
-                                                            Styl...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£60.00</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-7.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-8.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <span class="sticker">New</span>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">George
-                                                            Nelson
-                                                            Sunburst Cl...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£70.00</span>
-                                                        <span class="old-price">£85.00</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
+                                                <div class="hiraola-product_content">
+                                                    <div class="product-desc_info">
+                                                        <h6><a class="product-name"
+                                                                href="{{ url('product/' . $ear->getId()) }}">{{ $ear->getName() }}</a>
+                                                        </h6>
+                                                        <div class="price-box">
+                                                            @if ($ear->getSale_type() != null && strtolower($ear->getSale_type()) != 'normal')
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price text-danger">${{ $ear->getCurrentPrice() }}</span>
+                                                            @else
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price fw-bolder">${{ $ear->getCurrentPrice() }}</span>
+                                                            @endif
+                                                            @if ($ear->getCurrentPrice() != $ear->getPrice_Root())
+                                                                <span
+                                                                    class="old-price">${{ $ear->getPrice_Root() }}</span>
+                                                            @endif
+                                                        </div>
+                                                        <div class="additional-add_action">
+                                                            <ul>
+                                                                <li id="e{{ $ear->getId() }}">
+                                                                    <?php $test = true; ?>
+                                                                    @foreach ($wishlists as $w)
+                                                                        @if ($w->Product_id == $ear->getId())
+                                                                            <a class="hiraola-add_compare"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="wishlistDelete('{{ $ear->getId() }}','{{ $w->WishList_id }}')"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Remove from favorites"
+                                                                                style="color: rgb(255, 51, 0)"><i
+                                                                                    class="fas fa-heart"></i></a>
+                                                                            <?php $test = false; ?>
+                                                                        @endif
+                                                                    @endforeach
+                                                                    @if ($test)
+                                                                        <a class="hiraola-add_compare"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="wishlistHandler('{{ $ear->getId() }}')"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add To Wishlist"><i
+                                                                                class="ion-android-favorite-outline"></i></a>
+                                                                    @endif
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="rating-box">
+                                                            <ul>
+                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                                    <li class="silver-color"><i
+                                                                            class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-8.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-5.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <span class="sticker">New</span>
-                                                <span class="sticker-2">Sale</span>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Work Lamp
-                                                            Silver
-                                                            Proin
-                                                            he...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£35.20</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-9.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-4.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Flash
-                                                            Furniture
-                                                            Alonza Se...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£77.44</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-9.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-7.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Pwoly and
-                                                            Bark Eames
-                                                            Styl...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£99.60</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-5.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-4.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <span class="sticker">New</span>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">George
-                                                            Nelson
-                                                            Sunburst Cl...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£70.00</span>
-                                                        <span class="old-price">£85.00</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-2.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-5.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">1 - 2
-                                                            Person Outdoor
-                                                            Camp...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£30.00</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-9.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-6.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Puoly and
-                                                            Bark Eames
-                                                            Styl...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£60.00</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                     <!-- Hiraola's Slide Item Area End Here -->
                                 </div>
                             </div>
@@ -1810,7 +1380,7 @@
                                                         </div>
                                                         <div class="additional-add_action">
                                                             <ul>
-                                                                <li id="b{{ $brac->getId() }}">
+                                                                <li id="ba{{ $brac->getId() }}">
                                                                     <?php $test = true; ?>
                                                                     @foreach ($wishlists as $w)
                                                                         @if ($w->Product_id == $brac->getId())
@@ -1858,514 +1428,85 @@
                             <div id="Earrings-2" class="tab-pane" role="tabpanel">
                                 <div class="hiraola-product-tab_slider-2">
                                     <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-9.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-8.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
+                                    @foreach ($bestSellingProductsEarring as $ear)
+                                        <div class="slide-item">
+                                            <div class="single_product">
+                                                <div class="product-img">
+                                                    <a href="{{ url('product/' . $ear->getId()) }}">
+                                                        <img class='primary-img'
+                                                            src='{{ url('assets/images/product/' . $ear->getAvatar()) }}'
+                                                            alt='Product Image'>
+                                                        <img class='secondary-img'
+                                                            src='{{ url('assets/images/product/' . $ear->getImage()[1]) }}'
+                                                            alt='Product Image'>
+                                                    </a>
+                                                    <span class="sticker">New</span>
+                                                    @if ($ear->getSale_type() != null && strtolower($ear->getSale_type()) != 'normal')
+                                                        <span class='sticker-2'>Sale</span>
+                                                    @endif
                                                 </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Flash
-                                                            Furniture
-                                                            Alonza Se...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£90.36</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-7.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-6.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <span class="sticker-2">Sale</span>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Global
-                                                            Knives:
-                                                            Profession...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£60.25</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
+                                                <div class="hiraola-product_content">
+                                                    <div class="product-desc_info">
+                                                        <h6><a class="product-name"
+                                                                href="{{ url('product/' . $ear->getId()) }}">{{ $ear->getName() }}</a>
+                                                        </h6>
+                                                        <div class="price-box">
+                                                            @if ($ear->getSale_type() != null && strtolower($ear->getSale_type()) != 'normal')
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price text-danger">${{ $ear->getCurrentPrice() }}</span>
+                                                            @else
+                                                                <span style="font-weight: bolder"
+                                                                    class="new-price fw-bolder">${{ $ear->getCurrentPrice() }}</span>
+                                                            @endif
+                                                            @if ($ear->getCurrentPrice() != $ear->getPrice_Root())
+                                                                <span
+                                                                    class="old-price">${{ $ear->getPrice_Root() }}</span>
+                                                            @endif
+                                                        </div>
+                                                        <div class="additional-add_action">
+                                                            <ul>
+                                                                <li id="ea{{ $ear->getId() }}">
+                                                                    <?php $test = true; ?>
+                                                                    @foreach ($wishlists as $w)
+                                                                        @if ($w->Product_id == $ear->getId())
+                                                                            <a class="hiraola-add_compare"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="wishlistDelete('{{ $ear->getId() }}','{{ $w->WishList_id }}')"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Remove from favorites"
+                                                                                style="color: rgb(255, 51, 0)"><i
+                                                                                    class="fas fa-heart"></i></a>
+                                                                            <?php $test = false; ?>
+                                                                        @endif
+                                                                    @endforeach
+                                                                    @if ($test)
+                                                                        <a class="hiraola-add_compare"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="wishlistHandler('{{ $ear->getId() }}')"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add To Wishlist"><i
+                                                                                class="ion-android-favorite-outline"></i></a>
+                                                                    @endif
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="rating-box">
+                                                            <ul>
+                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
+                                                                    <li class="silver-color"><i
+                                                                            class="fa fa-star-of-david"></i></li>
+                                                                @endfor
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-5.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-4.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Flash
-                                                            Furniture
-                                                            Alonza Se...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£76.44</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-3.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-2.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <span class="sticker-2">Sale</span>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Work Lamp
-                                                            Silver
-                                                            Proin
-                                                            he...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£35.20</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-2.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-9.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <span class="sticker">New</span>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Global
-                                                            Knives:
-                                                            Profession...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£60.25</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-5.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-6.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Flash
-                                                            Furniture
-                                                            Alonza Se...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£77.44</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-8.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-5.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <span class="sticker">New</span>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Pwoly and
-                                                            Bark Eames
-                                                            Styl...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£23.43</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Hiraola's Slide Item Area End Here -->
-                                    <!-- Begin Hiraola's Slide Item Area -->
-                                    <div class="slide-item">
-                                        <div class="single_product">
-                                            <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img"
-                                                        src="assets/images/product/medium-size/1-4.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                    <img class="secondary-img"
-                                                        src="assets/images/product/medium-size/1-7.jpg"
-                                                        alt="Hiraola's Product Image">
-                                                </a>
-                                                <div class="add-actions">
-                                                    <ul>
-                                                        <li><a class="hiraola-add_cart" href="cart.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i class="ion-bag"></i></a>
-                                                        </li>
-                                                        <li><a class="hiraola-add_compare" href="compare.html"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Compare This Product"><i
-                                                                    class="ion-ios-shuffle-strong"></i></a>
-                                                        </li>
-                                                        <li class="quick-view-btn" data-toggle="modal"
-                                                            data-target="#exampleModalCenter"><a
-                                                                href="javascript:void(0)" data-toggle="tooltip"
-                                                                data-placement="top" title="Quick View"><i
-                                                                    class="ion-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="hiraola-product_content">
-                                                <div class="product-desc_info">
-                                                    <h6><a class="product-name" href="single-product.html">Utensils
-                                                            and Knives
-                                                            Block...</a></h6>
-                                                    <div class="price-box">
-                                                        <span class="new-price">£50.43</span>
-                                                    </div>
-                                                    <div class="additional-add_action">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li><i class="fa fa-star-of-david"></i></li>
-                                                            <li class="silver-color"><i
-                                                                    class="fa fa-star-of-david"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                     <!-- Hiraola's Slide Item Area End Here -->
                                 </div>
                             </div>

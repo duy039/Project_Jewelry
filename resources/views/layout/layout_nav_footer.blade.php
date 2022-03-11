@@ -168,7 +168,7 @@ $tagss = $lloadTag->getTags();
                                             </li>
                                             <hr style="margin: 0">
                                             <li>
-                                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                <a href="{{ url('logouts') }}" onclick="event.preventDefault();
                                                             document.getElementById('logout-form').submit();"><i
                                                         class="fa fa-sign-out-alt text-danger"
                                                         aria-hidden="true"></i>
@@ -176,7 +176,7 @@ $tagss = $lloadTag->getTags();
                                                 </a>
                                             </li>
                                         </ul>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        <form id="logout-form" action="{{ url('logouts') }}" method="POST"
                                             class="d-none">
                                             @csrf
                                         </form>
@@ -444,14 +444,14 @@ $tagss = $lloadTag->getTags();
                                             {{ __('Point') }}:
                                             {{ Auth::user()->point }}</span></li>
                                     <hr style="margin: 0">
-                                    <li><a href="{{ route('logout') }}"
+                                    <li><a href="{{ url('logouts') }}"
                                             onclick="event.preventDefault();
                                                                     document.getElementById('logout-form').submit();"><i
                                                 class="fa fa-sign-out-alt text-danger" aria-hidden="true"></i>
                                             {{ __('Sign out') }}
                                         </a></li>
                                 </ul>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                <form id="logout-form" action="{{ url('logouts') }}" method="POST"
                                     class="d-none">
                                     @csrf
                                 </form>
