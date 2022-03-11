@@ -306,5 +306,80 @@ class SingleProductController extends Controller
         }
     }
 
+    public function addCompare(Request $request){
+        if (session_id() === ''){
+            session_start();
+        }
+        // kiểm tra có tồn tại 2 post này ko?
+        if(isset($request->product_id)){
+            
+            if( !isset( $_SESSION['productCompare'] ) ){
+                $_SESSION['productCompare'] = array();
+            }
+            // ko cho sản phẩm bị trùng
+            foreach($_SESSION['productCompare']  as $pc){
+                if($pc->Product_id == $request->product_id){
+                    return "The product is already in the comparison list!";
+                }
+            }
+            // chỉ cho phép thêm 2 sản  phẩm
+            if(count($_SESSION['productCompare']) < 2 ){
+                foreach($this->products as $p){
+                    if($p->getId() == $request->product_id){
+                        $productObj = (object) [
+                            'Product_id'    => $p->getId(),
+                            'Name'          => $p->getName(),
+                            'Description'   => $p->getDescription(),
+                            'Price'         => $p->getCurrentPrice(),
+                            'Rating'        => $p->getRating(),
+                            'Quantity'      => $p->getQuantity(),
+                            'Sold_Product_Quantity'         => $p->getSold_Product_Quantity(),
+                            'Avatar'        => $p->getAvatar(),
+                            'Size'          => $p->getSize(),
+                        ];
+                        $_SESSION['productCompare'][]= $productObj ;
+                    }
+                }      
+            }else if(count($_SESSION['productCompare']) >= 2 ){
+                return "Please remove the product from the comparison list before adding a new product!";
+            }
+            return true;
+        }
+    }
+
+    public function getCompare(){
+        if (session_id() === ''){
+            session_start();
+        }
+        $resultProducts = array(); 
+        if(isset($_SESSION['productCompare'])){
+            $resultProducts = $_SESSION['productCompare'];
+        }
+        return json_encode($resultProducts);
+    }
+
+    // Ajax Xóa 1 product trong compare
+    public function compareDelete($id){
+        if (session_id() === ''){
+            session_start();
+        }
+        $test=array();
+        for($i=0; $i<count($_SESSION['productCompare']); $i++){
+            if($_SESSION['productCompare'][$i]->Product_id  != $id ){
+                $test[]  = $_SESSION['productCompare'][$i];
+            }
+        }
+        $_SESSION['productCompare'] = $test;
+        return true;
+    }
+
+    // Ajax Xóa 1 product trong compare
+    public function compareDeleteAll(){
+        if (session_id() === ''){
+            session_start();
+        }
+        $_SESSION['productCompare'] = array();
+        return true;
+    }
 
 }

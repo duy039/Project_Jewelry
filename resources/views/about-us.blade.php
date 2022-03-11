@@ -46,31 +46,70 @@
             </div>
             <!-- Hiraola's Breadcrumb Area End Here -->
             <!-- Begin Hiraola's About Us Area -->
-            <div class="about-us-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-7 d-flex align-items-center">
-                            <div class="overview-content">
-                                <h2>Welcome To <span>Hiraola's</span> Store!</h2>
-                                <p class="short_desc">We Provide Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                    Repudiandae nisi fuga facilis, consequuntur, maiores eveniet voluptatum, omnis possimus
-                                    temporibus aspernatur nobis animi in exercitationem vitae nulla! Adipisci ullam illum quisquam.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, nulla veniam? Magni aliquid
-                                    asperiores magnam. Veniam ex tenetur.</p>
-                                <div class="hiraola-about-us_btn-area">
-                                    <a class="about-us_btn" href="shop-left-sidebar.html">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-5">
-                            <div class="overview-img text-center img-hover_effect">
-                                <a href="#">
-                                    <img class="img-full" src="assets/images/about-us/1.jpg" alt="Hiraola's About Us Image">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+            <div style="width:1240px; margin:auto">
+                <div style="margin-top:25px;text-align:center">
+                    <span style="font-size:40px;line-height:140px;padding-bottom:37px;border-bottom:1px solid #000;">Brand Story</span>
                 </div>
+                <div class="text18">
+            
+                " At Jeulia, jewelry is more than an accessory - it represents something much more profound. Through jewelry, we're endowed with the ability to not only personalize a look, but also evoke emotion and create memories. This is the very mentality of Jeulia; we create premium, artisanal jewelry that embodies both who you are and what you stand for. Jeulia is located in Unit 20B2, 20/F, Guangdong Investment Tower, No. 148 Connaught Road, Central, Sheung Wan, Hong Kong."
+
+                </div>
+                <div style="margin: 60px 0 40px">
+                    <iframe style="width:1240px;height:696px" src="https://www.youtube.com/embed/Tu2VAAZg4A8?rel=0&enablejsapi=1&origin=https%3A%2F%2Fwww.jeulia.com" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-gtm-yt-inspected-8005137_16="true" id="108607724"></iframe>
+                </div>
+                <div style="margin-top: 25px; text-align: center">
+                    <span style="font-size:40px; line-height:100px">"15 Steps Process 100% Handcrafted Jewelry"</span>
+                </div>
+                <div style="height:1px; width:500px;margin:auto;border-bottom:1px solid #000"></div>
+                <div class="text18">
+                    
+                 " Designed and handcrafted in house at our state-of-the-art studio headquartered in Hong Kong, each beautiful piece is custom-made to be as unique and authentic as you are. True artisanship comes from caring hands, not an assembly line, which is why our workshop always puts the quality, and more importantly, you, first."
+                </div>
+                <div style="padding-top: 60px; " class="clearfix">
+                <div class="fw50">
+                    <img src="assets/images/about-us/p1.jpg" style="display: block">
+                </div>
+                <div class="fw50" style="padding-left: 10px; box-sizing: border-box;padding-top:115px">
+                   <div style="margin-top:25px;text-align:center;font-size:36px;line-height:100px">
+                        "So You Can Celebrate Yoursefl"
+                   </div>   
+                   <div style="height:1px;width:500px;margin:auto;border-bottom:1px solid #000"></div> 
+                   <div class="text18">
+                    " Because of our bespoke approach, each design is tailor-made to evoke an emotional connection while simultaneously ensuring it's a true representation of whomever is wearing it. From timeless and traditional to bold and modern, we offer a variety of jewelry options at affordable prices to meet the needs and tastes of everyone."
+                </div>
+                </div>
+                </div>
+                <div class="clearfix">
+                    <div class="fw50" style="padding-right:10px;box-sizing:border-box;padding-top:105px">
+                    <div style="margin-top:25px;text-align:center;font-size:36px;line-height:50px;height:130px">
+                        Enviromental Frendly and High-quality Meterial
+                    </div>
+                    <div style="height:1px;width:500px;margin:auto;border-bottom:1px solid #000"></div>
+                    <div class="text18">
+                        " Furthermore, we take extreme pride in our craftmanship and as such, the use of environmentally-conscious materials is just as important as the final product. Whether it's an engagement ring or a cocktail ring, each Jeulia piece is thoughtfully produced from start to finish so you can be assured of your purchases."
+                    </div>
+                    </div>
+                    <div class="fw50">
+                    <img src="assets/images/about-us/p2.jpg" style="display: block;">
+                </div>
+                </div>
+                <div class="clearfix">
+                    <div class="fw50">
+                        <img src="assets/images/about-us/p3.jpg" style="display: block;">
+                    </div>
+                    <div class="fw50" style="padding-left:10px;box-sizing:border-box;padding-top:125px">
+                        <div style="margin-top:25px;text-align:center;font-size:36px;line-height:100px">Our Misson</div>
+                        <div style="height:1px;width:500px;margin:auto;border-bottom:1px solid #000"></div>
+                        <div class="text18">
+                            " Our talented team of designers and craftsmen work conscientiously to bring each creation to life, from our hearts to yours. We promise to continue creating work of art that express your unique self, capture your unforgettable love story, and celebrate those memorable moments in your life journey."
+                        </div>
+                </div>
+                </div>
+                <div style="padding:70px 210px;text-align:center" class="text18">
+                    " At Jeulia,jewelry is more than an accessory-it's the embodiment of our passion,our love,and ultimately,
+                                                        our gift to you. "
+            </div>
             </div>
             <!-- Hiraola's About Us Area End Here -->
 
@@ -316,5 +355,3 @@
 
     @endsection
 </html>
-        
-        

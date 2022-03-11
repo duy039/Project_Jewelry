@@ -20,7 +20,11 @@
     <link rel="stylesheet" href="{{url('assets/css/plugins/lightgallery.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/plugins/nice-select.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/plugins/timecircles.css')}}">
-    <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ url('assets/css/plugins/compareAction.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
 </head>
 @extends('layout.layout_nav_footer')
 
@@ -115,7 +119,7 @@
                                         <li><a class="qty-cart_btn" onclick="addToCart('{{ $product->getId() }}')" href="javascript:void(0)">Add To Cart</a></li>
                                         {{-- js sẽ render --}}
                                         <li id="iconWishlist"></li>
-                                        <li><a class="qty-compare_btn" href="compare.html" data-toggle="tooltip" title="Compare This Product"><i class="ion-ios-shuffle-strong"></i></a></li>
+                                        <li><a class="qty-compare_btn" href="javascript:void(0)"  onclick="addProductCompare('{{ $product->getId() }}')" data-toggle="tooltip" title="Compare This Product"><i class="ion-ios-shuffle-strong"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="hiraola-tag-line">
@@ -357,7 +361,7 @@
                                                     <a class="hiraola-add_cart" onclick="addToCartProduct('{{ $pro->getId() }}')" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a class="hiraola-add_compare" href="compare.html" data-toggle="tooltip" data-placement="top" title="Compare This Product">
+                                                    <a class="hiraola-add_compare" href="javascript:void(0)"  onclick="addProductCompare('{{ $pro->getId() }}')" data-toggle="tooltip" data-placement="top" title="Compare This Product">
                                                         <i class="ion-ios-shuffle-strong"></i>
                                                     </a>
                                                 </li>
@@ -458,7 +462,7 @@
                                                     <a class="hiraola-add_cart" onclick="addToCartProduct('{{ $pro->getId() }}')" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a class="hiraola-add_compare" href="compare" data-toggle="tooltip" data-placement="top" title="Compare This Product">
+                                                    <a class="hiraola-add_compare" href="javascript:void(0)" onclick="addProductCompare('{{ $pro->getId() }}')" data-toggle="tooltip" data-placement="top" title="Compare This Product">
                                                         <i class="ion-ios-shuffle-strong"></i>
                                                     </a>
                                                 </li>
@@ -642,6 +646,34 @@
 
         <input id="pro_id" type="hidden" value='{{ $product->getId() }}'>
 
+        <div class="compareDiv">
+            {{-- compare bản nhỏ --}}
+            <div class="popup-button" id="miniCompare">
+                <a href="javascript:;" onclick="showCompare()" id="ss-now" style="display: block;">
+                    <span>List Compare</span>
+                </a>
+            </div>
+            {{-- compare bản lớn --}}
+            <div id="divShowCompare" class="stickcompare stickcompare_new cp-desktop spaceInDown" style="display: none;">
+            </div>
+            <div class="offcanvas-search_wrapper" id="searchProductCompare">
+                <div class="offcanvas-menu-inner">
+                    <div class="container">
+                        <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
+                        <!-- Begin Offcanvas Search Area -->
+                        <div class="offcanvas-search">
+                            <form class="hm-searchbox">
+                                <input id="inputSearchCompare" type="text" placeholder="Search for item..." onkeyup="changeSearchCompare()">
+                                <ul id="displayJewelryCompare"></ul>
+                                <button class="search_btn" type="button"><i class="ion-ios-search-strong"></i></button>
+                            </form>
+                        </div>
+                        <!-- Offcanvas Search Area End Here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="{{url('assets/js/plugins/controllerSingleProduct.js')}}"></script>
 @endsection
