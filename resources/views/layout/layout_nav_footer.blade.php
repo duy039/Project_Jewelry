@@ -765,10 +765,8 @@ $tagss = $lloadTag->getTags();
                     }
                     if (productSearchs[i].Name.toLowerCase().search(valueSearch.toLowerCase()) != -1) {
                         test = false;
-                        listSearch += '<li><a href="{{ url('product') }}/' + productSearchs[i]
-                            .Product_id +
-                            '"><img src="{{ url('assets/images/product') }}/' + productSearchs[i]
-                            .Avatar +
+                        listSearch += '<li><a href="{{ url('product') }}/' + productSearchs[i].Product_id +
+                                '"><img src="{{ url('assets/images/product') }}/' + productSearchs[i].Avatar +
                             '" alt="Image Product" width="80px"> <span> ' + productSearchs[i].Name +
                             '</span></a></li>';
                     }
