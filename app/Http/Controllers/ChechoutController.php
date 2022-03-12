@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LoadProduct;
-<<<<<<< HEAD
-use Auth;
-use App\Models\LoadTag;
-=======
->>>>>>> ce1be7fa2ef2cfb924c4b24d75acb6a4defa7afc
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Auth;
+
 
 class ChechoutController extends Controller
 {

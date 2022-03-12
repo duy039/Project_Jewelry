@@ -34,9 +34,6 @@ class HomeController extends Controller
         }
         $this->guard()->logout();
 
-<<<<<<< HEAD
-    public function index(){
-=======
         $r->session()->invalidate();
 
         $r->session()->regenerateToken();
@@ -61,7 +58,6 @@ class HomeController extends Controller
 
     public function index()
     {
->>>>>>> ce1be7fa2ef2cfb924c4b24d75acb6a4defa7afc
         $wishlists = array();
         if ( Auth::guest() ){
             //    Chưa đăng nhập
