@@ -10018,8 +10018,17 @@ p .bi-check-circle{
 #compareTowProduct .comparetd{
   width: 40%;
 }
-
-
+.contentComment .iconLike{
+  font-size: 24px;
+  padding-right: 5px;
+  margin-top: 8px;
+}
+.contentComment .iconLike :hover{
+  color: blue;
+}
+.contentComment .iconLike .yesLiked{
+  color: blue;
+}
 
 
 

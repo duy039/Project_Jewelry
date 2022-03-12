@@ -24,17 +24,15 @@ class HomeController extends Controller
     }
 
 
-    public function index()
-    {
-
+    public function index(){
         $wishlists = array();
-        if (session_id() === '') {
-            session_start();
+        if ( Auth::guest() ){
+            //    Chưa đăng nhập
         }
-        if (isset($_SESSION['user_id'])) {
-            // đã login
-            $wishlists = DB::table('wishlist')->where('User_id', $_SESSION['user_id'])->get();
+        else{
+            $wishlists = DB::table('wishlist')->where('User_id', Auth::user()->id)->get();
         }
+
         $contact = DB::table('contact')->get();
         $resultProductRing = array();
         // $resultProductEarring = array();

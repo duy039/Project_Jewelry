@@ -1,6 +1,7 @@
 var url = $("#urlWeb").val();
 // user_id có thể = null nếu chưa đăng nhập
 var user_id = ($("#user_id").val() != 'null')?$("#user_id").val():null;
+// sản phẩm đang xem
 var pro_id = $("#pro_id").val();
 function wishlistsResponse() {
     // local var
@@ -69,6 +70,25 @@ function raitingResponse() {
     });
     return theResponse;
 }
+
+function countLikeRating(ratings_id) {
+    // local var
+    var theResponse = null;
+    // jQuery ajax
+    $.ajax({
+        url: url +'/product/like/getLikeRating/'+ratings_id+'/'+user_id,
+        type: 'get',
+        data: {
+
+        },
+        dataType: "text",
+        async: false,
+        success: function(respText) {
+            theResponse = JSON.parse(respText);
+        }
+    });
+    return theResponse;
+}
 let wishlists = (user_id != null)?wishlistsResponse():null;
 let comments = commentsResponse();
 let raitings = raitingResponse();
@@ -79,11 +99,7 @@ function rendercomment(){
     let htmlAvatarComment = "";
     for(let i=0; i<comments.length; i++){
         if(comments[i].user_Avatar == "null"){
-            if(comments[i].user_Gender == 'male'){
-                htmlAvatarComment = '<img src="'+url+'/assets/images/user/avatarmale.jpg" alt="avatar">'
-            }else{
-                htmlAvatarComment = '<img src="'+url+'/assets/images/user/avatarfemale.jpg" alt="avatar">'
-            }
+                htmlAvatarComment = '<img src="'+url+'/assets/images/user/avatarDefault.jpg" alt="avatar">'
         }else{
             htmlAvatarComment = '<img src="'+url+'/assets/images/user/'+comments[i].user_Avatar+'" alt="avatar">'
         }
@@ -103,7 +119,6 @@ function rendercomment(){
                     +                            '<tr>'
                     +                                '<td colspan="2">'
                     +                                    '<p>'+comments[i].Content+'</p>'
-                    +                                    '<span><i class="far fa-thumbs-up"></i></span>  <span> 10</span>'
                     +                                '</td>'
                     +                            '</tr>'
                     +                        '</tbody>'
@@ -124,14 +139,17 @@ function renderRaiting(){
     let htmlRaitings = "";
 
     for(let i=0; i<raitings.length; i++){
+        let likeRating = countLikeRating(raitings[i].Raiting_id);
         let htmlAvatarRaiting = "";
         let htmlCountRaiting = "";
+        let iconLiked='';
+        if(likeRating.liked == true){
+            iconLiked = '<i class="fas fa-thumbs-up yesLiked"></i>';
+        }else{
+            iconLiked = '<i class="far fa-thumbs-up"></i>';
+        }
         if(raitings[i].user_Avatar == "null"){
-            if(raitings[i].user_Gender == 'male'){
-                htmlAvatarRaiting = '<img src="'+url+'/assets/images/user/avatarmale.jpg" alt="avatar">'
-            }else{
-                htmlAvatarRaiting = '<img src="'+url+'/assets/images/user/avatarfemale.jpg" alt="avatar">'
-            }
+            htmlAvatarRaiting = '<img src="'+url+'/assets/images/user/avatarDefault.jpg" alt="avatar">'
         }else{
             htmlAvatarRaiting = '<img src="'+url+'/assets/images/user/'+raitings[i].user_Avatar+'" alt="avatar">'
         }
@@ -162,9 +180,9 @@ function renderRaiting(){
                     +                                    '<div class="rating-box">'
                     +                                       '<ul>'
                     +                      htmlCountRaiting
-                    +                                       '</ul>'
+                    +                                       '</ul>' 
                     +                                    '</div>'
-                    +                                    '<span><i class="far fa-thumbs-up"></i></span>  <span> 10</span>'
+                    +                                    '<a href="javascript:void(0)"  onclick="addLikeRaiting(\'' +raitings[i].Raiting_id+ '\')" class="iconLike">'+iconLiked+'</a>  <span> '+likeRating.count+'</span>'
                     +                                '</td>'
                     +                            '</tr>'
                     +                        '</tbody>'
@@ -267,6 +285,28 @@ function addRaiting(){
                 raitings = raitingResponse();
                 renderRaiting();
                 $("#contenRaiting").val("");
+            }
+        });
+    }
+}
+// xử lý khi user Thêm 1 Raiting
+function addLikeRaiting(ratingID){
+    if(user_id == null){
+        return swal('Warning',"You must be logged in to like this rating!",'warning');
+    }else{
+        let urlAddRaiting = url +'/addLikeRaiting' ;
+        $.ajax({
+            url : urlAddRaiting,
+            type : "post",
+            cache: false,
+            dataType:"text",
+            data : {
+                _token: $("#csrf_token").val(),
+                'user_id' : user_id,
+                'ratingID' : ratingID,
+            },
+            success : function (result){
+                renderRaiting();
             }
         });
     }
@@ -691,7 +731,7 @@ function renderListCompare(){
                             +                '<i class="bi-chevron-down"></i> Shorten'
                             +            '</a>'
                             +            '<div class="buttonActionCompare">'
-                            +                '<p><button type="button" class="btn btn-primary"><a href="'+url+'/compare">Compare Now</a></button></p>'
+                            +                '<p><button type="button" class="btn btn-primary"><a style="text-decoration: none; color: #fff" href="'+url+'/compare">Compare Now</a></button></p>'
                             +                '<button type="button" onclick="deleteAllProductCompare()" class="btn btn-danger">Delete All Products</button>'
                             +            '</div>'
                             +       '</li>'

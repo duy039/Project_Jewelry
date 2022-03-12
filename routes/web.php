@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 Route::post('/wishlistHandler', 'App\Http\Controllers\WishlistController@wishlistHandler');
 Route::post('/addComment', 'App\Http\Controllers\SingleProductController@addComment');
 Route::post('/addRaiting', 'App\Http\Controllers\SingleProductController@addRaiting');
+Route::post('/addLikeRaiting', 'App\Http\Controllers\SingleProductController@addLikeRaiting');
 Route::post('/addToCart', 'App\Http\Controllers\SingleProductController@addToCart');
 Route::post('/addComapre', 'App\Http\Controllers\SingleProductController@addCompare');
 Route::get('/wishlistDelete/{user_id}/{wishl_id}', 'App\Http\Controllers\WishlistController@wishlistDelete');
@@ -33,6 +34,7 @@ Route::prefix('product')->group(function () {
     Route::get('/compare/getProduct', 'App\Http\Controllers\SingleProductController@getCompare');
     Route::get('/compare/deleteAll', 'App\Http\Controllers\SingleProductController@compareDeleteAll');
     Route::get('/compareDelete/{id}', 'App\Http\Controllers\SingleProductController@compareDelete');
+    Route::get('/like/getLikeRating/{raitingID}/{userID}', 'App\Http\Controllers\SingleProductController@countLikeRating');
 });
 Route::prefix('wishlist')->group(function () {
     Route::get('/', 'App\Http\Controllers\WishlistController@index');
