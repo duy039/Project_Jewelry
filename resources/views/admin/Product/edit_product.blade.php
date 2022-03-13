@@ -17,38 +17,38 @@
          </span>
        </div>
       @foreach($edit_product as $key => $pro)
-      <form action="{{URL::to('/update-product/'.$pro->product_id)}}" method="post" enctype="multipart/form-data" class="form-horizontal">
+      <form action="{{URL::to('/update-product/'.$pro->Product_id)}}" method="post" enctype="multipart/form-data" class="form-horizontal">
         {{csrf_field()}}
       <div class="card-body ">
         <div class="row">
           <label class="col-sm-2 col-form-label">{{__('Tên Sản Phẩm')}} :</label>
           <div class="col-sm-7">
             <div class="form-group">
-              <input class="form-control" type="text" onkeyup="ChangeToSlug();" id="slug" name="product_name" value="{{($pro->product_name)}}"/>
+              <input class="form-control" type="text" onkeyup="ChangeToSlug();" id="slug" name="product_name" value="{{($pro->Name)}}"/>
             </div>
           </div>
         </div>
-        <div class="row">
+        {{--  <div class="row">
           <label class="col-sm-2 col-form-label">{{__('Tên Sản Phẩm En')}} :</label>
           <div class="col-sm-7">
             <div class="form-group">
               <input class="form-control" type="text" name="product_name_en" class="form-control" value="{{($pro->product_name_en)}}" />
             </div>
           </div>
-        </div>
-        <div class="row">
+        </div>  --}}
+        {{--  <div class="row">
           <label class="col-sm-2 col-form-label">{{__('Slug Sản Phẩm')}} :</label>
           <div class="col-sm-7">
             <div class="form-group">
-              <input class="form-control" type="text" id="convert_slug" name="product_slug" value="{{($pro->product_slug)}}" />
+              <input class="form-control" type="text" id="convert_slug" name="product_slug" value="{{($pro->Quantity)}}" />
             </div>
           </div>
-        </div>
+        </div>  --}}
         <div class="row">
           <label class="col-sm-2 col-form-label">{{__('Giá Sản Phẩm')}} :</label>
           <div class="col-sm-7">
             <div class="form-group">
-              <input class="form-control" type="text" name="product_price" value="{{($pro->product_price)}}" />
+              <input class="form-control" type="text" name="product_price" value="{{($pro->Price_Sale)}}" />
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
           <label class="col-sm-2 col-form-label">{{__('Số Lượng Sản Phẩm')}} :</label>
           <div class="col-sm-7">
             <div class="form-group">
-              <input class="form-control" type="text" name="product_qty" value="{{($pro->product_qty)}}" />
+              <input class="form-control" type="text" name="product_qty" value="{{($pro->Quantity)}}" />
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@
           <div class="col-sm-7">
             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
               <div class="fileinput-new thumbnail">
-                <img src="{{URL::to('upload/product/'.$pro->product_image)}}"alt="...">
+                <img src="{{URL::to('upload/product/'.$pro->Avarta)}}"alt="...">
               </div>
               <div class="fileinput-preview fileinput-exists thumbnail"></div>
               <div>
@@ -83,27 +83,27 @@
           <label class="col-sm-2 col-form-label">{{__('Mô Tả Sản Phẩm')}} :</label>
           <div class="col-sm-7">
             <div class="form-group">
-              <textarea style="resize: none;" name="product_desc" class="form-control" rows="6">{{($pro->product_desc)}}</textarea>
+              <textarea style="resize: none;" name="product_desc" class="form-control" rows="6">{{($pro->Description)}}</textarea>
             </div>
           </div>
         </div>
-        <div class="row">
+        {{--  <div class="row">
           <label class="col-sm-2 col-form-label">{{__('Nội Dung Sản Phẩm')}} :</label>
           <div class="col-sm-7">
             <div class="form-group">
               <textarea name="product_content" id="ckeditor1" class="" rows="6">{{($pro->product_content)}}</textarea>
             </div>
           </div>
-        </div>
-        <div class="row">
+        </div>  --}}
+        {{--  <div class="row">
           <label class="col-sm-2 col-form-label">{{__('Nội Dung Sản Phẩm En')}} :</label>
           <div class="col-sm-7">
             <div class="form-group">
              <textarea name="product_content_en" id="ckeditor2" class="" rows="12">{{($pro->product_content_en)}}</textarea>
            </div>
          </div>
-       </div>
-       <div class="row">
+       </div>  --}}
+       {{--  <div class="row">
         <label class="col-sm-2 col-form-label">{{__('Danh Mục Sản Phẩm')}} :</label>
         <div class="col-sm-7">
           <div class="form-group">
@@ -118,8 +118,8 @@
             </select>
           </div>
         </div>
-      </div>
-      <div class="row">
+      </div>  --}}
+      {{--  <div class="row">
         <label class="col-sm-2 col-form-label">{{__('Thương hiệu')}} :</label>
         <div class="col-sm-7">
           <div class="form-group">
@@ -134,7 +134,7 @@
             </select>
           </div>
         </div>
-      </div>
+      </div>  --}}
       @endforeach
       <div class="">
         <center>

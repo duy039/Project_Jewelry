@@ -51,11 +51,16 @@
                     </div>
                     <div class="user-info">
                         <a data-toggle="collapse" href="#collapseExample" class="username">
-                            <span>{{ __('Xin Chào') }}
-                                {{Auth::user()->First_Name .' '. Auth::user()->Last_Name}}
-                            </span>
+                          <span>{{__('Xin Chào')}}
+                            <?php
+                            $name = Auth::user()->admin_name;
+                            if($name){
+                              echo $name;
+                            }
+                            ?>
+                          </span>
                         </a>
-                    </div>
+                      </div>
                 </div>
                 <ul class="nav">
                     <li class="nav-item active ">
@@ -122,7 +127,7 @@
                         <div class="collapse" id="product">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
+                                    <a class="nav-link" href="{{ url('admin/addProduct')}}">
                                         <span class="sidebar-mini"> SP </span>
                                         <span class="sidebar-normal">{{ __('Thêm Sản Phẩm') }} </span>
                                     </a>
@@ -146,13 +151,13 @@
                         <div class="collapse" id="coupon">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
+                                    <a class="nav-link" href="{{ url('admin/addcode')}}">
                                         <span class="sidebar-mini"> MGG </span>
                                         <span class="sidebar-normal"> {{ __('Thêm Mã') }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
+                                    <a class="nav-link" href="{{ url('admin/allcoupon')}}">
                                         <span class="sidebar-mini"> MGG </span>
                                         <span class="sidebar-normal"> {{ __('Quản Lý Mã') }} </span>
                                     </a>

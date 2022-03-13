@@ -1,18 +1,60 @@
 @extends('layout.admin_layout')
 @section('admin_content')
+<style>
+  .filter-form{
+    background: #FFF;
+    padding : 20px;
+}
+.filter-form label{
+    font-weight: bold;
+    color: black;
+}
+.filter-item{
+    display : inline-block;
+    margin-right : 15px;
+}
+</style>
+  <div class ="page-title">
+
+  <form class ="filter=form" action="" method="POST">
+
+    <fieldset>
+      <legend>Tìm kiếm: </legend>
+      <div  class="filter-item">
+        <label>ID:</label>
+        <input type="text" name ="Product_id" value="">
+      </div>
+
+      <div  class="filter-item">
+        <label>Name:</label>
+        <input type="text" name ="Name" value="">
+      </div>
+
+      <div  class="filter-item">
+        <label>Gia:</label>
+        <input type="text" name ="price(from)" value="">
+        <label>Đến:</label>
+        <input type="text" name ="price(from)" value="">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Tìm</button>
+    </fieldset>
+  </form>
+</div>
+
      <div class="col-md-12">
       <div class="card">
         <div class="card-header card-header-icon card-header-rose">
           <div class="card-icon">
             <i class="material-icons">assignment</i>
           </div>
-            <h4 class="card-title">{{__('Danh Sách Sản Phẩm')}}</h4>
+            <h4 class="card-title">{{__('List of product')}}</h4>
           </div>
           <span class="" style="margin-left: 800px;">
            <?php
            $message = Session::get('message');
            if ($message) {
-             echo '<span class="badge badge-pill badge-danger" >'.$message.'</span>';
+             echo '<span class="badge badge-pill badge-success" >'.$message.'</span>';
              Session::put('message',null);
            }
            ?>
@@ -48,6 +90,7 @@
                     <td>{{$pro->Quantity}}</td>
                     <td><img width="50px" height="50px" src="../assets/images/product/{{$pro->Avatar}}" alt=""></td>
                     <td>{{$pro->Create_Date}}</td>
+
                     <td class="td-actions text-right">
                       <button type="button" rel="tooltip" class="btn btn-success">
                         <a class="material-icons" href="{{URL::to('/edit-product/'.$pro->Product_id)}}" data-original-title="Update">edit</a>
@@ -56,6 +99,7 @@
                         <a class="material-icons" href="{{URL::to('/delete-product/'.$pro->Product_id)}}" onclick="return confirm('Bạn Có Muốn Xoá?')" data-original-title="Delete">close</a>
                       </button>
                     </td>
+
                   </tr>
                   @endforeach
                 </tbody>

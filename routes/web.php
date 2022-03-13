@@ -78,10 +78,15 @@ Route::post('feedback', [App\Http\Controllers\FeedbackController::class, 'postFe
 Route::post('crop', [App\Http\Controllers\my_accountController::class, 'crop'])->name('crop');
 Route::post('payMomo', [App\Http\Controllers\CheckoutController::class, 'payMomo'])->name('payMomo');
 
+//admin
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
+    //Product
     Route::get('manageProduct', [App\Http\Controllers\ManageProduct::class, 'index']);
-
+    Route::get('addProduct', [App\Http\Controllers\ManageProduct::class, 'viewadd']);
+    Route::get('addcode', [App\Http\Controllers\ManageProduct::class, 'addcoupon']);
+    Route::get('allcoupon', [App\Http\Controllers\ManageProduct::class, 'showcoupon']);
+    Route::post('storeProduct', [App\Http\Controllers\ManageProduct::class, 'store']);
 
 });
 Route::prefix('/')->group(function () {
