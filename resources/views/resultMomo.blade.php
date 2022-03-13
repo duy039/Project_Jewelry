@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Mail;
 
 header('Content-type: text/html; charset=utf-8');
 $secretKey = 'McBbYmABhC7fiF4AiJWVp87pY2fuuxq9'; //Put your secret key in there
@@ -28,70 +27,19 @@ if (!empty($_GET)) {
 
     $partnerSignature = hash_hmac('sha256', $rawHash, $secretKey);
     if ($resultCode == '0') {
-        $date = Carbon::now();
         $result = '<div class="alert alert-success"><strong>Payment status: </strong>' . $message . '</div>';
         $value = [
-            'Email' => $data->email,
-            'Address' => $data->address,
-            'Name' => $data->fname . ' ' . $data->lname,
-            'Phone_Number' => $data->phone,
-            'Create_Date' => $date->format('Y-m-d H:i:s'),
             'Status' => 'Success',
         ];
-        $orderTable = DB::table('orders')->where('Email',$data->email)->update($value);
-        if ($orderTable) {
-            $orderId = DB::table('orders')
-                ->where('Create_Date', $date->format('Y-m-d H:i:s'))
-                ->get();
-            if (session_id() === '') {
-                session_start();
-            }
-            if (isset($_SESSION['inCart'])) {
-                $resultProducts = $_SESSION['inCart'];
-                foreach ($resultProducts as $value) {
-                    $value = [
-                        'Order_id' => $orderId[0]->Order_id,
-                        'Product_id' => $value->Product_id,
-                        'Quantity' => $value->Quantity,
-                        'Size' => $value->Size,
-                        'Price' => $value->CurrentPrice,
-                    ];
-                    $order_item = DB::table('order_item')->update($value);
-                }
-            }
-            if ($order_item) {
-                $orderId = DB::table('orders')
-                    ->where('Create_Date', $date->format('Y-m-d H:i:s'))
-                    ->get();
-                $value = [
-                    'Order_id' => $orderId[0]->Order_id,
-                    'Tax' => $data->tax,
-                    'Payment_Method' => 'MOMO',
-                    'Shipping_Fee' => $data->ship,
-                    'Point_Used' => 0.0,
-                    'Disccount' => $data->discount,
-                    'Total' => $data->total*100,
-                    'Note'=>$data->note,
-                    'Create_Date' => $date->format('Y-m-d H:i:s'),
-                ];
-                $bill = DB::table('bill')->update($value);
-            }
-        }
+        $orderTable = DB::table('orders')->where('Create_Date',$data->date)->update($value);
     } else {
-        $date = Carbon::now();
         $result = '<div class="alert alert-danger"><strong>Payment status: </strong>' . $message . '</div>';
         $value = [
-            'Email' => $data->email,
-            'Address' => $data->address,
-            'Name' => $data->fname . ' ' . $data->lname,
-            'Phone_Number' => $data->phone,
-            'Create_Date' => $date->format('Y-m-d H:i:s'),
             'Status' => 'Failed',
         ];
-        $orderTable = DB::table('orders')->where('Email',$data->email)->update($value);
+        $orderTable = DB::table('orders')->where('Create_Date',$data->date)->update($value);
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

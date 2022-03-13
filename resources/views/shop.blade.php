@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{ url('assets/css/plugins/nice-select.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/plugins/timecircles.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/plugins/compareAction.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 </head>
 
@@ -159,153 +162,9 @@ for ($i = 0; $i < count($products); $i++) {
                         <div id="showProducts" class="shop-product-wrap grid gridview-3 row">
                             @if ($messenger != null)
                                 <h2 class="messengerProduct">{{ $messenger }}</h2><br>
-                            @else
-                                {{ csrf_field() }}
-                                @foreach ($products as $pro)
-                                    <div class="col-lg-4">
-                                        <div class="slide-item">
-                                            <div class="single_product">
-                                                <div class="product-img">
-                                                    <a href='{{ url('product/' . $pro->getId()) }}'>
-                                                        <img class='primary-img'
-                                                            src='{{ url('assets/images/product/' . $pro->getAvatar()) }}'
-                                                            alt='Product Image'>
-                                                        <img class='secondary-img'
-                                                            src='{{ url('assets/images/product/' . $pro->getImage()[1]) }}'
-                                                            alt='Product Image'>
-                                                    </a>
-                                                    <!-- dùng if để xét nếu ngày tạo ra sản  phẩm cách ngày hiện tại 30 ngày thì hiển thị sản phẩm mới-->
-                                                    <span class="sticker">New</span>
-                                                    <!-- dùng if để xét nếu $pro->getSale_type() khác null và khác normal thì hiển thị Sale-->
-                                                    @if ($pro->getSale_type() != null && strtolower($pro->getSale_type()) != 'normal')
-                                                        <span class='sticker-2'>Sale</span>
-                                                    @endif
-                                                    <div class="add-actions">
-                                                        <ul>
-                                                            <li>
-                                                                <a class="hiraola-add_cart" href="cart.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Cart"><i class="ion-bag"></i></a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="hiraola-add_compare" href="compare.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Compare This Product">
-                                                                    <i class="ion-ios-shuffle-strong"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li onclick="quickView('{!! $pro->getId() !!}')"
-                                                                class="quick-view-btn" data-toggle="modal"
-                                                                data-target="#exampleModalCenter">
-                                                                <a href="javascript:void(0)" data-toggle="tooltip"
-                                                                    data-placement="top" title="Quick View">
-                                                                    <i class="ion-eye"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="hiraola-product_content">
-                                                    <div class="product-desc_info">
-                                                        <h6>
-                                                            <a class="product-name"
-                                                                href='{{ url('/product' . '/' . $pro->getId()) }}'>{!! $pro->getName() !!}</a>
-                                                        </h6>
-                                                        <div class="price-box">
-                                                            <span class="new-price">${!! $pro->getCurrentPrice() !!}</span>
-                                                            @if ($pro->getCurrentPrice() != $pro->getPrice_Root())
-                                                                <span class="old-price">${{ $pro->getPrice_Root() }}</span>
-                                                            @endif
-                                                        </div>
-                                                        <div class="additional-add_action">
-                                                            <ul>
-                                                                <li><a class="hiraola-add_compare" href="wishlist.html"
-                                                                        data-toggle="tooltip" data-placement="top"
-                                                                        title="Add To Wishlist"><i
-                                                                            class="ion-android-favorite-outline"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="rating-box">
-                                                            <ul>
-                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
-                                                                    <li><i class="fa fa-star-of-david"></i></li>
-                                                                @endfor
-                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
-                                                                    <li class="silver-color"><i
-                                                                            class="fa fa-star-of-david"></i></li>
-                                                                @endfor
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-slide_item">
-                                            <div class="single_product">
-                                                <div class="product-img">
-                                                    <a href='{{ url('product/' . $pro->getId()) }}'>
-                                                        <img class='primary-img'
-                                                            src='{{ url('assets/images/product/' . $pro->getAvatar()) }}'
-                                                            alt='Product Image'>
-                                                        <img class='secondary-img'
-                                                            src='{{ url('assets/images/product/' . $pro->getImage()[1]) }}'
-                                                            alt='Product Image'>
-                                                    </a>
-                                                </div>
-                                                <div class="hiraola-product_content">
-                                                    <div class="product-desc_info">
-                                                        <h6>
-                                                            <a class="product-name"
-                                                                href="/product/{!! $pro->getId() !!}">{!! $pro->getName() !!}</a>
-                                                        </h6>
-                                                        <div class="rating-box">
-                                                            <ul>
-                                                                @for ($y = 0; $y < round($pro->getRating()); $y++)
-                                                                    <li><i class="fa fa-star-of-david"></i></li>
-                                                                @endfor
-                                                                @for ($y = 0; $y < 5 - round($pro->getRating()); $y++)
-                                                                    <li class="silver-color"><i
-                                                                            class="fa fa-star-of-david"></i></li>
-                                                                @endfor
-                                                            </ul>
-                                                        </div>
-                                                        <div class="price-box">
-                                                            <span class="new-price">${!! $pro->getCurrentPrice() !!} </span>
-                                                        </div>
-                                                        <div class="product-short_desc">
-                                                            <p>{!! $pro->getDescription() !!}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="add-actions">
-                                                        <ul>
-                                                            <li><a class="hiraola-add_cart" href="cart.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Cart">Add To Cart</a></li>
-                                                            <li><a class="hiraola-add_compare" href="compare.html"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Compare This Product"><i
-                                                                        class="ion-ios-shuffle-strong"></i></a></li>
-                                                            <li onclick="quickView('{!! $pro->getId() !!}')"
-                                                                class="quick-view-btn" data-toggle="modal"
-                                                                data-target="#exampleModalCenter"><a
-                                                                    href="javascript:void(0)" data-toggle="tooltip"
-                                                                    data-placement="top" title="Quick View"><i
-                                                                        class="ion-eye"></i></a></li>
-                                                            <li><a class="hiraola-add_compare" href="wishlist"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Add To Wishlist"><i
-                                                                        class="ion-android-favorite-outline"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                            @endif
                         </div>
-                        @endif
+                            
                         {{-- hàng  phân trang --}}
                         <div class="row">
                             <div class="col-lg-12">
@@ -461,7 +320,34 @@ for ($i = 0; $i < count($products); $i++) {
         <input id="idAllProductInShop" type="hidden" value='{!! $id_shopProduct !!}'>
 
     </div>
-
+    <div class="compareDiv">
+        {{-- compare bản nhỏ --}}
+        <div class="popup-button" id="miniCompare">
+            <a href="javascript:;" onclick="showCompare()" id="ss-now" style="display: block;">
+                <span>List Compare</span>
+            </a>
+        </div>
+        {{-- compare bản lớn --}}
+        <div id="divShowCompare" class="stickcompare stickcompare_new cp-desktop spaceInDown" style="display: none;">
+        </div>
+        <div class="offcanvas-search_wrapper" id="searchProductCompare">
+            <div class="offcanvas-menu-inner">
+                <div class="container">
+                    <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
+                    <!-- Begin Offcanvas Search Area -->
+                    <div class="offcanvas-search">
+                        <form class="hm-searchbox">
+                            <input id="inputSearchCompare" type="text" placeholder="Search for item..." onkeyup="changeSearchCompare()">
+                            <ul id="displayJewelryCompare"></ul>
+                            <button class="search_btn" type="button"><i class="ion-ios-search-strong"></i></button>
+                        </form>
+                    </div>
+                    <!-- Offcanvas Search Area End Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="{{ url('assets/js/plugins/controllerShopPage.js') }}"></script>
 @endsection

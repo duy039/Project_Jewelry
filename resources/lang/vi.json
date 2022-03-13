@@ -7,6 +7,7 @@
     "Contact": "Liên hệ",
     "Location": "Địa chỉ",
     "New": "Mới",
+    "Point" : "Điểm",
     "Trendding": "Xu hướng",
     "Phone Number": "Số điện thoại",
     "enterPhone" : "Nhập số điện thoại",
@@ -69,5 +70,6 @@
     "Enter Current Password" : "Nhập mật khẩu cũ",
     "My Wishlist" : "Yêu thích",
     "590 Cach Mang Thang 8, Ward 11, District 3, Ho Chi Minh City, Vietnam" : "590 Cách Mạng Tháng 8, Phường 11, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
-    "Dashboards" : "Trang Quản Trị"
+    "Dashboards" : "Trang Quản Trị",
+    "Send" : "Gửi"
 }

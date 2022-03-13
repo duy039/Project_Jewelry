@@ -1,13 +1,12 @@
 var user_id = ($("#user_id").val() != 'null') ? $("#user_id").val() : null;
 var url = $("#urlWeb").val();
 var pro_id = $("#pro_id").val();
-
 function wishlistsResponse() {
     // local var
     var theResponse = null;
     // jQuery ajax
     $.ajax({
-        url:'wishlists/' + user_id,
+        url: 'wishlists/' + user_id,
         type: 'get',
         data: {
 
@@ -40,7 +39,7 @@ function renderIconWishlist(productIDWishlist) {
     if (test) {
         htmlWishkist = '<a class="hiraola-add_compare" href="javascript:void(0)" onclick="wishlistHandler(\'' + productIDWishlist + '\')" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="far fa-heart"></i></a>';
     }
-    if ($("#a" + productIDWishlist) != null || $("#r" + productIDWishlist) != null || $("#ra" + productIDWishlist) != null || $("#b" + productIDWishlist) != null || $("#ba" + productIDWishlist) != null) {
+    if ($("#a" + productIDWishlist) != null || $("#r" + productIDWishlist) != null || $("#ra" + productIDWishlist) != null || $("#b" + productIDWishlist) != null || $("#ba" + productIDWishlist) != null || $("#e" + productIDWishlist) != null || $("#ea" + productIDWishlist) != null) {
         $("#a" + productIDWishlist).html(htmlWishkist);
         $("#n" + productIDWishlist).html(htmlWishkist);
         $("#na" + productIDWishlist).html(htmlWishkist);
@@ -48,6 +47,8 @@ function renderIconWishlist(productIDWishlist) {
         $("#ba" + productIDWishlist).html(htmlWishkist);
         $("#r" + productIDWishlist).html(htmlWishkist);
         $("#ra" + productIDWishlist).html(htmlWishkist);
+        $("#e" + productIDWishlist).html(htmlWishkist);
+        $("#ea" + productIDWishlist).html(htmlWishkist);
     }
     if ($("#r" + productIDWishlist) != null || $("#ra" + productIDWishlist) != null) {
         $("#r" + productIDWishlist).html(htmlWishkist);
@@ -61,30 +62,34 @@ function renderIconWishlist(productIDWishlist) {
         $("#n" + productIDWishlist).html(htmlWishkist);
         $("#na" + productIDWishlist).html(htmlWishkist);
     }
+    if ($("#e" + productIDWishlist) != null || $("#ea" + productIDWishlist) != null) {
+        $("#e" + productIDWishlist).html(htmlWishkist);
+        $("#ea" + productIDWishlist).html(htmlWishkist);
+    }
 }
 
 function wishlistHandler(prod_id) {
-    if(user_id == null){
-        return swal('Warning',"You must be logged in to add products to your wish list",'warning');
-    }else{
-    var urlAddWishlist = '/wishlistHandler';
-    $.ajax({
-        url: urlAddWishlist,
-        type: "post",
-        cache: false,
-        dataType: "text",
-        data: {
-            _token: $("#csrf_token").val(),
-            'user_id': user_id,
-            'product_id': prod_id,
-        },
-        success: function (result) {
-            if (result) {
-                swal('Success',"The product has been added to favorites",'success');
-            };
-            renderIconWishlist(prod_id);
-        }
-    });
+    if (user_id == null) {
+        return swal('Warning', "You must be logged in to add products to your wish list", 'warning');
+    } else {
+        var urlAddWishlist = '/wishlistHandler';
+        $.ajax({
+            url: urlAddWishlist,
+            type: "post",
+            cache: false,
+            dataType: "text",
+            data: {
+                _token: $("#csrf_token").val(),
+                'user_id': user_id,
+                'product_id': prod_id,
+            },
+            success: function (result) {
+                if (result) {
+                    swal('Success', "The product has been added to favorites", 'success');
+                };
+                renderIconWishlist(prod_id);
+            }
+        });
     }
 }
 
@@ -99,7 +104,7 @@ function wishlistDelete(prod_id, wishlist_id) {
         },
         success: function (result) {
             if (result) {
-                swal('Success',"The product has been removed from favorites",'success');
+                swal('Success', "The product has been removed from favorites", 'success');
             };
             renderIconWishlist(prod_id);
         }
@@ -117,10 +122,10 @@ function productsResponse() {
         },
         dataType: "text",
         async: false,
-        success: function(respText) {
-            if(respText!=false){
+        success: function (respText) {
+            if (respText != false) {
                 theResponse = JSON.parse(respText);
-            }else{
+            } else {
                 theResponse = null;
             }
 
@@ -130,66 +135,57 @@ function productsResponse() {
 }
 
 function renderMiniCart() {
-    if (pro_id ==null) {
+    products = productsResponse();
+    let htmlMiniCart = "";
+    if (products == null) {
         $("#sessionMiniCart").html("Cart is currently empty!!!");
         $("#sessionMiniCart").css({
             "text-align": "center"
         });
         return 0;
-    } else {
-        products = productsResponse();
-        console.log(products);
-        let htmlMiniCart = "";
-        if (products.length == 0) {
-            $("#sessionMiniCart").html("Cart is currently empty!!!");
-            $("#sessionMiniCart").css({
-                "text-align": "center"
-            });
-            return 0;
-        }
-        let sum = 0;
-        for (let i = 0; i < products.length; i++) {
-            let size = "";
-            if (products[i].Size != "null") {
-                size = products[i].Size;
-            }
-            let total = products[i].Quantity * products[i].CurrentPrice;
-            sum += total;
-            htmlMiniCart += '<li class="minicart-product">'
-                + '<a class="product-item_remove" onclick="cartDeleteMini(\'' + products[i].cart_id + '\')" href="javascript:void(0)"><i class="ion-android-close"></i></a>'
-                + '<div class="product-item_img">'
-                + '<img src="/assets/images/product/' + products[i].Avatar + '" alt="Product Image">'
-                + '</div>'
-                + '<div class="product-item_content">'
-                + '<a class="product-item_title" href=""/product/"' + products[i].Product_id + '">' + products[i].Name + '</a>'
-                + '<span class="product-item_quantity">' + products[i].Quantity + ' x $' + products[i].CurrentPrice.toFixed(2) + '</span>'
-                + '</div>'
-                + '</li>';
-        }
-        $("#sessionMiniCart").html(htmlMiniCart);
-        $("#homeMiniCart").html("$" + sum.toFixed(2));
     }
+    let sum = 0;
+    for (let i = 0; i < products.length; i++) {
+        let size = "";
+        if (products[i].Size != "null") {
+            size = products[i].Size;
+        }
+        let total = products[i].Quantity * products[i].CurrentPrice;
+        sum += total;
+        htmlMiniCart += '<li class="minicart-product">'
+            + '<a class="product-item_remove" onclick="cartDeleteMini(\'' + products[i].cart_id + '\')" href="javascript:void(0)"><i class="ion-android-close"></i></a>'
+            + '<div class="product-item_img">'
+            + '<img src="/assets/images/product/' + products[i].Avatar + '" alt="Product Image">'
+            + '</div>'
+            + '<div class="product-item_content">'
+            + '<a class="product-item_title" href=""/product/"' + products[i].Product_id + '">' + products[i].Name + '</a>'
+            + '<span class="product-item_quantity">' + products[i].Quantity + ' x $' + products[i].CurrentPrice.toFixed(2) + '</span>'
+            + '</div>'
+            + '</li>';
+    }
+    $("#sessionMiniCart").html(htmlMiniCart);
+    $("#homeMiniCart").html("$" + sum.toFixed(2));
 }
 
 function cartDeleteMini(id) {
     // if (user_id == null) {
     //     return confirm("You must be logged in to do this!!!");
     // } else {
-        let urlcartDelete = 'cartDelete/' + id;
-        $.ajax({
-            url: urlcartDelete,
-            type: "get",
-            cache: false,
-            dataType: "text",
-            data: {
-            },
-            success: function (result) {
-                if (result) {
-                    swal('Success',"The product has been removed from the cart!",'success');
-                };
-                renderMiniCart();
-            }
-        });
+    let urlcartDelete = 'cartDelete/' + id;
+    $.ajax({
+        url: urlcartDelete,
+        type: "get",
+        cache: false,
+        dataType: "text",
+        data: {
+        },
+        success: function (result) {
+            if (result) {
+                swal('Success', "The product has been removed from the cart!", 'success');
+            };
+            renderMiniCart();
+        }
+    });
     // }
 }
 renderMiniCart();

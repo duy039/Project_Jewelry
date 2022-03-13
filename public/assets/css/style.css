@@ -60,6 +60,7 @@ body {
   color: #595959;
   font-size: 16px;
   line-height: 24px;
+  box-sizing: border-box;
 }
 
 h1,
@@ -3361,7 +3362,7 @@ button.li-btn:hover {
           transform: translate(-50%, -50%);
   position: absolute;
   z-index: 9;
-  top: 50%;
+  top: 25%;
   left: 50%;
   width: calc(100% - 25%);
 }
@@ -9963,12 +9964,71 @@ button[name=apply]{
 p .bi-check-circle{
   color: green;
 }
+.text18{
+  line-height: 30px;
+  font-size: 18px;
+  color: #222;
+  padding-top: 30px;
+}
+.fw50{
+  float: left;
+  width: 50%;
+}
+.clearfix{
+  zoom: 1;
+}
 
+#displayJewelryCompare {
+  margin-left: 20%;
+  width: 100%;
+  max-height: 400px;
+  filter: drop-shadow(0 0 3px black);
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+  transition: all 0.5s ease-in-out;
+  top: 130%;
+  justify-content: center;
+  align-items: center;
+  
+}
+#displayJewelryCompare > li {
+  list-style-type: none; /* xóa dấu chấm đầu hàng*/
+  position: relative;
 
+}
 
+#displayJewelryCompare  > li > a {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+  line-height: 40px;
+}
+#displayJewelryCompare  > li > a img{
+  border-radius: 50%;
+}
+#displayJewelryCompare  > li > a > span{
+  padding-left: 20px;
+}
 
-
-
+#compareTowProduct .comparetd{
+  width: 40%;
+}
+.contentComment .iconLike{
+  font-size: 24px;
+  padding-right: 5px;
+  margin-top: 8px;
+}
+.contentComment .iconLike :hover{
+  color: blue;
+}
+.contentComment .iconLike .yesLiked{
+  color: blue;
+}
 
 
 

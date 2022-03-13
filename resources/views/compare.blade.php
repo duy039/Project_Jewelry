@@ -27,8 +27,11 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins/nice-select.css')}}">
     <!-- Timecircles -->
     <link rel="stylesheet" href="{{asset('assets/css/plugins/timecircles.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ url('assets/css/plugins/compareAction.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
 </head>
 @extends('layout.layout_nav_footer')
     @section('main')
@@ -39,7 +42,7 @@
                 <div class="breadcrumb-content">
                     <h2>Other</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url("/") }}">Home</a></li>
                         <li class="active">Compare</li>
                     </ul>
                 </div>
@@ -51,102 +54,32 @@
             <div class="container">
                 <div class="compare-table table-responsive">
                     <table class="table table-bordered table-hover mb-0">
-                        <tbody>
-                            <tr>
-                                <th class="compare-column-titles">Image</th>
-                                <td class="compare-column-productinfo">
-                                    <div class="compare-pdoduct-image">
-                                        <a href="single-product.html">
-                                            <img src="assets/images/product/medium-size/1-3.jpg" alt="Hiraola's Product Image">
-                                        </a>
-                                        <a href="cart.html" class="hiraola-compare_btn">
-                                            <span>ADD TO CART</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="compare-column-productinfo">
-                                    <div class="compare-pdoduct-image">
-                                        <a href="single-product.html">
-                                            <img src="assets/images/product/medium-size/1-7.jpg" alt="Hiraola's Product Image">
-                                        </a>
-                                        <a href="cart.html" class="hiraola-compare_btn">
-                                            <span>ADD TO CART</span>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Product Name</th>
-                                <td>
-                                    <h5 class="compare-product-name"><a href="single-product.html">Toe Rings</a>
-                                    </h5>
-                                </td>
-                                <td>
-                                    <h5 class="compare-product-name"><a href="single-product.html">Exquisite Rings</a></h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Description</th>
-                                <td>There are two kinds of White Gold: Nickel based and Palladium based. Some people are
-                                    allergic to Nickel, so Palladium white gold is a good alternative. Palladium white gold is
-                                    the only legal alloy in Europe. It also self burnishes and keeps a polish.</td>
-                                <td>The most popular color is yellow which is made by adding silver and some copper. The metals
-                                    are melted together to form an alloy of the desired color and karat. It is very important
-                                    that all the ingredients are pure and that the amounts of each are weighed very accurately
-                                    to prevent porosity, which weakens the alloy.</td>
-                            </tr>
-                            <tr>
-                                <th>Price</th>
-                                <td>$80</td>
-                                <td>$120</td>
-                            </tr>
-                            <tr>
-                                <th>Color</th>
-                                <td>Black</td>
-                                <td>Red</td>
-                            </tr>
-                            <tr>
-                                <th>Size</th>
-                                <td>Medium</td>
-                                <td>Large</td>
-                            </tr>
-                            <tr>
-                                <th>Stock</th>
-                                <td>In Stock</td>
-                                <td>Stock Out</td>
-                            </tr>
-                            <tr>
-                                <th>Rating</th>
-                                <td>
-                                    <div class="rating-box">
-                                        <ul>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                            <li class="silver-color"><i class="fa fa-star-of-david"></i></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="rating-box">
-                                        <ul>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                            <li><i class="fa fa-star-of-david"></i></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tbody id="compareTowProduct">
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         <!-- Hiraola's Compare Area End Here -->
-        
-        
+        <div class="compareDiv">
+            <div class="offcanvas-search_wrapper" id="searchProductCompare">
+                <div class="offcanvas-menu-inner">
+                    <div class="container">
+                        <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
+                        <!-- Begin Offcanvas Search Area -->
+                        <div class="offcanvas-search">
+                            <form class="hm-searchbox">
+                                <input id="inputSearchCompare" type="text" placeholder="Search for item..." onkeyup="changeSearchCompare()">
+                                <ul id="displayJewelryCompare"></ul>
+                                <button class="search_btn" type="button"><i class="ion-ios-search-strong"></i></button>
+                            </form>
+                        </div>
+                        <!-- Offcanvas Search Area End Here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="{{ url('assets/js/plugins/controllerCompare.js') }}"></script>
     @endsection
 </html>
