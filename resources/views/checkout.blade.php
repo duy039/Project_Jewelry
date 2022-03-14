@@ -175,6 +175,15 @@
                                 <input class="button" name="" value="Apply coupon" onclick="checkVoucher()">
                                 <p id="NotificationCoupon_code"></p>
                             </div>
+                        </div><br><br>
+                        <input type="hidden" value="{{ ($user != '')?$user->point:0 }}" id="pointUser">
+                        <div class="coupon-all">
+                            <p>your point: <span class="">{{ ($user != '')?$user->point:0 }}</span></p>
+                            <div class="coupon">
+                                <input id="pointed" class="" name="point" value=""
+                                     type="number" width="800">
+                                <input class="button" type="button" name="" value="Accept" onclick="usePoint()">
+                            </div>
                         </div>
                 </div>
 
@@ -208,16 +217,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="displayProductBill">
-                                    <tr class="cart_item">
-                                        <td class="cart-product-name"> Vestibulum suscipit<strong class="product-quantity">
-                                                × 1</strong></td>
-                                        <td class="cart-product-total"><span class="amount">$165.00</span></td>
-                                    </tr>
-                                    <tr class="cart_item">
-                                        <td class="cart-product-name"> Vestibulum suscipit<strong class="product-quantity">
-                                                × 1</strong></td>
-                                        <td class="cart-product-total"><span class="amount">£165.00</span></td>
-                                    </tr>
+                                    
                                 </tbody>
                                 <tfoot id="displayTotalBill">
                                     <tr class="cart-subtotal">
