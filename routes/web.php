@@ -36,6 +36,8 @@ Route::prefix('product')->group(function () {
     Route::get('/compareDelete/{id}', 'App\Http\Controllers\SingleProductController@compareDelete');
     Route::get('/like/getLikeRating/{raitingID}/{userID}', 'App\Http\Controllers\SingleProductController@countLikeRating');
 });
+Route::get('/compare', 'App\Http\Controllers\CompareController@index');
+
 Route::prefix('wishlist')->group(function () {
     Route::get('/', 'App\Http\Controllers\WishlistController@index');
     Route::get('/wishlist/{user_di}', 'App\Http\Controllers\WishlistController@wishlist');
@@ -55,6 +57,7 @@ Route::prefix('checkout')->group(function () {
 });
 Route::prefix('event')->group(function () {
     Route::get('/GetPointsEveryDay', 'App\Http\Controllers\EventController@eventEveryDay');
+    Route::get('/shopBirthday', 'App\Http\Controllers\EventController@birthdayPage');
     Route::post('/checkedEventEveryDay', 'App\Http\Controllers\EventController@checkedEventEveryDay');
 });
 
@@ -123,11 +126,10 @@ Route::prefix('/')->group(function () {
     Route::get('/listproduct/{listProductsID}', 'App\Http\Controllers\HomeController@productsInShop');
 });
 
+Route::get('/error', 'App\Http\Controllers\ErrorController@index');
 
 
 
 // code chưa xử lý
 Route::get('/about-us', 'App\Http\Controllers\AboutUsController@index');
 Route::get('/blog', 'App\Http\Controllers\BlogController@index');
-Route::get('/error', 'App\Http\Controllers\ErrorController@index');
-Route::get('/compare', 'App\Http\Controllers\CompareController@index');

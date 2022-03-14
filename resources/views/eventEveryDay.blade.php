@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ url('assets/css/plugins/lightgallery.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/plugins/nice-select.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/plugins/timecircles.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/bannerEvent.css')}}">
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
@@ -172,9 +173,28 @@
                                 <?php $count++; ?>
                             @endfor
                         </div>
-                        <div class="shop-toolbar " >
-                            <h4>Actively log in every day to receive gifts</h4>
-                        </div>
+                        <a href='{{ url("/event/shopBirthday") }}'>
+                            <div class="bannerTime">
+                                <div class="birthdayEvent">
+                                    <div id="time-festival">
+                                        <div id="time">
+                                            <div class="day">
+                                                <span id="day"></span><span class="text-time">Day</span>
+                                            </div>
+                                            <div class="hour">
+                                                <span id="hour"></span><span class="text-time">Hour</span>
+                                            </div>
+                                            <div class="minite">
+                                                    <span id="minute"></span><span class="text-time">Minute</span>
+                                            </div>
+                                            <div class="second">
+                                                <span id="second"></span><span class="text-time">Second</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -184,6 +204,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="{{ url('assets/js/plugins/eventEveryDay.js') }}"></script>
+    <script src="{{url('assets/js/plugins/controllerEventBirthday.js')}}"></script>
 @endsection
 
 </html>

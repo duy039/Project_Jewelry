@@ -291,6 +291,16 @@
                                         </li>
                                         <li><a href='{{ url('/contact') }}'>{{ __('Contact') }}</a>
                                         </li>
+                                        <li class="dropdown-holder"><a href="javascript:void(0)">Other</a>
+                                            <ul class="hm-dropdown">
+                                                <li>
+                                                    <a href='{{ url('/event/GetPointsEveryDay') }}'>Roll Call Event</a>
+                                                </li>
+                                                <li>
+                                                    <a href='{{ url('/compare') }}'>Compare</a>
+                                                <li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -623,21 +633,21 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="banner-item img-hover_effect">
                             <a href="{{ url('shop/categories/1') }}">
-                                <img height="100%" src="{{ asset('assets/images/banner/ringsbanner.jpg') }}" alt="">
+                                <img height="100%" src="{{ asset('assets/images/banner/banner4.png') }}" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="banner-item img-hover_effect">
                             <a href="{{ url('shop/categories/1') }}">
-                                <img src="{{ asset('assets/images/banner/wedding.jpg') }}" alt="">
+                                <img src="{{ asset('assets/images/banner/banner5.png') }}" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="banner-item img-hover_effect">
                             <a href="{{ url('shop/categories/1') }}">
-                                <img src="{{ asset('assets/images/banner/shopnow.jpg') }}" alt="">
+                                <img src="{{ asset('assets/images/banner/banner6.png') }}" alt="">
                             </a>
                         </div>
                     </div>
