@@ -88,9 +88,30 @@ Route::post('feedback', [App\Http\Controllers\FeedbackController::class, 'postFe
 Route::post('crop', [App\Http\Controllers\my_accountController::class, 'crop'])->name('crop');
 Route::post('payMomo', [App\Http\Controllers\CheckoutController::class, 'payMomo'])->name('payMomo');
 
+//admin
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
+    //Product
     Route::get('manageProduct', [App\Http\Controllers\ManageProduct::class, 'index']);
+    Route::get('addProduct', [App\Http\Controllers\ManageProduct::class, 'viewadd']);
+    Route::post('storeProduct', [App\Http\Controllers\ManageProduct::class, 'store']);
+    Route::get('editProduct/{proid}', [App\Http\Controllers\ManageProduct::class, 'edit']);
+    Route::post('updateProduct/{proid}', [App\Http\Controllers\ManageProduct::class, 'update']);
+    Route::get('deleteProduct/{proid}', [App\Http\Controllers\ManageProduct::class, 'destroy']);
+    Route::get('admin/searchAdmin', [App\Http\Controllers\ManageProduct::class, 'searchProduct']);
+
+    // Voucher
+    Route::get('addcode', [App\Http\Controllers\ManageProduct::class, 'viewCouponAddForm']);
+    Route::get('voucher', [App\Http\Controllers\ManageProduct::class, 'voucherIndex']);
+    Route::post('addVoucher', [App\Http\Controllers\ManageProduct::class, 'storeCoupon']);
+    Route::get('deleteVoucher/{voucherId}', [App\Http\Controllers\ManageProduct::class, 'destroyVoucher']);
+    Route::get('editVoucher/{voucherId}', [App\Http\Controllers\ManageProduct::class, 'editVoucherView']);
+    Route::post('updateVoucher/{voucherId}', [App\Http\Controllers\ManageProduct::class, 'updateVoucher']);
+
+    //Order
+    Route::get('viewOrder', [App\Http\Controllers\ManageProduct::class, 'orderIndex']);
+    Route::get('editOrder/{orderid}', [App\Http\Controllers\ManageProduct::class, 'orderEditView']);
+    Route::post('updateOrder/{voucherId}', [App\Http\Controllers\ManageProduct::class, 'updateOrder']);
 
 
 });

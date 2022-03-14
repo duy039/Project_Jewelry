@@ -31,6 +31,7 @@ class HomeController extends Controller
         }
         if (isset($_SESSION['user_id'])) {
             unset($_SESSION['user_id']);
+            unset($_SESSION['inCart']);
         }
         $this->guard()->logout();
 

@@ -36,7 +36,7 @@ class CartController extends Controller
         }
         return false;
     }
-    
+
 // Ajax Xóa 1 product trong cart
     public function cartDelete($id){
         if (session_id() === ''){
@@ -49,9 +49,12 @@ class CartController extends Controller
             }
         }
         $_SESSION['inCart'] = $test;
+        if($_SESSION['inCart'] == []){
+            unset($_SESSION['inCart']);
+        }
         return true;
     }
-    
+
 // Ajax Thay đổi Quantity 1 product trong cart
 public function quantityChange($id, $method){
     if (session_id() === ''){
@@ -69,5 +72,5 @@ public function quantityChange($id, $method){
     }
     return true;
 }
-    
+
 }

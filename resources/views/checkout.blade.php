@@ -33,7 +33,28 @@
 </head>
 @extends('layout.layout_nav_footer')
 @section('main')
-    
+<?php
+    use Illuminate\Support\Carbon;
+    $date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+    if (session_id() === '') {
+        session_start();
+    }
+    $user = '';
+    // $_SESSION['user_id'] = 1;
+
+    $lusers = DB::table('users')->get();
+    if (isset($_SESSION['user_id'])) {
+        // đã login
+        foreach ($lusers as $value) {
+            if ($value->id == $_SESSION['user_id']) {
+                $user = $value;
+            }
+        }
+    } else {
+        // Chưa login
+    }
+    ?>
+
     <input id="taxName" type="hidden" value="{{ $tax[0]->Tax_Name }}">
     <input id="taxPercentage" type="hidden" value="{{ $tax[0]->Tax_Percentage }}">
     <!-- Begin Breadcrumb Area -->
@@ -71,7 +92,7 @@
                         <input type="hidden" id="tax">
                         <input type="hidden" id="ship">
                         <input type="hidden" id="discount">
-                        <input type="hidden" name="date" value="{{$date}}">
+                        <input type="hidden" name="date" value="{{ $date }}">
                         <div class="checkbox-form">
                             <h3>Billing Details</h3>
                             <div class="row">
@@ -225,9 +246,19 @@
                         <div class="payment-method">
                             <div class="payment-accordion">
                                 <div class="order-button-payment">
-                                    <input value="Pay Direct" name="payment" type="submit">
-                                    <input value="Pay with MOMO" name="payment" type="submit">
-                                    <input value="Pay with VNPAY" name="payment" type="submit">
+                                    <?php
+                                    $test = isset($_SESSION['inCart']);
+                                    ?>
+                                    @if ($test)
+                                        <input value="Pay Direct" name="payment" type="submit">
+                                        <input value="Pay with MOMO" name="payment" type="submit">
+                                        <input value="Pay with VNPAY" name="payment" type="submit">
+                                    @else
+                                        <div class="text-center text-primary" style="font-size: 20px">
+                                            {{ __('Don\'t have any product in your Cart') }}</div>
+                                        <div class="text-center text-primary" style="font-size: 20px">Please Add product
+                                            before pay! <a href="{{ url('shop') }}">Go to shop</a></div>
+                                    @endif
                                 </div>
                                 </form>
                             </div>
