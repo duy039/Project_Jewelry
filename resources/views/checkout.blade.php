@@ -91,7 +91,7 @@
                         <input type="hidden" id="tax">
                         <input type="hidden" id="ship">
                         <input type="hidden" id="discount">
-                        <input type="hidden" name="date" value="{{$date}}">
+                        <input type="hidden" name="date" value="{{ $date }}">
                         <div class="checkbox-form">
                             <h3>Billing Details</h3>
                             <div class="row">
@@ -245,9 +245,19 @@
                         <div class="payment-method">
                             <div class="payment-accordion">
                                 <div class="order-button-payment">
-                                    <input value="Pay Direct" name="payment" type="submit">
-                                    <input value="Pay with MOMO" name="payment" type="submit">
-                                    <input value="Pay with VNPAY" name="payment" type="submit">
+                                    <?php
+                                    $test = isset($_SESSION['inCart']);
+                                    ?>
+                                    @if ($test)
+                                        <input value="Pay Direct" name="payment" type="submit">
+                                        <input value="Pay with MOMO" name="payment" type="submit">
+                                        <input value="Pay with VNPAY" name="payment" type="submit">
+                                    @else
+                                        <div class="text-center text-primary" style="font-size: 20px">
+                                            {{ __('Don\'t have any product in your Cart') }}</div>
+                                        <div class="text-center text-primary" style="font-size: 20px">Please Add product
+                                            before pay! <a href="{{ url('shop') }}">Go to shop</a></div>
+                                    @endif
                                 </div>
                                 </form>
                             </div>

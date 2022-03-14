@@ -99,20 +99,19 @@ class ChechoutController extends Controller
         // dd($all);
         $vnp_TxnRef = rand(1, 20000); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $object = (object)$all;
-
         if ($object->payment == "Pay with MOMO") {
             $value = [
                 'Email' => $request->email,
                 'Address' => $request->address,
                 'Name' => $request->fname . ' ' . $request->lname,
                 'Phone_Number' => $request->phone,
-                'Create_Date' => $object -> date,
+                'Create_Date' => $object->date,
                 'Status' => 'Pending',
             ];
             $orderTable = DB::table('orders')->insert($value);
             if ($orderTable) {
                 $orderId = DB::table('orders')
-                    ->where('Create_Date', $object -> date)
+                    ->where('Create_Date', $object->date)
                     ->get();
                 if (session_id() === '') {
                     session_start();
@@ -132,7 +131,7 @@ class ChechoutController extends Controller
                 }
                 if ($order_item) {
                     $orderId = DB::table('orders')
-                        ->where('Create_Date', $object -> date)
+                        ->where('Create_Date', $object->date)
                         ->get();
                     $value = [
                         'Order_id' => $orderId[0]->Order_id,
@@ -143,7 +142,7 @@ class ChechoutController extends Controller
                         'Disccount' => $request->discount,
                         'Total' => $request->total * 100,
                         'Note' => $request->note,
-                        'Create_Date' => $object -> date,
+                        'Create_Date' => $object->date,
                     ];
                     $bill = DB::table('bill')->insert($value);
                 }
@@ -190,13 +189,13 @@ class ChechoutController extends Controller
                 'Address' => $request->address,
                 'Name' => $request->fname . ' ' . $request->lname,
                 'Phone_Number' => $request->phone,
-                'Create_Date' => $object -> date,
+                'Create_Date' => $object->date,
                 'Status' => 'Pending',
             ];
             $orderTable = DB::table('orders')->insert($value);
             if ($orderTable) {
                 $orderId = DB::table('orders')
-                    ->where('Create_Date', $object -> date)
+                    ->where('Create_Date', $object->date)
                     ->get();
                 if (session_id() === '') {
                     session_start();
@@ -216,7 +215,7 @@ class ChechoutController extends Controller
                 }
                 if ($order_item) {
                     $orderId = DB::table('orders')
-                        ->where('Create_Date', $object -> date)
+                        ->where('Create_Date', $object->date)
                         ->get();
                     $value = [
                         'Order_id' => $orderId[0]->Order_id,
@@ -227,7 +226,7 @@ class ChechoutController extends Controller
                         'Disccount' => $request->discount,
                         'Total' => $request->total * 100,
                         'Note' => $request->note,
-                        'Create_Date' => $object -> date,
+                        'Create_Date' => $object->date,
                     ];
                     $bill = DB::table('bill')->insert($value);
                 }

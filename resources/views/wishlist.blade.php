@@ -50,7 +50,7 @@
                                             <th class="cart-product-name">{{__('Product')}}</th>
                                             <th class="hiraola-product-price">{{__('Price')}}</th>
                                             <th class="hiraola-product-stock-status">{{__('Status')}}</th>
-                                            <th class="hiraola-cart_btn">{{__('Add to cart')}}</th>
+                                            <th class="hiraola-cart_btn">{{__('Add To Cart')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="sessionWishlist">
