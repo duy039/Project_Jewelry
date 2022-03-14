@@ -107,8 +107,8 @@ Route::prefix('admin')->group(function () {
 
     //Order
     Route::get('viewOrder', [App\Http\Controllers\ManageProduct::class, 'orderIndex']);
-    Route::get('editOrder/{orderid}', [App\Http\Controllers\ManageProduct::class, 'orderEditView']);
-    Route::post('updateOrder/{voucherId}', [App\Http\Controllers\ManageProduct::class, 'updateOrder']);
+    Route::get('editOrder/{orderId}', [App\Http\Controllers\ManageProduct::class, 'orderEditView']);
+    Route::post('updateOrder/{orderId}', [App\Http\Controllers\ManageProduct::class, 'updateOrder']);
 
 
 });

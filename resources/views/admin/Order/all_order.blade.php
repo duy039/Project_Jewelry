@@ -70,7 +70,7 @@
                                     <td>{{ $order->Email }}</td>
                                     <td>{{ $order->Address }}</td>
                                     <td>{{ $order->Name }}</td>
-                                    <td>{{ $order->Phone_Number }}</td>
+                                    <td>0{{ $order->Phone_Number }}</td>
                                     <td>{{ $order->Status }}</td>
                                     <td>{{ $order->orderCode == null? 'Not have': $order->orderCode}}</td>
                                     <td>{{ $order->Create_Date }}</td>

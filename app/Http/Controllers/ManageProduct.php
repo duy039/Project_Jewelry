@@ -362,4 +362,14 @@ class ManageProduct extends Controller
         $order = DB::table('orders')->where('Order_id',$orderId)->get();
         return view('admin.Order.edit_order')->with('orders',$order);
     }
+    public function updateOrder(Request $request, $orderId){
+        $data = $request->all();
+        $value =[
+            'Status' => $data['orderStatus'],
+        ];
+        $query = DB::table('orders')->where('Order_id',$orderId)->update($value);
+        if($query){
+            return redirect('admin/viewOrder')->with(['message'=>'Updated successful']);
+        }
+    }
 }

@@ -17,27 +17,39 @@
                 </span>
             </div>
             @foreach ($orders as $key => $or)
-                <form action="{{ url('admin/updateProduct/' . $or->Order_id) }}" method="post"
-                    enctype="multipart/form-data" class="form-horizontal">
+                <form action="{{ url('admin/updateOrder/' . $or->Order_id) }}" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
+                    <div class="card-body">
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">{{ __('Order_id') }} :</label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="orderId" readonly
+                                        value="{{ $or->Order_id }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <label class="col-sm-2 col-form-label">{{ __('Status') }} :</label>
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <select class="form-control" name="orderStatus" id="">
-                                        <option value="failed">Failed</option>
-                                        <option value="success">Success</option>
+                                        <option value="Failed">Failed</option>
+                                        <option value="Success">Success</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="">
+                        <center>
+                            <button style="margin-top: 2%" type="submit"
+                                class="btn btn-rose">{{ __('Update order') }}</button>
+                        </center>
+                    </div>
+                </form>
             @endforeach
-            <div class="">
-                <center>
-                    <button style="margin-top: 2%" type="submit" class="btn btn-rose">{{ __('Update order') }}</button>
-                </center>
-            </div>
-            </form>
         </div>
     @endsection
