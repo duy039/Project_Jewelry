@@ -6,19 +6,18 @@ if (session_id() === '') {
     session_start();
 }
 $user = '';
-// $_SESSION['user_id'] = 1;
 
-$lusers = DB::table('users')->get();
-if (isset($_SESSION['user_id'])) {
-    // đã login
-    foreach ($lusers as $value) {
-        if ($value->id == $_SESSION['user_id']) {
-            $user = $value;
+    $lusers = DB::table('users')->get();
+    if ( Auth::guest() ){
+        //    Chưa đăng nhập
+    }
+    else{
+        foreach ($lusers as $value) {
+            if ($value->id == Auth::user()->id) {
+                $user = $value;
+            }
         }
     }
-} else {
-    // Chưa login
-}
 $contact = DB::table('contact')->get();
 $lloadProduct = new LoadProduct();
 $lloadTag = new LoadTag();
@@ -143,10 +142,7 @@ $tagss = $lloadTag->getTags();
                                                 <a href="{{ url('my-account') }}"><img style="border-radius: 50%"
                                                         width="25px" height="25px"
                                                         @switch(Auth::user()->Avatar) @case(null)
-                                                            @if (Auth::user()->Gender == 'male')
-                                                                src= "{{ url('assets/images/user/avatarmale.jpg') }}"
-                                                            @else
-                                                                src={{ url('assets/images/user/avatarfemale.jpg') }} @endif
+                                                                src={{ url('assets/images/user/avatarDefault.jpg') }}
                                                     @break @default
                                                         @if (substr(Auth::user()->Avatar, 0, 8) == 'https://') src= "{{ Auth::user()->Avatar }}"
                                                           @else
@@ -472,17 +468,22 @@ $tagss = $lloadTag->getTags();
             <div class="row">
                 <div class="col-lg-4">
                     <div class="footer-widgets_info">
+
                         <div class="footer-widgets_logo">
-                            <a href='{{ url('/') }}'>
+                            <a href="#">
                                 <img src="{{ url('assets/images/logo/logo.png') }}"
                                     alt="Hiraola's Footer Logo">
                             </a>
                         </div>
 
                         <div class="widget-short_desc">
-                            <p>We are a team of designers and developers that create high quality HTML Template
-                                &
-                                Woocommerce, Shopify Theme.
+                            <p>
+                                Jeulia is located in Unit 20B2, 20/F, Guangdong Investment Tower, 
+                                No. 148 Connaught Road, Central, Sheung Wan, Hong Kong. 
+                                We believe in delivering excellent customer service, 
+                                and will do everything possible to satisfy our customers. 
+                                If you have any questions, comments or suggestions, 
+                                feel free to contact us or email us at service@jeulia.com.
                             </p>
                         </div>
                         <div class="hiraola-social_link">
@@ -515,7 +516,7 @@ $tagss = $lloadTag->getTags();
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="footer-widgets_title">
-                                    <h6>{{ __('Product') }}</h6>
+                                    <h6>Product</h6>
                                 </div>
                                 <div class="footer-widgets">
                                     <ul>
@@ -526,60 +527,37 @@ $tagss = $lloadTag->getTags();
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-lg-9">
                                 <div class="footer-widgets_info">
                                     <div class="footer-widgets_title">
-                                        <h6>{{ __('About') }}</h6>
+                                        <h6>About Us</h6>
                                     </div>
                                     <div class="widgets-essential_stuff">
                                         <ul>
                                             <li class="hiraola-address"><i
-                                                    class="ion-ios-location"></i><span>Address:</span> The
-                                                Barn,
-                                                Ullenhall, Henley
-                                                in
-                                                Arden B578 5CC, England</li>
+                                                    class="ion-ios-location"></i><span>{{ __('Location') }}:</span>
+                                                @foreach ($contact as $con)
+                                                    {{ $con->Address }}
+                                                @endforeach
+                                            </li>
                                             <li class="hiraola-phone"><i
-                                                    class="ion-ios-telephone"></i><span>Call
-                                                    Us:</span> <a href="tel://+123123321345">+123 321 345</a>
+                                                    class="ion-ios-telephone"></i><span>{{ __('Phone Number') }}:</span>
+                                                <a
+                                                    href="tel://+@foreach ($contact as $con) {{ $con->Number_Phone }} @endforeach">
+                                                    @foreach ($contact as $con)
+                                                        {{ $con->Number_Phone }}
+                                                    @endforeach
+                                                </a>
                                             </li>
                                             <li class="hiraola-email"><i
-                                                    class="ion-android-mail"></i><span>Email:</span> <a
-                                                    href="mailto://info@yourdomain.com">info@yourdomain.com</a>
+                                                    class="fab fa-facebook"></i><span>Facebook:</span> <a
+                                                    target="_blank"
+                                                    href="@foreach ($contact as $con) {{ $con->FaceBook }} @endforeach">Facebook.com</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-4">
-                                        <div class="instagram-container footer-widgets_area">
-                                            <div class="footer-widgets_title">
-                                                <h6>Sign Up For Newslatter</h6>
-                                            </div>
-                                            <div class="widget-short_desc">
-                                                <p>Subscribe to our newsletters now and stay up-to-date with new
-                                                    collections</p>
-                                            </div>
-                                            <div class="newsletter-form_wrap">
-                                                <form class="subscribe-form" id="mc-form" action="#">
-                                                    <input class="newsletter-input" id="mc-email" type="email"
-                                                        autocomplete="off" name="Enter Your Email"
-                                                        value="Enter Your Email"
-                                                        onblur="if(this.value==''){this.value='Enter Your Email'}"
-                                                        onfocus="if(this.value=='Enter Your Email'){this.value=''}">
-                                                    <button class="newsletter-btn" id="mc-submit">
-                                                        <i class="ion-android-mail"></i>
-                                                    </button>
-                                                </form>
-                                                <!-- Mailchimp Alerts -->
-                                                <div class="mailchimp-alerts mt-3">
-                                                    <div class="mailchimp-submitting"></div>
-                                                    <div class="mailchimp-success"></div>
-                                                    <div class="mailchimp-error"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                         </div>
                     </div>
                 </div>
@@ -593,38 +571,29 @@ $tagss = $lloadTag->getTags();
                     <div class="col-lg-12">
                         <div class="footer-links">
                             <ul>
-                                <li><a href="#">Online Shopping</a></li>
-                                <li><a href="#">Promotions</a></li>
-                                <li><a href="#">My Orders</a></li>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Customer Service</a></li>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">Most Populars</a></li>
-                                <li><a href="#">New Arrivals</a></li>
-                                <li><a href="#">Special Products</a></li>
-                                <li><a href="#">Manufacturers</a></li>
-                                <li><a href="#">Our Stores</a></li>
-                                <li><a href="#">Shipping</a></li>
-                                <li><a href="#">Payments</a></li>
-                                <li><a href="#">Warantee</a></li>
-                                <li><a href="#">Refunds</a></li>
-                                <li><a href="#">Checkout</a></li>
-                                <li><a href="#">Discount</a></li>
-                                <li><a href="#">Refunds</a></li>
-                                <li><a href="#">Policy Shipping</a></li>
+                                <li><a href='{{ url("/") }}'>Home</a></li>
+                                <li><a href='{{ url("/shop") }}'>Online Shopping</a></li>
+                                <li><a href='{{ url("/cart") }}'>My Cart</a></li>
+                                <li><a href='{{ url("/event/GetPointsEveryDay") }}'>Roll Call Event</a></li>
+                                <li><a href='{{ url("/checkout") }}'>Checkout</a></li>
+                                <li><a href='{{ url("/about-us") }}'>About-us</a></li>
+                                <li><a href='{{ url("/contact") }}'>Contact</a></li>
+                                <li><a href='{{ url("/contact") }}'>feedback</a></li>
+                                <li><a href='{{ url("/compare") }}'>Compare</a></li>
+                                <li><a href='{{ url("/blog") }}'>Blog</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="payment">
                             <a href="#">
-                                <img src="assets/images/footer/payment/1.png" alt="Hiraola's Payment Method">
+                                <img src='{{ url("assets/images/footer/payment/1.png") }}' alt="Jeulia Payment Method">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="copyright">
-                            <span>Copyright &copy; 2019 <a href="#">Hiraola.</a> All rights reserved.</span>
+                            <span>Copyright &copy; 2021 <a href="#">Jeulia.</a> All rights reserved.</span>
                         </div>
                     </div>
                 </div>

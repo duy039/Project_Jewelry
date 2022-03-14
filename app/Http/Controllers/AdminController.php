@@ -11,4 +11,6 @@ class AdminController extends Controller
         $contact = DB::table('contact')->get();
         return view('admin.dashboard')->with('contact' ,$contact);
     }
+
+  
 }

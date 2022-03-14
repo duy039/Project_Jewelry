@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LoadProduct;
+use Auth;
 use App\Models\LoadTag;
 use Illuminate\Support\Facades\DB;
 
@@ -25,13 +26,13 @@ class SingleProductController extends Controller
 
     public function index($id){
         $wishlists =array();
-        if (session_id() === ''){
-            session_start();
+        if ( Auth::guest() ){
+            //    Chưa đăng nhập
         }
-        if( isset( $_SESSION['user_id'] ) ){
-            // đã login
-            $wishlists = DB::table('wishlist')->where('User_id', $_SESSION['user_id'])->get();
+        else{
+            $wishlists = DB::table('wishlist')->where('User_id', Auth::user()->id)->get();
         }
+        
         $result= $this->products;
         $resultTag =  array();
         $rel = array();
@@ -182,6 +183,26 @@ class SingleProductController extends Controller
         }
         return json_encode($result);
     }
+    // đếm lượt like và xem mình có like chưa
+    public function countLikeRating($raitingID, $userID){
+        $likeRating = DB::table('likerating')->where('Rating_id', $raitingID)->get();
+        $countLike = 0;
+        $liked = false;
+        foreach($likeRating as $lr){
+            if($lr->Statuss == 1){
+                $countLike++; 
+                if($lr->User_id == $userID){
+                    $liked = true;
+                }
+            }
+        }
+        $result = (object) [
+            'count'    => $countLike,
+            'liked'          => $liked
+        ];
+        return json_encode($result);
+    }
+    
 //  thêm 1 comment
     public function addComment(Request $request){
         date_default_timezone_set("Asia/Ho_Chi_Minh");
@@ -229,6 +250,47 @@ class SingleProductController extends Controller
                 'Content'       => $content,
                 'Create_Date'   => date('Y-m-d  H:i:s'),
                 'Update_Date'   => date('Y-m-d  H:i:s')
+            ]);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //  xử lý thêm bớt lượt Like cho rating
+    public function addLikeRaiting(Request $request){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        // kiểm tra có tồn tại 2 post này ko?
+        if(isset($request->user_id)& isset($request->ratingID)){
+            $user_id    = $request->user_id;
+            $raiting    = $request->ratingID;
+            
+            $likeTable = DB::table('likerating')->where('Rating_id', $raiting)->get();
+            foreach($likeTable as $lt){
+                if($lt->User_id == $user_id){
+                    // update nếu tìm thấy user  đã từng like cho Rating này
+                    if($lt->Statuss == 0){
+                        DB::table('likerating')->where('id', $lt->id)->update([
+                            'Statuss'        => 1,
+                            'Update_date'   => date('Y-m-d  H:i:s')
+                        ]);
+                    }else if($lt->Statuss == 1){
+                        DB::table('likerating')->where('id', $lt->id)->update([
+                            'Statuss'        => 0,
+                            'Update_date'   => date('Y-m-d  H:i:s')
+                        ]);
+                    }
+                    return true;
+                }
+            }
+
+            // thêm nếu trong rating này chưa có User này
+            DB::table('likerating')->insert([
+                'Rating_id'    => $raiting,
+                'User_id'       => $user_id,
+                'Statuss'        => 1,
+                'Create_date'   => date('Y-m-d  H:i:s'),
+                'Update_date'   => date('Y-m-d  H:i:s')
             ]);
             return true;
         }else{

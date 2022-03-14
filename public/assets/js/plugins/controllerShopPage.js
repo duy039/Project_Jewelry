@@ -630,7 +630,7 @@ function renderListCompare(){
                             +                '<i class="bi-chevron-down"></i> Shorten'
                             +            '</a>'
                             +            '<div class="buttonActionCompare">'
-                            +                '<p><button type="button" class="btn btn-primary"><a style="text-decoration: none" href="'+url+'/compare">Compare Now</a></button></p>'
+                            +                '<p><button type="button" class="btn btn-primary"><a style="text-decoration: none; color: #fff" href="'+url+'/compare">Compare Now</a></button></p>'
                             +                '<button type="button" onclick="deleteAllProductCompare()" class="btn btn-danger">Delete All Products</button>'
                             +            '</div>'
                             +       '</li>'

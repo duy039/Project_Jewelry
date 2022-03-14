@@ -33,27 +33,7 @@
 </head>
 @extends('layout.layout_nav_footer')
 @section('main')
-    <?php
-    use Illuminate\Support\Carbon;
-    $date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
-    if (session_id() === '') {
-        session_start();
-    }
-    $user = '';
-    // $_SESSION['user_id'] = 1;
-
-    $lusers = DB::table('users')->get();
-    if (isset($_SESSION['user_id'])) {
-        // đã login
-        foreach ($lusers as $value) {
-            if ($value->id == $_SESSION['user_id']) {
-                $user = $value;
-            }
-        }
-    } else {
-        // Chưa login
-    }
-    ?>
+    
     <input id="taxName" type="hidden" value="{{ $tax[0]->Tax_Name }}">
     <input id="taxPercentage" type="hidden" value="{{ $tax[0]->Tax_Percentage }}">
     <!-- Begin Breadcrumb Area -->

@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Auth;
 
+
 class ChechoutController extends Controller
 {
     public $products;
@@ -19,13 +20,6 @@ class ChechoutController extends Controller
     }
     public function index()
     {
-        if (session_id() === '') {
-            session_start();
-        }
-        if (!isset($_SESSION['user_id'])) {
-            // đã login
-            $_SESSION['user_id'] = array();
-        }
         $tax = DB::table('tax')->where('Tax_id', '1')->get();
         return view('checkout', [
             'tax' => $tax

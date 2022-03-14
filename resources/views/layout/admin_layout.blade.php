@@ -51,11 +51,13 @@
                     </div>
                     <div class="user-info">
                         <a data-toggle="collapse" href="#collapseExample" class="username">
-                            <span>{{ __('Xin Chào') }}
-                                {{Auth::user()->First_Name .' '. Auth::user()->Last_Name}}
-                            </span>
+                          <span>{{__('Xin Chào')}}
+                            @if(Auth::user()->Admins == 1)
+                            {{Auth::user()->First_Name. Auth::user()->Last_Name}}
+                            @endif
+                          </span>
                         </a>
-                    </div>
+                      </div>
                 </div>
                 <ul class="nav">
                     <li class="nav-item active ">
@@ -115,22 +117,22 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#product">
                             <i class="material-icons">production_quantity_limits</i>
-                            <p> {{ __('Sản Phẩm') }}
+                            <p> {{ __('Product') }}
                                 <b class="caret"></b>
                             </p>
                         </a>
                         <div class="collapse" id="product">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> SP </span>
-                                        <span class="sidebar-normal">{{ __('Thêm Sản Phẩm') }} </span>
+                                    <a class="nav-link" href="{{ url('admin/addProduct')}}">
+                                        <span class="sidebar-mini"> 1 </span>
+                                        <span class="sidebar-normal">{{ __('Add product') }} </span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
                                     <a class="nav-link" href="{{ url('admin/manageProduct')}}">
-                                        <span class="sidebar-mini"> SP </span>
-                                        <span class="sidebar-normal"> {{ __('Liệt Kê Sản Phẩm') }} </span>
+                                        <span class="sidebar-mini"> 2 </span>
+                                        <span class="sidebar-normal"> {{ __('List product') }} </span>
                                     </a>
                                 </li>
                             </ul>
@@ -139,46 +141,46 @@
                     <li class="nav-item ">
                         <a class="nav-link" data-toggle="collapse" href="#coupon">
                             <i class="material-icons">local_offer</i>
-                            <p> {{ __('Mã Giảm Giá') }}
+                            <p> {{ __('Voucher') }}
                                 <b class="caret"></b>
                             </p>
                         </a>
                         <div class="collapse" id="coupon">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> MGG </span>
-                                        <span class="sidebar-normal"> {{ __('Thêm Mã') }}</span>
+                                    <a class="nav-link" href="{{ url('admin/addcode')}}">
+                                        <span class="sidebar-mini"> 1 </span>
+                                        <span class="sidebar-normal"> {{ __('Add voucher') }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> MGG </span>
-                                        <span class="sidebar-normal"> {{ __('Quản Lý Mã') }} </span>
+                                    <a class="nav-link" href="{{ url('admin/voucher')}}">
+                                        <span class="sidebar-mini"> 2 </span>
+                                        <span class="sidebar-normal"> {{ __('List voucher') }} </span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item ">
+                    {{-- <li class="nav-item ">
                         <a class="nav-link" href="">
                             <i class="material-icons">local_shipping</i>
                             <p> {{ __('Phí Vận Chuyển') }} </p>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item ">
                         <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
                             <i class="material-icons">description</i>
-                            <p> {{ __('Quản Lý Đơn Hàng') }}
+                            <p> {{ __('Manage Order') }}
                                 <b class="caret"></b>
                             </p>
                         </a>
                         <div class="collapse" id="tablesExamples">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> ĐH </span>
-                                        <span class="sidebar-normal"> {{ __('Đơn Hàng') }} </span>
+                                    <a class="nav-link" href="{{url('admin/viewOrder')}}">
+                                        <span class="sidebar-mini"> 1 </span>
+                                        <span class="sidebar-normal"> {{ __('List Order') }} </span>
                                     </a>
                                 </li>
                             </ul>
@@ -385,18 +387,6 @@
             <div class="content">
                 <div class="content">
                     @yield('admin_content')
-                    {{-- <footer class="footer">
-                        <div class="container-fluid">
-                            <div class="copyright float-right">
-                                &copy;
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script>, made with <i class="material-icons">favorite</i>
-                                by
-                                <a href="#" target="_blank">Quang</a>.
-                            </div>
-                        </div>
-                    </footer> --}}
                 </div>
             </div>
             <div class="fixed-plugin">
@@ -551,6 +541,23 @@
             <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
             {{-- end morris --}}
             {{-- slug --}}
+            <script>
+                $(document).ready(function(){
+                    $('#searchbox').on('keyup',function(){
+                        var key = $('#searchbox').val();
+                        $.ajax({
+                            url: 'admin/searchAdmin',
+                            method : 'GET',
+                            data: {
+                                'search' : key
+                            },
+                            success: function(data){
+                                $('#searchProduct').html(data);
+                            }
+                        })
+                    });
+                });
+            </script>
             <script type="text/javascript">
                 function ChangeToSlug() {
                     var slug;
