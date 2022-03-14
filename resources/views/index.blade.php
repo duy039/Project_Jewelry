@@ -291,6 +291,16 @@
                                         </li>
                                         <li><a href='{{ url('/contact') }}'>{{ __('Contact') }}</a>
                                         </li>
+                                        <li class="dropdown-holder"><a href="javascript:void(0)">Other</a>
+                                            <ul class="hm-dropdown">
+                                                <li>
+                                                    <a href='{{ url('/event/GetPointsEveryDay') }}'>Roll Call Event</a>
+                                                </li>
+                                                <li>
+                                                    <a href='{{ url('/compare') }}'>Compare</a>
+                                                <li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
