@@ -1,0 +1,61 @@
+    .birthdayEvent{
+        width: 100%;
+        height: 400px;
+        background-image: url(../../images/banner/backgroudBirthday1.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .birthdayEvent #time-festival h2{
+        padding-left: 40px;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: cursive;
+        color: rgb(9, 179, 247);
+        filter: drop-shadow(0 0 3px rgb(249, 253, 19));
+    }
+    .birthdayEvent #time-festival{
+        margin-left: 50%;
+        padding-top: 80px;
+    }
+    .birthdayEvent    #time-festival #time{
+        display:flex;
+        margin-left: 00px;
+    }
+    .birthdayEvent   #time-festival #time div{
+        width: 120px;
+        height: 100px;
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0 5px 30px;
+
+    }
+    .birthdayEvent    #time-festival #time div span{
+        padding-top: 30px;
+        position: relative;
+        display:block;
+        color: rgb(255, 0, 255);
+        display:flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        z-index:3;
+    }
+    .birthdayEvent   .text-time{
+        font-size: 30px;
+        font-family: cursive;
+        font-weight: bold;
+        font-style: italic;
+        filter: drop-shadow(0 0 3px rgb(238, 255, 0));
+    }
+    .birthdayEvent   #time-festival p{
+        font-size: 15px;
+        color: rgb(0, 0, 0);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding: 0 250px 0 50px;
+        font-style: italic;
+        
+    }
+    .birthdayEvent   #day, #minute, #hour, #second{
+        font-size: 40px;
+    }

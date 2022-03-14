@@ -1,0 +1,59 @@
+.bannerTime {
+    margin-top: 30px;
+    width: 100%;
+    height: 300px;
+    background-image: url(../../images/banner/bannerBirthday1.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.birthdayEvent #time-festival{
+    width: 100%;
+}
+.birthdayEvent    #time-festival #time{
+    display:flex;
+    padding-top: 20px;
+}
+.birthdayEvent   #time-festival #time div{
+    width: 130px;
+    height: 130px;
+    position: relative;
+    background-image: url("../../images/product/R08P02.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 3px 30px;
+
+}
+
+#day , #hour, #minute, #second{
+    padding-top: 30px;
+    position: relative;
+    display:block;
+    display:flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    z-index:3;
+    color: rgba(0, 155, 245, 0.884);
+    filter: drop-shadow(0 0 1px rgb(255, 255, 255));
+}
+.birthdayEvent   .text-time{
+    padding-top: 10px;
+    padding-left: -5px;
+    position: relative;
+    display:block;
+    display:flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    z-index:3;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    font-family: cursive;
+    font-weight: bold;
+    font-style: italic;
+    filter: drop-shadow(0 0 1px rgb(255, 255, 255));
+}
+.birthdayEvent   #day, #minute, #hour, #second{
+    font-size: 40px;
+}

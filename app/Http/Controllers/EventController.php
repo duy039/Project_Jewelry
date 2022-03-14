@@ -95,4 +95,8 @@ class EventController extends Controller
         }      
         return false;
     }
+
+    public function birthdayPage(){
+        return view('coming-soon_page');
+    }
 }
