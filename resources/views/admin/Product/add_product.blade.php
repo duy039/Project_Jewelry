@@ -52,7 +52,7 @@
                         <label class="col-sm-2 col-form-label">{{ __('Price') }} :</label>
                         <div class="col-sm-7">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="product_price"
+                                <input class="form-control" type="number" name="product_price"
                                     placeholder="{{ __('Enter price') }}" />
                             </div>
                         </div>
@@ -103,37 +103,34 @@
                     <div class="row">
                         <label class="col-sm-2 col-form-label">{{ __('Image') }} :</label>
                         <div class="col-sm-7">
-                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                <div class="fileinput-new thumbnail">
-                                    <img src="{{ asset('backend/assets/img/image_placeholder.jpg') }}" alt="...">
+                            @for ($i = 0; $i < 8; $i++)
+                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail">
+                                        <img src="{{ asset('backend/assets/img/image_placeholder.jpg') }}" alt="...">
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                    <div>
+                                        <span class="btn btn-rose btn-round btn-file">
+                                            <span class="fileinput-new">Select image</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input type="file" name="product_image[]" class="form-control" />
+                                        </span>
+                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
+                                            data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                    </div>
                                 </div>
-                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                <div>
-                                    <span class="btn btn-rose btn-round btn-file">
-                                        <span class="fileinput-new">Select image</span>
-                                        <span class="fileinput-exists">Change</span>
-                                        <input type="file" name="product_image" class="form-control" />
-                                    </span>
-                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
-                                        data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                </div>
-                            </div>
+                            @endfor
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 col-form-label">{{ __('Create Date') }} :</label>
+                        <label class="col-sm-2 col-form-label">{{ __('Tag') }} :</label>
                         <div class="col-sm-7">
-                            <div class="form-group">
-                                <input type="date" class="form-control" name="createDate">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">{{ __('Update date') }} :</label>
-                        <div class="col-sm-7">
-                            <div class="form-group">
-                                <input type="date" class="form-control" name="updateDate">
-                            </div>
+                            @foreach ($tag as $t)
+                                <div class="form-group float-left" style="padding-right: 3%">
+                                    <input type="checkbox" name="tag[]" value="{{ $t->Tag_id }}">
+                                    <label> {{ $t->NAME }}</label><br>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row">
@@ -150,6 +147,7 @@
                             <button type="submit" class="btn btn-rose">{{ __('Add product') }}</button>
                         </center>
                     </div>
+                </div>
         </form>
     </div>
 @endsection
