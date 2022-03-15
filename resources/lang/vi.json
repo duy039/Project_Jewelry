@@ -10,7 +10,7 @@
     "Point" : "Điểm",
     "Trendding": "Xu hướng",
     "Phone Number": "Số điện thoại",
-    "enterPhone" : "Nhập số điện thoại",
+    "Enter phone number" : "Nhập số điện thoại",
     "Rings": "Nhẫn",
     "Neckales": "Vòng cổ",
     "Braceles": "Vòng tay",
@@ -80,5 +80,16 @@
     "Total" : "Tổng",
     "Subtotal" : "Tổng giá trước thuế",
     "Tax" : "Thuế",
-    "Price After Tax" : "Tổng giá sau thuế"
+    "Price After Tax" : "Tổng giá sau thuế",
+    "Pending" : "Đang chờ xử lý",
+    "Login event" : "Sự kiện đăng nhập",
+    "Compare" : "So sánh",
+    "Email is required" : "Email không được để trống",
+    "Billing Details" : "Thông tin đơn hàng",
+    "Address" : "Địa chỉ",
+    "Enter address" : "Nhập địa chỉ",
+    "Order Notes" : "Ghi chú",
+    "Notes about your order, e.g near bank" : "Ghi chú lại hóa đơn, ví dụ: gần ngân hàng",
+    "Coupon code" : "Mã giảm giá",
+    "Apply coupon" : "Áp dụng mã"
 }

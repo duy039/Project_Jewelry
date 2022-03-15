@@ -63,12 +63,7 @@ class registerOrLoginController extends Controller
             'f_name' => 'required|string|max:20',
             'email' => 'required|string|email|max:50|regex:/(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)/',
             'password' => 'required|string|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/',
-        ], [
-            'l_name.required' => 'The last name field is required',
-            'f_name.required' => 'The first name field is required',
-            'l_name.max' => 'The last name must not be greater than 20 characters.',
-            'f_name.max' => 'The first name must not be greater than 20 characters.',
-            'password.regex' => 'Password must have at least 1 lowercase alphabetical, 1 uppercase alphabetical,1 numeric character, 1 special character, must be 8 characters or longer',
+            'password_confirmation' => 'required',
         ]);
         $l_name = $request->l_name;
         $f_name = $request->f_name;

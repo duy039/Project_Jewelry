@@ -18,7 +18,7 @@ function productsResponse() {
             }else{
                 theResponse = null;
             }
-            
+
         }
     });
     return theResponse;
@@ -39,7 +39,7 @@ function changeQuantity(id, method){
             renderListProduct();
         }
     });
-    
+
 }
 
 

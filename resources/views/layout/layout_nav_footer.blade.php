@@ -280,13 +280,13 @@ $tagss = $lloadTag->getTags();
                                 <li><a href='{{ url('blog') }}'>{{ __('Blog') }}</a></li>
                                 <li><a href='{{ url('/about-us') }}'>{{ __('About-us') }}</a></li>
                                 <li><a href='{{ url('/contact') }}'>{{ __('Contact') }}</a></li>
-                                <li class="dropdown-holder"><a href="javascript:void(0)">Other</a>
+                                <li class="dropdown-holder"><a href="javascript:void(0)">{{__('Other')}}</a>
                                     <ul class="hm-dropdown">
                                         <li>
-                                            <a href='{{ url('/event/GetPointsEveryDay') }}'>Roll Call Event</a>
+                                            <a href='{{ url('/event/GetPointsEveryDay') }}'>{{__("Login event")}}</a>
                                         </li>
                                         <li>
-                                            <a href='{{ url('/compare') }}'>Compare</a>
+                                            <a href='{{ url('/compare') }}'>{{__("Compare")}}</a>
                                         <li>
                                     </ul>
                                 </li>
@@ -488,11 +488,11 @@ $tagss = $lloadTag->getTags();
 
                         <div class="widget-short_desc">
                             <p>
-                                Jeulia is located in Unit 20B2, 20/F, Guangdong Investment Tower, 
-                                No. 148 Connaught Road, Central, Sheung Wan, Hong Kong. 
-                                We believe in delivering excellent customer service, 
-                                and will do everything possible to satisfy our customers. 
-                                If you have any questions, comments or suggestions, 
+                                Jeulia is located in Unit 20B2, 20/F, Guangdong Investment Tower,
+                                No. 148 Connaught Road, Central, Sheung Wan, Hong Kong.
+                                We believe in delivering excellent customer service,
+                                and will do everything possible to satisfy our customers.
+                                If you have any questions, comments or suggestions,
                                 feel free to contact us or email us at service@jeulia.com.
                             </p>
                         </div>

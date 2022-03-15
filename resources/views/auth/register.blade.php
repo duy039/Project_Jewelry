@@ -77,6 +77,7 @@
                         <input type="password" data-html="true" id="confirm_pass" class="form-control"
                             name="password_confirmation" autocomplete="new-password"
                             placeholder="{{ __('Enter Confirm Password') }}">
+                            <span class="text-danger error-text password_confirmation_error"></span>
                     </div>
                     <div class="col-md-12 text-center">
                         <hr>

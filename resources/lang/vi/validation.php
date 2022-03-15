@@ -131,8 +131,43 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email' => [
+            'required' => 'Email không được để trống',
+            'max' => 'Email không lớn hơn 50 kí tự',
+            'regex' => 'Email không đúng định dạng'
+        ],
+        'password' => [
+            'required' => 'Mật khẩu không được để trống',
+            'regex' => 'Mật khẩu không đúng định dạng',
+            'confirmed' => "Xác nhận mật khẩu không khớp với mật khẩu",
+        ],
+        'l_name'=>[
+            'required' => 'Họ không được để trống',
+            'max' => "Họ không lớn hơn 20 kí tự"
+        ],
+        'f_name'=>[
+            'required' => 'Tên không được để trống',
+            'max' => "Tên không lớn hơn 20 kí tự"
+        ],
+        'phone_number'=>[
+            'required' => 'Số điện thoại không được để trống',
+            'max' => 'Số điện thoại không lớn hơn 11 số',
+            'min' => 'Số điện thoại không nhỏ hơn 10 số'
+        ],
+        'firstName'=>[
+            'required' => 'Tên không được để trống',
+            'max' => 'Tên không lớn hơn 20 kí tự',
+        ],
+        'lastName'=>[
+            'required' => 'Họ không được để trống',
+            'max' => 'Họ không lớn hơn 20 kí tự',
+        ],
+        'current_password'=>[
+            'required' => 'Mật khẩu cũ không được để trống',
+            'min' => 'Mật khẩu cũ phải ít nhất 8 kí tự',
+        ],
+        'password_confirmation'=>[
+            'required' => 'Xác nhận mất khẩu không được để trống',
         ],
     ],
 

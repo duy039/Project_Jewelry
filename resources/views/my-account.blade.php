@@ -174,8 +174,10 @@
                                                         <td colspan="4">Don't have order before.</td>
                                                     </tr>
                                                 @endif
+
                                             </tbody>
                                         </table>
+                                        <div style="position: absolute; margin-top: 5%; margin-left:50%;transform:translateX(-50%) ">{!!$orders->links('vendor.pagination.bootstrap-4')!!}</div>
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +226,7 @@
                                                     class="text-danger">*</span></label>
                                             <input type="number" data-html="true" value="0{{ $user->Phone_Number }}"
                                                 name="phone_number" id="phone"
-                                                placeholder="{{ __('enterPhone') }}">
+                                                placeholder="{{ __('Enter phone number') }}">
                                             <span class="text-danger error-text phone_number_error"></span>
                                         </div>
                                         <div class="single-input single-input-half">

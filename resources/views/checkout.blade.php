@@ -33,7 +33,7 @@
 </head>
 @extends('layout.layout_nav_footer')
 @section('main')
-<?php
+    <?php
     use Illuminate\Support\Carbon;
     $date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
     if (session_id() === '') {
@@ -94,38 +94,38 @@
                         <input type="hidden" id="discount">
                         <input type="hidden" name="date" value="{{ $date }}">
                         <div class="checkbox-form">
-                            <h3>Billing Details</h3>
+                            <h3>{{__('Billing Details')}}</h3>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
-                                        <label>Address <span class="required">*</span></label>
+                                        <label>{{__('Address')}} <span class="required">*</span></label>
                                         <input id="deliveryAddress" maxlength="50" required data-html="true"
-                                            placeholder="Street address" type="text" onchange="changeInput()"
+                                            placeholder="{{__('Enter address')}}" type="text" onchange="changeInput()"
                                             name="address">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
-                                        <label>First Name <span required class="required">*</span></label>
+                                        <label>{{__('First Name')}} <span required class="required">*</span></label>
                                         @if ($user == '')
                                             <input maxlength="20" id="inputFirstName" required data-html="true" name="fname"
-                                                placeholder="Enter first name" type="text">
+                                                placeholder="{{__('Enter First Name')}}" type="text">
                                         @else
                                             <input id="inputFirstName" data-html="true" type="text"
-                                                placeholder="Enter first name" maxlength="20" name="fname"
+                                                placeholder="{{__('Enter First Name')}}" maxlength="20" name="fname"
                                                 value="{{ $user->First_Name }}">
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
-                                        <label>Last Name <span class="required">*</span></label>
+                                        <label>{{__('Last Name')}} <span class="required">*</span></label>
                                         @if ($user == '')
                                             <input maxlength="20" id="inputLastName" required data-html="true"
-                                                placeholder="Enter last name" name="lname" type="text">
+                                                placeholder="{{__('Enter Last Name')}}" name="lname" type="text">
                                         @else
                                             <input maxlength="20" id="inputLastName" required data-html="true"
-                                                placeholder="Enter last name" type="text" name="lname"
+                                                placeholder="{{__('Enter Last Name')}}" type="text" name="lname"
                                                 value="{{ $user->Last_Name }}">
                                         @endif
                                     </div>
@@ -135,23 +135,23 @@
                                         <label>Email <span class="required">*</span></label>
                                         @if ($user == '')
                                             <input maxlength="50" id="inputEmailCheckout" required data-html="true"
-                                                placeholder="Enter email" name="email" type="email">
+                                                placeholder="{{__('Enter Email')}}" name="email" type="email">
                                         @else
                                             <input maxlength="50" id="inputEmailCheckout" required data-html="true"
-                                                placeholder="Enter email" name="email" type="email"
+                                                placeholder="{{__('Enter Email')}}" name="email" type="email"
                                                 value="{{ $user->email }}">
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
-                                        <label>Phone <span class="required">*</span></label>
+                                        <label>{{__('Phone Number')}} <span class="required">*</span></label>
                                         @if ($user == '')
                                             <input maxlength="12" id="inputPhoneCheckout" data-html="true" required
-                                                placeholder="Enter phone" name="phone" type="number">
+                                                placeholder="{{__('Enter phone number')}}" name="phone" type="number">
                                         @else
                                             <input maxlength="12" id="inputPhoneCheckout" data-html="true" required
-                                                placeholder="Enter phone" name="phone" type="number"
+                                                placeholder="{{__('Enter phone number')}}" name="phone" type="number"
                                                 value="0{{ $user->Phone_Number }}">
                                         @endif
                                     </div>
@@ -160,10 +160,9 @@
                             <div class="different-address">
                                 <div class="order-notes">
                                     <div class="checkout-form-list checkout-form-list-2">
-                                        <label>Order Notes</label>
-                                        <textarea style="resize: none" data-html="true" maxlength="100" name="note"
-                                            id="checkout-mess" cols="30" rows="10"
-                                            placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        <label>{{__('Order Notes')}}</label>
+                                        <textarea style="resize: none" data-html="true" maxlength="100" name="note" id="checkout-mess" cols="30" rows="10"
+                                            placeholder="{{__('Notes about your order, e.g near bank')}}"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -171,8 +170,8 @@
                         <div class="coupon-all">
                             <div class="coupon">
                                 <input id="coupon_code" class="" name="coupon_code" value=""
-                                    placeholder="Coupon code" type="text" width="800">
-                                <input class="button" name="" value="Apply coupon" onclick="checkVoucher()">
+                                    placeholder="{{__('Coupon code')}}" type="text" width="800">
+                                <input class="button" name="" value="{{__('Apply coupon')}}" onclick="checkVoucher()">
                                 <p id="NotificationCoupon_code"></p>
                             </div>
                         </div>
@@ -250,19 +249,25 @@
                                     $test = isset($_SESSION['inCart']);
                                     ?>
                                     @if ($test)
-                                        <input value="Pay Direct" name="payment" type="submit">
+                                    <select class="form-control" name="payment" id="">
+                                        <option value="Pay Direct">Pay Direct</option>
+                                        <option value="Pay with MOMO">Pay with MOMO</option>
+                                        <option value="Pay with VNPAY">Pay with VNPAY</option>
+                                    </select>
+                                        {{-- <input value="Pay Direct" name="payment" type="submit">
                                         <input value="Pay with MOMO" name="payment" type="submit">
-                                        <input value="Pay with VNPAY" name="payment" type="submit">
+                                        <input value="Pay with VNPAY" name="payment" type="submit"> --}}
                                     @else
                                         <div class="text-center text-primary" style="font-size: 20px">
                                             {{ __('Don\'t have any product in your Cart') }}</div>
                                         <div class="text-center text-primary" style="font-size: 20px">Please Add product
                                             before pay! <a href="{{ url('shop') }}">Go to shop</a></div>
                                     @endif
+                                    <input type="submit" value="Checkout">
                                 </div>
-                                </form>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

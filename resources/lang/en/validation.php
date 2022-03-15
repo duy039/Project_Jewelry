@@ -131,8 +131,43 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email'=>[
+            'required' => 'Email is required',
+            'max' => 'Email not greater than 50 character',
+            'regex' => 'Email wrong format'
+        ],
+        'password'=>[
+            'required' => 'Password is required',
+            'regex' => 'Password wrong format',
+            'confirmed' => "Confirm password must as same as password"
+        ],
+        'l_name'=>[
+            'required' => 'Last name is required',
+            'max' => 'Last name not greater than 20 characters',
+        ],
+        'f_name'=>[
+            'required' => 'First name is required',
+            'max' => 'First name not greater than 20 characters',
+        ],
+        'phone_number'=>[
+            'required' => 'Phone number is required',
+            'max' => 'Phone number not greater than 11 numbers',
+            'min' => 'Phone number at least 10 numbers'
+        ],
+        'firstName'=>[
+            'required' => 'First name is required',
+            'max' => 'First name not greater than 20 characters',
+        ],
+        'lastName'=>[
+            'required' => 'Last name is required',
+            'max' => 'Last name not greater than 20 characters',
+        ],
+        'current_password'=>[
+            'required' => 'Current password is required',
+            'min' => 'Current password at least 8 characters',
+        ],
+        'password_confirmation'=>[
+            'required' => 'Confirm password is required',
         ],
     ],
 

@@ -90,7 +90,7 @@ class ChechoutController extends Controller
         // $date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $total = $request->total;
         $all = $request->all();
-        // dd($all);
+        dd($all);
         $vnp_TxnRef = rand(1, 20000); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $object = (object)$all;
         if ($object->payment == "Pay with MOMO") {
@@ -148,7 +148,7 @@ class ChechoutController extends Controller
             $accessKey = 'X4TFZLVDDr0ZRCfY';
             $secretKey = 'McBbYmABhC7fiF4AiJWVp87pY2fuuxq9';
             $orderInfo = "Thanh toán qua MoMo";
-            $amount = $total * 100;
+            $amount = $total * 23000;
             $orderId = time() . "";
             $redirectUrl = "http://127.0.0.1:8000/checkout/resultMomo";
             $ipnUrl = "http://127.0.0.1:8000/checkout";
