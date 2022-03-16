@@ -2500,7 +2500,7 @@ button.li-btn:hover {
 
 .bg-6,
 .bg-7 {
-  background-image: url("../images/banner/R.jfif");
+  background-image: url("../images/banner/R.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -5385,6 +5385,7 @@ button.li-btn:hover {
 }
 
 .header-bottom_area .main-menu_area > nav > ul > li.megamenu-holder .hm-megamenu {
+  text-align: center;
   background: #ffffff;
   display: -webkit-box;
   display: -ms-flexbox;

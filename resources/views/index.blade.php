@@ -346,7 +346,7 @@
                                                                 href='{{ url('shop/categories/2') }}'>{{ __('Earring') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/2') }}'><img
-                                                                    src="{{ url('assets/images/product/R04P01.jpg') }}"
+                                                                    src="{{ url('assets/images/product/E01P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
                                                     </ul>
                                                 </li>
@@ -356,7 +356,7 @@
                                                                 href='{{ url('shop/categories/3') }}'>{{ __('Neckles') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/3') }}'><img
-                                                                    src="{{ url('assets/images/product/R08P01.jpg') }}"
+                                                                    src="{{ url('assets/images/product/N01P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
                                                     </ul>
                                                 </li>
@@ -366,12 +366,16 @@
                                                                 href='{{ url('shop/categories/4') }}'>{{ __('Braceles') }}</a>
                                                         </li>
                                                         <li><a href='{{ url('shop/categories/4') }}'><img
-                                                                    src="{{ url('assets/images/product/R09P01.jpg') }}"
+                                                                    src="{{ url('assets/images/product/B01P01.jpg') }}"
                                                                     alt="" width="150px"></a></li>
                                                     </ul>
                                                 </li>
-                                                <li> <img width="210px" height="200px"
-                                                        src="{{ url('assets/images/menu/Halloween.png') }}" alt="">
+                                                <li>
+                                                    <p>
+                                                        <span style="color: rgb(8, 66, 255); font-size: 22px" >Accessories </span> are a great way to show-off your individual style 
+                                                        and can help you play more with fashion risks and new trends. 
+                                                        Browse our wide selection of accessories to find the perfect piece to match your style.
+                                                    </p>
                                                 </li>
                                             </ul>
                                         </li>
@@ -598,10 +602,6 @@
                 <div class="single-slide animation-style-01 bg-6">
                     <div class="container">
                         <div class="slider-content slider-content-2">
-                            <h5><span>Black Friday</span> This Week</h5>
-                            <h2>Work Desk</h2>
-                            <h3>Surface Studio 2019</h3>
-                            <h4>Starting at <span>£1599.00</span></h4>
                             <div class="hiraola-btn-ps_center slide-btn">
                                 <a class="hiraola-btn" href="{{ url('shop') }}">{{ __('Shopping Now') }}</a>
                             </div>
@@ -614,10 +614,6 @@
                 <div class="single-slide animation-style-02 bg-7">
                     <div class="container">
                         <div class="slider-content">
-                            <h5><span>-10% Off</span> This Week</h5>
-                            <h2>Phantom4</h2>
-                            <h3>Pro+ Obsidian</h3>
-                            <h4>Starting at <span>£809.00</span></h4>
                             <div class="hiraola-btn-ps_center slide-btn">
                                 <a class="hiraola-btn" href="{{ url('shop') }}">{{ __('Shopping Now') }}</a>
                             </div>
@@ -765,7 +761,7 @@
                             <h3>Meito Accessories 2019</h3>
                             <p class="schedule">
                                 Starting at
-                                <span> £1209.00</span>
+                                <span> $1209.00</span>
                             </p>
                             <div class="hiraola-btn-ps_left">
                                 <a href="{{ url('shop') }}" class="hiraola-btn">{{ __('Shopping Now') }}</a>

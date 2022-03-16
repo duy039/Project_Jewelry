@@ -15,10 +15,10 @@
     padding-top: 20px;
 }
 .birthdayEvent   #time-festival #time div{
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
     position: relative;
-    background-image: url("../../images/product/R08P02.jpg");
+    background-image: url("../../images/banner/time.png");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0 3px 30px;
@@ -34,7 +34,7 @@
     justify-content: center;
     align-items: center;
     z-index:3;
-    color: rgba(0, 155, 245, 0.884);
+    color: rgba(239, 245, 248, 0.884);
     filter: drop-shadow(0 0 1px rgb(255, 255, 255));
 }
 .birthdayEvent   .text-time{
@@ -52,7 +52,7 @@
     font-family: cursive;
     font-weight: bold;
     font-style: italic;
-    filter: drop-shadow(0 0 1px rgb(255, 255, 255));
+    filter: drop-shadow(0 0 2px rgb(255, 255, 255));
 }
 .birthdayEvent   #day, #minute, #hour, #second{
     font-size: 40px;
