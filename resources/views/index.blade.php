@@ -286,7 +286,7 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href='{{ url('/blog') }}'>{{ __('Blog') }}</a></li>
+                                        {{-- <li><a href='{{ url('/blog') }}'>{{ __('Blog') }}</a></li> --}}
                                         <li><a href='{{ url('/about-us') }}'>{{ __('About-us') }}</a>
                                         </li>
                                         <li><a href='{{ url('/contact') }}'>{{ __('Contact') }}</a>
@@ -375,7 +375,7 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href='{{ url('/blog') }}'>{{ __('Blog') }}</a></li>
+                                        {{-- <li><a href='{{ url('/blog') }}'>{{ __('Blog') }}</a></li> --}}
                                         <li><a href='{{ url('/about-us') }}'>{{ __('About') }}</a>
                                         </li>
                                         <li><a href='{{ url('/contact') }}'>{{ __('Contact') }}</a>
@@ -509,11 +509,11 @@
                                         <span class="mm-text">{{ __('Shop') }}</span>
                                     </a>
                                 </li>
-                                <li class="menu-item-has-children">
+                                {{-- <li class="menu-item-has-children">
                                     <a href='{{ url('/blog') }}'>
                                         <span class="mm-text">{{ __('Blog') }}</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="menu-item-has-children">
                                     <a href='{{ url('/contact') }}'>
                                         <span class="mm-text">{{ __('Contact') }}</span>
@@ -1528,96 +1528,6 @@
                 </div>
             </div>
         </div>
-        <!-- Hiraola's Product Tab Area Three End Here -->
-
-        <!-- Begin Hiraola's Latest Blog Area -->
-        {{-- <div class="latest-blog_area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="hiraola-section_title">
-                            <h4>{{ __('Blog') }}</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="latest-blog_slider">
-                            <div class="blog-slide_item">
-                                <div class="blog-item">
-                                    @foreach ($posts as $post)
-                                        <div class="blog-img img-hover_effect">
-                                            <a href="blog-details-left-sidebar.html">
-                                                <img src="assets/images/blog/{{ $post->image_path }}"
-                                                    alt="Hiraola's Blog Image">
-                                            </a>
-                                        </div>
-                                        <div class="blog-content">
-                                            <div class="blog-heading">
-                                                <h5>
-                                                    <a href="blog-details-left-sidebar.html">{{$post->title}}</a>
-                                                </h5>
-                                            </div>
-                                            <div class="blog-short_desc">
-                                                <p>{{$post->description}}</p>
-                                            </div>
-                                            <div class="hiraola-read-more_area">
-                                                <a href="blog-details-left-sidebar.html" class="hiraola-read_more">Read
-                                                    More</a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Hiraola's Latest Blog Area End Here -->
-
-        <!-- Begin Hiraola's Brand Area -->
-        {{-- <div class="brand-area">
-            <div class="container">
-                <div class="brand-slider_nav">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="brand-slider">
-                                <div class="slide-item">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/brand/1.jpg" alt="Uren's Brand Image">
-                                    </a>
-                                </div>
-                                <div class="slide-item">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/brand/2.jpg" alt="Uren's Brand Image">
-                                    </a>
-                                </div>
-                                <div class="slide-item">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/brand/3.jpg" alt="Uren's Brand Image">
-                                    </a>
-                                </div>
-                                <div class="slide-item">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/brand/4.jpg" alt="Uren's Brand Image">
-                                    </a>
-                                </div>
-                                <div class="slide-item">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/brand/5.jpg" alt="Uren's Brand Image">
-                                    </a>
-                                </div>
-                                <div class="slide-item">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/brand/6.jpg" alt="Uren's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Hiraola's Brand Area End Here -->
 
         <!-- xử lý slide show -->
         <div class="modal fade modal-wrapper" id="exampleModalCenter">
@@ -1863,7 +1773,7 @@
                                         <div class="footer-widgets">
                                             <ul>
                                                 <li><a href="{{ url('shop') }}">{{ __('Shop') }}</a></li>
-                                                <li><a href="{{ url('blog') }}">{{ __('Blog') }}</a></li>
+                                                {{-- <li><a href="{{ url('blog') }}">{{ __('Blog') }}</a></li> --}}
                                                 <li><a href="{{ url('contact') }}">{{ __('Contact') }}</a></li>
                                                 <li><a href="{{ url('about') }}">{{ __('About-us') }}</a></li>
                                             </ul>
@@ -1914,7 +1824,7 @@
                                 <div class="footer-links">
                                     <ul>
                                         <li><a href="{{ url('shop') }}">{{ __('Shop') }}</a></li>
-                                        <li><a href="{{ url('blog') }}">{{ __('Blog') }}</a></li>
+                                        {{-- <li><a href="{{ url('blog') }}">{{ __('Blog') }}</a></li> --}}
                                         <li><a href="{{ url('contact') }}">{{ __('Contact') }}</a></li>
                                         <li><a href="{{ url('about') }}">{{ __('About-us') }}</a></li>
                                     </ul>

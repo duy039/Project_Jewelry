@@ -277,7 +277,7 @@ $tagss = $lloadTag->getTags();
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href='{{ url('blog') }}'>{{ __('Blog') }}</a></li>
+                                {{-- <li><a href='{{ url('blog') }}'>{{ __('Blog') }}</a></li> --}}
                                 <li><a href='{{ url('/about-us') }}'>{{ __('About-us') }}</a></li>
                                 <li><a href='{{ url('/contact') }}'>{{ __('Contact') }}</a></li>
                                 <li class="dropdown-holder"><a href="javascript:void(0)">{{__('Other')}}</a>
@@ -391,11 +391,11 @@ $tagss = $lloadTag->getTags();
                                 <span class="mm-text">{{ __('Shop') }}</span>
                             </a>
                         </li>
-                        <li class="menu-item-has-children">
+                        {{-- <li class="menu-item-has-children">
                             <a href='{{ url('/blog') }}'>
                                 <span class="mm-text">{{ __('Blog') }}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="menu-item-has-children">
                             <a href='{{ url('/contact') }}'>
                                 <span class="mm-text">{{ __('Contact') }}</span>
@@ -526,14 +526,14 @@ $tagss = $lloadTag->getTags();
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="footer-widgets_title">
-                                    <h6>Product</h6>
+                                    <h6>{{ __('Visitor') }}</h6>
                                 </div>
                                 <div class="footer-widgets">
                                     <ul>
-                                        <li><a href="#">Prices drop</a></li>
-                                        <li><a href="#">New products</a></li>
-                                        <li><a href="#">Best sales</a></li>
-                                        <li><a href="#">Contact us</a></li>
+                                        <li><a href="{{ url('shop') }}">{{ __('Shop') }}</a></li>
+                                        {{-- <li><a href="{{ url('blog') }}">{{ __('Blog') }}</a></li> --}}
+                                        <li><a href="{{ url('contact') }}">{{ __('Contact') }}</a></li>
+                                        <li><a href="{{ url('about') }}">{{ __('About-us') }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -581,29 +581,16 @@ $tagss = $lloadTag->getTags();
                     <div class="col-lg-12">
                         <div class="footer-links">
                             <ul>
-                                <li><a href='{{ url("/") }}'>Home</a></li>
-                                <li><a href='{{ url("/shop") }}'>Online Shopping</a></li>
-                                <li><a href='{{ url("/cart") }}'>My Cart</a></li>
-                                <li><a href='{{ url("/event/GetPointsEveryDay") }}'>Roll Call Event</a></li>
-                                <li><a href='{{ url("/checkout") }}'>Checkout</a></li>
-                                <li><a href='{{ url("/about-us") }}'>About-us</a></li>
-                                <li><a href='{{ url("/contact") }}'>Contact</a></li>
-                                <li><a href='{{ url("/contact") }}'>feedback</a></li>
-                                <li><a href='{{ url("/compare") }}'>Compare</a></li>
-                                <li><a href='{{ url("/blog") }}'>Blog</a></li>
+                                <li><a href="{{ url('shop') }}">{{ __('Shop') }}</a></li>
+                                {{-- <li><a href="{{ url('blog') }}">{{ __('Blog') }}</a></li> --}}
+                                <li><a href="{{ url('contact') }}">{{ __('Contact') }}</a></li>
+                                <li><a href="{{ url('about') }}">{{ __('About-us') }}</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="payment">
-                            <a href="#">
-                                <img src='{{ url("assets/images/footer/payment/1.png") }}' alt="Jeulia Payment Method">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
                         <div class="copyright">
-                            <span>Copyright &copy; 2021 <a href="#">Jeulia.</a> All rights reserved.</span>
+                            <span>Copyright &copy; 2022 <a href="#">JeuliaTeam</a> All rights reserved.</span>
                         </div>
                     </div>
                 </div>

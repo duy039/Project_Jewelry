@@ -22,22 +22,11 @@ class PostsController extends Controller
         ->with('posts',Post::orderBy('created_at','DESC')->paginate(6));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view(('blogs.create'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request ->validate([
@@ -59,12 +48,6 @@ class PostsController extends Controller
         return redirect()->route('blogs.blog')->with('message', 'Your post has been added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
 
