@@ -185,9 +185,9 @@
                                     </a>
                                 </div>
                                 <div class="team-content text-center">
-                                    <h3>Timothy Beck</h3>
+                                    <h3>Nguyen Tan Hieu</h3>
                                     <p>IT Expert</p>
-                                    <a href="#">info@example.com</a>
+                                    <a href="#">HieuNTTS2103013@fpt.edu.vn</a>
                                     <div class="hiraola-social_link">
                                         <ul>
                                             <li class="facebook">
@@ -228,9 +228,9 @@
                                     </a>
                                 </div>
                                 <div class="team-content text-center">
-                                    <h3>Sarah Sanchez</h3>
+                                    <h3>Nguyen Bao Duy</h3>
                                     <p>Web Designer</p>
-                                    <a href="#">info@example.com</a>
+                                    <a href="#">DuyNBTS2103004@fpt.edu.vn</a>
                                     <div class="hiraola-social_link">
                                         <ul>
                                             <li class="facebook">
@@ -271,9 +271,9 @@
                                     </a>
                                 </div>
                                 <div class="team-content text-center">
-                                    <h3>Edwin Adams</h3>
+                                    <h3>Pham Hoang Gia Kiet</h3>
                                     <p>Content Writer</p>
-                                    <a href="javascript:void(0)">info@example.com</a>
+                                    <a href="javascript:void(0)">KietPHGTS2103022@fpt.edu.vnm</a>
                                     <div class="hiraola-social_link">
                                         <ul>
                                             <li class="facebook">
@@ -314,9 +314,9 @@
                                     </a>
                                 </div>
                                 <div class="team-content text-center">
-                                    <h3>Anny Adams</h3>
+                                    <h3>Nguyen Tam Hieu</h3>
                                     <p>Marketing officer</p>
-                                    <a href="#">info@example.com</a>
+                                    <a href="#">HieuNTTS2008031@fpt.edu.vn</a>
                                     <div class="hiraola-social_link">
                                         <ul>
                                             <li class="facebook">
