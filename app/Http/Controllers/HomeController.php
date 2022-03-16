@@ -68,6 +68,7 @@ class HomeController extends Controller
         }
 
         $contact = DB::table('contact')->get();
+        $post = DB::table('posts')->get();
         $resultProductRing = array();
         $resultProductEarring = array();
         $resultProductNecklace = array();
@@ -151,6 +152,7 @@ class HomeController extends Controller
             'product' => $this->products,
             'contact' => $contact,
             'wishlists' => $wishlists,
+            'posts' => $post,
         ]);
     }
 

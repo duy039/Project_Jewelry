@@ -19,7 +19,7 @@ class PostsController extends Controller
     public function index()
     {
         return view('blogs.blog')
-        ->with('posts',Post::orderBy('created_at','DESC')->get());
+        ->with('posts',Post::orderBy('created_at','DESC')->paginate(6));
     }
 
     /**
@@ -67,7 +67,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        
+
         return view('blogs.show',compact('post'));
     }
 
@@ -96,7 +96,7 @@ class PostsController extends Controller
             'description' => 'required',
             'short'=>'required'
         ]);
-       
+
         Post::update([
             'title' => $request->input('title'),
             'description' => $request->input('description'),

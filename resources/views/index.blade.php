@@ -84,7 +84,7 @@
                                         </li>
                                         @guest
                                             <li>
-                                                <a href="{{ url('my-account') }}">{{__('Account')}}<i
+                                                <a href="{{ url('my-account') }}">{{ __('Account') }}<i
                                                         class="fa fa-chevron-down"></i></a>
                                                 <ul class="ht-dropdown ht-my_account">
                                                     @if (Route::has('login'))
@@ -118,7 +118,7 @@
                                                     <hr style="margin: 0">
                                                     <li><a href="{{ url('logouts') }}"
                                                             onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();"><i
+                                                                            document.getElementById('logout-form').submit();"><i
                                                                 class="fa fa-sign-out-alt text-danger"
                                                                 aria-hidden="true"></i>
                                                             {{ __('Sign out') }}
@@ -294,7 +294,8 @@
                                         <li class="dropdown-holder"><a href="javascript:void(0)">Other</a>
                                             <ul class="hm-dropdown">
                                                 <li>
-                                                    <a href='{{ url('/event/GetPointsEveryDay') }}'>Roll Call Event</a>
+                                                    <a href='{{ url('/event/GetPointsEveryDay') }}'>Roll Call
+                                                        Event</a>
                                                 </li>
                                                 <li>
                                                     <a href='{{ url('/compare') }}'>Compare</a>
@@ -535,7 +536,8 @@
                                 </li>
                                 @guest
                                     <li class="menu-item-has-children active">
-                                        <a href="{{ url('my-account') }}"><span class="mm-text">{{__('Account')}}</span></a>
+                                        <a href="{{ url('my-account') }}"><span
+                                                class="mm-text">{{ __('Account') }}</span></a>
                                         <ul class="sub-menu">
                                             @if (Route::has('login'))
                                                 <li><a href="{{ url('login') }}"><i
@@ -571,7 +573,7 @@
                                             <hr style="margin: 0">
                                             <li><a href="{{ url('logouts') }}"
                                                     onclick="event.preventDefault();
-                                                                                                                                            document.getElementById('logout-form').submit();"><i
+                                                                                                                                                        document.getElementById('logout-form').submit();"><i
                                                         class="fa fa-sign-out-alt text-danger" aria-hidden="true"></i>
                                                     {{ __('Sign out') }}
                                                 </a></li>
@@ -1177,7 +1179,8 @@
                                 </li>
                                 <li><a data-toggle="tab" href="#bracelets-2"><span>{{ __('Braceles') }}</span></a>
                                 </li>
-                                <li><a data-toggle="tab" href="#Earrings-2"><span>{{ __('Earrings') }}</span></a></li>
+                                <li><a data-toggle="tab" href="#Earrings-2"><span>{{ __('Earrings') }}</span></a>
+                                </li>
                             </ul>
                         </div>
                         <div class="tab-content hiraola-tab_content">
@@ -1528,48 +1531,47 @@
         <!-- Hiraola's Product Tab Area Three End Here -->
 
         <!-- Begin Hiraola's Latest Blog Area -->
-        <div class="latest-blog_area">
+        {{-- <div class="latest-blog_area">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="hiraola-section_title">
-                            <h4>Latest Blog</h4>
+                            <h4>{{ __('Blog') }}</h4>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="latest-blog_slider">
                             <div class="blog-slide_item">
                                 <div class="blog-item">
-                                    <div class="blog-img img-hover_effect">
-                                        <a href="blog-details-left-sidebar.html">
-                                            <img src="assets/images/blog/medium-size/2.jpg" alt="Hiraola's Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="blog-heading">
-                                            <h5>
-                                                <a href="blog-details-left-sidebar.html">Gt wisi enim ad minim
-                                                    veniam.</a>
-                                            </h5>
+                                    @foreach ($posts as $post)
+                                        <div class="blog-img img-hover_effect">
+                                            <a href="blog-details-left-sidebar.html">
+                                                <img src="assets/images/blog/{{ $post->image_path }}"
+                                                    alt="Hiraola's Blog Image">
+                                            </a>
                                         </div>
-                                        <div class="blog-short_desc">
-                                            <p>Aenean vestibulum pretium enim, non commodo urna volutpat vitae.
-                                                Pellentesque vel
-                                                lacus
-                                            </p>
+                                        <div class="blog-content">
+                                            <div class="blog-heading">
+                                                <h5>
+                                                    <a href="blog-details-left-sidebar.html">{{$post->title}}</a>
+                                                </h5>
+                                            </div>
+                                            <div class="blog-short_desc">
+                                                <p>{{$post->description}}</p>
+                                            </div>
+                                            <div class="hiraola-read-more_area">
+                                                <a href="blog-details-left-sidebar.html" class="hiraola-read_more">Read
+                                                    More</a>
+                                            </div>
                                         </div>
-                                        <div class="hiraola-read-more_area">
-                                            <a href="blog-details-left-sidebar.html" class="hiraola-read_more">Read
-                                                More</a>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Hiraola's Latest Blog Area End Here -->
 
         <!-- Begin Hiraola's Brand Area -->
@@ -1856,21 +1858,21 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="footer-widgets_title">
-                                            <h6>{{__('Visitor')}}</h6>
+                                            <h6>{{ __('Visitor') }}</h6>
                                         </div>
                                         <div class="footer-widgets">
                                             <ul>
-                                                <li><a href="{{url('shop')}}">{{__("Shop")}}</a></li>
-                                                <li><a href="{{url('blog')}}">{{__('Blog')}}</a></li>
-                                                <li><a href="{{url('contact')}}">{{__('Contact')}}</a></li>
-                                                <li><a href="{{url('about')}}">{{__('About-us')}}</a></li>
+                                                <li><a href="{{ url('shop') }}">{{ __('Shop') }}</a></li>
+                                                <li><a href="{{ url('blog') }}">{{ __('Blog') }}</a></li>
+                                                <li><a href="{{ url('contact') }}">{{ __('Contact') }}</a></li>
+                                                <li><a href="{{ url('about') }}">{{ __('About-us') }}</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-lg-9">
                                         <div class="footer-widgets_info">
                                             <div class="footer-widgets_title">
-                                                <h6>{{__('About-us')}}</h6>
+                                                <h6>{{ __('About-us') }}</h6>
                                             </div>
                                             <div class="widgets-essential_stuff">
                                                 <ul>
@@ -1898,35 +1900,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-lg-4">
-                                        <div class="instagram-container footer-widgets_area">
-                                            <div class="footer-widgets_title">
-                                                <h6>Sign Up For Newslatter</h6>
-                                            </div>
-                                            <div class="widget-short_desc">
-                                                <p>Subscribe to our newsletters now and stay up-to-date with new
-                                                    collections</p>
-                                            </div>
-                                            <div class="newsletter-form_wrap">
-                                                <form class="subscribe-form" id="mc-form" action="#">
-                                                    <input class="newsletter-input" id="mc-email" type="email"
-                                                        autocomplete="off" name="Enter Your Email"
-                                                        value="Enter Your Email"
-                                                        onblur="if(this.value==''){this.value='Enter Your Email'}"
-                                                        onfocus="if(this.value=='Enter Your Email'){this.value=''}">
-                                                    <button class="newsletter-btn" id="mc-submit">
-                                                        <i class="ion-android-mail"></i>
-                                                    </button>
-                                                </form>
-                                                <!-- Mailchimp Alerts -->
-                                                <div class="mailchimp-alerts mt-3">
-                                                    <div class="mailchimp-submitting"></div>
-                                                    <div class="mailchimp-success"></div>
-                                                    <div class="mailchimp-error"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -1940,38 +1913,16 @@
                             <div class="col-lg-12">
                                 <div class="footer-links">
                                     <ul>
-                                        <li><a href="#">Online Shopping</a></li>
-                                        <li><a href="#">Promotions</a></li>
-                                        <li><a href="#">My Orders</a></li>
-                                        <li><a href="#">Help</a></li>
-                                        <li><a href="#">Customer Service</a></li>
-                                        <li><a href="#">Support</a></li>
-                                        <li><a href="#">Most Populars</a></li>
-                                        <li><a href="#">New Arrivals</a></li>
-                                        <li><a href="#">Special Products</a></li>
-                                        <li><a href="#">Manufacturers</a></li>
-                                        <li><a href="#">Our Stores</a></li>
-                                        <li><a href="#">Shipping</a></li>
-                                        <li><a href="#">Payments</a></li>
-                                        <li><a href="#">Warantee</a></li>
-                                        <li><a href="#">Refunds</a></li>
-                                        <li><a href="#">Checkout</a></li>
-                                        <li><a href="#">Discount</a></li>
-                                        <li><a href="#">Refunds</a></li>
-                                        <li><a href="#">Policy Shipping</a></li>
+                                        <li><a href="{{ url('shop') }}">{{ __('Shop') }}</a></li>
+                                        <li><a href="{{ url('blog') }}">{{ __('Blog') }}</a></li>
+                                        <li><a href="{{ url('contact') }}">{{ __('Contact') }}</a></li>
+                                        <li><a href="{{ url('about') }}">{{ __('About-us') }}</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="payment">
-                                    <a href="#">
-                                        <img src="assets/images/footer/payment/1.png" alt="Hiraola's Payment Method">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
                                 <div class="copyright">
-                                    <span>Copyright &copy; 2019 <a href="#">Hiraola.</a> All rights reserved.</span>
+                                    <span>Copyright &copy; 2022 <a href="#">JeuliaTeam</a> All rights reserved.</span>
                                 </div>
                             </div>
                         </div>
