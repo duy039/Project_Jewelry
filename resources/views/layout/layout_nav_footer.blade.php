@@ -246,7 +246,7 @@ $tagss = $lloadTag->getTags();
                                                         href='{{ url('shop/categories/2') }}'>{{ __('Neckales') }}</a>
                                                 </li>
                                                 <li><a href='{{ url('shop/categories/2') }}'><img
-                                                            src="{{ url('assets/images/product/R08P01.jpg') }}"
+                                                            src="{{ url('assets/images/product/N01P01.jpg') }}"
                                                             alt="" width="150px"></a></li>
                                             </ul>
                                         </li>
@@ -256,7 +256,7 @@ $tagss = $lloadTag->getTags();
                                                         href='{{ url('shop/categories/3') }}'>{{ __('Braceles') }}</a>
                                                 </li>
                                                 <li><a href='{{ url('shop/categories/3') }}'><img
-                                                            src="{{ url('assets/images/product/R09P01.jpg') }}"
+                                                            src="{{ url('assets/images/product/B01P01.jpg') }}"
                                                             alt="" width="150px"></a></li>
                                             </ul>
                                         </li>
@@ -266,14 +266,16 @@ $tagss = $lloadTag->getTags();
                                                         href='{{ url('shop/categories/4') }}'>{{ __('Earrings') }}</a>
                                                 </li>
                                                 <li><a href='{{ url('shop/categories/4') }}'><img
-                                                            src="{{ url('assets/images/product/R04P01.jpg') }}"
+                                                            src="{{ url('assets/images/product/E01P01.jpg') }}"
                                                             alt="" width="150px"></a></li>
                                             </ul>
                                         </li>
-
-
-                                        <li> <img width="210px" height="200px"
-                                                src="{{ url('assets/images/menu/Halloween.png') }}" alt="">
+                                        <li>                                            
+                                            <p>
+                                                <span style="color: rgb(8, 66, 255); font-size: 22px" >Accessories </span> are a great way to show-off your individual style 
+                                                and can help you play more with fashion risks and new trends. 
+                                                Browse our wide selection of accessories to find the perfect piece to match your style.
+                                            </p>
                                         </li>
                                     </ul>
                                 </li>
