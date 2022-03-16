@@ -132,4 +132,5 @@ Route::get('/error', 'App\Http\Controllers\ErrorController@index');
 
 // code chưa xử lý
 Route::get('/about-us', 'App\Http\Controllers\AboutUsController@index');
-Route::get('/blog', 'App\Http\Controllers\BlogController@index');
+Route::get('blog', [App\Http\Controllers\PostsController::class,'index'])->name('blogs.blog');
+Route::resource('/blogs',App\Http\Controllers\PostsController::class);
