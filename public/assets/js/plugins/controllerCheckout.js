@@ -76,6 +76,17 @@ var discount = 0;
 var orderTotal = 0;
 var limitedVoucher = 0;
 var display = null;
+
+$(window).ready(function () {
+    $("#checkoutForm").on("keypress", function (event) {
+        var keyPressed = event.keyCode || event.which;
+        if (keyPressed === 13) {
+            event.preventDefault();
+        }
+    });
+});
+
+
 function setCustomer() {
     resultAPIGeocodeCustomer = responseGeocoding();
     if (resultAPIGeocodeCustomer.status == "OK") {
@@ -162,14 +173,14 @@ function checkVoucher() {
     });
 }
 function usePoint() {
-    if(pointUser < $("#pointed").val() || $("#pointed").val() == '' ){
-        swal('Warning',"Invalid score",'warning');
-    }else{
-        swal('Success',"Successfully Applied",'success');
+    if (pointUser < $("#pointed").val() || $("#pointed").val() == '') {
+        swal('Warning', "Invalid score", 'warning');
+    } else {
+        swal('Success', "Successfully Applied", 'success');
         pointed = $("#pointed").val();
         renderBill();
     }
-   
+
 }
 
 // phần bill Order
@@ -178,10 +189,10 @@ function renderBill() {
     var taxPercentage = $('#taxPercentage').val();
     let htmlProductBill = '';
     let htmlDiscount = '';
-    let htmlPointOrder='';
+    let htmlPointOrder = '';
     var sum = 0;
     let priceDiscount = 0;
-    let dolaPointed= pointed/100;
+    let dolaPointed = pointed / 100;
     // tính phí ship
     if ($("input[name='mapShip']")[0].checked) {
         if (deliveryDistance <= 2) {
@@ -200,12 +211,12 @@ function renderBill() {
         sum += (productsInCart[i].CurrentPrice * productsInCart[i].Quantity)
         let nameProduct = '';
         if (productsInCart[i].Name.length > 12) {
-            nameProduct = productsInCart[i].Name.slice(0, 13) ;
+            nameProduct = productsInCart[i].Name.slice(0, 13);
         } else {
             nameProduct = productsInCart[i].Name;
         }
-        if(productsInCart[i].Size != 'null'){
-            nameProduct +="... (<span class='sizeProductBill'>Size " + productsInCart[i].Size + "</span>)";
+        if (productsInCart[i].Size != 'null') {
+            nameProduct += "... (<span class='sizeProductBill'>Size " + productsInCart[i].Size + "</span>)";
         }
         htmlProductBill += '<tr class="cart_item">'
             + '<td class="cart-product-name" title="' + productsInCart[i].Name + '"> '
@@ -234,11 +245,11 @@ function renderBill() {
         htmlDiscount = '<td class="priceBill discountBill" ><span class="amount">- $</span><span id="discountBill">' + priceDiscount + '</span></td>'
     }
     // HTML SỬ DỤNG ĐIỂM
-    if(pointed > 0){
-        htmlPointOrder= ' <tr class="cart-subtotal">'
-        + '<th>Point Used</th>'
-        + '<td class="priceBill" ><span class="amount" id="pointUsed"> - $' + (dolaPointed).toFixed(2) + ' (' +pointed + ' point)</span></td>'
-        + ' </tr>' 
+    if (pointed > 0) {
+        htmlPointOrder = ' <tr class="cart-subtotal">'
+            + '<th>Point Used</th>'
+            + '<td class="priceBill" ><span class="amount" id="pointUsed"> - $' + (dolaPointed).toFixed(2) + ' (' + pointed + ' point)</span></td>'
+            + ' </tr>'
     }
 
     // tính tổng hóa đơn

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class ManageProduct extends Controller
 {
@@ -44,6 +45,7 @@ class ManageProduct extends Controller
             'tag.required' => 'Tag field is required',
         ]);
         $data =  $request->all();
+        // dd($data);
         $path = 'assets/images/product/';
         $file = $request->file('product_image');
         for ($i = 0; $i < count($file); $i++) {
@@ -152,7 +154,7 @@ class ManageProduct extends Controller
             }
         }
         //lấy đuôi hình
-        for ($i = 0; $i < count($imgPro); $i++) {
+        for ($i = 0; $i < count($file); $i++) {
             $extension = $file[$i]->getClientOriginalExtension();
         };
         $proAvatar = $request->file('product_Avatar');
@@ -215,7 +217,15 @@ class ManageProduct extends Controller
     {
         if ($request->ajax()) {
             $output = '';
-            $data = DB::table('product')->where('Product_id', 'like', '%' . $request->search . '%')->get();
+            $data = DB::table('product')
+                ->where('Product_id', 'like', '%' . $request->product . '%')
+                ->orwhere('Name', 'like', '%' . $request->product . '%')
+                ->orwhere('Price_Root', 'like', '%' . $request->product . '%')
+                ->orwhere('Sale_Type', 'like', '%' . $request->product . '%')
+                ->orwhere('Price_Sale', 'like', '%' . $request->product . '%')
+                ->orwhere('Rating', 'like', '%' . $request->product . '%')
+                ->orwhere('Quantity', 'like', '%' . $request->product . '%')
+                ->get();
             $total_row = count($data);
             if ($total_row > 0) {
                 foreach ($data as $row) {
@@ -257,6 +267,24 @@ class ManageProduct extends Controller
 
     public function destroy($proid)
     {
+        $product = DB::table('product')->where('Product_id', $proid)->first();
+        $imageProduct = DB::table('images_product')->where('Product_id', $proid)->get();
+        foreach ($imageProduct as $imgProduct) {
+            $imgPro[] = $imgProduct;
+        }
+        $path = 'assets/images/product/';
+        $oldProAvatar = $path . $product->Avatar;
+        //xóa hình trong product
+        if (File::exists($oldProAvatar)) {
+            File::delete($oldProAvatar);
+        }
+        //xóa hình trong bảng image_product
+        for ($i = 0; $i < count($imgPro); $i++) {
+            $oldProImage[] = $path . $imgPro[$i]->Image_Name;
+            if (File::exists($oldProImage[$i])) {
+                File::delete($oldProImage[$i]);
+            }
+        }
         DB::table('product')->where('Product_id', $proid)->delete();
         return redirect('admin/manageProduct')
             ->with('success', 'Product updated successfully');
@@ -352,24 +380,176 @@ class ManageProduct extends Controller
         DB::table('voucher')->where('Voucher_id', $voucherId)->delete();
         return redirect('admin/voucher');
     }
-    //-------------------------------Order-----------------------------------------
 
-    public function orderIndex(){
+    //-------------------------------Order-----------------------------------------
+    public function searchOrder(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = '';
+            $data = DB::table('orders')
+                ->where('Order_id', 'like', '%' . $request->order . '%')
+                ->orwhere('Email', 'like', '%' . $request->order . '%')
+                ->orwhere('Address', 'like', '%' . $request->order . '%')
+                ->orwhere('Name', 'like', '%' . $request->order . '%')
+                ->orwhere('Phone_Number', 'like', '%' . $request->order . '%')
+                ->orwhere('Status', 'like', '%' . $request->order . '%')
+                ->orwhere('orderCode', 'like', '%' . $request->order . '%')
+                ->get();
+            $total_row = count($data);
+            if ($total_row > 0) {
+                foreach ($data as $row) {
+                    $output .= '<tr>
+                    <td>' . $row->Order_id . '</td>
+                    <td>' . $row->Email . '</td>
+                    <td>$' . $row->Address . '</td>
+                    <td>' . $row->Name . '</td>
+                    <td>' . $row->Phone_Number . '</td>
+                    <td>' . $row->Status . '</td>
+                    <td>' . $row->orderCode . '</td>
+                    <td>' . $row->Create_Date . '</td>
+                    <td class="td-actions text-right">
+                        <button type="button" rel="tooltip" class="btn btn-success">
+                            <a class="material-icons"
+                                href="' . url('admin/editProduct/' . $row->Order_id) . '"
+                                data-original-title="Update">edit</a>
+                        </button>
+                        <button type="button" rel="tooltip" class="btn btn-danger">
+                            <a class="material-icons"
+                                href="' . url('admin/deleteProduct/' . $row->Order_id) . '"
+                                onclick="return confirm("Delete this product ?")"
+                                data-original-title="Delete">close</a>
+                        </button>
+                    </td>
+                </tr>';
+                }
+            } else {
+                $output = '<tr>
+                            <td align="center" colspan="10">No Data Found</td>
+                        </tr>';
+            }
+        }
+        return $output;
+    }
+    public function orderIndex()
+    {
         $order = DB::table('orders')->paginate(10);
-        return view('admin.Order.all_order')->with('orders',$order);
+        return view('admin.Order.all_order')->with('orders', $order);
     }
-    public function orderEditView($orderId){
-        $order = DB::table('orders')->where('Order_id',$orderId)->get();
-        return view('admin.Order.edit_order')->with('orders',$order);
+    public function orderEditView($orderId)
+    {
+        $order = DB::table('orders')->where('Order_id', $orderId)->get();
+        return view('admin.Order.edit_order')->with('orders', $order);
     }
-    public function updateOrder(Request $request, $orderId){
+    public function updateOrder(Request $request, $orderId)
+    {
         $data = $request->all();
-        $value =[
+        $value = [
             'Status' => $data['orderStatus'],
         ];
-        $query = DB::table('orders')->where('Order_id',$orderId)->update($value);
-        if($query){
-            return redirect('admin/viewOrder')->with(['message'=>'Updated successful']);
+        $query = DB::table('orders')->where('Order_id', $orderId)->update($value);
+        if ($query) {
+            return redirect('admin/viewOrder')->with(['message' => 'Updated successful']);
         }
+    }
+
+    public function destroyOrder($orderId)
+    {
+        DB::table('orders')->where('Order_id', $orderId)->delete();
+        return redirect('admin/viewOrder');
+    }
+
+    //-------------------------------Tag------------------------------------------------
+
+    public function viewAddTag()
+    {
+        return view('admin.Tag.add_tag');
+    }
+
+    public function storeTag(Request $request)
+    {
+        $tag = DB::table('tags')->get();
+        $request->validate([
+            'tag_id' => 'required',
+            'tag_name' => 'required'
+        ]);
+        foreach ($tag as $t[]) {
+            $tag = $t;
+        }
+        for ($i = 0; $i < count($tag); $i++) {
+            if ($tag[$i]->Tag_id == $request->tag_id) {
+                return redirect('admin/viewAddTag')->with('error', 'This tag id was have');
+                Session::put('error');
+            }
+        }
+        $value = [
+            'Tag_id' => $request->tag_id,
+            'NAME' => $request->tag_name,
+        ];
+        DB::table('tags')->insert($value);
+        return redirect('admin/viewTag');
+    }
+
+    public function searchTag(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = '';
+            $data = DB::table('tags')
+                ->where('Tag_id', 'like', '%' . $request->tag . '%')
+                ->orwhere('NAME', 'like', '%' . $request->tag . '%')
+                ->get();
+            $total_row = count($data);
+            if ($total_row > 0) {
+                foreach ($data as $row) {
+                    $output .= '<tr>
+                    <td>' . $row->Tag_id . '</td>
+                    <td>' . $row->NAME . '</td>
+                    <td class="td-actions text-right">
+                        <button type="button" rel="tooltip" class="btn btn-success">
+                            <a class="material-icons"
+                                href="' . url('admin/editProduct/' . $row->Tag_id) . '"
+                                data-original-title="Update">edit</a>
+                        </button>
+                        <button type="button" rel="tooltip" class="btn btn-danger">
+                            <a class="material-icons"
+                                href="' . url('admin/deleteProduct/' . $row->Tag_id) . '"
+                                onclick="return confirm("Delete this tag ?")"
+                                data-original-title="Delete">close</a>
+                        </button>
+                    </td>
+                </tr>';
+                }
+            } else {
+                $output = '<tr>
+                            <td align="center" colspan="10">No Data Found</td>
+                        </tr>';
+            }
+        }
+        return $output;
+    }
+    public function tagIndex()
+    {
+        $tag = DB::table('tags')->paginate(10);
+        return view('admin.Tag.all_tag')->with('tags', $tag);
+    }
+    public function tagEditView($tagId)
+    {
+        $tag = DB::table('tags')->where('Tag_id', $tagId)->get();
+        return view('admin.Tag.edit_tag')->with('tags', $tag);
+    }
+    public function updateTag(Request $request, $tagId)
+    {
+        $data = $request->all();
+        $value = [
+            'Tag_id' => $data['tag_id'],
+            'NAME' => $data['tag_name'],
+        ];
+        DB::table('tags')->where('Tag_id', $tagId)->update($value);
+        return redirect('admin/viewTag')->with(['message' => 'Updated successful']);
+    }
+
+    public function destroyTag($tagId)
+    {
+        DB::table('tags')->where('Tag_id', $tagId)->delete();
+        return redirect('admin/viewTag');
     }
 }

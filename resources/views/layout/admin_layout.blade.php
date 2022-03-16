@@ -66,54 +66,6 @@
                             <p> {{__("Dashboards")}}</p>
                         </a>
                     </li>
-                    {{-- <li class="nav-item ">
-                        <a class="nav-link" data-toggle="collapse" href="#category">
-                            <i class="material-icons">category</i>
-                            <p>{{ __('Danh Mục Sản Phẩm') }}
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse" id="category">
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> DM </span>
-                                        <span class="sidebar-normal"> {{ __('Thêm Danh Mục') }} </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="{{ URL::to('/all-category-product') }}">
-                                        <span class="sidebar-mini"> DM </span>
-                                        <span class="sidebar-normal"> {{ __('Liệt Kê Danh Mục') }} </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li> --}}
-                    {{-- <li class="nav-item ">
-                        <a class="nav-link" data-toggle="collapse" href="#brand">
-                            <i class="material-icons">branding_watermark</i>
-                            <p> {{ __('Thương Hiệu Sản Phẩm') }}
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse" id="brand">
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="{{ URl::to('/add-brand-product') }}">
-                                        <span class="sidebar-mini"> TH </span>
-                                        <span class="sidebar-normal"> {{ __('Thêm Thương Hiệu') }} </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="{{ URL::to('/all-brand-product') }}">
-                                        <span class="sidebar-mini"> TH </span>
-                                        <span class="sidebar-normal">{{ __('Liệt Kê Thương Hiệu') }} </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#product">
                             <i class="material-icons">production_quantity_limits</i>
@@ -162,20 +114,14 @@
                             </ul>
                         </div>
                     </li>
-                    {{-- <li class="nav-item ">
-                        <a class="nav-link" href="">
-                            <i class="material-icons">local_shipping</i>
-                            <p> {{ __('Phí Vận Chuyển') }} </p>
-                        </a>
-                    </li> --}}
                     <li class="nav-item ">
-                        <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
+                        <a class="nav-link" data-toggle="collapse" href="#order">
                             <i class="material-icons">description</i>
                             <p> {{ __('Manage Order') }}
                                 <b class="caret"></b>
                             </p>
                         </a>
-                        <div class="collapse" id="tablesExamples">
+                        <div class="collapse" id="order">
                             <ul class="nav">
                                 <li class="nav-item ">
                                     <a class="nav-link" href="{{url('admin/viewOrder')}}">
@@ -187,120 +133,26 @@
                         </div>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" data-toggle="collapse" href="#BlogExamples">
-                            <i class="material-icons">reorder</i>
-                            <p> {{ __('Danh Mục Bài Viết') }}
+                        <a class="nav-link" data-toggle="collapse" href="#tag">
+                            <i class="material-icons">description</i>
+                            <p> {{ __('Manage Tag') }}
                                 <b class="caret"></b>
                             </p>
                         </a>
-                        <div class="collapse" id="BlogExamples">
+                        <div class="collapse" id="tag">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> DM </span>
-                                        <span class="sidebar-normal"> {{ __('Thêm Danh Mục') }} </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> DM </span>
-                                        <span class="sidebar-normal"> {{ __('Liệt Kê Danh Mục') }} </span>
+                                    <a class="nav-link" href="{{url('admin/viewTag')}}">
+                                        <span class="sidebar-mini"> 1 </span>
+                                        <span class="sidebar-normal"> {{ __('List Tag') }} </span>
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" data-toggle="collapse" href="#PostExamples">
-                            <i class="material-icons">article</i>
-                            <p> {{ __('Bài Viết') }}
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse" id="PostExamples">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> BV </span>
-                                        <span class="sidebar-normal"> {{ __('Thêm Bài Viết') }} </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> BV </span>
-                                        <span class="sidebar-normal"> {{ __('Liệt Kê Bài Viết') }} </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#Slider">
-                            <i class="material-icons">payment</i>
-                            <p> {{ __('Slider') }}
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse" id="Slider">
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> SP </span>
-                                        <span class="sidebar-normal"> {{ __('Thêm Slider') }} </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> SP </span>
-                                        <span class="sidebar-normal">{{ __('Liệt Kê Slider') }} </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#Footer">
-                            <i class="material-icons">build</i>
-                            <p> {{ __('Footer') }}
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse" id="Footer">
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> SP </span>
-                                        <span class="sidebar-normal"> {{ __('Thêm Footer') }} </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> SP </span>
-                                        <span class="sidebar-normal">{{ __('Liệt Kê Footer') }} </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ads">
-                            <i class="material-icons">ads_click</i>
-                            <p> {{ __('Quảng Cáo') }}
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse" id="ads">
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> SP </span>
-                                        <span class="sidebar-normal"> {{ __('Thêm Quảng Cáo') }} </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="">
-                                        <span class="sidebar-mini"> SP </span>
-                                        <span class="sidebar-normal"> {{ __('Liệt Kê Quảng Cáo') }} </span>
+                                    <a class="nav-link" href="{{url('admin/viewAddTag')}}">
+                                        <span class="sidebar-mini"> 2 </span>
+                                        <span class="sidebar-normal"> {{ __('Add Tag') }} </span>
                                     </a>
                                 </li>
                             </ul>
@@ -541,18 +393,54 @@
             <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
             {{-- end morris --}}
             {{-- slug --}}
+
             <script>
                 $(document).ready(function(){
-                    $('#searchbox').on('keyup',function(){
-                        var key = $('#searchbox').val();
+                    $('#searchTag').on('keyup',function(){
+                        var key = $('#searchTag').val();
                         $.ajax({
-                            url: 'admin/searchAdmin',
+                            url: 'admin/searchTag',
                             method : 'GET',
                             data: {
-                                'search' : key
+                                'tag' : key
                             },
                             success: function(data){
-                                $('#searchProduct').html(data);
+                                $('#tagList').html(data);
+                            }
+                        })
+                    });
+                });
+            </script>
+
+            <script>
+                $(document).ready(function(){
+                    $('#searchOrder').on('keyup',function(){
+                        var key = $('#searchOrder').val();
+                        $.ajax({
+                            url: 'admin/searchOrder',
+                            method : 'GET',
+                            data: {
+                                'order' : key
+                            },
+                            success: function(data){
+                                $('#orderList').html(data);
+                            }
+                        })
+                    });
+                });
+            </script>
+            <script>
+                $(document).ready(function(){
+                    $('#searchProduct').on('keyup',function(){
+                        var key = $('#searchProduct').val();
+                        $.ajax({
+                            url: 'admin/searchProduct',
+                            method : 'GET',
+                            data: {
+                                'product' : key
+                            },
+                            success: function(data){
+                                $('#productList').html(data);
                             }
                         })
                     });

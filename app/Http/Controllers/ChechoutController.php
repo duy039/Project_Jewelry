@@ -90,7 +90,7 @@ class ChechoutController extends Controller
         // $date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $total = $request->total;
         $all = $request->all();
-        dd($all);
+        // dd($all);
         $vnp_TxnRef = rand(1, 20000); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $object = (object)$all;
         if ($object->payment == "Pay with MOMO") {
@@ -132,7 +132,7 @@ class ChechoutController extends Controller
                         'Tax' => $request->tax,
                         'Payment_Method' => 'MOMO',
                         'Shipping_Fee' => $request->ship,
-                        'Point_Used' => 0.0,
+                        'Point_Used' => $request->point,
                         'Disccount' => $request->discount,
                         'Total' => $request->total * 100,
                         'Note' => $request->note,
@@ -283,9 +283,13 @@ class ChechoutController extends Controller
             $vnp_HashSecret = "SFHOOUCEIYPMLOMDRWVUGFOSICBGPOSQ"; //Secret key
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
             $vnp_Returnurl = "http://127.0.0.1:8000/checkout/resultVnpay";
-            $vnp_OrderInfo = "Thanh toan vnpay";
+            $vnp_OrderInfo = [
+                'email'=>$request->email,
+                'point' => $request->point,
+            ];
+            // dd(base64_encode(json_encode($vnp_OrderInfo)));
             $vnp_OrderType = "200000";
-            $vnp_Amount = ($request->total * 100) * 100;
+            $vnp_Amount = ($request->total * 23000) * 100;
             $vnp_Locale = "VN";
             $vnp_BankCode = "NCB";
             $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -312,7 +316,7 @@ class ChechoutController extends Controller
                 "vnp_CurrCode" => "VND",
                 "vnp_IpAddr" => $vnp_IpAddr,
                 "vnp_Locale" => $vnp_Locale,
-                "vnp_OrderInfo" => $vnp_OrderInfo,
+                "vnp_OrderInfo" => base64_encode(json_encode($vnp_OrderInfo)),
                 "vnp_OrderType" => $vnp_OrderType,
                 "vnp_ReturnUrl" => $vnp_Returnurl,
                 //Thông tin thanh toán
@@ -322,7 +326,7 @@ class ChechoutController extends Controller
                 "vnp_Bill_Email" => $vnp_Bill_Email,
                 "vnp_Bill_FirstName" => $vnp_Bill_FirstName,
                 "vnp_Bill_LastName" => $vnp_Bill_LastName,
-                "vnp_Bill_Address" => $vnp_Bill_Address,
+                "vnp_Bill_Address" => $request->point,
                 "vnp_Inv_Phone" => $vnp_Inv_Phone,
                 "vnp_Inv_Email" => $vnp_Inv_Email,
                 "vnp_Inv_Address" => $vnp_Inv_Address,

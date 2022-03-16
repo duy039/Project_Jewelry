@@ -43,6 +43,13 @@
                     Session::put('message', null);
                 }
                 ?>
+               <?php
+               $message = Session::get('error');
+               if ($message) {
+                   echo '<span class="badge badge-pill badge-danger" >' . $message . '</span>';
+                   Session::put('error', null);
+               }
+               ?>
             </span>
             <div class="card-body">
                 <div class="toolbar">
@@ -53,39 +60,25 @@
                         <thead class="text-primary">
                             <tr>
                                 <th>{{ __('#') }}</th>
-                                <th>{{ __('Email') }}</th>
-                                <th>{{ __('Address') }}</th>
                                 <th>{{ __('Name') }}</th>
-                                <th>{{ __('Phone Number') }}</th>
-                                <th>{{ __('Status') }}</th>
-                                <th>{{ __('orderCode') }}</th>
-                                <th>{{ __('Create Date') }}</th>
                                 <th class="disabled-sorting text-right">{{ __('Action') }}</th>
                             </tr>
                         </thead>
-                        <tbody id="orderList">
-                            @foreach ($orders as $key => $order)
+                        <tbody id="tagList">
+                            @foreach ($tags as $key => $tag)
                                 <tr>
-                                    <td>{{ $order->Order_id }}</td>
-                                    <td>{{ $order->Email }}</td>
-                                    <td>{{ $order->Address }}</td>
-                                    <td>{{ $order->Name }}</td>
-                                    <td>0{{ $order->Phone_Number }}</td>
-                                    <td>{{ $order->Status }}</td>
-                                    <td>{{ $order->orderCode == null? 'Not have': $order->orderCode}}</td>
-                                    <td>{{ $order->Create_Date }}</td>
-
-
+                                    <td>{{ $tag->Tag_id }}</td>
+                                    <td>{{ $tag->NAME }}</td>
                                     <td class="td-actions text-right">
                                         <button type="button" rel="tooltip" class="btn btn-success">
                                             <a class="material-icons"
-                                                href="{{ url('admin/editOrder/' . $order->Order_id) }}"
+                                                href="{{ url('admin/editTag/' . $tag->Tag_id) }}"
                                                 data-original-title="Update">edit</a>
                                         </button>
                                         <button type="button" rel="tooltip" class="btn btn-danger">
                                             <a class="material-icons"
-                                                href="{{ url('admin/deleteOrder/' . $order->Order_id) }}"
-                                                onclick="return confirm('Delete this Order ?')"
+                                                href="{{ url('admin/deleteTag/' . $tag->Tag_id) }}"
+                                                onclick="return confirm('Delete this Tag ?')"
                                                 data-original-title="Delete">close</a>
                                         </button>
                                     </td>
@@ -98,7 +91,7 @@
             <!-- end content-->
         </div>
         <!--  end card  -->
-        {{ $orders->links('vendor.pagination.bootstrap-4') }}
+        {{ $tags->links('vendor.pagination.bootstrap-4') }}
 
     @endsection
 

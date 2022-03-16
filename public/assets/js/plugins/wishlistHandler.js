@@ -76,7 +76,18 @@ function renderWishlist(){
 // xử lý khi user chọn Xóa sản phẩm ra khỏi danh sách yêu thích
 function wishlistDelete(wishlist_id){
     if(user_id == null){
-        return confirm("You must be logged in to add products to your wish list");
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to add products to your wish list!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              window.location('http://127.0.0.1:8000/login');
+            }
+          });
     }else{
         let urlDeleteWishlist = url +'/wishlistDelete/'+user_id + '/' + wishlist_id ;
         $.ajax({

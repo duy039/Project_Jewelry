@@ -116,7 +116,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="account-logout-tab"
                                     onclick="event.preventDefault();
-                                                                                                                                            document.getElementById('logout-form').submit();"
+                                                                                                                                                        document.getElementById('logout-form').submit();"
                                     href="{{ url('logout') }}" role="tab"
                                     aria-selected="false">{{ __('Sign out') }}</a>
 
@@ -133,9 +133,10 @@
                                 aria-labelledby="account-dashboard-tab">
                                 <div class="myaccount-dashboard">
                                     @if (Auth::check())
-                                        <p>{{__("Hello")}} <b>{{ Auth::user()->First_Name }}</b></p>
+                                        <p>{{ __('Hello') }} <b>{{ Auth::user()->First_Name }}</b></p>
                                     @endif
-                                    <p>{{__("From your account you can view your orders history and edit your password and account details.")}}</p>
+                                    <p>{{ __('From your account you can view your orders history and edit your password and account details.') }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="account-orders" role="tabpanel"
@@ -151,12 +152,13 @@
                                                     <th>{{ __('Status') }}</th>
                                                     <th></th>
                                                 </tr>
-                                                @if ($orders)
+                                                @if (count($order) > 0)
                                                     @foreach ($orders as $order)
                                                         <tr>
                                                             <td>{{ $order->Order_id }}</td>
                                                             <td>{{ $order->Create_Date }}</td>
-                                                            <td style="text-transform: uppercase">{{ __($order->Status) }}
+                                                            <td style="text-transform: uppercase">
+                                                                {{ __($order->Status) }}
                                                             </td>
                                                             <td>
                                                                 <a onclick="quickView('{!! $order->Order_id !!}')"
@@ -171,13 +173,16 @@
                                                     @endforeach
                                                 @else
                                                     <tr>
-                                                        <td colspan="4">Don't have order before.</td>
+                                                        <td colspan="4" style="font-weight: bold">Don't have order before.
+                                                        </td>
                                                     </tr>
                                                 @endif
 
                                             </tbody>
                                         </table>
-                                        <div style="position: absolute; margin-top: 5%; margin-left:50%;transform:translateX(-50%) ">{!!$orders->links('vendor.pagination.bootstrap-4')!!}</div>
+                                        <div
+                                            style="position: absolute; margin-top: 5%; margin-left:50%;transform:translateX(-50%) ">
+                                            {!! $orders->links('vendor.pagination.bootstrap-4') !!}</div>
                                     </div>
                                 </div>
                             </div>
@@ -234,12 +239,12 @@
                                                     class="text-danger">*</span></label>
                                             <select name="gender" id="gender">
                                                 <option value="other" {{ $user->Gender == 'other' ? 'selected' : '' }}>
-                                                    {{__("Other")}}</option>
+                                                    {{ __('Other') }}</option>
                                                 <option value="male" {{ $user->Gender == 'male' ? 'selected' : '' }}>
-                                                    {{__("Male")}}
+                                                    {{ __('Male') }}
                                                 </option>
                                                 <option value="female" {{ $user->Gender == 'female' ? 'selected' : '' }}>
-                                                    {{__("Female")}}</option>
+                                                    {{ __('Female') }}</option>
                                             </select>
                                         </div>
                                         <div class="single-input">
@@ -255,7 +260,8 @@
                                                     <label for="account-details-oldpass">{{ __('Current Password') }}
                                                         <span class="text-danger">*</span></label>
                                                     <input type="password" name="current_password" data-html="true"
-                                                        id="current_pass" placeholder="{{ __('Enter Current Password') }}">
+                                                        id="current_pass"
+                                                        placeholder="{{ __('Enter Current Password') }}">
                                                     <span class="text-danger error-text current_password_error"></span>
                                                 </div>
                                             @endif
@@ -303,11 +309,14 @@
                     <div class="modal-inner-area">
                         <img class="float-left" style="position: absolute"
                             src="{{ asset('assets/images/logo/logo2.png') }}" alt="">
-                        <div class="text-center order">{{__('Order History')}}</div>
+                        <div class="text-center order">{{ __('Order History') }}</div>
                         <div class="text-right"><button id="download" class="btn btn-primary">Print PDF</button></div>
                         <hr>
                     </div>
-                    <div id="history"></div>
+                    <div id="invoice">
+                        <div id="history"></div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -333,6 +342,9 @@
             }
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ url('assets/js/account.js') }}"></script>
 @endsection
 

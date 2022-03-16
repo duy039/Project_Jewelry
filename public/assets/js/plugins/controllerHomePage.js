@@ -70,7 +70,18 @@ function renderIconWishlist(productIDWishlist) {
 
 function wishlistHandler(prod_id) {
     if (user_id == null) {
-        return swal('Warning', "You must be logged in to add products to your wish list", 'warning');
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to add products to your wishlist!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((value) => {
+                if (value) {
+                    window.location = '/login';
+                }
+            });
     } else {
         var urlAddWishlist = '/wishlistHandler';
         $.ajax({
@@ -94,22 +105,36 @@ function wishlistHandler(prod_id) {
 }
 
 function wishlistDelete(prod_id, wishlist_id) {
-    let urlDeleteWishlist = '/wishlistDelete/' + user_id + '/' + wishlist_id;
-    $.ajax({
-        url: urlDeleteWishlist,
-        type: "get",
-        cache: false,
-        dataType: "text",
-        data: {
-        },
-        success: function (result) {
-            if (result) {
-                swal('Success', "The product has been removed from favorites", 'success');
-            };
-            renderIconWishlist(prod_id);
-        }
-    });
-
+    if (user_id == null) {
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to delete products to your wishlist!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((value) => {
+                if (value) {
+                    window.location = '/login';
+                }
+            });
+    } else {
+        let urlDeleteWishlist = '/wishlistDelete/' + user_id + '/' + wishlist_id;
+        $.ajax({
+            url: urlDeleteWishlist,
+            type: "get",
+            cache: false,
+            dataType: "text",
+            data: {
+            },
+            success: function (result) {
+                if (result) {
+                    swal('Success', "The product has been removed from favorites", 'success');
+                };
+                renderIconWishlist(prod_id);
+            }
+        });
+    }
 }
 
 function productsResponse() {

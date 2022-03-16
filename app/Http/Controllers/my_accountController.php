@@ -17,8 +17,9 @@ class my_accountController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $order = DB::table('orders')->where('Email', $user->email)->paginate(3);
-        return view('my-account')->with(['user'=> $user,'orders'=>$order]);
+        $order = DB::table('orders')->where('Email', $user->email)->paginate(5);
+        $orders = DB::table('orders')->where('Email', $user->email)->get();
+        return view('my-account')->with(['user'=> $user,'orders'=>$order,'order' => $orders]);
     }
 
     function crop(Request $request)

@@ -24,6 +24,8 @@ if (!empty($_GET)) {
     // dd($data);
     //Checksum
     $rawHash = 'partnerCode=' . $partnerCode . '&requestId=' . $requestId . '&amount=' . $amount . '&orderId=' . $orderId . '&orderInfo=' . $orderInfo . '&orderType=' . $orderType . '&transId=' . $transId . '&message=' . $message . '&responseTime=' . $responseTime . '&resultCode=' . $resultCode . '&payType=' . $payType . '&extraData=' . $extraData;
+    $userPoint = DB::table('users')->where('email',$data->email)->first();
+    $totalPoint = $userPoint->point - $data->point;
 
     $partnerSignature = hash_hmac('sha256', $rawHash, $secretKey);
     if ($resultCode == '0') {
@@ -32,6 +34,7 @@ if (!empty($_GET)) {
             'Status' => 'Success',
         ];
         $orderTable = DB::table('orders')->where('Create_Date',$data->date)->update($value);
+        $userTable = DB::table('users')->where('email',$data->email)->update(['point'=>$totalPoint]);
     } else {
         $result = '<div class="alert alert-danger"><strong>Payment status: </strong>' . $message . '</div>';
         $value = [

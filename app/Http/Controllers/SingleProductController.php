@@ -32,7 +32,7 @@ class SingleProductController extends Controller
         else{
             $wishlists = DB::table('wishlist')->where('User_id', Auth::user()->id)->get();
         }
-        
+
         $result= $this->products;
         $resultTag =  array();
         $rel = array();
@@ -189,8 +189,8 @@ class SingleProductController extends Controller
         $countLike = 0;
         $liked = false;
         foreach($likeRating as $lr){
-            if($lr->Statuss == 1){
-                $countLike++; 
+            if($lr->Status == 1){
+                $countLike++;
                 if($lr->User_id == $userID){
                     $liked = true;
                 }
@@ -202,7 +202,7 @@ class SingleProductController extends Controller
         ];
         return json_encode($result);
     }
-    
+
 //  thêm 1 comment
     public function addComment(Request $request){
         date_default_timezone_set("Asia/Ho_Chi_Minh");
@@ -264,19 +264,19 @@ class SingleProductController extends Controller
         if(isset($request->user_id)& isset($request->ratingID)){
             $user_id    = $request->user_id;
             $raiting    = $request->ratingID;
-            
+
             $likeTable = DB::table('likerating')->where('Rating_id', $raiting)->get();
             foreach($likeTable as $lt){
                 if($lt->User_id == $user_id){
                     // update nếu tìm thấy user  đã từng like cho Rating này
-                    if($lt->Statuss == 0){
+                    if($lt->Status == 0){
                         DB::table('likerating')->where('id', $lt->id)->update([
-                            'Statuss'        => 1,
+                            'Status'        => 1,
                             'Update_date'   => date('Y-m-d  H:i:s')
                         ]);
-                    }else if($lt->Statuss == 1){
+                    }else if($lt->Status == 1){
                         DB::table('likerating')->where('id', $lt->id)->update([
-                            'Statuss'        => 0,
+                            'Status'        => 0,
                             'Update_date'   => date('Y-m-d  H:i:s')
                         ]);
                     }
@@ -288,7 +288,7 @@ class SingleProductController extends Controller
             DB::table('likerating')->insert([
                 'Rating_id'    => $raiting,
                 'User_id'       => $user_id,
-                'Statuss'        => 1,
+                'Status'        => 1,
                 'Create_date'   => date('Y-m-d  H:i:s'),
                 'Update_date'   => date('Y-m-d  H:i:s')
             ]);
@@ -374,7 +374,7 @@ class SingleProductController extends Controller
         }
         // kiểm tra có tồn tại 2 post này ko?
         if(isset($request->product_id)){
-            
+
             if( !isset( $_SESSION['productCompare'] ) ){
                 $_SESSION['productCompare'] = array();
             }
@@ -401,7 +401,7 @@ class SingleProductController extends Controller
                         ];
                         $_SESSION['productCompare'][]= $productObj ;
                     }
-                }      
+                }
             }else if(count($_SESSION['productCompare']) >= 2 ){
                 return "Please remove the product from the comparison list before adding a new product!";
             }
@@ -413,7 +413,7 @@ class SingleProductController extends Controller
         if (session_id() === ''){
             session_start();
         }
-        $resultProducts = array(); 
+        $resultProducts = array();
         if(isset($_SESSION['productCompare'])){
             $resultProducts = $_SESSION['productCompare'];
         }

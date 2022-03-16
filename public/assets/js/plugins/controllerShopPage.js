@@ -456,7 +456,18 @@ console.log(user_id)
 // xử lý khi user chọn Thêm sản phẩm vào danh sách yêu thích
     function wishlistHandler(prod_id){
         if(user_id == null){
-            return confirm("You must be logged in to add products to your wish list");
+            return swal({
+                title: "Warning",
+                text: "You must be logged in to add products to your wishlist!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((value) => {
+                if (value) {
+                  window.location= '/login';
+                }
+              });
         }else{
             var urlAddWishlist = url +'/wishlistHandler' ;
             $.ajax({
@@ -485,7 +496,18 @@ console.log(user_id)
 // xử lý khi user chọn Xóa sản phẩm ra khỏi danh sách yêu thích
     function wishlistDelete(wishlist_id){
         if(user_id == null){
-            return confirm("You must be logged in to add products to your wish list");
+            return swal({
+                title: "Warning",
+                text: "You must be logged in to delete products to your wishlist!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((value) => {
+                if (value) {
+                  window.location= '/login';
+                }
+              });
         }else{
             let urlDeleteWishlist = url +'/wishlistDelete/'+user_id + '/' + wishlist_id ;
             $.ajax({
@@ -749,7 +771,7 @@ function changeSearchCompare() {
     });
 }
 
-    renderListCompare();  
+    renderListCompare();
     renderProducts();
     listNumberPage();
 

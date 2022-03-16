@@ -22,7 +22,7 @@
             <legend>Tìm kiếm: </legend>
             <div class="filter-item">
                 <label>ID:</label>
-                <input type="text" id="searchbox" name="searchbox">
+                <input type="text" id="searchProduct" name="searchbox">
             </div>
         </fieldset>
     </div>
@@ -64,7 +64,7 @@
                                 <th class="disabled-sorting text-right">{{ __('Action') }}</th>
                             </tr>
                         </thead>
-                        <tbody id="searchProduct">
+                        <tbody id="productList">
                             @foreach ($ap as $key => $pro)
                                 <tr>
                                     <td>{{ $pro->Product_id }}</td>
@@ -74,7 +74,7 @@
                                     <td>{{ $pro->Price_Sale }}</td>
                                     <td>{{ $pro->Rating }}</td>
                                     <td>{{ $pro->Quantity }}</td>
-                                    <td><img width="50px" height="50px" src="../assets/images/product/{{ $pro->Avatar }}"
+                                    <td><img width="50px" height="50px" src="{{url('assets/images/product/'.$pro->Avatar)}}"
                                             alt=""></td>
                                     <td>{{ $pro->Create_Date }}</td>
 

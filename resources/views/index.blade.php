@@ -1144,15 +1144,15 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="banner-item img-hover_effect">
-                            <a href="shop-left-sidebar.html">
-                                <img class="img-full" src="assets/images/banner/3_4.jpg" alt="Hiraola's Banner">
+                            <a href="{{ url('shop/categories/1') }}">
+                                <img src="{{ asset('assets/images/banner/banner6.png') }}" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="banner-item img-hover_effect">
-                            <a href="shop-left-sidebar.html">
-                                <img class="img-full" src="assets/images/banner/3_5.jpg" alt="Hiraola's Banner">
+                            <a href="{{ url('shop/categories/1') }}">
+                                <img src="{{ asset('assets/images/banner/banner5.png') }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -1544,12 +1544,6 @@
                                         <a href="blog-details-left-sidebar.html">
                                             <img src="assets/images/blog/medium-size/2.jpg" alt="Hiraola's Blog Image">
                                         </a>
-                                        <div class="blog-meta-2">
-                                            <div class="blog-time_schedule">
-                                                <span class="day">10</span>
-                                                <span class="month">Oct</span>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="blog-content">
                                         <div class="blog-heading">
@@ -1579,7 +1573,7 @@
         <!-- Hiraola's Latest Blog Area End Here -->
 
         <!-- Begin Hiraola's Brand Area -->
-        <div class="brand-area">
+        {{-- <div class="brand-area">
             <div class="container">
                 <div class="brand-slider_nav">
                     <div class="row">
@@ -1620,7 +1614,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Hiraola's Brand Area End Here -->
 
         <!-- xử lý slide show -->
@@ -1862,21 +1856,21 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="footer-widgets_title">
-                                            <h6>Product</h6>
+                                            <h6>{{__('Visitor')}}</h6>
                                         </div>
                                         <div class="footer-widgets">
                                             <ul>
-                                                <li><a href="#">Prices drop</a></li>
-                                                <li><a href="#">New products</a></li>
-                                                <li><a href="#">Best sales</a></li>
-                                                <li><a href="#">Contact us</a></li>
+                                                <li><a href="{{url('shop')}}">{{__("Shop")}}</a></li>
+                                                <li><a href="{{url('blog')}}">{{__('Blog')}}</a></li>
+                                                <li><a href="{{url('contact')}}">{{__('Contact')}}</a></li>
+                                                <li><a href="{{url('about')}}">{{__('About-us')}}</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-lg-9">
                                         <div class="footer-widgets_info">
                                             <div class="footer-widgets_title">
-                                                <h6>About Us</h6>
+                                                <h6>{{__('About-us')}}</h6>
                                             </div>
                                             <div class="widgets-essential_stuff">
                                                 <ul>

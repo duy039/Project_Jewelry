@@ -108,7 +108,7 @@
                                         <span class="btn btn-rose btn-round btn-file">
                                             <span class="fileinput-new">Select image</span>
                                             <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="product_Avatar" class="form-control" />
+                                            <input type="file" name="product_Avatar" class="form-control">
                                         </span>
                                         <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
                                             data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
@@ -119,24 +119,22 @@
                         <div class="row">
                             <label class="col-sm-2 col-form-label">{{ __('Cover Image') }} :</label>
                             <div class="col-sm-7">
-                                @foreach ($image as $img)
-                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail">
-                                            <img src=""
-                                                alt="...">
-                                        </div>
-                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                        <div>
-                                            <span class="btn btn-rose btn-round btn-file">
-                                                <span class="fileinput-new">Select image</span>
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="file" name="product_image[]" class="form-control" />
-                                            </span>
-                                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
-                                                data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                        </div>
+                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail">
+                                        <img src="" alt="...">
                                     </div>
-                                @endforeach
+                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                    <div>
+                                        <span class="btn btn-rose btn-round btn-file">
+                                            <span class="fileinput-new">Select image</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input type="file" name="product_image[]" class="form-control" multiple>
+                                        </span>
+                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
+                                            data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                    </div>
+                                </div>
+                                <span style="font-weight:bold">Cover Image can choose multiple file</span>
                             </div>
                         </div>
                         <div class="row">

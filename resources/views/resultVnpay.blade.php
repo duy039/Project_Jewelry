@@ -21,13 +21,16 @@ foreach ($inputData as $key => $value) {
     }
 }
 // dd($inputData);
+$orderPointAndEmail =  json_decode(base64_decode($inputData['vnp_OrderInfo']));
+$userPoint = DB::table('users')->where('email',$orderPointAndEmail->email)->first();
+$totalPoint = $userPoint->point - $orderPointAndEmail->point;
+// dd($totalPoint);
 if ($inputData['vnp_ResponseCode'] == '00') {
     $value = [
         'Status' => 'Success',
     ];
-    $orderTable = DB::table('orders')
-        ->where('orderCode', $inputData['vnp_TxnRef'])
-        ->update($value);
+    $orderTable = DB::table('orders')->where('orderCode', $inputData['vnp_TxnRef'])->update($value);
+    $userTable = DB::table('users')->where('email',$orderPointAndEmail->email)->update(['point'=>$totalPoint]);
 } else {
     $value = [
         'Status' => 'Failed',

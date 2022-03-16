@@ -91,16 +91,17 @@ Route::post('payMomo', [App\Http\Controllers\CheckoutController::class, 'payMomo
 //admin
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
-    //Product
+
+    //-----------------------------Product-----------------------------------------
     Route::get('manageProduct', [App\Http\Controllers\ManageProduct::class, 'index']);
     Route::get('addProduct', [App\Http\Controllers\ManageProduct::class, 'viewadd']);
     Route::post('storeProduct', [App\Http\Controllers\ManageProduct::class, 'store']);
     Route::get('editProduct/{proid}', [App\Http\Controllers\ManageProduct::class, 'edit']);
     Route::post('updateProduct/{proid}', [App\Http\Controllers\ManageProduct::class, 'update']);
     Route::get('deleteProduct/{proid}', [App\Http\Controllers\ManageProduct::class, 'destroy']);
-    Route::get('admin/searchAdmin', [App\Http\Controllers\ManageProduct::class, 'searchProduct']);
+    Route::get('admin/searchProduct', [App\Http\Controllers\ManageProduct::class, 'searchProduct']);
 
-    // Voucher
+    // -----------------------------Voucher-------------------------------------------
     Route::get('addcode', [App\Http\Controllers\ManageProduct::class, 'viewCouponAddForm']);
     Route::get('voucher', [App\Http\Controllers\ManageProduct::class, 'voucherIndex']);
     Route::post('addVoucher', [App\Http\Controllers\ManageProduct::class, 'storeCoupon']);
@@ -108,11 +109,21 @@ Route::prefix('admin')->group(function () {
     Route::get('editVoucher/{voucherId}', [App\Http\Controllers\ManageProduct::class, 'editVoucherView']);
     Route::post('updateVoucher/{voucherId}', [App\Http\Controllers\ManageProduct::class, 'updateVoucher']);
 
-    //Order
+    //--------------------------------Order--------------------------------------
     Route::get('viewOrder', [App\Http\Controllers\ManageProduct::class, 'orderIndex']);
     Route::get('editOrder/{orderId}', [App\Http\Controllers\ManageProduct::class, 'orderEditView']);
     Route::post('updateOrder/{orderId}', [App\Http\Controllers\ManageProduct::class, 'updateOrder']);
+    Route::get('deleteOrder/{orderId}', [App\Http\Controllers\ManageProduct::class, 'destroyOrder']);
+    Route::get('admin/searchOrder', [App\Http\Controllers\ManageProduct::class, 'searchOrder']);
 
+    //-------------------------------Tag---------------------------------------
+    Route::get('viewTag', [App\Http\Controllers\ManageProduct::class, 'tagIndex']);
+    Route::get('viewAddTag', [App\Http\Controllers\ManageProduct::class, 'viewAddTag']);
+    Route::get('editTag/{orderId}', [App\Http\Controllers\ManageProduct::class, 'tagEditView']);
+    Route::post('storeTag', [App\Http\Controllers\ManageProduct::class, 'storeTag']);
+    Route::post('updateTag/{orderId}', [App\Http\Controllers\ManageProduct::class, 'updateTag']);
+    Route::get('deleteTag/{orderId}', [App\Http\Controllers\ManageProduct::class, 'destroyTag']);
+    Route::get('admin/searchTag', [App\Http\Controllers\ManageProduct::class, 'searchTag']);
 
 });
 Route::prefix('/')->group(function () {

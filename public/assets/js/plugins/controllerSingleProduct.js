@@ -180,7 +180,7 @@ function renderRaiting(){
                     +                                    '<div class="rating-box">'
                     +                                       '<ul>'
                     +                      htmlCountRaiting
-                    +                                       '</ul>' 
+                    +                                       '</ul>'
                     +                                    '</div>'
                     +                                    '<a href="javascript:void(0)"  onclick="addLikeRaiting(\'' +raitings[i].Raiting_id+ '\')" class="iconLike">'+iconLiked+'</a>  <span> '+likeRating.count+'</span>'
                     +                                '</td>'
@@ -224,15 +224,15 @@ function addComment(){
     if(user_id == null){
         // return confirm("You must be logged in to comment on this product!");
         return swal({
-            title: "Are you sure?",
+            title: "Warning",
             text: "You must be logged in to comment on this product!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
           })
-          .then((willDelete) => {
-            if (willDelete) {
-              window.location('login');
+          .then((value) => {
+            if (value) {
+              window.location='/login';
             }
           });
     }else{
@@ -263,7 +263,18 @@ function addRaiting(){
         content = "-@.@.@-"
     }
     if(user_id == null){
-        return confirm("You must be logged in to comment on this product!");
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to rating on this product!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((value) => {
+            if (value) {
+              window.location='/login';
+            }
+          });
     }else{
         let urlAddRaiting = url +'/addRaiting' ;
         $.ajax({
@@ -292,7 +303,18 @@ function addRaiting(){
 // xử lý khi user Thêm 1 Raiting
 function addLikeRaiting(ratingID){
     if(user_id == null){
-        return swal('Warning',"You must be logged in to like this rating!",'warning');
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to like rating on this product!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((value) => {
+            if (value) {
+              window.location='/login';
+            }
+          });
     }else{
         let urlAddRaiting = url +'/addLikeRaiting' ;
         $.ajax({
@@ -314,7 +336,18 @@ function addLikeRaiting(ratingID){
 // xử lý khi user chọn Thêm sản phẩm vào danh sách yêu thích
 function wishlistHandler(prod_id){
     if(user_id == null){
-        return confirm("You must be logged in to add products to your wish list");
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to add products to your wish list!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((value) => {
+            if (value) {
+              window.location='/login';
+            }
+          });
     }else{
         var urlAddWishlist = url +'/wishlistHandler' ;
         $.ajax({
@@ -343,7 +376,18 @@ function wishlistHandler(prod_id){
 // xử lý khi user chọn Xóa sản phẩm ra khỏi danh sách yêu thích
 function wishlistDelete(wishlist_id){
     if(user_id == null){
-        return confirm("You must be logged in to add products to your wish list");
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to delete products to your wishlist!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((value) => {
+            if (value) {
+              window.location='/login';
+            }
+          });
     }else{
         let urlDeleteWishlist = url +'/wishlistDelete/'+user_id + '/' + wishlist_id ;
         $.ajax({
@@ -460,7 +504,18 @@ function renderIconWishlistList(productIDWishlist){
 // xử lý khi user chọn Thêm sản phẩm vào danh sách yêu thích của 2 list bên dưới
 function wishlistHandlerList(prod_id){
     if(user_id == null){
-        return confirm("You must be logged in to add products to your wish list");
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to add products to your wishlist!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((value) => {
+            if (value) {
+              window.location='/login';
+            }
+          });
     }else{
         var urlAddWishlist = url +'/wishlistHandler' ;
         $.ajax({
@@ -489,7 +544,18 @@ function wishlistHandlerList(prod_id){
 // xử lý khi user chọn Xóa sản phẩm ra khỏi danh sách yêu thích của 2 list bên dưới
 function wishlistDeleteList(prod_id, wishlist_id){
     if(user_id == null){
-        return confirm("You must be logged in to add products to your wish list");
+        return swal({
+            title: "Warning",
+            text: "You must be logged in to add products to your wishlist!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              window.location='/login';
+            }
+          });
     }else{
         let urlDeleteWishlist = url +'/wishlistDelete/'+user_id + '/' + wishlist_id ;
         $.ajax({
@@ -629,7 +695,7 @@ function addToCartQuickView(productAdd){
         },
         success : function (result){
             if(result == true){
-                return alert("The product has been added to the cart");
+                return swal('Success',"The product has been added to the cart",'success');
             }
         }
     });
@@ -665,7 +731,7 @@ function addToCartProduct(productAdd){
                 },
                 success : function (result){
                     if(result == true){
-                        return alert("The product has been added to the cart");
+                        return swal('Success',"The product has been added to the cart",'success');
                     }
                 }
             });
@@ -850,7 +916,7 @@ function changeSearchCompare() {
     });
 }
 
-renderListCompare();    
+renderListCompare();
 rendercomment();
 renderIconWishlist();
 renderRaiting();
